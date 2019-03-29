@@ -40,12 +40,16 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="public/picture/ico/apple-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="public/picture/ico/apple-icon-144x144.png" />
 
-    <!-- Liens Polices Google Fonts -->
+    <!-- Polices Google Fonts utilisées -->
     <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron|Open+Sans+Condensed:300" rel="stylesheet">
 
-    <!-- Feuille de style css et Bibliothèque d'icones FontAwesome -->
+    <!-- Bibliothèque CSS FontAwesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- Bibliothèque CSS Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bibliothèque CSS jQuery UI -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <!-- Bibliothèque CSS perso -->
     <link href="public/style.css" rel="stylesheet" />
 </head>
 
@@ -65,28 +69,122 @@
         </div>
     </noscript>
 
-    <!-- LISTES DU MENU (COMMUN TOUS RESPONSIVES) -->
+    <!-- UL DU NAV (COMMUN) -->
 
-    <?php ob_start(); 
-    
-    if($_SESSION['group_id']) {
-    ?>
+    <?php ob_start(); ?>
+
+    <?php
+        if($_SESSION['pseudo']) {
+        ?>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?action=list">Votre caddie</a>
+        <a class="nav-link" href="index.php?action=list"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />
+            <span class="alert posts-view black">
+                <span class="alert2">
+                    22
+                </span>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?action=memberDetail"><i class="fas fa-user fa-2x" title="Profil"></i> Profil</a>
     </li>
     <?php
-    if($_SESSION['group_id'] != 3) {
+            if($_SESSION['group_id'] != 3) {
+        ?>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cloud fa-2x" title="Admin"></i> Admin</a>
+
+        <!-- ADMIN SEULEMENT: AVIS SIGNALES -->
+
+        <?php
+    if (($_SESSION['group_id'] == 1 || $_SESSION['group_id'] == 2) && $signalComments) {
     ?>
-    <li class="nav-item">
-        <a class="nav-link" href="index.php?action=membersDetail">Membres</a>
-    </li>
-    <?php
-        }
+
+        <div class="alert posts-view black">
+            <a href="#popup4">
+                <i class="fas fa-exclamation-circle fa-2x red"></i>
+            </a>
+            <div id="popup4" class="overlay">
+                <div class="popup">
+                    <h3 class="text-center">Avis signalés</h3>
+                    <a class="close" href="#">&times;</a>
+                    <div class="comments-content-signaled col-xs-10">
+                        <?php
+                    foreach($signalComments as $signalComment) {
+                ?>
+                        <div class="row justify-content-around">
+                            <span class="col-md-auto orange"><i class="fas fa-exclamation-circle"></i> signalé le
+                                <?= $signalComment['signal_date_fr']; ?> par
+                                <strong>
+                                    <?= $signalComment['signal_author']; ?></strong>
+                            </span>
+                            <span class="col-md-auto">
+                                <strong>
+                                    <?= $signalComment['author']; ?>
+                                </strong>
+                                <span>
+                                    le
+                                    <?= $signalComment['comment_date_fr']; ?>
+                                </span>
+                            </span>
+                        </div>
+                        <p class="alert alert-info row col-xs-12">
+                            <?= nl2br(htmlspecialchars($signalComment['comment'])); ?>
+                        </p>
+
+                        <!-- BOUTON SUPPRIMER UN COMMENTAIRE (uniquement si admin, modérateur, ou posté par sois-meme)-->
+
+                        <div class="boutons row">
+                            <form class="offset-lg-7" action="index.php?action=deleteComment" method="post">
+                                <input type="hidden" name="delete_comment" value="<?= $signalComment['id'] ?>" />
+                                <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                            </form>
+                            <a href="index.php?action=post&amp;billet=<?= $signalComment['post_id']; ?>" class="btn btn-primary btn-sm">Accéder à l'avis complet <i class="fab fa-readme"></i></a>
+
+                        </div>
+                        <?php
+                    }
+                ?>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <?php
     }
     ?>
+        <div class="dropdown-menu">
+            <a class="dropdown-item nav-link" href="index.php?action=items"><i class="fas fa-barcode fa-2x"></i> Articles</a>
+            <a class="dropdown-item nav-link" href="index.php?action=membersDetail"><i class="fas fa-users-cog fa-2x"></i> Membres</a>
+        </div>
+    </li>
+    <?php
+            }
+        } 
+        ?>
 
     <?php $ul = ob_get_clean(); ?>
+
     <?php ob_start(); ?>
+
+    <!-- MENU ECRANS -->
+
+    <nav class="navbar nav-ecran navbar-light bg-dark fixed-top white">
+        <div class="container">
+            <span class="logo d-flex align-items-end">
+                <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
+                <span>addy</span>
+                <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
+                <span>ace</span>
+            </span>
+            <ul class="nav nav-pills nav-stacked align-items-end">
+                <?= $ul ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="deconnexion" title="Deconnexion"><i class="fas fa-power-off fa-2x red"></i> Deconnexion</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- MENU SMARTPHONES -->
 
@@ -94,37 +192,11 @@
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <div class="container-fluid menu-xs">
-                    <span class="logo d-inline-flex align-items-end white">
-                        <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
-                        <span class="navbar-brand">addy</span>
-                        <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
-                        <span class="navbar-brand">ace</span>
-                    </span>
-                    <ul class="nav flex-column">
-                        <?php
-                        if($_SESSION['pseudo']) {
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?action=list">Votre caddie</a>
-                        </li>
-                        <?php
-                            if($_SESSION['group_id'] != 3) {
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?action=membersDetail">Membres</a>
-                        </li>
-                        <?php
-                            }
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?action=memberDetail">Profil</a>
-                        </li>
+                    <ul class="nav nav-pills nav-stacked justify-content-end">
+                        <?= $ul ?>
                         <li>
-                            <a class="nav-link" href="#" id="deconnexion_xs">Deconnexion</a>
+                            <a class="nav-link" href="#" id="deconnexion_xs"><i class="fas fa-power-off fa-2x red"></i> Deconnexion</a>
                         </li>
-                        <?php
-                        } 
-                        ?>
                     </ul>
                 </div>
             </div>
@@ -140,53 +212,12 @@
                     </span>
                 </div>
                 <span class="menu white">Menu</span>
-                <i class="fas fa-cogs white"></i>
             </button>
         </nav>
     </div>
 
-    <!-- MENU ECRANS -->
-
-    <nav class="navbar nav-ecran navbar-light bg-dark fixed-top white">
-        <div class="container">
-            <span class="logo d-flex align-items-end">
-                <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
-                <span>addy</span>
-                <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
-                <span>ace</span>
-            </span>
-            <ul class="nav nav-pills nav-stacked">
-                <?php
-                if($_SESSION['pseudo']) {
-                ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?action=list">Caddie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?action=memberDetail">Profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="deconnexion">Deconnexion</a>
-                </li>
-                <?php
-                if($_SESSION['group_id'] != 3) {
-                ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item nav-link" href="index.php?action=items">Les items</a>
-                        <a class="dropdown-item nav-link" href="index.php?action=membersDetail">Les Membres</a>
-                    </div>
-                </li>
-                <?php
-                    }
-                } 
-                ?>
-            </ul>
-        </div>
-    </nav>
-
     <?php $menu = ob_get_clean(); ?>
+
     <?php ob_start(); ?>
 
     <!-- FOOTER -->
@@ -243,22 +274,24 @@
                         <?php } ?>
                     </div>
 
-                    <form class="login-form contact-form" method="post" action="index.php?action=contactForm">
+                    <form class="contact-form" method="post" action="index.php?action=contactForm">
                         <div class="form-row">
-                            <div class="form-group text-left">
-                                <label class="black">Votre nom :</label>
-                                <input class="bg-dark" type="text" name="name" value="<?= $_SESSION['name'] ?>" />
-                            </div>
-                            <div class="form-group text-left">
-                                <label class="black">Votre prénom :</label>
-                                <input class="bg-dark" type="text" name="first_name" value="<?= $_SESSION['first_name'] ?>" />
-                            </div>
-                            <div class="form-group text-left">
-                                <label class="black text-left">Votre message : </label>
-                                <textarea class="col-lg-12" rows="8"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="button submit" class="btn btn-success white btn-lg" name="login"><i class="fas fa-paper-plane orange"></i> Soumettre</button>
+                            <div class="col-12">
+                                <div class="form-group text-left">
+                                    <label class="black">Votre nom :</label>
+                                    <input class="bg-dark" type="text" name="name" value="<?= $_SESSION['name'] ?>" />
+                                </div>
+                                <div class="form-group text-left">
+                                    <label class="black">Votre prénom :</label>
+                                    <input class="bg-dark" type="text" name="first_name" value="<?= $_SESSION['first_name'] ?>" />
+                                </div>
+                                <div class="form-group text-left">
+                                    <label class="black text-left">Votre message : </label>
+                                    <textarea class="col-lg-12" rows="8"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button submit" class="btn btn-success white btn-lg" name="login"><i class="fas fa-paper-plane orange"></i> Soumettre</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -292,18 +325,23 @@
 
     <?= $footer ?>
 
-    <!-- jQuery Bibliothèque Production -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!-- JavaScript Bootstrap-->
+    <!-- (1) Bibliothèque JavaScript jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- (2) Bibliothèque JavaScript jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- (3) Bibliothèque JavaScript Bootstrap-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="public/ajax.js"></script>
     <script src="public/caddyrace.js"></script>
+    <script src="public/ajax.js"></script>
 
 </body>
 

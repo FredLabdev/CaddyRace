@@ -9,97 +9,40 @@
     ob_start(); 
 ?>
 
-<!-- ADMIN: AVIS SIGNALES -->
+<!-- MENU COURSES -->
 
-<?php
-    if (($_SESSION['group_id'] == 1 || $_SESSION['group_id'] == 2) && $signalComments) {
-?>
+<nav id="navbar-example2" class="navbar navbar-light bg-dark fixed-top justify-content-end">
 
-<div id="comments-signaled" class="posts-view black">
-    <div class="row justify-content-center">
-        <a href="#popup4">
-            <i class="fas fa-exclamation-circle orange fa-7x"></i>
-        </a>
-    </div>
-    <div id="popup4" class="overlay">
-        <div class="popup">
-            <h3 class="text-center">Avis signalés</h3>
-            <a class="close" href="#">&times;</a>
-            <div class="comments-content-signaled col-xs-10">
-                <?php
-                    foreach($signalComments as $signalComment) {
-                ?>
-                <div class="row justify-content-around">
-                    <span class="col-md-auto orange"><i class="fas fa-exclamation-circle"></i> signalé le
-                        <?= $signalComment['signal_date_fr']; ?> par
-                        <strong>
-                            <?= $signalComment['signal_author']; ?></strong>
-                    </span>
-                    <span class="col-md-auto">
-                        <strong>
-                            <?= $signalComment['author']; ?>
-                        </strong>
-                        <span>
-                            le
-                            <?= $signalComment['comment_date_fr']; ?>
-                        </span>
-                    </span>
-                </div>
-                <p class="alert alert-info row col-xs-12">
-                    <?= nl2br(htmlspecialchars($signalComment['comment'])); ?>
-                </p>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="#liste"><i class="far fa-file-alt fa-2x"></i> Liste</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tri"><i class="fas fa-cogs fa-2x"></i> Tris</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#caddie"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Go !</a>
+        </li>
+    </ul>
+</nav>
 
-                <!-- BOUTON SUPPRIMER UN COMMENTAIRE (uniquement si admin, modérateur, ou posté par sois-meme)-->
+<div id="list_scroll" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
 
-                <div class="boutons row">
-                    <form class="offset-lg-7" action="index.php?action=deleteComment" method="post">
-                        <input type="hidden" name="delete_comment" value="<?= $signalComment['id'] ?>" />
-                        <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash-alt"></i> Supprimer</button>
-                    </form>
-                    <a href="index.php?action=post&amp;billet=<?= $signalComment['post_id']; ?>" class="btn btn-primary btn-sm">Accéder à l'avis complet <i class="fab fa-readme"></i></a>
+    <!-- LISTE -->
 
-                </div>
-                <?php
-                    }
-                ?>
-            </div>
-        </div>
-    </div>
-
-</div>
-<?php
-    }
-?>
-
-<?php $all1 = ob_get_clean(); ?>
-
-<!-- LISTE DE COURSES -->
-
-<?php ob_start();?>
-
-<div class="posts-view">
-    <h3 class="posts-title orange">
-        <?php
-            echo 'items du n° ' . $billet_max . ' au n° ' . $billet_min;
-         ?>
-    </h3>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link bg-darkgreen white" href="index.php?action=pagePosts&amp;page=<?php if($_GET['page'] < $pages_max){echo $_GET['page']+1;} else {echo $pages_max;} ?>">Retour</a>
-                <?php 
-                    for ($index=1, $pages_max; $index <= $pages_max; $index++) {
-                ?>
-            <li class="page-item">
-                <a class="page-link bg-darkgreen white" href="index.php?action=pagePosts&amp;page=<?= $pages_max+1-$index ?>">
-                    <?= $index ?></a>
-                <?php
-                    }
-                ?>
-            <li class="page-item">
-                <a class="page-link bg-darkgreen white" href="index.php?action=pagePosts&amp;page=<?php if($_GET['page'] > 1){echo $_GET['page']-1;} else {echo 1;} ?>">Avance</a>
+    <nav id="liste" class="navbar navbar-dark bg-dark">
+        <span class="white">
+            Votre liste
+        </span>
+        <ul class="nav nav-pills">
         </ul>
     </nav>
+
+    <div class="bs-example">
+        <h2>Ajouter un article à la liste</h2>
+        <input type="text" class="typeahead tt-query" id="recherche" placeholder="Rechercher un article ici..." autocomplete="off" spellcheck="false" />
+    </div>
+
     <div class="posts-extracts col-xs-12 white">
         <?php    
             for ($i=0; $i<5; $i++) {
@@ -126,34 +69,271 @@
             }
         ?>
     </div>
-</div>
 
-<!-- NOUVEL ITEM -->
+    <!-- TRIS -->
 
-<div class="post-viewblack">
-    <div class=title-container>
-        <h3 class="posts-title orange">
-            Votre nouvel item ici :
-        </h3>
-        <div class="row col-xs-12 text-center">
-            <?php if($message_success) { ?>
-            <span class="alert alert-success col-xs-4 offset-4">
-                <?= $message_success; ?>
-            </span>
-            <?php } else if($message_error) { ?>
-            <span class="alert alert-danger col-xs-4 offset-4">
-                <?= $message_error; ?>
-            </span>
-            <?php } ?>
+    <nav id="tri" class="navbar navbar-dark bg-dark">
+        <span class="white">
+            Tri par Familles &amp; Rayons
+        </span>
+        <ul class="nav nav-pills">
+            <li class="nav-item dropdown orange">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-th-large fa-2x"></i> Familles</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#one">Boissons</a>
+                    <a class="dropdown-item" href="#two">Condiments</a>
+                    <a class="dropdown-item" href="#three">Conserves</a>
+                    <a class="dropdown-item" href="#four">Fruits &amp; Légumes</a>
+                    <a class="dropdown-item" href="#five">Hygiène</a>
+                    <a class="dropdown-item" href="#six">Laitages</a>
+                    <a class="dropdown-item" href="#seven">Ménage &amp; Animaux</a>
+                    <a class="dropdown-item" href="#height">Pain &amp; Céréales</a>
+                    <a class="dropdown-item" href="#nine">Pâtes &amp; Riz</a>
+                    <a class="dropdown-item" href="#ten">Rayon frais</a>
+                    <a class="dropdown-item" href="#eleven">Sucres, Farines &amp; Gâteaux</a>
+                    <a class="dropdown-item" href="#twelve">Surgelès</a>
+                    <a class="dropdown-item" href="#thirteen">Viandes &amp; Poissons</a>
+                    <div role="separator" class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#else">Autre</a>
+                </div>
+            </li>
+            <li class="nav-item orange">
+                <a><i class="far fa-th fa-2x"></i> Articles</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="accordion">
+        <div class="d-flex flex-row">
+            <h4 id="one">Boissons</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="two">Condiments</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="three">Conserves</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="four">Fruits &amp; Légumes</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="five">Hygiène</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="six">Laitages</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="seven">Ménage &amp; Animaux</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="height">Pain &amp; Céréales</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="far fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="nine">Pâtes &amp; Riz</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="ten">Rayon frais</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="eleven">Confiserie, Gâteaux</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="twelve">Surgelès</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="thirteen">Viandes &amp; Poissons</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+        </div>
+        <div class="d-flex flex-row">
+            <h4 id="else">Autre</h4>
+            <div class="alert3 d-flex justify-content-between">2<i class="fas fa-shoe-prints black"></i></div>
+        </div>
+        <div>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 1
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 2
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>9</span>
+            </a>
+            <a class="dropdown-item d-flex flex-row" href="#">Article 3
+                <span class="alert3b d-flex justify-content-between"><i class="fas fa-shopping-cart"></i>8</span>
+            </a>
         </div>
     </div>
-    <form method="post" action="index.php?action=addPost">
-        <label>Nom du nouvel item : </label>
-        <input type="text" name="titre" class="col-xs-7 news-title" /><br>
-        <button type="button submit" class="btn btn-success btn-sm col-xs-1 offset-lg-10" onclick="getNewPostInForm();"><i class="fas fa-share-square"></i> Valider</button>
-    </form>
+
+    <!-- COURSES -->
+
+    <nav id="caddie" class="navbar navbar-dark bg-dark">
+        <span class="white">
+            Démarrez vos courses !
+        </span>
+        <ul class="nav nav-pills">
+            <li class="nav-item white">
+                <a><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> To pick up</a>
+            </li>
+            <li class="nav-item orange">
+                <a><img src="public/picture/brand/caddy-icon-C-38x38.png" alt="caddy picture" title="Caddie" /> To pay</a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
-<?php $all2 = ob_get_clean(); ?>
+<?php $all1 = ob_get_clean(); ?>
 
 <?php require('view/frontend/template.php'); ?>
