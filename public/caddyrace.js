@@ -1,9 +1,54 @@
  //**************************************************************************************
- // => listView/Tris jQuery - Accordion         
+ // => listView/Tris jQuery - Tabs & Accordion         
  //**************************************************************************************
 
+ function focusListe() {
+     document.getElementById('liste-nav').style.zIndex = 3;
+     document.getElementById('pref-nav').style.zIndex = 2;
+     document.getElementById('caddie-nav').style.zIndex = 1;
+     document.getElementById('liste-nav2').style.zIndex = 3;
+     document.getElementById('pref-nav2').style.zIndex = 2;
+     document.getElementById('caddie-nav2').style.zIndex = 1;
+ }
+
+ function focusPref() {
+     document.getElementById('liste-nav').style.zIndex = 1;
+     document.getElementById('pref-nav').style.zIndex = 3;
+     document.getElementById('caddie-nav').style.zIndex = 2;
+     document.getElementById('liste-nav2').style.zIndex = 1;
+     document.getElementById('pref-nav2').style.zIndex = 3;
+     document.getElementById('caddie-nav2').style.zIndex = 2;
+ }
+
+ function focusCaddie() {
+     document.getElementById('liste-nav').style.zIndex = 2;
+     document.getElementById('pref-nav').style.zIndex = 1;
+     document.getElementById('caddie-nav').style.zIndex = 3;
+     document.getElementById('liste-nav2').style.zIndex = 2;
+     document.getElementById('pref-nav2').style.zIndex = 1;
+     document.getElementById('caddie-nav2').style.zIndex = 3;
+ }
+
  $(function () {
-     $("#accordion").accordion();
+     $("#tabs").tabs();
+ });
+
+ $(function () {
+     $("#accordion").accordion({
+         heightStyle: "content"
+     });
+     $("#accordion").accordion({
+         collapsible: true
+     });
+ });
+
+ $(function () {
+     $("#caddie-accordion").accordion({
+         heightStyle: "content"
+     });
+     $("#caddie-accordion").accordion({
+         collapsible: true
+     });
  });
 
  //**************************************************************************************

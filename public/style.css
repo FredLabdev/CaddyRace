@@ -8,7 +8,7 @@ html {
 body {
     font-family: 'Muli', sans-serif;
     background-color: lightgray;
-    height: 82vh;
+    height: 100vh;
 }
 
 main {
@@ -88,8 +88,8 @@ input[type='submit'],
     color: darkorange;
 }
 
-.bg-darkgreen {
-    background-color: #19444B;
+.bg-blue {
+    background-color: blue;
 }
 
 .green {
@@ -651,8 +651,56 @@ ul.bs-autocomplete-menu a {
 /***********************************************************************/
 /* listView */
 
-#navbar-example2 {
+#list-nav {
     top: 115px;
+}
+
+#liste,
+#liste1,
+#articles,
+#pref,
+#fam,
+#pref2,
+#caddie,
+#tobuy,
+#topay {
+    margin-top: 115px;
+}
+
+#liste-nav,
+#pref-nav,
+#caddie-nav {
+    background-color: grey;
+    position: absolute;
+    width: 200px;
+    height: 70px;
+    top: 0px;
+    left: -500px;
+}
+
+#liste-nav2,
+#pref-nav2,
+#caddie-nav2 {
+    background-color: grey;
+    position: absolute;
+    width: 200px;
+    height: 70px;
+    top: 0px;
+    left: -300px;
+}
+
+#liste-nav,
+#liste-nav2 {
+    z-index: 3;
+}
+
+#pref-nav,
+#pref-nav2 {
+    z-index: 2;
+}
+
+#caddie-nav,
+#caddie-nav2 {
     z-index: 1;
 }
 
@@ -742,20 +790,59 @@ ul.bs-autocomplete-menu a {
     font-family: 'Inconsolata', monospace;
 }
 
+#tabs {
+    background-color: darkorange;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 0em;
+}
+
 .ui-state-active,
-.ui-state-focus {
+.ui-state-focus,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
     color: #fff;
     background: #343A40;
+}
+
+.ui-widget-header,
+.ui-widget-header .ui-state-default {
+    background: none;
+    border: none;
+}
+
+.ui-widget-header a,
+.ui-state-hover a,
+.ui-state-hover a:hover,
+.ui-state-hover a:link,
+.ui-state-hover a:visited,
+.ui-state-focus a,
+.ui-state-focus a:hover,
+.ui-state-focus a:link,
+.ui-state-focus a:visited,
+a.ui-button:hover,
+a.ui-button:focus,
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-state-default a:visited,
+a.ui-button,
+a:link.ui-button,
+a:visited.ui-button,
+.ui-button {
+    color: #fff;
 }
 
 .ui-widget-content a:hover,
 .ui-widget-content a:active,
 .ui-widget-content a:focus {
     background: darkorange;
-    color: #fff;
 }
 
-.dropdown-item {
+.dropdown-item:hover {
     color: #fff;
 }
 
@@ -765,11 +852,19 @@ ul.bs-autocomplete-menu a {
     width: 50px;
     margin: auto;
     margin-right: 50%;
+    padding: 3px;
     text-align: right;
-    border: 3px solid darkorange;
-    border-radius: 5%;
-    background-color: darkorange;
     font-weight: bold;
+    color: dodgerblue;
+}
+
+.alert3 {
+    color: darkorange;
+}
+
+.alert3 i,
+.alert3b i {
+    color: lightgray;
 }
 
 .ui-icon-triangle-1-e {
@@ -1327,7 +1422,7 @@ label[for] {
     /***********************************************************************/
     /* Posts View Extracts */
 
-    #navbar-example2 {
+    # {
         height: 50px;
         top: 50px;
         z-index: 1;
