@@ -57,23 +57,23 @@ ob_start();
         <form class="login-form" method="post" action="index.php?action=newMember">
             <div class="form-row">
                 <div class="form-group">
-                    <label class="orange">Nom :</label>
+                    <label class="black">Nom :</label>
                     <input id="name_create" class="" type="text" name="name" placeholder="last name" value="<?php if (isset($_POST['name'])){echo $_POST['name'];} ?>" />
-                    <label class="orange">Prenom :</label>
+                    <label class="black">Prenom :</label>
                     <input id="first_name_create" class="" type="text" name="first_name" placeholder="first name" value="<?php if (isset($_POST['first_name'])){echo $_POST['first_name'];} ?>" />
-                    <label class="orange">Pseudo :</label>
+                    <label class="black">Pseudo :</label>
                     <input id="pseudo_create" class="" type="text" name="pseudo" placeholder="pseudo" value="<?php if (isset($_POST['pseudo'])){echo $_POST['pseudo'];} ?>" />
                 </div>
                 <div class="form-group">
-                    <label class="orange">e-mail :</label>
+                    <label class="black">e-mail :</label>
                     <input id="email_create" class="" type="text" name="email" placeholder="e-mail" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" />
-                    <label class="orange">Confirmer l'e-mail:</label>
+                    <label class="black">Confirmer l'e-mail:</label>
                     <input id="email_create_confirm" class="" type="text" name="email_confirm" placeholder="confirm e-mail" value="<?php if (isset($_POST['email_confirm'])){echo $_POST['email_confirm'];} ?>" />
                 </div>
                 <div class="form-group">
-                    <label class="orange">Mot de passe :</label>
+                    <label class="black">Mot de passe :</label>
                     <input id="password_create" class="" type="password" name="password" placeholder="Pass&word (inclu: Maj et caract.special)" />
-                    <label class="orange">Confirmer le mot de passe :</label>
+                    <label class="black">Confirmer le mot de passe :</label>
                     <input id="password_create_confirm" class="" type="password" name="password_confirm" placeholder="confirm Pass&word" />
                 </div>
                 <div class="form-group">

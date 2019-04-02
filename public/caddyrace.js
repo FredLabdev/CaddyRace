@@ -1,5 +1,5 @@
  //**************************************************************************************
- // => listView/Tris jQuery - Tabs & Accordion         
+ // => listView/Nav - Tabs Mise en forme       
  //**************************************************************************************
 
  function focusListe() {
@@ -9,6 +9,23 @@
      document.getElementById('liste-nav2').style.zIndex = 3;
      document.getElementById('pref-nav2').style.zIndex = 2;
      document.getElementById('caddie-nav2').style.zIndex = 1;
+     document.getElementById('list-tab').style.color = 'darkorange';
+     document.getElementById('byABC-tab').style.background = 'darkorange';
+     document.getElementById('byFam-tab').style.background = '#343A40';
+     document.getElementById('pref-tab').style.color = '#fff';
+     document.getElementById('caddie-tab').style.color = '#fff';
+ }
+
+ function focusListe1() {
+     document.getElementById('list-tab').style.color = 'darkorange';
+     document.getElementById('byABC-tab').style.background = 'darkorange';
+     document.getElementById('byFam-tab').style.background = '#343A40';
+ }
+
+ function focusListe2() {
+     document.getElementById('list-tab').style.color = 'darkorange';
+     document.getElementById('byFam-tab').style.background = 'darkorange';
+     document.getElementById('byABC-tab').style.background = '#343A40';
  }
 
  function focusPref() {
@@ -18,6 +35,23 @@
      document.getElementById('liste-nav2').style.zIndex = 1;
      document.getElementById('pref-nav2').style.zIndex = 3;
      document.getElementById('caddie-nav2').style.zIndex = 2;
+     document.getElementById('fam-tab').style.background = 'darkorange';
+     document.getElementById('pref-tab').style.color = 'darkorange';
+     document.getElementById('ray-tab').style.background = '#343A40';
+     document.getElementById('list-tab').style.color = '#fff';
+     document.getElementById('caddie-tab').style.color = '#fff';
+ }
+
+ function focusPref1() {
+     document.getElementById('fam-tab').style.background = 'darkorange';
+     document.getElementById('ray-tab').style.background = '#343A40';
+     document.getElementById('pref-tab').style.color = 'darkorange';
+ }
+
+ function focusPref2() {
+     document.getElementById('ray-tab').style.background = 'darkorange';
+     document.getElementById('fam-tab').style.background = '#343A40';
+     document.getElementById('pref-tab').style.color = 'darkorange';
  }
 
  function focusCaddie() {
@@ -27,7 +61,28 @@
      document.getElementById('liste-nav2').style.zIndex = 2;
      document.getElementById('pref-nav2').style.zIndex = 1;
      document.getElementById('caddie-nav2').style.zIndex = 3;
+     document.getElementById('caddie-tab').style.color = 'darkorange';
+     document.getElementById('to-buy').style.background = 'darkorange';
+     document.getElementById('to-pay').style.background = '#343A40';
+     document.getElementById('list-tab').style.color = '#fff';
+     document.getElementById('pref-tab').style.color = '#fff';
  }
+
+ function focusCaddie1() {
+     document.getElementById('caddie-tab').style.color = 'darkorange';
+     document.getElementById('to-buy').style.background = 'darkorange';
+     document.getElementById('to-pay').style.background = '#343A40';
+ }
+
+ function focusCaddie2() {
+     document.getElementById('caddie-tab').style.color = 'darkorange';
+     document.getElementById('to-pay').style.background = 'darkorange';
+     document.getElementById('to-buy').style.background = '#343A40';
+ }
+
+ //**************************************************************************************
+ // => listView/Tris jQuery - Tabs & Accordion         
+ //**************************************************************************************
 
  $(function () {
      $("#tabs").tabs();
@@ -49,6 +104,166 @@
      $("#caddie-accordion").accordion({
          collapsible: true
      });
+ });
+
+ //**************************************************************************************
+ // => listView/Rayons jQuery - Sortable        
+ //**************************************************************************************
+
+ $(function () {
+     $("#sortable").sortable({
+         placeholder: "ui-state-highlight"
+     });
+     $("#sortable").disableSelection();
+ });
+
+ //**************************************************************************************
+ // => listView/Rayons jQuery - Selectmenu        
+ //**************************************************************************************
+
+ $(function () {
+     $.widget("custom.iconselectmenu", $.ui.selectmenu, {
+         _renderItem: function (ul, item) {
+             var li = $("<li>"),
+                 wrapper = $("<div>", {
+                     text: item.label
+                 });
+
+             if (item.disabled) {
+                 li.addClass("ui-state-disabled");
+             }
+
+             $("<span>", {
+                     style: item.element.attr("data-style"),
+                     "class": "ui-icon " + item.element.attr("data-class")
+                 })
+                 .appendTo(wrapper);
+
+             return li.append(wrapper).appendTo(ul);
+         }
+     });
+
+     $("#files1")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+     $("#files2")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons customicons");
+
+     $("#files3")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons customicons");
+
+     $("#files4")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files5")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files6")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files7")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files8")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files9")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files10")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files11")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files12")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files13")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files14")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files15")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files16")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files17")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files18")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files19")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#files20")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons");
+
+
+     $("#people")
+         .iconselectmenu()
+         .iconselectmenu("menuWidget")
+         .addClass("ui-menu-icons avatar");
  });
 
  //**************************************************************************************
@@ -102,7 +317,7 @@
  });
 
 
- /* TODO: LE JS SUIVANT SUR LOGINVIEW MARCHE MAIS BLOQUE LA SUITE...? A VOIR...
+
 
  //**************************************************************************************
  // => loginView Log In - Interactions pour les input formulaires  

@@ -104,6 +104,18 @@ input[type='submit'],
     background-color: lightgray;
 }
 
+.bg-green {
+    background-color: limegreen;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.blue {
+    color: dodgerblue;
+}
+
 /***********************************************************************/
 /* Navbar */
 
@@ -655,11 +667,24 @@ ul.bs-autocomplete-menu a {
     top: 115px;
 }
 
+.bs-example {
+    position: absolute;
+    top: 3px;
+    left: -553px;
+}
+
+.bs-example input {
+    width: 250px;
+    height: 55px;
+}
+
+.ui-widget-content {
+    z-index: 10;
+}
+
 #liste,
-#liste1,
-#articles,
+#liste2,
 #pref,
-#fam,
 #pref2,
 #caddie,
 #tobuy,
@@ -670,23 +695,19 @@ ul.bs-autocomplete-menu a {
 #liste-nav,
 #pref-nav,
 #caddie-nav {
-    background-color: grey;
+    background-color: #343A40;
     position: absolute;
-    width: 200px;
-    height: 70px;
-    top: 0px;
-    left: -500px;
+    top: 3px;
+    left: -301px;
 }
 
 #liste-nav2,
 #pref-nav2,
 #caddie-nav2 {
-    background-color: grey;
+    background-color: #343A40;
     position: absolute;
-    width: 200px;
-    height: 70px;
-    top: 0px;
-    left: -300px;
+    top: 3px;
+    left: -148px;
 }
 
 #liste-nav,
@@ -790,10 +811,6 @@ ul.bs-autocomplete-menu a {
     font-family: 'Inconsolata', monospace;
 }
 
-#tabs {
-    background-color: darkorange;
-}
-
 .ui-tabs .ui-tabs-panel {
     padding: 0em;
 }
@@ -836,10 +853,8 @@ a:visited.ui-button,
     color: #fff;
 }
 
-.ui-widget-content a:hover,
-.ui-widget-content a:active,
-.ui-widget-content a:focus {
-    background: darkorange;
+.ui-widget-content a {
+    width: 150px;
 }
 
 .dropdown-item:hover {
@@ -869,6 +884,275 @@ a:visited.ui-button,
 
 .ui-icon-triangle-1-e {
     background-position: -62px -16px;
+}
+
+/***********************************************************************/
+/* listView - Rayons */
+
+.famIcon1 {
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+
+.famIcon2 {
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.bois {
+    background-image: url("https://img.icons8.com/color/48/000000/bottle-of-water.png");
+}
+
+.bois2 {
+    background-image: url("https://img.icons8.com/color/48/000000/beer.png");
+}
+
+.cond {
+    background-image: url("https://img.icons8.com/color/48/000000/olive-oil.png");
+}
+
+.cond2 {
+    background-image: url("https://img.icons8.com/color/48/000000/pepper-shaker.png");
+}
+
+.cons {
+    background-image: url("https://img.icons8.com/color/48/000000/tin-can.png");
+}
+
+.cons2 {
+    background-image: url("https://img.icons8.com/color/48/000000/spam-can.png");
+}
+
+.frui {
+    background-image: url("https://img.icons8.com/color/48/000000/pear.png");
+}
+
+.frui2 {
+    background-image: url("https://img.icons8.com/color/48/000000/eggplant.png");
+}
+
+.hygi {
+    background-image: url("https://img.icons8.com/color/48/000000/soap-dispenser.png");
+}
+
+.hygi2 {
+    background-image: url("https://img.icons8.com/color/48/000000/toothpaste.png");
+}
+
+.lait {
+    background-image: url("https://img.icons8.com/color/48/000000/milk-bottle.png");
+}
+
+.lait2 {
+    background-image: url("https://img.icons8.com/color/48/000000/cheese.png");
+}
+
+.mena {
+    background-image: url("https://img.icons8.com/color/48/000000/duster.png");
+}
+
+.mena2 {
+    background-image: url("https://img.icons8.com/color/48/000000/cat.png");
+}
+
+.cere {
+    background-image: url("https://img.icons8.com/color/48/000000/baguette.png");
+}
+
+.cere2 {
+    background-image: url("https://img.icons8.com/color/48/000000/wheat.png");
+}
+
+.pate {
+    background-image: url("https://img.icons8.com/color/48/000000/spaghetti.png");
+}
+
+.pate2 {
+    background-image: url("https://img.icons8.com/color/48/000000/rice-bowl.png");
+}
+
+.frai {
+    background-image: url("https://img.icons8.com/color/48/000000/sandwich.png");
+}
+
+.frai2 {
+    background-image: url("https://img.icons8.com/color/48/000000/salami.png");
+}
+
+.gate {
+    background-image: url("https://img.icons8.com/color/48/000000/jam.png");
+}
+
+.gate2 {
+    background-image: url("https://img.icons8.com/color/48/000000/cookies.png");
+}
+
+.surg {
+    background-image: url("https://img.icons8.com/color/48/000000/cooling.png");
+}
+
+.surg2 {
+    background-image: url("https://img.icons8.com/color/48/000000/ice-cream-cone.png");
+}
+
+.vian {
+    background-image: url("https://img.icons8.com/color/48/000000/steak.png");
+}
+
+.vian2 {
+    background-image: url("https://img.icons8.com/color/48/000000/fish-food.png");
+}
+
+.autr {}
+
+.autr2 {
+    background-image: url("https://img.icons8.com/color/48/000000/bento.png");
+}
+
+
+
+/*Pain & cereales "https://img.icons8.com/color/48/000000/toaster.png"
+Chocolat "https://img.icons8.com/color/48/000000/chocolate-bar.png"
+Apéro "https://img.icons8.com/color/48/000000/bavarian-pretzel.png"
+A la coupe "https://img.icons8.com/color/48/000000/jamon.png"
+huile "https://img.icons8.com/color/48/000000/olive-oil.png"
+café "https://img.icons8.com/color/48/000000/coffee-pot.png
+"https://img.icons8.com/color/48/000000/espresso-cup.png"
+
+/***********************************************************************/
+/* listView - Rayons */
+
+.circuit {
+    height: 3em;
+    line-height: 1.2em;
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px 4px 4px 4px;
+    font-weight: normal;
+    color: #fff;
+}
+
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#sortable li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    height: 1.5em;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px 4px 4px 4px;
+    font-weight: normal;
+    color: #555555;
+    cursor: pointer;
+}
+
+#sortable li:active,
+#sortable li:hover {
+    color: #fff;
+    background: #343A40;
+}
+
+html > body #sortable li {
+    height: 3em;
+    line-height: 1.2em;
+}
+
+.ui-state-highlight {
+    height: 1.5em;
+    line-height: 1.2em;
+}
+
+/* select with custom icons */
+
+.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item-wrapper {
+    padding: 0.5em 0 0.5em 3em;
+}
+
+.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
+    height: 24px;
+    width: 24px;
+    top: 0.1em;
+}
+
+.ui-selectmenu-button.ui-button {
+    text-align: left;
+    white-space: nowrap;
+    width: 12em;
+    position: relative;
+    right: 170px;
+}
+
+.ui-selectmenu-icon.ui-icon {
+    margin-right: 20px;
+}
+
+/* select with CSS avatar icons */
+option.avatar {
+    background-repeat: no-repeat !important;
+    padding-left: 20px;
+}
+
+.avatar .ui-icon {
+    background-position: left top;
+    opacity: 0;
+}
+
+.demo {
+    position: relative;
+    top: -20px;
+    right: -250px;
+}
+
+.fam-select {
+    position: relative;
+    top: 15px;
+    right: 3px;
+}
+
+#files1-button,
+#files2-button,
+#files3-button,
+#files4-button,
+#files5-button,
+#files6-button,
+#files7-button,
+#files8-button,
+#files9-button,
+#files10-button,
+#files11-button,
+#files12-button,
+#files13-button,
+#files14-button,
+#files15-button,
+#files16-button,
+#files17-button,
+#files18-button,
+#files19-button,
+#files20-button {
+    background: none;
+}
+
+.famSelect {
+    position: relative;
+    right: -50px;
+}
+
+span.ui-icon.video {
+    background-image: url("https://img.icons8.com/color/48/000000/cucumber.png");
+    background-size: contain;
+}
+
+span.ui-icon.rss {
+    background-image: url("https://img.icons8.com/color/48/000000/pear.png");
+    background-size: contain;
 }
 
 /***********************************************************************/
