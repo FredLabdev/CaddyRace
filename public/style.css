@@ -239,6 +239,14 @@ footer div:nth-child(3) {
     padding-bottom: 20px;
 }
 
+.contact-form {
+    border: 5px solid lightgray;
+    border-radius: 10px;
+    border-style: ridge;
+    background-color: darkorange;
+    padding: 5px;
+}
+
 .contact-form:nth-child(3) {
     padding: 0px;
 }
@@ -482,18 +490,12 @@ carousel-indicators {
 
 .enter-btn span:nth-child(1n) {
     font-family: 'Orbitron', serif;
-    font-size: 1.5em;
 }
 
 .enter-btn i:nth-child(1n) {
     font-size: 2em;
     padding-right: 5px;
     color: darkorange;
-}
-
-.logo2 span:nth-child(1n) {
-    font-size: 1em;
-    margin-bottom: -6px;
 }
 
 /***********************************************************************/
@@ -522,9 +524,9 @@ carousel-indicators {
 
 .login-title,
 .member-title {
-    padding-top: 30px;
+    padding-top: 10px;
     text-align: left;
-    margin-left: 20%;
+    margin: 5%;
 }
 
 .login-form {
@@ -546,6 +548,28 @@ s .member-link {
 
 .form-check {
     margin-bottom: 1rem;
+}
+
+.connect {
+    height: 50px;
+    padding-top: 0px;
+}
+
+.logo2 span,
+.logo3 span {
+    padding-bottom: 0px;
+    font-size: 1em;
+}
+
+.logo2 img:nth-child(3n) {
+    padding-top: 27px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+}
+
+.logo3 img:nth-child(3n) {
+    padding-right: 0px;
+    padding-bottom: 0px;
 }
 
 /***********************************************************************/
@@ -1314,16 +1338,11 @@ span.ui-icon.rss {
 }
 
 #members {
-    background: url('picture/picture10.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
     margin-bottom: 0px;
 }
 
 #member {
     padding: 40px;
-    background: url('picture/picture9.jpg');
-    background-repeat: no-repeat;
     height: 750px;
     margin-bottom: 0px;
     color: red;
@@ -1372,6 +1391,10 @@ textarea:after,
     color: #fff;
     border: 5px solid darkorange;
     border-style: ridge;
+}
+
+.desinscrire {
+    padding-top: 0px;
 }
 
 /***********************************************************************/
@@ -1446,10 +1469,7 @@ input[type=email] {
 }
 
 .exit-text {
-    position: relative;
     margin: auto;
-    left: -20px;
-    top: -60px;
 }
 
 /***********************************************************************/
@@ -1619,7 +1639,7 @@ label[for] {
     }
 
     footer div:nth-child(1) {
-        padding-top: 20px;
+        padding-top: 5px;
     }
 
     footer div:nth-child(3) {
@@ -1674,11 +1694,14 @@ label[for] {
         width: 24%;
     }
 
-
     footer div:nth-child(3) span:hover:after,
     footer div:nth-child(3) span:hover:before,
     footer div:nth-child(3) span:nth-child(2):hover strong:after,
-    footer div:nth-child(3) span:nth-child(2):hover strong:before {
+    footer div:nth-child(3) span:nth-child(2):hover strong:before,
+    footer div:nth-child(3) span:focus:after,
+    footer div:nth-child(3) span:focus:before,
+    footer div:nth-child(3) span:nth-child(2):focus strong:after,
+    footer div:nth-child(3) span:nth-child(2):focus strong:before {
         transform: scaleX(1);
     }
 
@@ -1689,6 +1712,7 @@ label[for] {
     .popup {
         margin-top: 50px;
         width: 80%;
+        height: 450px;
     }
 
     .popup3 a {
@@ -1700,8 +1724,10 @@ label[for] {
         left: -15px;
     }
 
-    #popup3 {
-        overflow-y: scroll;
+    .contact-form {
+        height: 250px;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .popup3 a i:nth-child(2) {
@@ -1794,15 +1820,6 @@ label[for] {
         min-height: 0px;
     }
 
-    .login,
-    .newMember {
-        background-position: right -200px top -50px;
-    }
-
-    .newMember {
-        background-position: right -350px top -50px;
-    }
-
     .login-brand {
         font-size: 1.5em;
     }
@@ -1852,7 +1869,7 @@ label[for] {
         height: 60px;
     }
 
-    h4 {
+    .ray {
         font-size: 0.9em;
         margin-bottom: 0px;
     }
@@ -1882,17 +1899,13 @@ label[for] {
 
     #members,
     .member-text {
+        font-size: 0.9em;
         width: auto;
+        margin: 10px;
     }
 
     #members {
         padding: 20px;
-    }
-
-    .deleteMember {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
     }
 
     /***********************************************************************/
@@ -1911,12 +1924,11 @@ label[for] {
         background-size: cover;
         background-position: center;
         width: auto;
-        height: 500px;
+        height: 400px;
     }
 
     .return-button {
         left: 10px;
-        top: 200px;
     }
 
     /***********************************************************************/

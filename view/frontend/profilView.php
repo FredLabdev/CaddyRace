@@ -46,7 +46,7 @@
             <input type="hidden" name="personal_modif" value="<?php echo $dataMember['id']; ?>" />
             <div class="form-row">
                 <div class="form-group">
-                    <label class="orange">Champ à modifier:</label>
+                    <label class="black">Champ à modifier:</label>
                     <select id="champ" name="champ">
                         <option value=""></option>
                         <option value="1">e-mail</option>
@@ -54,14 +54,14 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="orange" for="modif_champ">Nouveau contenu :</label>
+                    <label class="black" for="modif_champ">Nouveau contenu :</label>
                     <input id="modif_champ" class="" type="text" name="modif_champ" value="<?php if (isset($_POST['modif_champ'])){echo $_POST['modif_champ'];} ?>" /> <br>
                     <span class="error" id="error1" aria-live="polite">
                         <?= $message_error; ?>
                     </span>
                 </div>
                 <div class="form-group">
-                    <label class="orange" for="modif_champ_confirm">Confirmez ce contenu : </label>
+                    <label class="black" for="modif_champ_confirm">Confirmez ce contenu : </label>
                     <input id="modif_champ_confirm" type="text" name="modif_champ_confirm" value="<?php if (isset($_POST['modif_champ_confirm'])){echo $_POST['modif_champ_confirm'];} ?>" /> <br>
                     <span class="error" id="error2" aria-live="polite">
                         <?= $message_error; ?>
@@ -75,9 +75,9 @@
 
     </div>
 
-    <div class="bg-grey">
+    <div class="login bg-grey">
 
-        <h4 class="login-title black">
+        <h4 class="login-title desinscrire black">
             <i class="fas fa-user-times orange"></i> Vous désinscrire :
         </h4>
 
@@ -85,7 +85,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <input type="hidden" name="personal_modif" value="<?php echo $dataMember['id']; ?>" />
-                    <label class="orange">Désinscription définitive : </label>
+                    <label class="red">Désinscription définitive : </label>
                     <a href="#" class="btn btn-danger white btn-lg" onClick="var memberId = document.forms.delete.personal_modif.value;
         function valid_confirm(member) {
             if (confirm('Voulez-vous vraiment vous désinscrire définitivement ?')) {

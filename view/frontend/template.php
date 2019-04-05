@@ -78,7 +78,7 @@
         if($_SESSION['pseudo']) {
         ?>
     <li class="nav-item">
-        <a class="nav-link bg-orange" href="index.php?action=list"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />
+        <a class="nav-link bg-orange" href="index.php?action=list"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Liste
         </a>
     </li>
     <li class="nav-item">
@@ -201,6 +201,13 @@
                             <a class="nav-link" href="#" id="deconnexion_xs" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
                         </li>
                         <?php
+                        } else {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link bg-orange" href="index.php"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Retour démo
+                            </a>
+                        </li>
+                        <?php
                         }
                         ?>
                     </ul>
@@ -208,7 +215,7 @@
             </div>
         </div>
         <nav class="navbar">
-            <button class="navbar-toggler container-fluid justify-content-around align-items-center bg-orange" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler container-fluid justify-content-around align-items-center bg-dark" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="navbar-brand">
                     <span class="logo white">
                         <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
@@ -217,7 +224,7 @@
                         <span>ace</span>
                     </span>
                 </div>
-                <span class="menu white">Menu</span>
+                <span class="menu orange">Menu</span>
             </button>
         </nav>
     </div>
@@ -270,7 +277,7 @@
                     <h3>Votre avis <i class="far fa-lightbulb fa-2x"></i><br>nous éclaire !</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content black">
-                        Une question, une idéee, n'hésitez pas à tout poser ici sur le tapis !
+                        Une question, une idée, n'hésitez pas à tout poser ici sur le tapis !
                     </div>
                     <div class="row justify-content-center align-items-center">
                         <?php if($message_error) { ?>
@@ -283,16 +290,22 @@
                     <form class="contact-form" method="post" action="index.php?action=contactForm">
                         <div class="form-row">
                             <div class="col-12">
+                                <?php
+                                if(!($_SESSION['pseudo'])) {
+                                ?>
                                 <div class="form-group text-left">
-                                    <label class="black">Votre nom :</label>
-                                    <input class="bg-dark" type="text" name="name" value="<?= $_SESSION['name'] ?>" />
+                                    <label>Votre nom :</label>
+                                    <input class="col-lg-12" type="text" name="name" value="<?= $_SESSION['name'] ?>" />
                                 </div>
                                 <div class="form-group text-left">
-                                    <label class="black">Votre prénom :</label>
-                                    <input class="bg-dark" type="text" name="first_name" value="<?= $_SESSION['first_name'] ?>" />
+                                    <label>Votre prénom :</label>
+                                    <input class="col-lg-12" type="text" name="first_name" value="<?= $_SESSION['first_name'] ?>" />
                                 </div>
+                                <?php
+                                }
+                                ?>
                                 <div class="form-group text-left">
-                                    <label class="black text-left">Votre message : </label>
+                                    <label class="text-left">Votre message : </label>
                                     <textarea class="col-lg-12" rows="8"></textarea>
                                 </div>
                                 <div class="form-group">

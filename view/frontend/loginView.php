@@ -30,11 +30,11 @@ ob_start();
                 <input class="form-check-input" type="hidden" name="login_auto" checked />
 
                 <div class="form-group">
-                    <button type="button submit" class="btn btn-success white btn-lg" name="login">
-                        <span class="logo2 d-flex justify-content-center align-items-end">
+                    <button type="button submit" class="connect btn btn-success white btn-lg" name="login">
+                        <span class="logo logo3 white">
                             <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
                             <span>addy</span>
-                            <img src="public/picture/brand/caddy-icon-R-32x32-white.png" alt="caddy picture" />
+                            <img src="public/picture/brand/caddy-icon-R-15x12-white.png" alt="caddy picture" />
                             <span>ace</span>
                         </span>
                     </button>

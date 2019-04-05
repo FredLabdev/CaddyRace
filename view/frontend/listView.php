@@ -43,7 +43,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 autr"></span>
                 <span class="col-1 famIcon2 autr2"></span>
-                <h4 class="col-7" id="one">Divers</h4>
+                <h4 class="ray col-7" id="one">Divers</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -68,7 +68,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 hygi"></span>
                 <span class="col-1 famIcon2 hygi2"></span>
-                <h4 class="col-7" id="two">Toilette, Maquillage</h4>
+                <h4 class="ray col-7" id="two">Toilette, Maquillage</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -93,7 +93,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 fari"></span>
                 <span class="col-1 famIcon2 fari2"></span>
-                <h4 class="col-7" id="three">Dessert, Farine, Compotes</h4>
+                <h4 class="ray col-7" id="three">Dessert, Farine, Compotes</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -118,7 +118,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 choc"></span>
                 <span class="col-1 famIcon2 choc2"></span>
-                <h4 class="col-7" id="three2">Goûters, Chocolat</h4>
+                <h4 class="ray col-7" id="three2">Goûters, Chocolat</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -143,7 +143,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 conf"></span>
                 <span class="col-1 famIcon2 conf2"></span>
-                <h4 class="col-7" id="four">Confiture, Café, Thé</h4>
+                <h4 class="ray col-7" id="four">Confiture, Café, Thé</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -168,7 +168,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 cere"></span>
                 <span class="col-1 famIcon2 cere2"></span>
-                <h4 class="col-7" id="five">Pain, Céréales</h4>
+                <h4 class="ray col-7" id="five">Pain, Céréales</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -193,7 +193,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 mena"></span>
                 <span class="col-1 famIcon2 mena2"></span>
-                <h4 class="col-7" id="six">Ménage, Animaux</h4>
+                <h4 class="ray col-7" id="six">Ménage, Animaux</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -218,7 +218,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 cond"></span>
                 <span class="col-1 famIcon2 cond2"></span>
-                <h4 class="col-7" id="seven">Huile, Condiments, Pdts monde</h4>
+                <h4 class="ray col-7" id="seven">Huile, Condiments, Pdts monde</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -243,7 +243,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 pate"></span>
                 <span class="col-1 famIcon2 pate2"></span>
-                <h4 class="col-7" id="height">Pâtes, Riz, Thon, Potages</h4>
+                <h4 class="ray col-7" id="height">Pâtes, Riz, Thon, Potages</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -268,7 +268,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 cons"></span>
                 <span class="col-1 famIcon2 cons2"></span>
-                <h4 class="col-7" id="nine">Conserve, Plats cuisinés</h4>
+                <h4 class="ray col-7" id="nine">Conserve, Plats cuisinés</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -293,7 +293,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 bois"></span>
                 <span class="col-1 famIcon2 bois2"></span>
-                <h4 class="col-7" id="ten">Boissons</h4>
+                <h4 class="ray col-7" id="ten">Boissons</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -318,7 +318,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 aper"></span>
                 <span class="col-1 famIcon2 aper2"></span>
-                <h4 class="col-7" id="eleven">Biscuits apéritifs</h4>
+                <h4 class="ray col-7" id="eleven">Biscuits apéritifs</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -343,7 +343,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 lait"></span>
                 <span class="col-1 famIcon2 lait2"></span>
-                <h4 class="col-7" id="twelve">Laitages, Oeufs</h4>
+                <h4 class="ray col-7" id="twelve">Laitages, Oeufs</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -368,7 +368,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 surg"></span>
                 <span class="col-1 famIcon2 surg2"></span>
-                <h4 class="col-7" id="thirteen">Surgelés</h4>
+                <h4 class="ray col-7" id="thirteen">Surgelés</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -393,7 +393,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 frai"></span>
                 <span class="col-1 famIcon2 frai2"></span>
-                <h4 class="col-7" id="else">Charcuterie, Pâtes tarte</h4>
+                <h4 class="ray col-7" id="else">Charcuterie, Pâtes tarte</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -418,7 +418,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 vian"></span>
                 <span class="col-1 famIcon2 vian2"></span>
-                <h4 class="col-7" id="else">Viandes, Poissons, traiteur</h4>
+                <h4 class="ray col-7" id="else">Viandes, Poissons, traiteur</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -443,7 +443,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 coup"></span>
                 <span class="col-1 famIcon2 coup2"></span>
-                <h4 class="col-7" id="else">A la coupe</h4>
+                <h4 class="ray col-7" id="else">A la coupe</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -468,7 +468,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 frui"></span>
                 <span class="col-1 famIcon2 frui2"></span>
-                <h4 class="col-7" id="else">Fruits, Légumes</h4>
+                <h4 class="ray col-7" id="else">Fruits, Légumes</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -493,7 +493,7 @@
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 boul"></span>
                 <span class="col-1 famIcon2 boul2"></span>
-                <h4 class="col-7" id="else">Boulangerie</h4>
+                <h4 class="ray col-7" id="else">Boulangerie</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
                     <span class="caddie2">22</span>
@@ -528,18 +528,7 @@
                 </div>
             </div>
             <div class="row">
-                <ul class="list-group rayon-num col-2">
-                    <?php    
-                    for ($i=1; $i<=20; $i++) {
-                    ?>
-                    <li class="list-group-item">
-                        <?= $i ?>
-                    </li>
-                    <?php
-                    }
-                    ?>
-                </ul>
-                <ul id="sortable" class="col-10 offset-2">
+                <ul id="sortable" class="col-10">
                     <li class="ui-state-default row">
                         <i class="fas fa-sort"></i>
                         <span class="col-1 famIcon1 autr"></span>
@@ -699,6 +688,17 @@
                         <h4 class="ray col-7">Ajouter un rayon ?</h4>
                         <i class="fam-select orange fas fa-stream col-1"></i>
                     </li>
+                </ul>
+                <ul class="list-group rayon-num col-2">
+                    <?php    
+                    for ($i=1; $i<=20; $i++) {
+                    ?>
+                    <li class="list-group-item">
+                        <?= $i ?>
+                    </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="row">

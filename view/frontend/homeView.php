@@ -98,7 +98,7 @@
         <span class="logo2 d-flex justify-content-center align-items-end">
             <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
             <span>addy</span>
-            <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
+            <img src="public/picture/brand/caddy-icon-R-23x23.png" alt="caddy picture" />
             <span>ace</span>
         </span>
     </a>
