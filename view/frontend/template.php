@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no, maximum-scale=1">
     <meta name="description" content="CaddyRace, appli pour faire vos courses, une course" />
     <meta name="author" content="Frédéric Labourel">
 
@@ -44,11 +44,12 @@
     <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron|Open+Sans+Condensed:300" rel="stylesheet">
 
     <!-- Bibliothèque CSS FontAwesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Bibliothèque CSS Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bibliothèque CSS jQuery UI -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <!-- Bibliothèque CSS perso -->
     <link href="public/style.css" rel="stylesheet" />
 </head>
@@ -77,12 +78,7 @@
         if($_SESSION['pseudo']) {
         ?>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?action=list"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />
-            <span class="alert posts-view black">
-                <span class="alert2">
-                    22
-                </span>
-            </span>
+        <a class="nav-link bg-orange" href="index.php?action=list"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />
         </a>
     </li>
     <li class="nav-item">
@@ -100,7 +96,7 @@
     if (($_SESSION['group_id'] == 1 || $_SESSION['group_id'] == 2) && $signalComments) {
     ?>
 
-        <div class="alert posts-view black">
+        <div class="alert alert-admin black">
             <a href="#popup4">
                 <i class="fas fa-exclamation-circle fa-2x red"></i>
             </a>
@@ -170,20 +166,24 @@
     <!-- MENU ECRANS -->
 
     <nav class="navbar nav-ecran navbar-light bg-dark fixed-top white">
-        <div class="container">
-            <span class="logo d-flex align-items-end">
-                <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
-                <span>addy</span>
-                <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
-                <span>ace</span>
-            </span>
-            <ul class="nav nav-pills nav-stacked align-items-end">
-                <?= $ul ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="deconnexion" title="Deconnexion"><i class="fas fa-power-off fa-2x red"></i> Deconnexion</a>
-                </li>
-            </ul>
-        </div>
+        <span class="logo d-flex align-items-end">
+            <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
+            <span>addy</span>
+            <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
+            <span>ace</span>
+        </span>
+        <ul class="nav nav-pills nav-stacked align-items-center">
+            <?= $ul ?>
+            <?php
+                if($_SESSION['pseudo']) {
+                ?>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="deconnexion" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
+            </li>
+            <?php
+                } 
+                ?>
+        </ul>
     </nav>
 
     <!-- MENU SMARTPHONES -->
@@ -192,22 +192,28 @@
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <div class="container-fluid menu-xs">
-                    <ul class="nav nav-pills nav-stacked justify-content-end">
+                    <ul class="nav flex-column nav-pills nav-stacked justify-content-end">
                         <?= $ul ?>
-                        <li>
-                            <a class="nav-link" href="#" id="deconnexion_xs"><i class="fas fa-power-off fa-2x red"></i> Deconnexion</a>
+                        <?php
+                        if($_SESSION['pseudo']) {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="deconnexion_xs" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
                         </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-light bg-dark">
-            <button class="navbar-toggler container-fluid justify-content-around align-items-center bg-dark" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar">
+            <button class="navbar-toggler container-fluid justify-content-around align-items-center bg-orange" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="navbar-brand">
                     <span class="logo white">
-                        <img src="public/picture/brand/caddy-icon-C-38x38.png" alt="caddy picture" />
+                        <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
                         <span>addy</span>
-                        <img src="public/picture/brand/caddy-icon-R-22x17.png" alt="caddy picture" />
+                        <img src="public/picture/brand/caddy-icon-R-15x12-white.png" alt="caddy picture" />
                         <span>ace</span>
                     </span>
                 </div>
@@ -245,7 +251,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-around align-items-center bg-orange">
+        <div class="justify-content-around align-items-center bg-orange">
             <h2 class="col-12">Restez informé</h2>
             <div>
                 <button class="btn btn-info social-link"><a href="https://www.facebook.com/frederic.labourel.3" target=_blank><span class="glyphicon glyphicon-facebook"><i class="fab fa-facebook-f fa-lg white"></i></span></a></button>
@@ -258,7 +264,7 @@
             <span><i class="far fa-copyright"></i> 2019 FredLab</span><span>Brainmade with <strong class="rwd-line">HTML CSS PHP SQL GIT</strong></span><span><a href="index.php?action=contact">contact</a></span>
         </div>
         <div class="offset-10 fixed-bottom popup3">
-            <a href="#popup3"><i class="far fa-comment-alt fa-7x"></i><i id="light" class="fas fa-lightbulb fa-3x"></i></a>
+            <a href="#popup3"><i class="fas fa-comment-dots fa-7x"></i></a>
             <div id="popup3" class="overlay">
                 <div class="popup">
                     <h3>Votre avis <i class="far fa-lightbulb fa-2x"></i><br>nous éclaire !</h3>
@@ -325,11 +331,14 @@
 
     <?= $footer ?>
 
-    <!-- (1) Bibliothèque JavaScript jQuery -->
+    <!-- (1) Bibliothèque jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- (2) Bibliothèque JavaScript jQuery UI -->
+    <!-- (2) Bibliothèque jQuery UI -->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- (2b) Bibliothèque jQuery Touch screen  -->
+    <script src="jquery.ui.touch-punch.min.js"></script>
 
     <!-- (3) Bibliothèque JavaScript Bootstrap-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

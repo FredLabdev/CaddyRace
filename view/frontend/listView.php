@@ -13,884 +13,701 @@
 
 <div id="tabs">
 
-    <nav id="list-nav" class="navbar navbar-light bg-dark fixed-top justify-content-end">
-
-        <ul class="nav nav-pills">
-            <div class="bs-example">
+    <div class="row">
+        <nav id="list-nav" class="navbar navbar-light bg-dark fixed-top">
+            <form class="search-bar form-inline">
+                <span class="nav-item item-create">
+                    <a class="nav-link" href="#item" id="item-tab"><i class="far fa-plus-circle fa-2x orange"></i></a>
+                </span>
                 <input type="text" class="typeahead tt-query" id="recherche" placeholder="Que vous manque-t-il ?" autocomplete="off" spellcheck="false" />
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="#liste" id="list-tab" onclick="focusListe()"><i class="far fa-file-alt fa-2x"></i> Liste</a>
-            </li>
-            <li class="nav-item" id="liste-nav">
-                <a class="nav-link" href="#liste" id="byABC-tab" onclick="focusListe1()"><i class="far fa-th fa-2x"></i> /ABC</a>
-            </li>
-            <li class="nav-item" id="liste-nav2">
-                <a class="nav-link" href="#liste2" id="byFam-tab" onclick="focusListe2()"><i class="far fa-th-large fa-2x"></i> /Famille</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#pref" id="pref-tab" onclick="focusPref()"><i class="far fa-cogs fa-2x"></i> Pref</a>
-            </li>
-
-            <li class="nav-item" id="pref-nav">
-                <a class="nav-link" href="#pref" id="fam-tab" onclick="focusPref1()"><i class="far fa-th-large fa-2x"></i> Familles</a>
-            </li>
-            <li class="nav-item" id="pref-nav2">
-                <a class="nav-link" href="#pref2" id="ray-tab" onclick="focusPref2()"><i class="fas fa-stream fa-2x"></i> Rayons</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#caddie" id="caddie-tab" onclick="focusCaddie()"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Go !</a>
-            </li>
-
-            <li class="nav-item white" id="caddie-nav">
-                <a class="nav-link" href="#tobuy" id="to-buy" onclick="focusCaddie1()"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> To buy</a>
-            </li>
-            <li class="nav-item orange" id="caddie-nav2">
-                <a class="nav-link" href="#topay" id="to-pay" onclick="focusCaddie2()"><i class="fas fa-shopping-cart fa-2x"></i> To pay</a>
-            </li>
-        </ul>
-
-    </nav>
+                <span class="nav-item item-create">
+                    <a class="nav-link" href="#item" id="item-tab"><i class="fas fa-check-circle fa-2x green"></i></a>
+                </span>
+            </form>
+            <ul class="nav nav-pills nav-stacked align-items-center">
+                <li class="nav-item ">
+                    <a class="nav-link" href="#liste" id="liste-tab"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Liste</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="#rayons" id="rayons-tab"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
     <!-- LISTE -->
 
     <div id="liste">
-
-        <div class="posts-extracts col-xs-12 white">
-            <?php    
-            for ($i=0; $i<5; $i++) {
-                if ($postsBy5[$i] != "") {
-        ?>
-            <div class="extract">
-                <p class="row">
-                    <a href="index.php?action=post&amp;billet=<?= $postsBy5[$i]['id']; ?>" class="btn btn-primary">
-                        <span class="white">le
-                            <?= $postsBy5[$i]['date']; ?>
-                        </span>
-                        <span class="badge badge-light">
-                            <?= $commentsCountBy5[$i]['nbre_comment']; ?>
-                        </span>
-                        <span class="news-title">
-                            <?= $postsBy5[$i]['chapter_title'] ?>
-                        </span>
-                        <i class="fab fa-readme"></i>
-                    </a>
-                </p>
-            </div>
-            <?php
-                }
-            }
-        ?>
-        </div>
-
-    </div>
-
-    <div id="">
-    </div>
-
-    <div id="liste2">
-        <p>
-            TODO: Tous les articles (ceux cochés en tête de famille) triés par Familles. Avec possibilité d'en coché d'autres...
-        </p>
-    </div>
-
-    <!-- PREFERENCES -->
-
-    <div id="pref">
-
         <div id="accordion">
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 autr"></span>
+                <span class="col-1 famIcon2 autr2"></span>
+                <h4 class="col-7" id="one">Divers</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=1; $i<5; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 hygi"></span>
+                <span class="col-1 famIcon2 hygi2"></span>
+                <h4 class="col-7" id="two">Toilette, Maquillage</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=6; $i<10; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 fari"></span>
+                <span class="col-1 famIcon2 fari2"></span>
+                <h4 class="col-7" id="three">Dessert, Farine, Compotes</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=11; $i<15; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 choc"></span>
+                <span class="col-1 famIcon2 choc2"></span>
+                <h4 class="col-7" id="three2">Goûters, Chocolat</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=16; $i<20; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 conf"></span>
+                <span class="col-1 famIcon2 conf2"></span>
+                <h4 class="col-7" id="four">Confiture, Café, Thé</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=21; $i<25; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 cere"></span>
+                <span class="col-1 famIcon2 cere2"></span>
+                <h4 class="col-7" id="five">Pain, Céréales</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=26; $i<30; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 mena"></span>
+                <span class="col-1 famIcon2 mena2"></span>
+                <h4 class="col-7" id="six">Ménage, Animaux</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=31; $i<35; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 cond"></span>
+                <span class="col-1 famIcon2 cond2"></span>
+                <h4 class="col-7" id="seven">Huile, Condiments, Pdts monde</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=36; $i<40; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 pate"></span>
+                <span class="col-1 famIcon2 pate2"></span>
+                <h4 class="col-7" id="height">Pâtes, Riz, Thon, Potages</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=41; $i<45; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 cons"></span>
+                <span class="col-1 famIcon2 cons2"></span>
+                <h4 class="col-7" id="nine">Conserve, Plats cuisinés</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=46; $i<50; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
 
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 bois"></span>
                 <span class="col-1 famIcon2 bois2"></span>
-                <h4 id="one">Boissons</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
+                <h4 class="col-7" id="ten">Boissons</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
             </div>
             <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
+                <?php    
+            for ($i=51; $i<55; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
+                <?php
+            }
+            ?>
             </div>
+
             <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 cond"></span>
-                <span class="col-1 famIcon2 cond2"></span>
-                <h4 id="two">Condiments</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
+                <span class="col-1 famIcon1 aper"></span>
+                <span class="col-1 famIcon2 aper2"></span>
+                <h4 class="col-7" id="eleven">Biscuits apéritifs</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
             </div>
             <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
+                <?php    
+            for ($i=56; $i<60; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
+                <?php
+            }
+            ?>
             </div>
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 cons"></span>
-                <span class="col-1 famIcon2 cons2"></span>
-                <h4 id="three">Conserves</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 frui"></span>
-                <span class="col-1 famIcon2 frui2"></span>
-                <h4 id="four">Fruits &amp; Légumes</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 hygi"></span>
-                <span class="col-1 famIcon2 hygi2"></span>
-                <h4 id="five">Hygiène</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
+
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 lait"></span>
                 <span class="col-1 famIcon2 lait2"></span>
-                <h4 id="six">Laitages</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
+                <h4 class="col-7" id="twelve">Laitages, Oeufs</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
             </div>
             <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
+                <?php    
+            for ($i=61; $i<65; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
+                <?php
+            }
+            ?>
             </div>
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 mena"></span>
-                <span class="col-1 famIcon2 mena2"></span>
-                <h4 id="seven">Ménage &amp; Animaux</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 cere"></span>
-                <span class="col-1 famIcon2 cere2"></span>
-                <h4 id="height">Pain &amp; Céréales</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="far fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 pate"></span>
-                <span class="col-1 famIcon2 pate2"></span>
-                <h4 id="nine">Pâtes &amp; Riz</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 frai"></span>
-                <span class="col-1 famIcon2 frai2"></span>
-                <h4 id="ten">Rayon frais</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 gate"></span>
-                <span class="col-1 famIcon2 gate2"></span>
-                <h4 id="eleven">Confiserie, Gâteaux</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
+
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 surg"></span>
                 <span class="col-1 famIcon2 surg2"></span>
-                <h4 id="twelve">Surgelès</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
+                <h4 class="col-7" id="thirteen">Surgelés</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
             </div>
             <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
+                <?php    
+            for ($i=66; $i<70; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
+                <?php
+            }
+            ?>
             </div>
+
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 frai"></span>
+                <span class="col-1 famIcon2 frai2"></span>
+                <h4 class="col-7" id="else">Charcuterie, Pâtes tarte</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=71; $i<75; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 vian"></span>
                 <span class="col-1 famIcon2 vian2"></span>
-                <h4 id="thirteen">Viandes &amp; Poissons</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
+                <h4 class="col-7" id="else">Viandes, Poissons, traiteur</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
             </div>
             <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
+                <?php    
+            for ($i=76; $i<80; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
+                <?php
+            }
+            ?>
             </div>
+
             <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 autr">?</span>
-                <span class="col-1 famIcon2 autr2"></span>
-                <h4 id="else">Autre</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
+                <span class="col-1 famIcon1 coup"></span>
+                <span class="col-1 famIcon2 coup2"></span>
+                <h4 class="col-7" id="else">A la coupe</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
             </div>
             <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
+                <?php    
+            for ($i=81; $i<85; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
+                <?php
+            }
+            ?>
             </div>
 
-        </div>
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 frui"></span>
+                <span class="col-1 famIcon2 frui2"></span>
+                <h4 class="col-7" id="else">Fruits, Légumes</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=86; $i<90; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
 
+            <div class="d-flex flex-row">
+                <span class="col-1 famIcon1 boul"></span>
+                <span class="col-1 famIcon2 boul2"></span>
+                <h4 class="col-7" id="else">Boulangerie</h4>
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <span class="caddie2">22</span>
+                </span>
+            </div>
+            <div>
+                <?php    
+            for ($i=91; $i<95; $i++) {
+               ?>
+                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
+                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                        <?= $i ?></label>
+                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                </a>
+                <?php
+            }
+            ?>
+            </div>
+        </div>
     </div>
 
-    <div id="">
-    </div>
+    <!-- RAYONS -->
 
-    <div id="pref2">
-        <div class="circuit d-flex flex-row justify-content-center align-items-center bg-green">
-            <div><i class="fas fa-flag fa-2x"></i> Entrée circuit</div>
-        </div>
+    <div id="rayons">
 
-        <ul id="sortable">
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Divers</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files1"></label>
-                            <select name="files1" id="files1" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
+        <div class="rayons-org col-10 offset-1">
+            <div class="row">
+                <div class="col-12 circuit text-center bg-green">
+                    <i class="fas fa-flag fa-2x"></i> Entrée circuit
                 </div>
-            </li>
+            </div>
+            <div class="row">
+                <ul class="list-group rayon-num col-2">
+                    <?php    
+                    for ($i=1; $i<=20; $i++) {
+                    ?>
+                    <li class="list-group-item">
+                        <?= $i ?>
+                    </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+                <ul id="sortable" class="col-10 offset-2">
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 autr"></span>
+                        <span class="col-1 famIcon2 autr2"></span>
+                        <h4 class="ray col-7">Divers</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
 
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Toilette, Maquillage</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files2"></label>
-                            <select name="files2" id="files2" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 hygi"></span>
+                        <span class="col-1 famIcon2 hygi2"></span>
+                        <h4 class="ray col-7">Toilette, Maquillage</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 fari"></span>
+                        <span class="col-1 famIcon2 fari2"></span>
+                        <h4 class="ray col-7">Dessert, Farine, Compotes</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 choc"></span>
+                        <span class="col-1 famIcon2 choc2"></span>
+                        <h4 class="ray col-7">Goûters, Chocolat</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 conf"></span>
+                        <span class="col-1 famIcon2 conf2"></span>
+                        <h4 class="ray col-7">Confiture, Café, Thé</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 cere"></span>
+                        <span class="col-1 famIcon2 cere2"></span>
+                        <h4 class="ray col-7">Pain, Céréales</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 mena"></span>
+                        <span class="col-1 famIcon2 mena2"></span>
+                        <h4 class="ray col-7">Ménage, Animaux</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 cond"></span>
+                        <span class="col-1 famIcon2 cond2"></span>
+                        <h4 class="ray col-7">Huile, Condiments, Pdts monde</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 pate"></span>
+                        <span class="col-1 famIcon2 pate2"></span>
+                        <h4 class="ray col-7">Pâtes, Riz, Thon, Potages</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 cons"></span>
+                        <span class="col-1 famIcon2 cons2"></span>
+                        <h4 class="ray col-7">Conserves, Plats cuisinés</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 bois"></span>
+                        <span class="col-1 famIcon2 bois2"></span>
+                        <h4 class="ray col-7">Boissons</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 aper"></span>
+                        <span class="col-1 famIcon2 aper2"></span>
+                        <h4 class="ray col-7">Biscuits apéritif</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 lait"></span>
+                        <span class="col-1 famIcon2 lait2"></span>
+                        <h4 class="ray col-7">Laitages, Oeufs</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 surg"></span>
+                        <span class="col-1 famIcon2 surg2"></span>
+                        <h4 class="ray col-7">Surgelés</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 frai"></span>
+                        <span class="col-1 famIcon2 frai2"></span>
+                        <h4 class="ray col-7">Charcuterie, pâtes tarte</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 vian"></span>
+                        <span class="col-1 famIcon2 vian2"></span>
+                        <h4 class="ray col-7">Viandes, Poissons</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 coup"></span>
+                        <span class="col-1 famIcon2 coup2"></span>
+                        <h4 class="ray col-7">A la coupe</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 frui"></span>
+                        <span class="col-1 famIcon2 frui2"></span>
+                        <h4 class="ray col-7">Fruits, Légumes</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1 boul"></span>
+                        <span class="col-1 famIcon2 boul2"></span>
+                        <h4 class="ray col-7">Boulangerie</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+
+                    <li class="ui-state-default row">
+                        <i class="fas fa-sort"></i>
+                        <span class="col-1 famIcon1"></span>
+                        <span class="col-1 famIcon2"><i class="fas fa-plus-square fa-2x"></i></span>
+                        <h4 class="ray col-7">Ajouter un rayon ?</h4>
+                        <i class="fam-select orange fas fa-stream col-1"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-12 circuit text-center bg-red">
+                    <i class="fas fa-flag-checkered fa-2x"></i> Sortie Circuit
                 </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Dessert, Farine, Compotes</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files3"></label>
-                            <select name="files3" id="files3" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Goûters, Chocolat</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files4"></label>
-                            <select name="files4" id="files4" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Confiture, Café, Thé</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files5"></label>
-                            <select name="files5" id="files5" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Pain, Céréales</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files6"></label>
-                            <select name="files6" id="files6" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Ménage, Animaux</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files7"></label>
-                            <select name="files7" id="files7" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Huile, Condiments, Pdts monde</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files8"></label>
-                            <select name="files8" id="files8" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Pâtes, Riz, Thon, Potages</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files9"></label>
-                            <select name="files9" id="files9" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Conserves, Plats cuisinés</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files10"></label>
-                            <select name="files10" id="files10" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Boissons</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files11"></label>
-                            <select name="files11" id="files11" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Biscuits apéritif</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files12"></label>
-                            <select name="files12" id="files12" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Laitages, Oeufs</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files13"></label>
-                            <select name="files13" id="files13" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Surgelés</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files14"></label>
-                            <select name="files14" id="files14" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Charcuterie, pâtes tarte</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files15"></label>
-                            <select name="files15" id="files15" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Viandes, Poissons</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files16"></label>
-                            <select name="files16" id="files16" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">A la coupe</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files17"></label>
-                            <select name="files17" id="files17" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Fruits, Légumes</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files18"></label>
-                            <select name="files18" id="files18" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Boulangerie</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files19"></label>
-                            <select name="files19" id="files19" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-            <li class="ui-state-default row"><i class="fas fa-sort col-1"></i><span class="col-10">Ajouter ?</span><i class="fam-select blue far fa-th-large col-1"></i>
-                <div class="demo">
-                    <form action="#">
-                        <fieldset>
-                            <label for="files20"></label>
-                            <select name="files20" id="files20" class="famSelect">
-                                <option value="mypodcast" data-class="podcast">Famille</option>
-                                <option value="myvideo" data-class="video">Fruits et Légumes</option>
-                                <option value="myrss" data-class="rss">Laitages</option>
-                            </select>
-                        </fieldset>
-                    </form>
-                </div>
-            </li>
-
-        </ul>
-
-        <div class="circuit d-flex flex-row justify-content-center align-items-center bg-red">
-            <div><i class="fas fa-flag-checkered fa-2x"></i> Fin circuit</div>
-        </div>
-
-    </div>
-
-    <!-- COURSES -->
-
-    <div id="caddie">
-
-        <div id="caddie-accordion">
-            <div class="d-flex flex-row">
-                <h4 id="c-one">Boissons</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-two">Condiments</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-three">Conserves</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-four">Fruits &amp; Légumes</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-five">Hygiène</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-six">Laitages</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-seven">Ménage &amp; Animaux</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-height">Pain &amp; Céréales</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="far fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-nine">Pâtes &amp; Riz</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-ten">Rayon frais</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-eleven">Confiserie, Gâteaux</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-twelve">Surgelès</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-thirteen">Viandes &amp; Poissons</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-            </div>
-            <div class="d-flex flex-row">
-                <h4 id="c-else">Autre</h4>
-                <div class="alert3 d-flex justify-content-between">2<i class="fas fa-stream"></i></div>
-            </div>
-            <div>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 1
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 2
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>9</span>
-                </a>
-                <a class="dropdown-item d-flex flex-row" href="#">Article 3
-                    <span class="alert3b d-flex justify-content-between"><i class="fas fa-stream"></i>8</span>
-                </a>
             </div>
         </div>
 
-    </div>
-
-    <div id="tobuy">
-        <p>
-            TODO: les To Buy !
-        </p>
-    </div>
-
-    <div id="topay">
-        <p>
-            TODO: les To Pay !
-        </p>
     </div>
 
 </div>

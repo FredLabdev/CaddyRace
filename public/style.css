@@ -1,6 +1,31 @@
 /***********************************************************************/
 /* Généralités */
 
+@viewport {
+    zoom: 1.0;
+    width: device-width;
+    initial-scale: 1;
+    maximum-scale: 1;
+}
+
+/*Font Awesome Fonts*/
+
+@font-face {
+    font-family: 'FontAwesome-webfont';
+    src: url('fonts/fontawesome-webfont.eot') format('eot'),
+        url('fonts/fontawesome-webfont.svg') format('svg'),
+        url('fonts/fontawesome-webfont.ttf') format('ttf'),
+        url('fonts/fontawesome-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+    font-family: 'FontAwesome';
+    src: url('fonts/fontawesome-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 html {
     height: 100%;
 }
@@ -13,7 +38,6 @@ body {
 
 main {
     margin-top: 115px;
-    min-height: 100%;
 }
 
 .container-fluid {
@@ -119,10 +143,6 @@ input[type='submit'],
 /***********************************************************************/
 /* Navbar */
 
-.navbar {
-    height: 115px;
-}
-
 .pos-f-t {
     display: none;
 }
@@ -150,14 +170,18 @@ input[type='submit'],
 }
 
 .nav {
-    position: relative;
-    top: 10px;
+    flex-wrap: nowrap;
 }
 
 .nav-link {
     font-weight: bold;
     color: white;
 }
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    padding: 10px;
+}
+
 
 .nav-link:hover {
     color: darkorange;
@@ -194,7 +218,7 @@ input[type='submit'],
     top: 8px;
     padding: 3px;
     border: 3px solid darkorange;
-    border-radius: 50%;
+    border-radius: 100%;
     background-color: darkorange;
     font-weight: bold;
 }
@@ -341,9 +365,6 @@ footer div:nth-child(3) span:nth-child(3) {
     bottom: 35px;
 }
 
-.popup3 a i:nth-child(1):hover ~ #light {
-    color: darkgoldenrod;
-}
 
 /***********************************************************************/
 /* Home View */
@@ -661,68 +682,50 @@ ul.bs-autocomplete-menu a {
 }
 
 /***********************************************************************/
-/* listView */
+/* listView Nav */
 
 #list-nav {
     top: 115px;
+    flex-wrap: nowrap;
 }
 
-.bs-example {
-    position: absolute;
-    top: 3px;
-    left: -553px;
-}
-
-.bs-example input {
-    width: 250px;
+.search-bar input {
+    width: 500px;
     height: 55px;
+}
+
+.ui-corner-all {
+    border-radius: 0px;
+}
+
+.ui-widget.ui-widget-content {
+    border: none;
 }
 
 .ui-widget-content {
     z-index: 10;
+    background-color: darkorange;
+    color: #fff;
+    border: none;
 }
 
 #liste,
-#liste2,
-#pref,
-#pref2,
-#caddie,
-#tobuy,
-#topay {
-    margin-top: 115px;
+#rayons {
+    margin-top: 80px;
+    background-color: darkorange;
 }
 
-#liste-nav,
-#pref-nav,
-#caddie-nav {
-    background-color: #343A40;
-    position: absolute;
-    top: 3px;
-    left: -301px;
+#item-tab {
+    padding: .5rem .5rem;
 }
 
-#liste-nav2,
-#pref-nav2,
-#caddie-nav2 {
-    background-color: #343A40;
-    position: absolute;
-    top: 3px;
-    left: -148px;
-}
-
-#liste-nav,
-#liste-nav2 {
-    z-index: 3;
-}
-
-#pref-nav,
-#pref-nav2 {
-    z-index: 2;
-}
-
-#caddie-nav,
-#caddie-nav2 {
-    z-index: 1;
+#liste-tab:hover,
+#rayons-tab:hover,
+#liste-tab:focus,
+#rayons-tab:focus,
+#liste-tab:active,
+#rayons-tab:active {
+    background: darkorange;
 }
 
 .posts-extracts {
@@ -793,7 +796,7 @@ ul.bs-autocomplete-menu a {
     display: inline;
 }
 
-.posts-view {
+.alert-admin {
     padding: 60px;
     background: url('picture/picture2.jpg');
     background-attachment: fixed;
@@ -853,51 +856,111 @@ a:visited.ui-button,
     color: #fff;
 }
 
-.ui-widget-content a {
-    width: 150px;
-}
-
-.dropdown-item:hover {
-    color: #fff;
-}
-
-.alert3,
-.alert3b {
-    height: 30px;
-    width: 50px;
-    margin: auto;
-    margin-right: 50%;
-    padding: 3px;
-    text-align: right;
-    font-weight: bold;
-    color: dodgerblue;
-}
-
-.alert3 {
-    color: darkorange;
-}
-
-.alert3 i,
-.alert3b i {
-    color: lightgray;
-}
-
 .ui-icon-triangle-1-e {
     background-position: -62px -16px;
 }
 
 /***********************************************************************/
-/* listView - Rayons */
+/* listView - items checkbox */
+
+.ui-accordion .ui-accordion-content {
+    padding: 1em 0em;
+    background-color: lightgoldenrodyellow;
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    left: -9999px;
+}
+
+.item-check {
+    display: block;
+    position: relative;
+    margin: 3px 10px 3px 10px;
+    padding: 15px 30px 15px 62px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    color: black;
+    background-color: lightgray;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color .2s, box-shadow .2s;
+}
+
+.caddie2,
+.item-delete,
+.item-modif {
+    border-radius: 100px;
+}
+
+.caddie2 {
+    border: 3px solid darkorange;
+    background-color: ;
+    padding: 3px;
+    margin-left: 5px;
+}
+
+.item-delete {
+    color: red;
+}
+
+.item-modif {
+    color: orchid;
+}
+
+.item-check::before {
+    content: "\f07a";
+    font-family: 'FontAwesome';
+    padding: 3px;
+    color: #fff;
+    display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    width: 32px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
+}
+
+.item-check:hover,
+.item-delete:hover,
+.item-modif:hover,
+input[type="checkbox"]:focus + .item-check {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+}
+
+input[type="checkbox"]:checked + .item-check {
+    color: #fff;
+    background-color: #343A40;
+}
+
+input[type="checkbox"]:checked + .item-check::before {
+    color: darkorange;
+}
+
+.dropdown-item:active,
+.dropdown-item:hover {
+    background-color: #fff;
+}
+
+/***********************************************************************/
+/* listView - Icones */
 
 .famIcon1 {
     background-repeat: no-repeat;
     background-position: right;
+    background-size: contain;
 }
 
 
 .famIcon2 {
     background-repeat: no-repeat;
     background-position: left;
+    background-size: contain;
 }
 
 .bois {
@@ -924,6 +987,14 @@ a:visited.ui-button,
     background-image: url("https://img.icons8.com/color/48/000000/spam-can.png");
 }
 
+.conf {
+    background-image: url("https://img.icons8.com/color/48/000000/jam.png");
+}
+
+.conf2 {
+    background-image: url("https://img.icons8.com/color/48/000000/coffee-pot.png");
+}
+
 .frui {
     background-image: url("https://img.icons8.com/color/48/000000/pear.png");
 }
@@ -945,7 +1016,7 @@ a:visited.ui-button,
 }
 
 .lait2 {
-    background-image: url("https://img.icons8.com/color/48/000000/cheese.png");
+    background-image: url("https://img.icons8.com/color/48/000000/eggs.png");
 }
 
 .mena {
@@ -957,7 +1028,7 @@ a:visited.ui-button,
 }
 
 .cere {
-    background-image: url("https://img.icons8.com/color/48/000000/baguette.png");
+    background-image: url("https://img.icons8.com/color/48/000000/toaster.png");
 }
 
 .cere2 {
@@ -973,19 +1044,11 @@ a:visited.ui-button,
 }
 
 .frai {
-    background-image: url("https://img.icons8.com/color/48/000000/sandwich.png");
-}
-
-.frai2 {
     background-image: url("https://img.icons8.com/color/48/000000/salami.png");
 }
 
-.gate {
-    background-image: url("https://img.icons8.com/color/48/000000/jam.png");
-}
-
-.gate2 {
-    background-image: url("https://img.icons8.com/color/48/000000/cookies.png");
+.frai2 {
+    background-image: url("https://img.icons8.com/color/48/000000/sandwich.png");
 }
 
 .surg {
@@ -1001,32 +1064,65 @@ a:visited.ui-button,
 }
 
 .vian2 {
-    background-image: url("https://img.icons8.com/color/48/000000/fish-food.png");
-}
-
-.autr {}
-
-.autr2 {
     background-image: url("https://img.icons8.com/color/48/000000/bento.png");
 }
 
+.coup {
+    background-image: url("https://img.icons8.com/color/48/000000/jamon.png");
+}
 
+.coup2 {
+    background-image: url("https://img.icons8.com/color/48/000000/cheese.png");
+}
 
-/*Pain & cereales "https://img.icons8.com/color/48/000000/toaster.png"
-Chocolat "https://img.icons8.com/color/48/000000/chocolate-bar.png"
-Apéro "https://img.icons8.com/color/48/000000/bavarian-pretzel.png"
-A la coupe "https://img.icons8.com/color/48/000000/jamon.png"
-huile "https://img.icons8.com/color/48/000000/olive-oil.png"
-café "https://img.icons8.com/color/48/000000/coffee-pot.png
-"https://img.icons8.com/color/48/000000/espresso-cup.png"
+.aper {
+    background-image: url("https://img.icons8.com/color/48/000000/nachos.png");
+}
+
+.aper2 {
+    background-image: url("https://img.icons8.com/color/48/000000/bavarian-pretzel.png");
+}
+
+.fari {
+    background-image: url("https://img.icons8.com/color/48/000000/sack-of-flour.png");
+}
+
+.fari2 {
+    background-image: url("https://img.icons8.com/color/48/000000/sugar-cubes.png");
+}
+
+.choc {
+    background-image: url("https://img.icons8.com/color/48/000000/cookies.png");
+}
+
+.choc2 {
+    background-image: url("https://img.icons8.com/color/48/000000/chocolate-bar.png");
+}
+
+.boul {
+    background-image: url("https://img.icons8.com/color/48/000000/baguette.png");
+}
+
+.boul2 {
+    background-image: url("https://img.icons8.com/color/48/000000/croissant.png");
+}
+
+.autr {
+    background-image: url("https://img.icons8.com/color/48/000000/magazine.png");
+}
+
+.autr2 {
+    background-image: url("https://img.icons8.com/color/48/000000/watering-can.png");
+}
 
 /***********************************************************************/
 /* listView - Rayons */
 
+.rayon-num {}
+
 .circuit {
-    height: 3em;
+    height: 3.1em;
     line-height: 1.2em;
-    margin: 0 5px 5px 5px;
     padding: 5px;
     font-size: 1.2em;
     border: 1px solid #d3d3d3;
@@ -1042,10 +1138,11 @@ café "https://img.icons8.com/color/48/000000/coffee-pot.png
     width: 100%;
 }
 
-#sortable li {
-    margin: 0 5px 5px 5px;
-    padding: 5px;
-    font-size: 1.2em;
+#sortable li,
+.rayon-num li {
+    padding: .5em .5em .5em .7em;
+    margin: 2px 0 0 0;
+    font-size: 1em;
     height: 1.5em;
     border: 1px solid #d3d3d3;
     border-radius: 4px 4px 4px 4px;
@@ -1060,8 +1157,9 @@ café "https://img.icons8.com/color/48/000000/coffee-pot.png
     background: #343A40;
 }
 
-html > body #sortable li {
-    height: 3em;
+html > body #sortable li,
+.rayon-num li {
+    height: 3.1em;
     line-height: 1.2em;
 }
 
@@ -1111,12 +1209,6 @@ option.avatar {
     right: -250px;
 }
 
-.fam-select {
-    position: relative;
-    top: 15px;
-    right: 3px;
-}
-
 #files1-button,
 #files2-button,
 #files3-button,
@@ -1138,11 +1230,6 @@ option.avatar {
 #files19-button,
 #files20-button {
     background: none;
-}
-
-.famSelect {
-    position: relative;
-    right: -50px;
 }
 
 span.ui-icon.video {
@@ -1255,23 +1342,36 @@ span.ui-icon.rss {
 
 input,
 .input_novalue,
+input:invalid,
 textarea,
 #champ,
-.posts-extracts {
-    border: 5px solid darkorange;
-    color: white;
+.posts-extracts,
+.rayons-org {
+    border: 5px solid lightgray;
     border-radius: 10px;
+    border-style: ridge;
+    background-color: #fff;
+}
+
+.rayons-org {
+    background-color: #343A40;
+}
+
+.input_focus {
+    background-color: lightgray;
+    border: 5px solid darkorange;
     border-style: ridge;
 }
 
-input:focus,
-input:after,
 .input_value,
 textarea:focus,
 textarea:after,
 #champ:focus,
 #champ:after {
     background-color: #343A40;
+    color: #fff;
+    border: 5px solid darkorange;
+    border-style: ridge;
 }
 
 /***********************************************************************/
@@ -1459,19 +1559,13 @@ label[for] {
     }
 
     .navbar-toggler {
-        background-color: white;
         color: darkorange;
         height: 50px;
     }
 
-    .navbar-toggler i,
     .navbar-toggler .menu {
         position: relative;
-        top: -10px;
-    }
-
-    .navbar-toggler .menu {
-        left: 28px;
+        bottom: 5px;
     }
 
     .nav-ecran {
@@ -1489,7 +1583,7 @@ label[for] {
     }
 
     .navbar-brand .logo img:nth-child(3n) {
-        padding-bottom: 13px;
+        padding-bottom: 7px;
     }
 
     .navbar-brand .logo span {
@@ -1505,6 +1599,16 @@ label[for] {
 
     .alert2 {
         top: -2px;
+    }
+
+    navbarToggleExternalContent {
+        z-index: 1;
+    }
+
+    .alert-admin {
+        padding: 0px;
+        left: 50px;
+        top: -10px;
     }
 
     /***********************************************************************/
@@ -1706,30 +1810,60 @@ label[for] {
     /***********************************************************************/
     /* Posts View Extracts */
 
-    # {
-        height: 50px;
+    #list-nav {
         top: 50px;
-        z-index: 1;
+        height: 60px;
     }
 
-    .posts-view {
-        padding: 5%;
+    .list-nav-text {
+        display: none;
     }
 
-    .comments-content {
-        padding: 5%;
+    #tabs {
+        z-index: 0;
     }
 
-    .post-content {
-        max-height: 400px;
+    .dropdown-item {
+        padding: .25rem 0.25rem;
     }
 
-    .alert3 {
-        margin-right: 10%;
+    .search-bar {
+        flex-flow: nowrap;
     }
 
-    .alert3b {
-        margin-right: -5%;
+    .search-bar input {
+        width: 180px;
+        height: 35px;
+    }
+
+    #liste,
+    #rayons {
+        margin-top: 60px;
+    }
+
+    .rayons-org {
+        height: 540px;
+        overflow: scroll;
+    }
+
+    .ui-accordion .ui-accordion-header,
+    html > body #sortable li,
+    .rayon-num li {
+        height: 60px;
+    }
+
+    h4 {
+        font-size: 0.9em;
+        margin-bottom: 0px;
+    }
+
+    .ui-widget {
+        font-size: 0.9em;
+    }
+
+    .ui-accordion-header-icon,
+    i.fas.fa-sort {
+        display: none;
     }
 
     /***********************************************************************/
@@ -1791,6 +1925,29 @@ label[for] {
     .error-view {
         background-size: cover;
         background-position: center;
+    }
+
+}
+
+
+@media all and (max-width: 350px) {
+
+    .search-bar input {
+        width: 120px;
+    }
+
+    .rayons-org {
+        height: 440px;
+        overflow-y: scroll;
+    }
+
+    .rayon-num,
+    .ray {
+        padding-right: 2px;
+    }
+
+    .fam-select {
+        padding-left: 0px;
     }
 
 }
