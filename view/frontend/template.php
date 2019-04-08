@@ -150,7 +150,7 @@
     }
     ?>
         <div class="dropdown-menu">
-            <a class="dropdown-item nav-link" href="index.php?action=items"><i class="fas fa-barcode fa-2x"></i> Articles</a>
+            <a class="dropdown-item nav-link" href="index.php?action=shopAdmin"><i class="fas fa-barcode fa-2x"></i> Boutique</a>
             <a class="dropdown-item nav-link" href="index.php?action=membersDetail"><i class="fas fa-users-cog fa-2x"></i> Membres</a>
         </div>
     </li>
@@ -225,6 +225,7 @@
                     </span>
                 </div>
                 <span class="menu orange">Menu</span>
+                <span class="caddie3">128</span>
             </button>
         </nav>
     </div>
@@ -239,7 +240,7 @@
         <div class="sm-row xs-column justify-content-around align-items-center bg-orange">
             <a href="#popup1"><img src="public/picture/mini/App_Store_Badge.png" alt="apple_store_picture" width="175px" /></a>
             <div id="popup1" class="overlay">
-                <div class="popup">
+                <div class="popup popup-sm">
                     <h3>Pas encore :D</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content orange">
@@ -249,7 +250,7 @@
             </div>
             <a href="#popup2"><img src="public/picture/mini/Google_Play_Badge.png" alt="google_play_picture" width="200px" /></a>
             <div id="popup2" class="overlay">
-                <div class="popup">
+                <div class="popup popup-sm">
                     <h3>Là non plus :D</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content orange">
@@ -259,7 +260,7 @@
             </div>
         </div>
         <div class="justify-content-around align-items-center bg-orange">
-            <h2 class="col-12">Restez informé</h2>
+            <h2>Restez informé</h2>
             <div>
                 <button class="btn btn-info social-link"><a href="https://www.facebook.com/frederic.labourel.3" target=_blank><span class="glyphicon glyphicon-facebook"><i class="fab fa-facebook-f fa-lg white"></i></span></a></button>
                 <button class="btn btn-info social-link"><a href="mailto: fred.labourel@wanadoo.fr"><span class="glyphicon glyphicon-calendar"><i class="fas fa-at fa-lg white"></i></span></a></button>
@@ -273,7 +274,7 @@
         <div class="offset-10 fixed-bottom popup3">
             <a href="#popup3"><i class="fas fa-comment-dots fa-7x"></i></a>
             <div id="popup3" class="overlay">
-                <div class="popup">
+                <div class="popup popup-lg">
                     <h3>Votre avis <i class="far fa-lightbulb fa-2x"></i><br>nous éclaire !</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content black">
@@ -321,7 +322,7 @@
 
     <?php $footer = ob_get_clean(); ?>
 
-    <!-- CONTAINER BOOTSRTAP -->
+    <!-- CONTAINER BOOTSTRAP -->
 
     <main role="main" class="container-fluid">
 

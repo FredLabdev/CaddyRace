@@ -137,38 +137,8 @@ try {
     //             Controller frontend PostManager (+frontend CommentManager)            
     //**************************************************************************************
 
-    function sortListShop($page, $message_success, $message_error) {
-        $postManager = new \FredLab\tp5_caddy_race\Model\PostManager();
-        $postsCount = $postManager->getPostsCount();
-        $postsList = $postManager->getPosts();
-        $pages_max = getPagesMax($postsCount);
-        if ($page <= $pages_max) {
-            $offset = ($page-1)*5;  
-            $postsBy5 = $postManager->getPostsBy5($offset);
-            $commentsCountBy5 = array(); 
-            $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-            foreach($postsBy5 as $postBy5) {
-                $commentsCount = $commentManager->getCommentsCount($postBy5['id']);                
-                $commentsCountBy5[] = $commentsCount;
-            } 
-            $billet_max = $postsCount['nbre_posts']-($offset);
-            $message_success;
-            $message_error;
-            if ($billet_max <= 5) {
-                $billet_min = 1;
-            } else {
-                $billet_min = $billet_max-4;
-            };
-            $signalComments = $commentManager->getSignalComments();
+    function listDetail($message_success, $message_error) {
             require('view/frontend/listView.php');
-        } else {
-            if ($postsCount['nbre_posts'] == 0) {
-                $message_success = 'Aucun billet n\'est encore de publié...';
-            } else {
-                $message_error = 'Mauvais indice de page !';
-            };
-            require('view/frontend/listView.php');
-        }
     }
 
     function getPagesMax($postsCount) {

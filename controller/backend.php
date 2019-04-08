@@ -9,6 +9,10 @@ try {
     //**************************************************************************************
     // Controller backend PostManager (+backend CommentManager) (+Controller frontend PostManager)          
     //**************************************************************************************
+    
+    function shopDetail($message_success, $message_error) {
+        require('view/backend/shopView.php');
+    }
 
     function postExtract($text) {
         $max=200;

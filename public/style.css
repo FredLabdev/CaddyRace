@@ -182,7 +182,6 @@ input[type='submit'],
     padding: 10px;
 }
 
-
 .nav-link:hover {
     color: darkorange;
 }
@@ -205,12 +204,8 @@ input[type='submit'],
     color: darkorange;
 }
 
-.alert {
-    position: absolute;
-    top: -78px;
-    left: -10px;
-    padding-top: 0px;
-    background-attachment: scroll;
+.dropdown-menu {
+    overflow: auto;
 }
 
 .alert2 {
@@ -354,7 +349,7 @@ footer div:nth-child(3) span:nth-child(3) {
     color: #06D85F;
 }
 
-.popup .content {
+.popup-lg .content {
     max-height: 30%;
     overflow: auto;
 }
@@ -708,12 +703,13 @@ ul.bs-autocomplete-menu a {
 /***********************************************************************/
 /* listView Nav */
 
-#list-nav {
+.list-nav {
     top: 115px;
     flex-wrap: nowrap;
 }
 
-.search-bar input {
+.search-bar input,
+.search-bar select {
     width: 500px;
     height: 55px;
 }
@@ -728,8 +724,8 @@ ul.bs-autocomplete-menu a {
 
 .ui-widget-content {
     z-index: 10;
-    background-color: darkorange;
-    color: #fff;
+    background-color: lightgray;
+    color: black;
     border: none;
 }
 
@@ -739,8 +735,18 @@ ul.bs-autocomplete-menu a {
     background-color: darkorange;
 }
 
-#item-tab {
+#addItem,
+#addItem-Admin {
     padding: .5rem .5rem;
+}
+
+#raySelect,
+#raySelect-Admin {
+    width: 100%;
+
+    top: 175px;
+    left: 0px;
+    display: none;
 }
 
 #liste-tab:hover,
@@ -884,12 +890,19 @@ a:visited.ui-button,
     background-position: -62px -16px;
 }
 
+#raySelect,
+#raySelect-Admin {
+    position: absolute;
+    top: 75px;
+    z-index: 1;
+}
+
 /***********************************************************************/
 /* listView - items checkbox */
 
 .ui-accordion .ui-accordion-content {
     padding: 1em 0em;
-    background-color: lightgoldenrodyellow;
+    background-color: darkorange;
 }
 
 input[type="checkbox"] {
@@ -921,38 +934,49 @@ input[type="checkbox"] {
 
 .caddie2 {
     border: 3px solid darkorange;
-    background-color: ;
     padding: 3px;
     margin-left: 5px;
 }
 
+.caddie3 {
+    position: relative;
+    top: -10px;
+    border: 3px solid darkorange;
+    padding: 2px;
+    margin-left: 15px;
+    border-radius: 100px;
+    color: #fff;
+}
+
 .item-delete {
-    color: red;
+    color: darkolivegreen;
 }
 
 .item-modif {
-    color: orchid;
+    color: yellow;
 }
 
 .item-check::before {
     content: "\f07a";
     font-family: 'FontAwesome';
-    padding: 3px;
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+    padding-left: .2rem;
+    padding-right: .2rem;
     color: #fff;
     display: block;
     position: absolute;
     top: 10px;
     bottom: 10px;
     left: 10px;
-    width: 32px;
     border: 3px solid #fff;
     border-radius: 100px;
     transition: background-color .2s;
 }
 
-.item-check:hover,
-.item-delete:hover,
-.item-modif:hover,
+.item-check,
+.item-delete,
+.item-modif,
 input[type="checkbox"]:focus + .item-check {
     box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 }
@@ -968,7 +992,7 @@ input[type="checkbox"]:checked + .item-check::before {
 
 .dropdown-item:active,
 .dropdown-item:hover {
-    background-color: #fff;
+    background-color: darkorange;
 }
 
 /***********************************************************************/
@@ -987,7 +1011,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-size: contain;
 }
 
-.bois {
+.bois,
+.ui-icon.bois {
     background-image: url("https://img.icons8.com/color/48/000000/bottle-of-water.png");
 }
 
@@ -995,7 +1020,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/beer.png");
 }
 
-.cond {
+.cond,
+.ui-icon.cond {
     background-image: url("https://img.icons8.com/color/48/000000/olive-oil.png");
 }
 
@@ -1003,7 +1029,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/pepper-shaker.png");
 }
 
-.cons {
+.cons,
+.ui-icon.cons {
     background-image: url("https://img.icons8.com/color/48/000000/tin-can.png");
 }
 
@@ -1011,7 +1038,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/spam-can.png");
 }
 
-.conf {
+.conf,
+.ui-icon.conf {
     background-image: url("https://img.icons8.com/color/48/000000/jam.png");
 }
 
@@ -1019,7 +1047,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/coffee-pot.png");
 }
 
-.frui {
+.frui,
+.ui-icon.frui {
     background-image: url("https://img.icons8.com/color/48/000000/pear.png");
 }
 
@@ -1027,7 +1056,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/eggplant.png");
 }
 
-.hygi {
+.hygi,
+.ui-icon.hygi {
     background-image: url("https://img.icons8.com/color/48/000000/soap-dispenser.png");
 }
 
@@ -1035,7 +1065,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/toothpaste.png");
 }
 
-.lait {
+.lait,
+.ui-icon.lait {
     background-image: url("https://img.icons8.com/color/48/000000/milk-bottle.png");
 }
 
@@ -1043,7 +1074,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/eggs.png");
 }
 
-.mena {
+.mena,
+.ui-icon.mena {
     background-image: url("https://img.icons8.com/color/48/000000/duster.png");
 }
 
@@ -1051,7 +1083,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/cat.png");
 }
 
-.cere {
+.cere,
+.ui-icon.cere {
     background-image: url("https://img.icons8.com/color/48/000000/toaster.png");
 }
 
@@ -1059,7 +1092,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/wheat.png");
 }
 
-.pate {
+.pate,
+.ui-icon.pate {
     background-image: url("https://img.icons8.com/color/48/000000/spaghetti.png");
 }
 
@@ -1067,7 +1101,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/rice-bowl.png");
 }
 
-.frai {
+.frai,
+.ui-icon.frai {
     background-image: url("https://img.icons8.com/color/48/000000/salami.png");
 }
 
@@ -1075,7 +1110,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/sandwich.png");
 }
 
-.surg {
+.surg,
+.ui-icon.surg {
     background-image: url("https://img.icons8.com/color/48/000000/cooling.png");
 }
 
@@ -1083,7 +1119,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/ice-cream-cone.png");
 }
 
-.vian {
+.vian,
+.ui-icon.vian {
     background-image: url("https://img.icons8.com/color/48/000000/steak.png");
 }
 
@@ -1091,7 +1128,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/bento.png");
 }
 
-.coup {
+.coup,
+.ui-icon.coup {
     background-image: url("https://img.icons8.com/color/48/000000/jamon.png");
 }
 
@@ -1099,7 +1137,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/cheese.png");
 }
 
-.aper {
+.aper,
+.ui-icon.aper {
     background-image: url("https://img.icons8.com/color/48/000000/nachos.png");
 }
 
@@ -1107,7 +1146,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/bavarian-pretzel.png");
 }
 
-.fari {
+.fari,
+.ui-icon.fari {
     background-image: url("https://img.icons8.com/color/48/000000/sack-of-flour.png");
 }
 
@@ -1115,7 +1155,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/sugar-cubes.png");
 }
 
-.choc {
+.choc,
+.ui-icon.choc {
     background-image: url("https://img.icons8.com/color/48/000000/cookies.png");
 }
 
@@ -1123,7 +1164,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/chocolate-bar.png");
 }
 
-.boul {
+.boul,
+.ui-icon.boul {
     background-image: url("https://img.icons8.com/color/48/000000/baguette.png");
 }
 
@@ -1131,7 +1173,8 @@ input[type="checkbox"]:checked + .item-check::before {
     background-image: url("https://img.icons8.com/color/48/000000/croissant.png");
 }
 
-.autr {
+.autr,
+.ui-icon.autr {
     background-image: url("https://img.icons8.com/color/48/000000/magazine.png");
 }
 
@@ -1164,7 +1207,6 @@ input[type="checkbox"]:checked + .item-check::before {
 
 #sortable li,
 .rayon-num li {
-    padding: .5em .5em .5em .7em;
     margin: 2px 0 0 0;
     font-size: 1em;
     height: 1.5em;
@@ -1173,6 +1215,18 @@ input[type="checkbox"]:checked + .item-check::before {
     font-weight: normal;
     color: #555555;
     cursor: pointer;
+}
+
+#sortable li {
+    padding: .5em .5em .5em .7em;
+}
+
+.rayon-num {
+    padding: 0px;
+}
+
+.rayon-num li {
+    padding: 20px;
 }
 
 #sortable li:active,
@@ -1199,9 +1253,10 @@ html > body #sortable li,
 }
 
 .ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
-    height: 24px;
-    width: 24px;
+    height: 40px;
+    width: 40px;
     top: 0.1em;
+    margin-left: -10px;
 }
 
 .ui-selectmenu-button.ui-button {
@@ -1209,11 +1264,11 @@ html > body #sortable li,
     white-space: nowrap;
     width: 12em;
     position: relative;
-    right: 170px;
 }
 
 .ui-selectmenu-icon.ui-icon {
     margin-right: 20px;
+    transform: scaleX(0.5);
 }
 
 /* select with CSS avatar icons */
@@ -1264,6 +1319,12 @@ span.ui-icon.video {
 span.ui-icon.rss {
     background-image: url("https://img.icons8.com/color/48/000000/pear.png");
     background-size: contain;
+}
+
+.ray,
+.ray-order,
+.fam-select {
+    margin: auto
 }
 
 /***********************************************************************/
@@ -1332,6 +1393,15 @@ span.ui-icon.rss {
 /***********************************************************************/
 /* Members Edit view */
 
+.profil-form {
+    width: 50%;
+    margin-left: 10%;
+}
+
+.profil-form label {
+    width: 200px;
+}
+
 #members {
     padding: 40px;
     width: 1080px;
@@ -1365,6 +1435,7 @@ input:invalid,
 textarea,
 #champ,
 .posts-extracts,
+.search-bar select,
 .rayons-org {
     border: 5px solid lightgray;
     border-radius: 10px;
@@ -1579,7 +1650,6 @@ label[for] {
     }
 
     .navbar-toggler {
-        color: darkorange;
         height: 50px;
     }
 
@@ -1638,8 +1708,12 @@ label[for] {
         display: block;
     }
 
-    footer div:nth-child(1) {
+    .popup-lg {
         padding-top: 5px;
+    }
+
+    .popup-sm {
+        padding-top: 40px;
     }
 
     footer div:nth-child(3) {
@@ -1710,9 +1784,16 @@ label[for] {
     }
 
     .popup {
-        margin-top: 50px;
         width: 80%;
+    }
+
+    .popup-lg {
         height: 450px;
+        margin-top: 50px;
+    }
+
+    .popup-sm {
+        height: 200px;
     }
 
     .popup3 a {
@@ -1825,9 +1906,9 @@ label[for] {
     }
 
     /***********************************************************************/
-    /* Posts View Extracts */
+    /* List View */
 
-    #list-nav {
+    .list-nav {
         top: 50px;
         height: 60px;
     }
@@ -1836,7 +1917,7 @@ label[for] {
         display: none;
     }
 
-    #tabs {
+    .tabs {
         z-index: 0;
     }
 
@@ -1844,11 +1925,16 @@ label[for] {
         padding: .25rem 0.25rem;
     }
 
+    .familles {
+        height: 500px;
+    }
+
     .search-bar {
         flex-flow: nowrap;
     }
 
-    .search-bar input {
+    .search-bar input,
+    .search-bar select {
         width: 180px;
         height: 35px;
     }
@@ -1870,8 +1956,11 @@ label[for] {
     }
 
     .ray {
-        font-size: 0.9em;
-        margin-bottom: 0px;
+        font-size: 1.3em;
+    }
+
+    .ray-order {
+        font-size: 1em;
     }
 
     .ui-widget {
@@ -1942,10 +2031,19 @@ label[for] {
 }
 
 
+
 @media all and (max-width: 350px) {
+
+    .familles {
+        height: 400px;
+    }
 
     .search-bar input {
         width: 120px;
+    }
+
+    #recherche {
+        font-size: 0.7em;
     }
 
     .rayons-org {
@@ -1956,6 +2054,12 @@ label[for] {
     .rayon-num,
     .ray {
         padding-right: 2px;
+        font-size: 1em;
+    }
+
+    .ray-order {
+        padding-right: 2px;
+        font-size: 0.9em;
     }
 
     .fam-select {

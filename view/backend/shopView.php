@@ -11,17 +11,18 @@
 
 <!-- MENU COURSES -->
 
-<div id="tabs" class="tabs">
+<div id="tabs-Admin" class="tabs">
 
     <div class="row">
-        <nav class="list-nav navbar navbar-light bg-dark fixed-top">
+        <nav class="list-nav navbar navbar-light bg-red fixed-top">
             <form class="search-bar form-inline">
-                <a href="#" id="addItem"><i class="far fa-plus-circle fa-2x orange"></i></a>
-                <input type="text" class="typeahead tt-query" id="recherche" placeholder="Que vous manque-t-il ?" autocomplete="off" spellcheck="false" />
+                <a href="#" id="addItem-Admin"><i class="far fa-plus-circle fa-2x orange"></i></a>
+                <input type="text" class="typeahead tt-query" id="recherche" placeholder="Rechercher un article" autocomplete="off" spellcheck="false" />
                 <span class="nav-item">
                     <a class="nav-link" href="#popup5" id="addList"><i class="fas fa-check-circle fa-2x green"></i></a>
                 </span>
             </form>
+
             <div id="popup5" class="overlay">
                 <div class="text-center popup popup-sm">
                     <h3>Ajouté !</h3>
@@ -31,6 +32,7 @@
                     </div>
                 </div>
             </div>
+
             <ul class="nav nav-pills nav-stacked align-items-center">
                 <li class="nav-item ">
                     <a class="nav-link" href="#liste" id="liste-tab"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Liste</span></a>
@@ -39,129 +41,90 @@
                     <a class="nav-link" href="#rayons" id="rayons-tab"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
                 </li>
             </ul>
-        </nav>
-    </div>
 
-    <div class="row" id="raySelect">
-        <nav class="navbar navbar-light bg-dark">
-            <form class="search-bar form-inline offset-1">
-                <select name="rayon" id="rayon" placeholder="Rangez votre nouvel article dans un rayon.">
-                    <div class="dropdown-menu familles">
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 autr"></span>
-                            <span class="col-1 famIcon2 autr2"></span>
-                            Divers
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 hygi"></span>
-                            <span class="col-1 famIcon2 hygi2"></span>
-                            Toilette, Maquillage
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 fari"></span>
-                            <span class="col-1 famIcon2 fari2"></span>
-                            Dessert, Farine, Compotes
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 choc"></span>
-                            <span class="col-1 famIcon2 choc2"></span>
-                            Goûters, Chocolat
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 conf"></span>
-                            <span class="col-1 famIcon2 conf2"></span>
-                            Confiture, Café, Thé
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 cere"></span>
-                            <span class="col-1 famIcon2 cere2"></span>
-                            Pain, Céréales
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 mena"></span>
-                            <span class="col-1 famIcon2 mena2"></span>
-                            Ménage, Animaux
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 cond"></span>
-                            <span class="col-1 famIcon2 cond2"></span>
-                            Huile, Condiments, Pdts monde
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 pate"></span>
-                            <span class="col-1 famIcon2 pate2"></span>
-                            Pâtes, Riz, Thon, Potages
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 cons"></span>
-                            <span class="col-1 famIcon2 cons2"></span>
-                            Conserve, Plats cuisinés
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 bois"></span>
-                            <span class="col-1 famIcon2 bois2"></span>
-                            Boissons
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 aper"></span>
-                            <span class="col-1 famIcon2 aper2"></span>
-                            Biscuits apéritifs
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 lait"></span>
-                            <span class="col-1 famIcon2 lait2"></span>
-                            Laitages, Oeufs
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 surg"></span>
-                            <span class="col-1 famIcon2 surg2"></span>
-                            Surgelés
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 frai"></span>
-                            <span class="col-1 famIcon2 frai2"></span>
-                            Charcuterie, Pâtes tarte
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 vian"></span>
-                            <span class="col-1 famIcon2 vian2"></span>
-                            Viandes, Poissons, traiteur
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 coup"></span>
-                            <span class="col-1 famIcon2 coup2"></span>
-                            A la coupe
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 frui"></span>
-                            <span class="col-1 famIcon2 frui2"></span>
-                            Fruits, Légumes
-                        </option>
-                        <option class="dropdown-item ray-order">
-                            <span class="col-1 famIcon1 boul"></span>
-                            <span class="col-1 famIcon2 boul2"></span>
-                            Boulangerie
-                        </option>
-                    </div>
-                </select>
-            </form>
-            <div id="popup6" class="overlay">
-                <div class="text-center popup popup-sm">
-                    <h3>Article créé</h3>
-                    <a class="close" href="#">&times;</a>
-                    <div class="content orange">
-                        Vous pouvez maintenant l'ajouter à votre liste !
+            <div id="raySelect-Admin" class="bg-red">
+                <form class="search-bar form-inline offset-1" action="#">
+                    <fieldset>
+                        <label for="rayon-Admin">Selectionnez un rayon:</label>
+                        <select name="rayon-Admin" id="rayon-Admin" placeholder="Rangez votre nouvel article dans un rayon.">
+                            <option class="ray-order" data-class="autr">
+                                Divers
+                            </option>
+                            <option class="ray-order" data-class="hygi">
+                                Toilette, Maquillage
+                            </option>
+                            <option class="ray-order" data-class="fari">
+                                Dessert, Farine, Compotes
+                            </option>
+                            <option class="ray-order" data-class="choc">
+                                Goûters, Chocolat
+                            </option>
+                            <option class="ray-order" data-class="conf">
+                                Confiture, Café, Thé
+                            </option>
+                            <option class="ray-order" data-class="cere">
+                                Pain, Céréales
+                            </option>
+                            <option class="ray-order" data-class="mena">
+                                Ménage, Animaux
+                            </option>
+                            <option class="ray-order" data-class="cond">
+                                Huile, Condiments, Pdts monde
+                            </option>
+                            <option class="ray-order" data-class="pate">
+                                Pâtes, Riz, Thon, Potages
+                            </option>
+                            <option class="ray-order" data-class="cons">
+                                Conserve, Plats cuisinés
+                            </option>
+                            <option class="ray-order" data-class="bois">
+                                Boissons
+                            </option>
+                            <option class="ray-order" data-class="aper">
+                                Biscuits apéritifs
+                            </option>
+                            <option class="ray-order" data-class="lait">
+                                Laitages, Oeufs
+                            </option>
+                            <option class="ray-order" data-class="surg">
+                                Surgelés
+                            </option>
+                            <option class="ray-order" data-class="frai">
+                                Charcuterie, Pâtes tarte
+                            </option>
+                            <option class="ray-order" data-class="vian">
+                                Viandes, Poissons, traiteur
+                            </option>
+                            <option class="ray-order" data-class="coup">
+                                A la coupe
+                            </option>
+                            <option class="ray-order" data-class="frui">
+                                Fruits, Légumes
+                            </option>
+                            <option class="ray-order" data-class="boul">
+                                Boulangerie
+                            </option>
+                        </select>
+                    </fieldset>
+                </form>
+
+                <div id="popup6" class="overlay">
+                    <div class="text-center popup popup-sm">
+                        <h3>Article créé</h3>
+                        <a class="close" href="#">&times;</a>
+                        <div class="content orange">
+                            Vous pouvez maintenant l'ajouter à votre liste !
+                        </div>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
 
-
     <!-- LISTE -->
 
     <div id="liste">
-        <div id="accordion">
+        <div id="accordion-Admin">
 
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 autr"></span>

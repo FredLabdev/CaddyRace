@@ -1,4 +1,15 @@
 //**************************************************************************************
+// => listView - Créer un nouvel article -> Afficher l'affectation à un rayon        
+//**************************************************************************************
+
+
+$(function () {
+    $('#addItem').click(function () {
+        $('#raySelect').toggle() // AFFICHE ET CACHE A CHAQUE CLIQUE SUR LE BOUTTON
+    });
+});
+
+//**************************************************************************************
 // => listView/Tris jQuery - Tabs - Accordion        
 //**************************************************************************************
 
@@ -11,6 +22,33 @@ $(function () {
         heightStyle: "content"
     });
     $("#accordion").accordion({
+        collapsible: true
+    });
+});
+
+//**************************************************************************************
+// => shopView - Créer un nouvel article -> Afficher l'affectation à un rayon        
+//**************************************************************************************
+
+$(function () {
+    $('#addItem-Admin').click(function () {
+        $('#raySelect-Admin').toggle() // AFFICHE ET CACHE A CHAQUE CLIQUE SUR LE BOUTTON
+    });
+});
+
+//**************************************************************************************
+// => shopView/Tris jQuery - Tabs - Accordion        
+//**************************************************************************************
+
+$(function () {
+    $("#tabs-Admin").tabs();
+});
+
+$(function () {
+    $("#accordion-Admin").accordion({
+        heightStyle: "content"
+    });
+    $("#accordion-Admin").accordion({
         collapsible: true
     });
 });
@@ -106,127 +144,35 @@ $(function () {
         }
     });
 
-    $("#files1")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-    $("#files2")
+    $("#rayon-Admin")
         .iconselectmenu()
         .iconselectmenu("menuWidget")
         .addClass("ui-menu-icons customicons");
+});
 
-    $("#files3")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons customicons");
+//**************************************************************************************
+// => nav dropdown automatique au hover         
+//**************************************************************************************
 
-    $("#files4")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
+$('ul.nav li.dropdown').hover(function () {
+    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+}, function () {
+    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+});
 
+//**************************************************************************************
+// => listView nav search autocomplete         
+//**************************************************************************************
 
-    $("#files5")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
+var liste = [
+    "Abricot",
+    "Ananas",
+    "Banane",
+    "Cacahuètes",
+];
 
-
-    $("#files6")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files7")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files8")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files9")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files10")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files11")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files12")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files13")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files14")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files15")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files16")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files17")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files18")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files19")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#files20")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons");
-
-
-    $("#people")
-        .iconselectmenu()
-        .iconselectmenu("menuWidget")
-        .addClass("ui-menu-icons avatar");
+$('#recherche').autocomplete({
+    source: liste
 });
 
 //**************************************************************************************
@@ -251,32 +197,6 @@ document.getElementById("deconnexion").addEventListener('click', function (e) {
 document.getElementById("deconnexion_xs").addEventListener('click', function (e) {
     e.preventDefault();
     deconnect_confirm();
-});
-
-//**************************************************************************************
-// => nav dropdown automatique au hover         
-//**************************************************************************************
-
-$('ul.nav li.dropdown').hover(function () {
-    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-}, function () {
-    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-});
-
-//**************************************************************************************
-// => listView nav search autocomplete         
-//**************************************************************************************
-
-var liste = [
-    "Abricot",
-    "Ananas",
-    "Banane",
-    "Cacahuètes",
-    "Nouvel article ?"
-];
-
-$('#recherche').autocomplete({
-    source: liste
 });
 
 //**************************************************************************************
