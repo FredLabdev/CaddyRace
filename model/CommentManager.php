@@ -10,6 +10,13 @@ class CommentManager extends Manager { // se situe dans le namespace
 //                                Model CommentManager           
 //**************************************************************************************
 
+    public function getItemsGene($aisleGeneId) {
+        $db = $this->dbConnect();
+        $itemsGene = $db->prepare('SELECT item_gene_name FROM items WHERE aisle_gene_id = ? ORDER BY item_gene_name');
+        $itemsGene->execute(array($aisleGeneId));    
+        return $itemsGene;
+    }
+    
     public function getCommentsCount($postId) {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT COUNT(post_id) AS nbre_comment FROM comments WHERE post_id = ?');
@@ -17,13 +24,6 @@ class CommentManager extends Manager { // se situe dans le namespace
         $commentsCount = $req->fetch();
         $req->closeCursor();
         return $commentsCount;
-    }
-
-    public function getComments($postId) {
-        $db = $this->dbConnect();
-        $comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\')comment_date_fr, comment_signal FROM comments WHERE post_id = ? ORDER BY comment_date');
-        $comments->execute(array($postId));    
-        return $comments;
     }
 
     public function getMemberNoComment($member) {
@@ -35,13 +35,12 @@ class CommentManager extends Manager { // se situe dans le namespace
         return $addCommentRight;
     }
     
-   public function addComment($postId, $author, $comment) {            
+   public function pushItemGene($aisleGeneId, $itemGeneName) {            
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO comments(post_id, author, comment, comment_date) VALUES(:post_id, :author, :comment, NOW())');
+        $req = $db->prepare('INSERT INTO items(aisle_gene_id, item_gene_name) VALUES(:aisle_gene_id, :item_gene_name)');
         $req->execute(array(
-            'post_id' => $postId,
-            'author' => $author,
-            'comment' => $comment
+            'aisle_gene_id' => $aisleGeneId,
+            'item_gene_name' => $itemGeneName
         ));
         $req->closeCursor();
     }

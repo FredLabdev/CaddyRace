@@ -62,9 +62,7 @@ try {
             
             //**************************************************************************************
             // => listView(frontend) Interface de Gestion des tables Persos d'Articles & Rayons
-            
-            if ($_GET['action'] == 'list') {
-                
+           
                 // Trier sa liste
                 if ($_POST['sortList']) {
                     // par Alphabet:
@@ -93,19 +91,18 @@ try {
                 else if ($_GET['action'] == 'item') {
                     if (isset($_GET['itemId']) && $_GET['itemId'] > 0) {
                         $itemId = getCleanParameter($_GET['itemId']);
-
+                        
+                        // Créer un nouvel article Perso   
+                        if ($_GET['action'] == 'createItem') {
+                            $itemName = getCleanParameter($_POST['itemName']);
+                            $aisleId = getCleanParameter($_POST['aisleId']);
+                            createItem($aisleId, $itemName); // TODO selon controller/model
+                        }
                         // Modifier un de ses articles 
-                        if ($_GET['action'] == 'itemModif') {  
+                        else if ($_GET['action'] == 'itemModif') {  
                             $itemName = getCleanParameter($_POST['itemName']);
                             modifItem($itemId, $itemName); // TODO selon controller/model
                         } 
-                        // Créer un nouvel article Perso   
-                        else if ($_GET['action'] == 'createItem') {
-                            $itemName = getCleanParameter($_POST['itemName']);
-                            $itemFamily = getCleanParameter($_POST['itemFamily']);
-                            $itemAisle = getCleanParameter($_POST['itemAisle']);
-                            newItem($itemName, $itemFamily, $itemAisle); // TODO selon controller/model
-                        }
                         // Supprimer un de ses articles,   
                         else if ($_GET['action'] == 'itemDelete') {
                             itemErase($itemId); // TODO selon controller/model
@@ -119,20 +116,25 @@ try {
                         throw new Exception('Identifiant d\'item vide ou erronné');
                     }
                 }
-                
-                // Afficher sa liste (par défaut):
-                else {
-                    listDetail("",""); // TODO selon controller/model
-                }  
-            }
+                 
             
             //**************************************************************************************
             // => shopView(backend) Interface de Gestion des tables Générales Communes d'Articles & Rayons
-
-            else if ($_GET['action'] == 'shopAdmin') {
+                
+                // Afficher la shopView
+               else if ($_GET['action'] == 'shopAdmin') {
+                    shopDetail(1, "", ""); // TODO selon controller/model
+                }
+            
+                // Créer un nouvel article Gene   
+               else if ($_GET['action'] == 'createItemGene') {
+                    $itemGeneName = getCleanParameter($_POST['itemGeneName']);
+                    $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                    createItemGene($aisleGeneId, $itemGeneName); // TODO selon controller/model
+                }
 
                 // Modifier un article   
-                if ($_GET['action'] == 'itemGeneModif') {  
+                else if ($_GET['action'] == 'itemGeneModif') {  
                     $itemGeneName = getCleanParameter($_POST['itemGeneName']);
                     modifItemGene($itemGeneId, $itemGeneName); // TODO selon controller/model
                 } 
@@ -161,11 +163,7 @@ try {
                 else if ($_GET['action'] == 'aisleGeneDelete') {
                     aisleGeneErase($aisleGeneId); // TODO selon controller/model
                 }
-                // Afficher les articles (par défaut)
-                else {
-                    shopDetail("", ""); // TODO selon controller/model
-                }
-            }
+ 
             
             //**************************************************************************************
             // => profilView(frontend) / => membersView(backend)         
@@ -292,6 +290,12 @@ try {
            
             else if ($_GET['action'] == 'deconnexion') {
                 sessionEnd();
+            } 
+            
+            //**************************************************************************************
+            // => Afficher Accueil du site (par défaut):
+            else {
+                listDetail("",""); // TODO selon controller/model
             } 
             
         //**************************************************************************************

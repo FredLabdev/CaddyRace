@@ -9,10 +9,6 @@ try {
     //**************************************************************************************
     // Controller backend PostManager (+backend CommentManager) (+Controller frontend PostManager)          
     //**************************************************************************************
-    
-    function shopDetail($message_success, $message_error) {
-        require('view/backend/shopView.php');
-    }
 
     function postExtract($text) {
         $max=200;
@@ -63,22 +59,27 @@ try {
     }
 
     //**************************************************************************************
-    //           Controller CommentManager (+Controller frontend PostManager)                  
+    //            Items Admin Manager          
     //**************************************************************************************
 
-    function addCommentRequest($postId, $member, $newComment) {
+    function shopDetail($aisleGeneId, $message_success, $message_error) {
+        itemsAdmin($aisleGeneId, $message_success, $message_error);
+    }
+    
+    function createItemGene($aisleGeneId, $itemGeneName) {
         $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $addCommentRight = $commentManager->getMemberNoComment($member);
+        $commentManager->pushItemGene($aisleGeneId, $itemGeneName);     
+        $message_success =  'Votre article a bien été ajouté dans ce rayon';
         $message_error = "";
-        if($addCommentRight['block_comment'] == 1) {
-            $message_error =  'Désolé vous n\'êtes pas autorisé à poster des comments';
-        } else if($newComment == "") {
-            $message_error =  'Désolé votre message est vide';
-        } else {
-            $commentManager->addComment($postId, $member, $newComment);     
-            $message_success =  'Votre commentaire a bien été publié ci-dessous';
-        }
-        post($postId, $message_success, $message_error);
+        itemsAdmin($aisleGeneId, $message_success, $message_error);
+    }
+
+    function itemsAdmin($aisleGeneId, $message_success, $message_error) {
+        $message_success;
+        $message_error;
+        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+        $itemsGene = $commentManager->getItemsGene($aisleGeneId);
+        require('view/backend/shopView.php');
     }
     
     function modifCommentRequest($postId, $member, $commentId, $modifComment) {

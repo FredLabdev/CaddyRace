@@ -14,25 +14,10 @@
 <div id="tabs-Admin" class="tabs">
 
     <div class="row">
-        <nav class="list-nav navbar navbar-light bg-red fixed-top">
+        <nav class="list-nav navbar navbar-light bg-blue fixed-top">
             <form class="search-bar form-inline">
-                <a href="#" id="addItem-Admin"><i class="far fa-plus-circle fa-2x orange"></i></a>
-                <input type="text" class="typeahead tt-query" id="recherche" placeholder="Rechercher un article" autocomplete="off" spellcheck="false" />
-                <span class="nav-item">
-                    <a class="nav-link" href="#popup5" id="addList"><i class="fas fa-check-circle fa-2x green"></i></a>
-                </span>
+                <input type="text" class="typeahead tt-query" id="recherche2" placeholder="Vérifier existence d'un article" autocomplete="off" spellcheck="false" />
             </form>
-
-            <div id="popup5" class="overlay">
-                <div class="text-center popup popup-sm">
-                    <h3>Ajouté !</h3>
-                    <a class="close" href="#">&times;</a>
-                    <div class="content orange">
-                        Cet article est désormais ajouté à votre liste dans le rayon !
-                    </div>
-                </div>
-            </div>
-
             <ul class="nav nav-pills nav-stacked align-items-center">
                 <li class="nav-item ">
                     <a class="nav-link" href="#liste" id="liste-tab"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Liste</span></a>
@@ -41,89 +26,23 @@
                     <a class="nav-link" href="#rayons" id="rayons-tab"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
                 </li>
             </ul>
-
-            <div id="raySelect-Admin" class="bg-red">
-                <form class="search-bar form-inline offset-1" action="#">
-                    <fieldset>
-                        <label for="rayon-Admin">Selectionnez un rayon:</label>
-                        <select name="rayon-Admin" id="rayon-Admin" placeholder="Rangez votre nouvel article dans un rayon.">
-                            <option class="ray-order" data-class="autr">
-                                Divers
-                            </option>
-                            <option class="ray-order" data-class="hygi">
-                                Toilette, Maquillage
-                            </option>
-                            <option class="ray-order" data-class="fari">
-                                Dessert, Farine, Compotes
-                            </option>
-                            <option class="ray-order" data-class="choc">
-                                Goûters, Chocolat
-                            </option>
-                            <option class="ray-order" data-class="conf">
-                                Confiture, Café, Thé
-                            </option>
-                            <option class="ray-order" data-class="cere">
-                                Pain, Céréales
-                            </option>
-                            <option class="ray-order" data-class="mena">
-                                Ménage, Animaux
-                            </option>
-                            <option class="ray-order" data-class="cond">
-                                Huile, Condiments, Pdts monde
-                            </option>
-                            <option class="ray-order" data-class="pate">
-                                Pâtes, Riz, Thon, Potages
-                            </option>
-                            <option class="ray-order" data-class="cons">
-                                Conserve, Plats cuisinés
-                            </option>
-                            <option class="ray-order" data-class="bois">
-                                Boissons
-                            </option>
-                            <option class="ray-order" data-class="aper">
-                                Biscuits apéritifs
-                            </option>
-                            <option class="ray-order" data-class="lait">
-                                Laitages, Oeufs
-                            </option>
-                            <option class="ray-order" data-class="surg">
-                                Surgelés
-                            </option>
-                            <option class="ray-order" data-class="frai">
-                                Charcuterie, Pâtes tarte
-                            </option>
-                            <option class="ray-order" data-class="vian">
-                                Viandes, Poissons, traiteur
-                            </option>
-                            <option class="ray-order" data-class="coup">
-                                A la coupe
-                            </option>
-                            <option class="ray-order" data-class="frui">
-                                Fruits, Légumes
-                            </option>
-                            <option class="ray-order" data-class="boul">
-                                Boulangerie
-                            </option>
-                        </select>
-                    </fieldset>
-                </form>
-
-                <div id="popup6" class="overlay">
-                    <div class="text-center popup popup-sm">
-                        <h3>Article créé</h3>
-                        <a class="close" href="#">&times;</a>
-                        <div class="content orange">
-                            Vous pouvez maintenant l'ajouter à votre liste !
-                        </div>
-                    </div>
-                </div>
-            </div>
         </nav>
     </div>
 
     <!-- LISTE -->
 
     <div id="liste">
+
+        <div id="popup5" class="overlay">
+            <div class="text-center popup popup-sm">
+                <h3>Ajouté !</h3>
+                <a class="close" href="#">&times;</a>
+                <div class="content orange">
+                    Cet article est désormais ajouté à votre liste dans le rayon !
+                </div>
+            </div>
+        </div>
+
         <div id="accordion-Admin">
 
             <div class="d-flex flex-row">
@@ -131,24 +50,30 @@
                 <span class="col-1 famIcon2 autr2"></span>
                 <h4 class="ray col-xs-7 col-sm-8" id="one">Divers</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
+                    <i class="fam-select orange far fa-th"></i>
                     <span class="caddie2">22</span>
                 </span>
             </div>
             <div>
-                <?php    
-            for ($i=1; $i<5; $i++) {
-               ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <form class="form-row" id="newItemGeneForm" method="post" action="index.php?action=createItemGene">
+                        <input type="hidden" name="aisleGeneId" value="<?= 1 ?>" />
+                        <input type="text" id="itemGeneField" class="item-gene col-9" name="itemGeneName" placeholder="Rajouter un article dans ce rayon ?" focus />
+                        <input type="submit" id="addItemGene" class="item-modif d-flex align-items-center p-2" value="+" />
+                    </form>
                 </a>
-                <?php
-            }
-            ?>
+                <ul id="aisle1">
+                    <?php
+                    while ($itemGene = $itemsGene->fetch()) {
+                    ?>
+                    <li class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                        <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                        <input type="text" name="" class="item-gene col-9" value="<?= $itemGene['item_gene_name'] ?>" />
+                    </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
             </div>
 
             <div class="d-flex flex-row">

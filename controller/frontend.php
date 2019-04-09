@@ -150,17 +150,6 @@ try {
         return $pages_max;
     }
 
-    function post($postId, $message_success, $message_error) {
-        $postManager = new \FredLab\tp5_caddy_race\Model\PostManager();
-        $postDetails = $postManager->getPost($postId);
-        $message_success;
-        $message_error;
-        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $comments = $commentManager->getComments($postId);
-        $commentsCount = $commentManager->getCommentsCount($postId);
-        require('view/frontend/itemView.php');
-    }
-
     //**************************************************************************************
     //        Controller frontend MemberManager (+Controller frontend Login Manager)          
     //**************************************************************************************

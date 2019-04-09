@@ -2,7 +2,6 @@
 // => listView - Créer un nouvel article -> Afficher l'affectation à un rayon        
 //**************************************************************************************
 
-
 $(function () {
     $('#addItem').click(function () {
         $('#raySelect').toggle() // AFFICHE ET CACHE A CHAQUE CLIQUE SUR LE BOUTTON
@@ -26,15 +25,6 @@ $(function () {
     });
 });
 
-//**************************************************************************************
-// => shopView - Créer un nouvel article -> Afficher l'affectation à un rayon        
-//**************************************************************************************
-
-$(function () {
-    $('#addItem-Admin').click(function () {
-        $('#raySelect-Admin').toggle() // AFFICHE ET CACHE A CHAQUE CLIQUE SUR LE BOUTTON
-    });
-});
 
 //**************************************************************************************
 // => shopView/Tris jQuery - Tabs - Accordion        
@@ -144,7 +134,7 @@ $(function () {
         }
     });
 
-    $("#rayon-Admin")
+    $("#rayon")
         .iconselectmenu()
         .iconselectmenu("menuWidget")
         .addClass("ui-menu-icons customicons");
@@ -165,15 +155,74 @@ $('ul.nav li.dropdown').hover(function () {
 //**************************************************************************************
 
 var liste = [
-    "Abricot",
-    "Ananas",
-    "Banane",
-    "Cacahuètes",
+    "Abricot Perso",
+    "Ananas Perso",
+    "Banane Perso",
+    "Cacahuètes Perso",
 ];
 
 $('#recherche').autocomplete({
     source: liste
 });
+
+$(".tohide").hide();
+$(".tohide2").show();
+$('#recherche').autocomplete({
+    source: liste,
+    select: function (event, ui) {
+        var selectedItem = ui.item;
+        if (selectedItem.value !== '') {
+            $(".tohide").show();
+            $(".tohide2").hide();
+        }
+    }
+});
+
+//**************************************************************************************
+// => shopView - Ajouter un article dans un rayon      
+//**************************************************************************************
+
+$(function () {
+    var $list, $newItemGeneForm;
+    $list = $('#aisle1');
+    $newItemGeneForm = $('#newItemGeneForm');
+    $newItemGeneForm.on("submit", function (e) {
+        e.preventDefault();
+        $itemGeneField = $('#itemGeneField');
+        var text = $itemGeneField.val();
+        $list.append('<li class="dropdown-item d-flex flex-row justify-content-center align-items-center"><span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span><input type="text" class="item-gene col-9"  value="' + text + '"/></li>');
+        $itemGeneField.val('');
+    });
+    $list.on('click', 'span', function () {
+        var $trash = $(this);
+        $trash.parent().remove();
+    })
+});
+
+//**************************************************************************************
+// => listView : Focus sur article à modifier au click sur icone "pencil"         
+//**************************************************************************************
+
+var list = document.getElementById("liste");
+var items = list.querySelectorAll(".item-check");
+
+if (list) {
+    var icons = list.querySelectorAll(".item-modif");
+    for (var i = 0, c = icons.length; i < c; i++) {
+        items[i].onclick = function () {
+            var itemName = this.innerText;
+            var input = document.createElement('input');
+            input.value = itemName;
+            input.type = "text";
+            input.className = "right";
+            this.appendChild(input);
+            input.focus();
+            input.onblur = function () {
+                this.parentNode.innerText = this.value;
+            }
+        }
+    }
+}
 
 //**************************************************************************************
 // => exitView - Interactions pour la déconnexion         

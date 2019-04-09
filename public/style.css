@@ -709,7 +709,8 @@ ul.bs-autocomplete-menu a {
 }
 
 .search-bar input,
-.search-bar select {
+.search-bar select,
+.ui-selectmenu-button.ui-button {
     width: 500px;
     height: 55px;
 }
@@ -724,7 +725,7 @@ ul.bs-autocomplete-menu a {
 
 .ui-widget-content {
     z-index: 10;
-    background-color: lightgray;
+    background-color: #fff;
     color: black;
     border: none;
 }
@@ -743,9 +744,12 @@ ul.bs-autocomplete-menu a {
 #raySelect,
 #raySelect-Admin {
     width: 100%;
-
-    top: 175px;
+    position: absolute;
+    z-index: 1;
+    top: 75px;
     left: 0px;
+    display: flex;
+    align-items: center;
     display: none;
 }
 
@@ -890,13 +894,6 @@ a:visited.ui-button,
     background-position: -62px -16px;
 }
 
-#raySelect,
-#raySelect-Admin {
-    position: absolute;
-    top: 75px;
-    z-index: 1;
-}
-
 /***********************************************************************/
 /* listView - items checkbox */
 
@@ -926,9 +923,25 @@ input[type="checkbox"] {
     transition: background-color .2s, box-shadow .2s;
 }
 
+
+.item-gene {
+    display: block;
+    position: relative;
+    margin: 3px 10px 3px 10px;
+    padding: 15px 30px 15px 62px;
+    color: black;
+    background-color: lightgoldenrodyellow;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color .2s, box-shadow .2s;
+}
+
 .caddie2,
 .item-delete,
-.item-modif {
+.item-modif,
+.item-action {
     border-radius: 100px;
 }
 
@@ -949,11 +962,11 @@ input[type="checkbox"] {
 }
 
 .item-delete {
-    color: darkolivegreen;
+    color: #fff;
 }
 
 .item-modif {
-    color: yellow;
+    color: #fff;
 }
 
 .item-check::before {
@@ -977,6 +990,8 @@ input[type="checkbox"] {
 .item-check,
 .item-delete,
 .item-modif,
+.item-action,
+.item-gene:focus,
 input[type="checkbox"]:focus + .item-check {
     box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 }
@@ -993,6 +1008,38 @@ input[type="checkbox"]:checked + .item-check::before {
 .dropdown-item:active,
 .dropdown-item:hover {
     background-color: darkorange;
+}
+
+.right {
+    position: absolute;
+    top: 10px;
+    left: 60%;
+}
+
+/***********************************************************************/
+/* shopView - Icones */
+
+.item-gene::before {
+    content: "\f02a";
+    font-family: 'FontAwesome';
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+    padding-left: .2rem;
+    padding-right: .2rem;
+    color: #fff;
+    display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
+}
+
+.item-gene:focus {
+    color: #fff;
+    background-color: #343A40;
 }
 
 /***********************************************************************/
@@ -1262,13 +1309,13 @@ html > body #sortable li,
 .ui-selectmenu-button.ui-button {
     text-align: left;
     white-space: nowrap;
-    width: 12em;
     position: relative;
-}
-
-.ui-selectmenu-icon.ui-icon {
-    margin-right: 20px;
-    transform: scaleX(0.5);
+    margin-left: 68px;
+    border: 5px solid lightgray;
+    border-radius: 10px;
+    border-style: outset;
+    background-color: lightgray;
+    color: black;
 }
 
 /* select with CSS avatar icons */
@@ -1934,9 +1981,14 @@ label[for] {
     }
 
     .search-bar input,
-    .search-bar select {
+    .search-bar select,
+    .ui-selectmenu-button.ui-button {
         width: 180px;
         height: 35px;
+    }
+
+    .ui-selectmenu-button.ui-button {
+        margin-left: 46px;
     }
 
     #liste,
@@ -1970,6 +2022,21 @@ label[for] {
     .ui-accordion-header-icon,
     i.fas.fa-sort {
         display: none;
+    }
+
+    #raySelect,
+    #raySelect-Admin {
+        top: 60px;
+        height: 60px;
+    }
+
+    /***********************************************************************/
+    /* listView - items checkbox */
+
+    .right {
+        top: 50px;
+        left: 40%;
+        z-index: 1;
     }
 
     /***********************************************************************/
