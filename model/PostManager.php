@@ -15,22 +15,23 @@ class PostManager extends Manager { // se situe dans le namespace
     // private $newPostContentHTML;
     // private $postExtract;
 
-    public function getPostsCount() {
+    public function getAislesGeneCount() {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT COUNT(id) AS nbre_posts FROM posts');
-        $postsCount = $req->fetch();
+        $req = $db->query('SELECT COUNT(id) AS count FROM aisles');
+        $aislesGeneCount = $req->fetch();
         $req->closeCursor();
-        return $postsCount;
+        return $aislesGeneCount;
     }
 
-    public function getPosts() {
+    public function getAislesGene() {
         $db = $this->dbConnect();
-        $posts = $db->query('SELECT id, chapter_title, creation_date FROM posts ORDER BY creation_date');
-        $postsList = array(); 
-        while ($post = $posts->fetch()) {
-            $postsList[] = $post; // on créer un tableau regroupant les posts
+        $req = $db->query('SELECT * FROM aisles ORDER BY aisle_gene_order');
+        $aislesGene = array(); 
+        while ($aisleGene = $req->fetch()) {
+            $aislesGene[] = $aisleGene; // on créer un tableau regroupant les 5 posts
         }
-        return $postsList;
+        $req->closeCursor();
+        return $aislesGene;
     }
 
     public function getPostsBy5($offset) {

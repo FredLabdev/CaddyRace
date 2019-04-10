@@ -123,30 +123,27 @@ try {
                 
                 // Afficher la shopView
                else if ($_GET['action'] == 'shopAdmin') {
-                    shopDetail(1, "", ""); // TODO selon controller/model
+                    shopAdmin("", ""); // TODO selon controller/model
                 }
-            
                 // Créer un nouvel article Gene   
                else if ($_GET['action'] == 'createItemGene') {
                     $itemGeneName = getCleanParameter($_POST['itemGeneName']);
                     $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
-                    createItemGene($aisleGeneId, $itemGeneName); // TODO selon controller/model
+                    if ($aisleGeneId) {
+                        createItemGene($aisleGeneId, $itemGeneName);
+                    } else {
+                        throw new Exception('Aucun identifiant de rayon envoyé');
+                    }
+                } 
+                // Supprimer un article,   
+                else if ($_GET['action'] == 'deleteItemGene') {
+                    $itemGeneId = getCleanParameter($_POST['itemGeneId']);
+                    itemGeneErase($itemGeneId); // TODO selon controller/model
                 }
-
                 // Modifier un article   
-                else if ($_GET['action'] == 'itemGeneModif') {  
+                else if ($_GET['action'] == 'modifItemGene') {  
                     $itemGeneName = getCleanParameter($_POST['itemGeneName']);
                     modifItemGene($itemGeneId, $itemGeneName); // TODO selon controller/model
-                } 
-                // Créer un nouveau article   
-                else if ($_GET['action'] == 'createItemGene') {
-                    $itemGeneName = getCleanParameter($_POST['itemGeneName']);
-                    $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
-                    newItemGene($itemGeneName, $aisleGeneId); // TODO selon controller/model
-                }
-                // Supprimer un article,   
-                else if ($_GET['action'] == 'itemGeneDelete') {
-                    itemGeneErase($itemGeneId); // TODO selon controller/model
                 }
                 // Modifier un rayon   
                 else if ($_GET['action'] == 'aisleGeneModif') {  

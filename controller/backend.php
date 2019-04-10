@@ -62,24 +62,41 @@ try {
     //            Items Admin Manager          
     //**************************************************************************************
 
-    function shopDetail($aisleGeneId, $message_success, $message_error) {
-        itemsAdmin($aisleGeneId, $message_success, $message_error);
+    function shopAdmin($message_success, $message_error) {
+        $postManager = new \FredLab\tp5_caddy_race\Model\PostManager();
+        $aislesGeneCount = $postManager->getAislesGeneCount();
+
+        $aislesGene = $postManager->getAislesGene();
+        $itemsGeneCountInAisleTab = array();
+        $itemsGeneInAisleTab  = array();
+        // $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+        // $itemsGeneInAisle = $commentManager->getItemsGeneInAisle(1); 
+        foreach($aislesGene as $aisleGene) {
+            $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+            $itemsGeneCountInAisle = $commentManager->getItemsGeneCountInAisle($aisleGene['id']);  
+            $itemsGeneCountInAisleTab[] = $itemsGeneCountInAisle;
+            $itemsGeneInAisle = $commentManager->getItemsGeneInAisle($aisleGene['id']);    
+            $itemsGeneInAisleTab[] = $itemsGeneInAisle;
+        }
+        $message_success;
+        $message_error;
+        require('view/backend/shopView.php');
     }
     
     function createItemGene($aisleGeneId, $itemGeneName) {
         $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
         $commentManager->pushItemGene($aisleGeneId, $itemGeneName);     
-        $message_success =  'Votre article a bien été ajouté dans ce rayon';
+        $message_success =  'Votre article a bien été ajouté dans ce rayon.';
         $message_error = "";
-        itemsAdmin($aisleGeneId, $message_success, $message_error);
+        shopAdmin($message_success, $message_error);
     }
-
-    function itemsAdmin($aisleGeneId, $message_success, $message_error) {
-        $message_success;
-        $message_error;
+    
+    function itemGeneErase($itemGeneId) {
         $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $itemsGene = $commentManager->getItemsGene($aisleGeneId);
-        require('view/backend/shopView.php');
+        $commentManager->deleteItemGene($itemGeneId); 
+        $message_success =  'Cet article a bien été Supprimé.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
     }
     
     function modifCommentRequest($postId, $member, $commentId, $modifComment) {
@@ -106,18 +123,6 @@ try {
             $message_success =  'Ce commentaire ne sera plus signalé à l\'administrateur!';
         }
         post($postId, $message_success, $message_error);
-    }
-    
-    function commentErase($postId, $commentId) {
-        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $commentManager->deleteComment($commentId); 
-        if ($postId != "") {
-            $message_success =  'Ce commentaire a bien été Supprimé !';
-            post($postId, $message_success, "");
-        } else {
-            $message_success =  'Ce commentaire a bien été Supprimé !';
-            listPosts(1, $message_success, "");
-        }
     }
 
     //**************************************************************************************

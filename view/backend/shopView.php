@@ -9,7 +9,7 @@
     ob_start(); 
 ?>
 
-<!-- MENU COURSES -->
+<!-- MENU ADMIN -->
 
 <div id="tabs-Admin" class="tabs">
 
@@ -29,7 +29,7 @@
         </nav>
     </div>
 
-    <!-- LISTE -->
+    <!-- ITEMS -->
 
     <div id="liste">
 
@@ -45,36 +45,49 @@
 
         <div id="accordion-Admin">
 
+            <!---------------------- Rayon ---------------------->
+            <?php    
+             for ($i=0; $i<$aislesGeneCount['count']; $i++) {
+            ?>
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 autr"></span>
                 <span class="col-1 famIcon2 autr2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="one">Divers</h4>
+                <h4 class="ray col-xs-7 col-sm-8" id="one">
+                    <?= $aislesGene[$i]['aisle_gene_title'] ?>
+                </h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange far fa-th"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2">
+                        <?= $itemsGeneCountInAisleTab[$i]['count'] ?></span>
                 </span>
             </div>
             <div>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <form class="form-row" id="newItemGeneForm" method="post" action="index.php?action=createItemGene">
-                        <input type="hidden" name="aisleGeneId" value="<?= 1 ?>" />
-                        <input type="text" id="itemGeneField" class="item-gene col-9" name="itemGeneName" placeholder="Rajouter un article dans ce rayon ?" focus />
+                    <form class="form-row" method="post" action="index.php?action=createItemGene">
+                        <input type="hidden" name="aisleGeneId" value="<?= $aislesGene[$i]['id'] ?>" />
+                        <input type="text" name="itemGeneName" class="item-gene col-9" placeholder="Rajouter un article dans ce rayon ?" focus />
                         <input type="submit" id="addItemGene" class="item-modif d-flex align-items-center p-2" value="+" />
                     </form>
                 </a>
                 <ul id="aisle1">
                     <?php
-                    while ($itemGene = $itemsGene->fetch()) {
+                    foreach ($itemsGeneInAisleTab[$i] as $itemGeneInAisle) {
                     ?>
                     <li class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                        <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
-                        <input type="text" name="" class="item-gene col-9" value="<?= $itemGene['item_gene_name'] ?>" />
+                        <form class="form-row" method="post" action="index.php?action=deleteItemGene">
+                            <input type="hidden" name="itemGeneId" value="<?= $itemGeneInAisle['id'] ?>" />
+                            <button type="submit" class="item-delete d-flex p-2 align-items-center" id="deleteItemGene"><i class="fas fa-trash-alt"></i></button>
+                            <input type="text" name="itemGeneName" class="item-gene col-9" value="<?= $itemGeneInAisle['item_gene_name'] ?>" />
+                        </form>
                     </li>
                     <?php
                     }
                     ?>
                 </ul>
             </div>
+            <?php
+            }
+            ?>
 
             <div class="d-flex flex-row">
                 <span class="col-1 famIcon1 hygi"></span>

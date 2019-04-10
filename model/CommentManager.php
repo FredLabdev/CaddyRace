@@ -10,20 +10,27 @@ class CommentManager extends Manager { // se situe dans le namespace
 //                                Model CommentManager           
 //**************************************************************************************
 
-    public function getItemsGene($aisleGeneId) {
+    public function getItemsGeneInAisle($aisleGeneId) {
         $db = $this->dbConnect();
-        $itemsGene = $db->prepare('SELECT item_gene_name FROM items WHERE aisle_gene_id = ? ORDER BY item_gene_name');
-        $itemsGene->execute(array($aisleGeneId));    
-        return $itemsGene;
+        $itemsGeneInAisle = $db->prepare('SELECT * FROM items WHERE aisle_gene_id = ? ORDER BY item_gene_name');
+        $itemsGeneInAisle->execute(array($aisleGeneId));
+        return $itemsGeneInAisle;
     }
     
-    public function getCommentsCount($postId) {
+    public function getItemsGeneCountInAisle($aisleGeneId) {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT COUNT(post_id) AS nbre_comment FROM comments WHERE post_id = ?');
-        $req->execute(array($postId));
-        $commentsCount = $req->fetch();
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM items WHERE aisle_gene_id = ?');
+        $req->execute(array($aisleGeneId));
+        $itemsGeneCountInAisle = $req->fetch();
         $req->closeCursor();
-        return $commentsCount;
+        return $itemsGeneCountInAisle;
+    }
+    
+    public function deleteItemGene($itemGeneId) {  
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM items WHERE id = ?');
+        $req->execute(array($itemGeneId)); 
+        $req->closeCursor();
     }
 
     public function getMemberNoComment($member) {
@@ -74,15 +81,6 @@ class CommentManager extends Manager { // se situe dans le namespace
             $signalComments[] = $signalComment; // on créer un tableau regroupant les members
         }
         return $signalComments;
-    }
-    
-    public function deleteComment($commentId) {  
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM comments WHERE id = :idnum');
-        $req->execute(array(
-            'idnum' => $commentId
-        ));  
-        $req->closeCursor();
     }
     
     public function deleteComments($postId) {  
