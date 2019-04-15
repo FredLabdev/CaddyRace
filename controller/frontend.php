@@ -1,9 +1,9 @@
 <?php
 
-require_once('model/CommentManager.php');
+require_once('model/ItemsManager.php');
 require_once('model/LoginManager.php');
 require_once('model/MemberManager.php');
-require_once('model/PostManager.php');
+require_once('model/AislesManager.php');
 
 
 try {
@@ -19,7 +19,8 @@ try {
             $login_error = 'Erreur : pseudo et/ou mot de passe erroné(s).';
         }
         $loginManager = new \FredLab\tp5_caddy_race\Model\LoginManager();
-        $dbPassword = ($loginManager->getPasswordFromPseudo($pseudo))['password']; 
+        $passwordFromPseudo = ($loginManager->getPasswordFromPseudo($pseudo)); 
+        $dbPassword = $passwordFromPseudo['password']; 
         $isPasswordCorrect = password_verify($password, $dbPassword); 
         if ($dbPassword) {
             if ($isPasswordCorrect) {
@@ -134,7 +135,7 @@ try {
     }
 
     //**************************************************************************************
-    //             Controller frontend PostManager (+frontend CommentManager)            
+    //             Controller frontend AislesManager (+frontend ItemsManager)            
     //**************************************************************************************
 
     function listDetail($message_success, $message_error) {

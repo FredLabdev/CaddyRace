@@ -4,7 +4,7 @@ namespace FredLab\tp5_caddy_race\Model;
 
 require_once("model/Manager.php");
 
-class PostManager extends Manager { // se situe dans le namespace
+class AislesManager extends Manager { // se situe dans le namespace
 
     // private $postTitle;
     // private $postContentHTML;
@@ -23,16 +23,36 @@ class PostManager extends Manager { // se situe dans le namespace
         return $aislesGeneCount;
     }
 
-    public function getAislesGene() {
+    public function getAislesGeneTab() {
         $db = $this->dbConnect();
         $req = $db->query('SELECT * FROM aisles ORDER BY aisle_gene_order');
-        $aislesGene = array(); 
+        $aislesGeneTab = array(); 
         while ($aisleGene = $req->fetch()) {
-            $aislesGene[] = $aisleGene; // on créer un tableau regroupant les 5 posts
+            $aislesGeneTab[] = $aisleGene; // on créer un tableau regroupant les 5 posts
         }
         $req->closeCursor();
-        return $aislesGene;
+        return $aislesGeneTab;
     }
+    
+    public function getAislesGeneIcons($aisleGeneId) {
+        $db = $this->dbConnect();
+        $aislesGeneIcons = $db->prepare('SELECT icon_adress FROM icons WHERE aile_id = ? ORDER BY icon_class');    
+        $aislesGeneIcons->execute(array($aisleGeneId));
+        return $aislesGeneIcons;
+    }
+    
+    /* public function changeAislesGeneOrder($aisleGeneId, $aisleGeneOrder) {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE aisles SET aisle_gene_order = :new-order WHERE id = :id');    
+        $req->execute(array($aisleGeneId));
+        $req->execute(array(
+            'new-order' => $aisleGeneOrder,
+            'id' => $aisleGeneId
+        ));
+        $req->closeCursor();
+    } */
+    
+//**************************************************************************************
 
     public function getPostsBy5($offset) {
         $db = $this->dbConnect();
@@ -68,7 +88,7 @@ class PostManager extends Manager { // se situe dans le namespace
     }
     
 //**************************************************************************************
-//                        Model backend PostManager           
+//                        Model backend AislesManager           
 //**************************************************************************************
     
     public function addPost($postTitle, $postContentHTML, $postExtract, $postBefore) {            

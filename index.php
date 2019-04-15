@@ -3,7 +3,10 @@ session_start();
 require('controller/frontend.php');
 require('controller/backend.php');
 
+header('Access-Control-Allow-Origin: *');
+
 try {
+    
 
     //**************************************************************************************
     //**************************************************************************************
@@ -63,7 +66,7 @@ try {
             //**************************************************************************************
             // => listView(frontend) Interface de Gestion des tables Persos d'Articles & Rayons
            
-                // Trier sa liste
+                /*/ Trier sa liste
                 if ($_POST['sortList']) {
                     // par Alphabet:
                     if ($_POST['alphab']) {
@@ -75,9 +78,9 @@ try {
                     else {
                         throw new Exception('Identifiant de classement vide ou erronné');
                     }
-                } 
+                } */
                 // Ajouter un article existant à sa liste     
-                else if ($_GET['action'] == 'addItem') {
+                if ($_GET['action'] == 'addItem') {
                     if (isset($_GET['itemId']) && $_GET['itemId'] > 0) {
                         $itemId = getCleanParameter($_GET['itemId']);
                         addItem($itemId); // TODO selon controller/model
@@ -138,29 +141,37 @@ try {
                 // Supprimer un article,   
                 else if ($_GET['action'] == 'deleteItemGene') {
                     $itemGeneId = getCleanParameter($_POST['itemGeneId']);
-                    itemGeneErase($itemGeneId); // TODO selon controller/model
+                    deleteItemGene($itemGeneId); // TODO selon controller/model
                 }
                 // Modifier un article   
-                else if ($_GET['action'] == 'modifItemGene') {  
+                else if ($_GET['action'] == 'modifItemGene') { 
+                    $itemGeneId = getCleanParameter($_POST['itemGeneId']);
                     $itemGeneName = getCleanParameter($_POST['itemGeneName']);
                     modifItemGene($itemGeneId, $itemGeneName); // TODO selon controller/model
                 }
-                // Modifier un rayon   
-                else if ($_GET['action'] == 'aisleGeneModif') {  
-                    $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
-                    modifAisleGene($aisleGeneId, $aisleGeneTitle); // TODO selon controller/model
-                } 
+                 // Déplacer un rayon   
+                else if ($_GET['action'] == 'orderAisleGene') {
+                    $aisleGeneId = getCleanParameter($_POST["aisleGeneId"]);
+                    $aisleGeneOrder = getCleanParameter($_POST["aisleGeneOrder"]);
+                    // $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                    // $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
+                    orderAisleGene($aisleGeneId, $aisleGeneOrder); // TODO selon controller/model
+                }
                 // Créer un nouveau rayon   
                 else if ($_GET['action'] == 'createAisleGene') {
                     $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
                     $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
-                    newAisleGene($aisleGeneTitle, $aisleGeneOrder); // TODO selon controller/model
+                    createAisleGene($aisleGeneTitle, $aisleGeneOrder); // TODO selon controller/model
                 }
                 // Supprimer un rayon,   
-                else if ($_GET['action'] == 'aisleGeneDelete') {
-                    aisleGeneErase($aisleGeneId); // TODO selon controller/model
+                else if ($_GET['action'] == 'deleteAisleGene') {
+                    deleteAisleGene($aisleGeneId); // TODO selon controller/model
                 }
- 
+                // Modifier un rayon   
+                else if ($_GET['action'] == 'modifAisleGene') {  
+                    $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
+                    modifAisleGene($aisleGeneId, $aisleGeneTitle); // TODO selon controller/model
+                }  
             
             //**************************************************************************************
             // => profilView(frontend) / => membersView(backend)         

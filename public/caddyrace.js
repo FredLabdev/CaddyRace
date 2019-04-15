@@ -1,12 +1,10 @@
-//**************************************************************************************
-// => listView - Créer un nouvel article -> Afficher l'affectation à un rayon        
-//**************************************************************************************
-
-$(function () {
-    $('#addItem').click(function () {
-        $('#raySelect').toggle() // AFFICHE ET CACHE A CHAQUE CLIQUE SUR LE BOUTTON
-    });
-});
+/* eslint-env jquery */
+/* global $ */
+/* global alert */
+/* global document */
+/* global navigator */
+/* global confirm */
+"use strict";
 
 //**************************************************************************************
 // => listView/Tris jQuery - Tabs - Accordion        
@@ -47,11 +45,110 @@ $(function () {
 // => listView/Rayons jQuery - Sortable        
 //**************************************************************************************
 
-$(function () {
+/* $(function () {
     $("#sortable").sortable({
+        placeholder: 'fond',
+        update: function () {
+            var order = $("#sortable").sortable("serialize");
+            $("#info").load("ajax.php" + order);
+        }
+    })
+    $("#sortable").disableSelection();
+}); 
+
+$(function () {
+    $("#sortable-admin").sortable({
+        opacity: 0.8, // réduit l'opacité lors du déplacement
+        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+        placeholder: '.ui-state-highlight',
+        forcePlaceholderSize: true, // force le redimensionnement du placeholder
+        revert: true,
+        stop: function (event, ui) {
+            var order = $("this").sortable("serialize");
+
+            var aisleGeneOrder = ui.item.index() + 1;
+            var aisleGeneId = ui.item.attr('id');
+            $.ajax({
+                type: "post",
+                url: "index.php?action=orderAisleGene",
+                data: {
+                    aisleGeneOrder: aisleGeneOrder,
+                    aisleGeneId: aisleGeneId
+                },
+                success: function (data) {
+                    alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder);
+                }
+            });
+        }
+    })
+    $("#sortable-admin").disableSelection();
+}); 
+
+$(function () {
+    $("#sortable-admin").sortable({
+        opacity: 0.8, // réduit l'opacité lors du déplacement
+        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+        placeholder: '.ui-state-highlight',
+        forcePlaceholderSize: true, // force le redimensionnement du placeholder
+        revert: true,
+        stop: function (event, ui) {
+            var order = $("this").sortable("serialize");
+
+            var aisleGeneInfos = "aisleGeneId=" + ui.item.attr('id') + "&aisleGeneOrder=" + (ui.item.index() + 1);
+
+
+            ajaxPost("index.php?action=orderAisleGene", aisleGeneInfos,
+                function (reponse) {
+                    alert("La nouvelle position du rayon : " + ui.item.attr('id') + " est " + (ui.item.index() + 1) + " et : " + aisleGeneInfos);
+                }
+            )
+        }
+    });
+    $("#sortable-admin").disableSelection();
+}); */
+
+$(function () {
+    $("#sortable-admin").sortable({
+        opacity: 0.8, // réduit l'opacité lors du déplacement
+        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+        placeholder: '.ui-state-highlight',
+        forcePlaceholderSize: true, // force le redimensionnement du placeholder
+        revert: true,
+        stop: function (event, ui) {
+            var aisleNewPos = ui.item.index() + 1; // récupère la position d'arrivée du seul rayon sorti
+            // var aisleGeneId = ui.item.attr('id'); // récupèrerait son id
+            var order = $(this).sortable('serialize'); // récupère sous forme de tableau tous les id des rayons classés dans le nouvel ordre. Attention pour serialize les id doivent avoir un préfixe textuel => id="aisleId_" + indice php // sinon faire un 'toArray'
+
+            /* var ids = [];
+            for (var i = 0, c = order.length; i < c; i++) { // idem récupère les id classés dans le nouvel ordre
+                ids.push($('#sortable-admin li:eq(' + i + ')').attr('id'));
+            }  */
+
+            $.ajax({
+                dataType: "html",
+                type: 'POST',
+                url: 'public/ajax.php?action=orderAisleGene',
+                data: order,
+                success: function () {
+                    /*alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder + " et le nouvel ordre est : " + order);*/
+                    alert("Ce rayon a bien été déplacé en position n° " + aisleNewPos);
+                },
+                error: function () {
+                    alert('failed');
+                }
+            });
+        }
+    });
+    $("#sortable-admin").disableSelection();
+});
+
+
+
+$(function () {
+    $("#sortable-perso").sortable({
         placeholder: "ui-state-highlight"
     });
-    $("#sortable").disableSelection();
+    $("#sortable-perso").disableSelection();
 });
 
 // => Passage de mousse a touch sur mobile (complément touch-punch)
@@ -254,14 +351,14 @@ document.getElementById("deconnexion_xs").addEventListener('click', function (e)
 //**************************************************************************************
 
 var pseudoLogin = document.getElementById('pseudo_login');
-pseudoLogin.addEventListener("focus", function (event) {
+pseudoLogin.addEventListener("focus", function () {
     if (pseudoLogin.value == "") {
         pseudoLogin.className = "input_focus";
     } else {
         pseudoLogin.className = "input_value";
     }
 }, false);
-pseudoLogin.addEventListener("blur", function (event) {
+pseudoLogin.addEventListener("blur", function () {
     if (pseudoLogin.value == "") {
         pseudoLogin.className = "input_novalue";
     } else {
@@ -270,10 +367,10 @@ pseudoLogin.addEventListener("blur", function (event) {
 }, false);
 
 var passwordLogin = document.getElementById('password_login');
-passwordLogin.addEventListener("focus", function (event) {
+passwordLogin.addEventListener("focus", function () {
     passwordLogin.className = "input_focus"; // on change l'apparence du champ
 }, false);
-passwordLogin.addEventListener("blur", function (event) {
+passwordLogin.addEventListener("blur", function () {
     if (passwordLogin.value == "") {
         passwordLogin.className = "input_novalue";
     } else {
@@ -282,10 +379,10 @@ passwordLogin.addEventListener("blur", function (event) {
 }, false);
 
 var nameCreate = document.getElementById('name_create');
-nameCreate.addEventListener("focus", function (event) {
+nameCreate.addEventListener("focus", function () {
     nameCreate.className = "input_focus"; // on change l'apparence du champ
 }, false);
-nameCreate.addEventListener("blur", function (event) {
+nameCreate.addEventListener("blur", function () {
     if (nameCreate.value == "") {
         nameCreate.className = "input_novalue";
     } else {
@@ -294,10 +391,10 @@ nameCreate.addEventListener("blur", function (event) {
 }, false);
 
 var firstNameCreate = document.getElementById('first_name_create');
-firstNameCreate.addEventListener("focus", function (event) {
+firstNameCreate.addEventListener("focus", function () {
     firstNameCreate.className = "input_focus"; // on change l'apparence du champ
 }, false);
-firstNameCreate.addEventListener("blur", function (event) {
+firstNameCreate.addEventListener("blur", function () {
     if (firstNameCreate.value == "") {
         firstNameCreate.className = "input_novalue";
     } else {
@@ -306,10 +403,10 @@ firstNameCreate.addEventListener("blur", function (event) {
 }, false);
 
 var pseudoCreate = document.getElementById('pseudo_create');
-pseudoCreate.addEventListener("focus", function (event) {
+pseudoCreate.addEventListener("focus", function () {
     pseudoCreate.className = "input_focus"; // on change l'apparence du champ
 }, false);
-pseudoCreate.addEventListener("blur", function (event) {
+pseudoCreate.addEventListener("blur", function () {
     if (pseudoCreate.value == "") {
         pseudoCreate.className = "input_novalue";
     } else {
@@ -318,10 +415,10 @@ pseudoCreate.addEventListener("blur", function (event) {
 }, false);
 
 var emailCreate = document.getElementById('email_create');
-emailCreate.addEventListener("focus", function (event) {
+emailCreate.addEventListener("focus", function () {
     emailCreate.className = "input_focus"; // on change l'apparence du champ
 }, false);
-emailCreate.addEventListener("blur", function (event) {
+emailCreate.addEventListener("blur", function () {
     if (emailCreate.value == "") {
         emailCreate.className = "input_novalue";
     } else {
@@ -330,10 +427,10 @@ emailCreate.addEventListener("blur", function (event) {
 }, false);
 
 var email2Create = document.getElementById('email_create_confirm');
-email2Create.addEventListener("focus", function (event) {
+email2Create.addEventListener("focus", function () {
     email2Create.className = "input_focus"; // on change l'apparence du champ
 }, false);
-email2Create.addEventListener("blur", function (event) {
+email2Create.addEventListener("blur", function () {
     if (email2Create.value == "") {
         email2Create.className = "input_novalue";
     } else {
@@ -342,10 +439,10 @@ email2Create.addEventListener("blur", function (event) {
 }, false);
 
 var passwordCreate = document.getElementById('password_create');
-passwordCreate.addEventListener("focus", function (event) {
+passwordCreate.addEventListener("focus", function () {
     passwordCreate.className = "input_focus"; // on change l'apparence du champ
 }, false);
-passwordCreate.addEventListener("blur", function (event) {
+passwordCreate.addEventListener("blur", function () {
     if (passwordCreate.value == "") {
         passwordCreate.className = "input_novalue";
     } else {
@@ -354,10 +451,10 @@ passwordCreate.addEventListener("blur", function (event) {
 }, false);
 
 var password2Create = document.getElementById('password_create_confirm');
-password2Create.addEventListener("focus", function (event) {
+password2Create.addEventListener("focus", function () {
     password2Create.className = "input_focus"; // on change l'apparence du champ
 }, false);
-password2Create.addEventListener("blur", function (event) {
+password2Create.addEventListener("blur", function () {
     if (password2Create.value == "") {
         password2Create.className = "input_novalue";
     } else {
@@ -366,10 +463,10 @@ password2Create.addEventListener("blur", function (event) {
 }, false);
 
 var searchBar = document.getElementById('recherche');
-searchBar.addEventListener("focus", function (event) {
+searchBar.addEventListener("focus", function () {
     searchBar.className = "input_focus"; // on change l'apparence du champ
 }, false);
-searchBar.addEventListener("blur", function (event) {
+searchBar.addEventListener("blur", function () {
     if (searchBar.value == "") {
         searchBar.className = "input_novalue";
     } else {
@@ -378,10 +475,10 @@ searchBar.addEventListener("blur", function (event) {
 }, false);
 
 var champ = document.getElementById('champ');
-champ.addEventListener("focus", function (event) {
+champ.addEventListener("focus", function () {
     champ.className = "input_focus"; // on change l'apparence du champ
 }, false);
-champ.addEventListener("blur", function (event) {
+champ.addEventListener("blur", function () {
     if (champ.value == "") {
         champ.className = "input_novalue";
     } else {
@@ -390,10 +487,10 @@ champ.addEventListener("blur", function (event) {
 }, false);
 
 var missChamp = document.getElementById('modif_champ');
-missChamp.addEventListener("focus", function (event) {
+missChamp.addEventListener("focus", function () {
     missChamp.className = "input_focus"; // on change l'apparence du champ
 }, false);
-missChamp.addEventListener("blur", function (event) {
+missChamp.addEventListener("blur", function () {
     if (missChamp.value == "") {
         missChamp.className = "input_novalue";
     } else {
@@ -402,10 +499,10 @@ missChamp.addEventListener("blur", function (event) {
 }, false);
 
 var missChampConfirm = document.getElementById('modif_champ_confirm');
-missChamp.addEventListener("focus", function (event) {
+missChamp.addEventListener("focus", function () {
     missChamp.className = "input_focus"; // on change l'apparence du champ
 }, false);
-missChamp.addEventListener("blur", function (event) {
+missChamp.addEventListener("blur", function () {
     if (missChamp.value == "") {
         missChamp.className = "input_novalue";
     } else {
@@ -441,7 +538,7 @@ if (missChamp.validity.valueMissing) {
     }
 }
 
-missChamp.addEventListener("input", function (event) {
+missChamp.addEventListener("input", function () {
     // Chaque fois que l'utilisateur saisit quelque chose dans le 1er champ
     // S'il y a un message d'erreur affiché et que le champ est valide, on retire l'erreur
     missChamp.addClassclassName = "input_value"; // on change l'apparence du champ
@@ -455,14 +552,14 @@ missChamp.addEventListener("input", function (event) {
     }
 }, false);
 
-missChampConfirm.addEventListener("input", function (event) {
+missChampConfirm.addEventListener("input", function () {
     // Chaque fois que l'utilisateur saisit quelque chose dans le 2nd champ
     missChampConfirm.className = "input_value"; // on change l'apparence du champ
     errorChampConfirm.innerHTML = ""; // On réinitialise le contenu
     errorChampConfirm.className = "error"; // On réinitialise l'état visuel du message
 }, false);
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", function () {
     if (errorChamp.innerHTML !== "") {
         errorChamp.className = "error active";
     }

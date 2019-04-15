@@ -4,19 +4,12 @@ namespace FredLab\tp5_caddy_race\Model;
 
 require_once("model/Manager.php");
 
-class CommentManager extends Manager { // se situe dans le namespace
+class ItemsManager extends Manager { // se situe dans le namespace
 
 //**************************************************************************************
-//                                Model CommentManager           
+//                                Model ItemsManager           
 //**************************************************************************************
 
-    public function getItemsGeneInAisle($aisleGeneId) {
-        $db = $this->dbConnect();
-        $itemsGeneInAisle = $db->prepare('SELECT * FROM items WHERE aisle_gene_id = ? ORDER BY item_gene_name');
-        $itemsGeneInAisle->execute(array($aisleGeneId));
-        return $itemsGeneInAisle;
-    }
-    
     public function getItemsGeneCountInAisle($aisleGeneId) {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT COUNT(id) AS count FROM items WHERE aisle_gene_id = ?');
@@ -26,23 +19,14 @@ class CommentManager extends Manager { // se situe dans le namespace
         return $itemsGeneCountInAisle;
     }
     
-    public function deleteItemGene($itemGeneId) {  
+    public function getItemsGeneInAisle($aisleGeneId) {
         $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM items WHERE id = ?');
-        $req->execute(array($itemGeneId)); 
-        $req->closeCursor();
-    }
-
-    public function getMemberNoComment($member) {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT block_comment FROM members WHERE pseudo = ?');
-        $req->execute(array($member));
-        $addCommentRight = $req->fetch();
-        $req->closeCursor();
-        return $addCommentRight;
+        $itemsGeneInAisle = $db->prepare('SELECT * FROM items WHERE aisle_gene_id = ? ORDER BY item_gene_name');
+        $itemsGeneInAisle->execute(array($aisleGeneId));
+        return $itemsGeneInAisle;
     }
     
-   public function pushItemGene($aisleGeneId, $itemGeneName) {            
+    public function pushItemGene($aisleGeneId, $itemGeneName) {            
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO items(aisle_gene_id, item_gene_name) VALUES(:aisle_gene_id, :item_gene_name)');
         $req->execute(array(
@@ -52,14 +36,32 @@ class CommentManager extends Manager { // se situe dans le namespace
         $req->closeCursor();
     }
     
-   public function replaceComment($commentId, $newComment) {            
+    public function pullItemGene($itemGeneId) {  
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET comment = :comment, comment_date = NOW() WHERE id = :commentId');
+        $req = $db->prepare('DELETE FROM items WHERE id = ?');
+        $req->execute(array($itemGeneId)); 
+        $req->closeCursor();
+    }
+    
+    public function changeItemGeneName($itemGeneId, $itemGeneName) {            
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE items SET item_gene_name = :item_gene_name WHERE id = :id');
         $req->execute(array(
-            'comment' => $newComment,
-            'commentId' => $commentId
+            'item_gene_name' => $itemGeneName,
+            'id' => $itemGeneId
         ));
         $req->closeCursor();
+    }
+
+//**************************************************************************************
+    
+    public function getMemberNoComment($member) {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT block_comment FROM members WHERE pseudo = ?');
+        $req->execute(array($member));
+        $addCommentRight = $req->fetch();
+        $req->closeCursor();
+        return $addCommentRight;
     }
     
     public function signalComment($commentId, $signalId, $member) {  

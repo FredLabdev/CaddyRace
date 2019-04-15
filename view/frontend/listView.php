@@ -130,7 +130,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="one">Divers</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -138,11 +138,11 @@
             for ($i=1; $i<5; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -155,7 +155,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="two">Toilette, Maquillage</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -163,11 +163,11 @@
             for ($i=6; $i<10; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -180,7 +180,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="three">Dessert, Farine, Compotes</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -188,11 +188,11 @@
             for ($i=11; $i<15; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -205,7 +205,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="three2">Goûters, Chocolat</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -213,11 +213,11 @@
             for ($i=16; $i<20; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -230,7 +230,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="four">Confiture, Café, Thé</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -238,11 +238,11 @@
             for ($i=21; $i<25; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -255,7 +255,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="five">Pain, Céréales</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -263,11 +263,11 @@
             for ($i=26; $i<30; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -280,7 +280,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="six">Ménage, Animaux</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -288,11 +288,11 @@
             for ($i=31; $i<35; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -305,7 +305,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="seven">Huile, Condiments, Pdts monde</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -313,11 +313,11 @@
             for ($i=36; $i<40; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -330,7 +330,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="height">Pâtes, Riz, Thon, Potages</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -338,11 +338,11 @@
             for ($i=41; $i<45; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -355,7 +355,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="nine">Conserve, Plats cuisinés</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -363,11 +363,11 @@
             for ($i=46; $i<50; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -380,7 +380,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="ten">Boissons</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -388,11 +388,11 @@
             for ($i=51; $i<55; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -405,7 +405,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="eleven">Biscuits apéritifs</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -413,11 +413,11 @@
             for ($i=56; $i<60; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -430,7 +430,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="twelve">Laitages, Oeufs</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -438,11 +438,11 @@
             for ($i=61; $i<65; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -455,7 +455,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="thirteen">Surgelés</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -463,11 +463,11 @@
             for ($i=66; $i<70; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -480,7 +480,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="else">Charcuterie, Pâtes tarte</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -488,11 +488,11 @@
             for ($i=71; $i<75; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -505,7 +505,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="else">Viandes, Poissons, Traiteur</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -513,11 +513,11 @@
             for ($i=76; $i<80; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -530,7 +530,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="else">A la coupe</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -538,11 +538,11 @@
             for ($i=81; $i<85; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -555,7 +555,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="else">Fruits, Légumes</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -563,11 +563,11 @@
             for ($i=86; $i<90; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -580,7 +580,7 @@
                 <h4 class="ray col-xs-7 col-sm-8" id="else">Boulangerie</h4>
                 <span class="d-flex flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2">22</span>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
                 </span>
             </div>
             <div>
@@ -588,11 +588,11 @@
             for ($i=91; $i<95; $i++) {
                ?>
                 <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span>
+                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
                     <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
                     <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
                         <?= $i ?></label>
-                    <span class="item-modif d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
+                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <?php
             }
@@ -612,7 +612,7 @@
                 </div>
             </div>
             <div class="row">
-                <ul id="sortable" class="col-10">
+                <ul id="sortable-perso" class="sortable col-10">
                     <li class="ui-state-default row">
                         <i class="fas fa-sort"></i>
                         <span class="col-1 famIcon1 autr"></span>
