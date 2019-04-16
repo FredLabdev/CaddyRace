@@ -708,6 +708,14 @@ ul.bs-autocomplete-menu a {
     flex-wrap: nowrap;
 }
 
+.search-bar,
+.screen-avert {
+    position: fixed;
+    top: 126px;
+    left: 50px;
+    z-index: 1040;
+}
+
 .search-bar input,
 .search-bar select,
 .ui-selectmenu-button.ui-button {
@@ -930,10 +938,8 @@ input[type="checkbox"] {
     margin: 3px 10px 3px 10px;
     padding: 15px 30px 15px 62px;
     color: black;
-    font-weight: bold;
     box-shadow: 0 0 20px rgba(0, 0, 0, .2);
     white-space: nowrap;
-    cursor: pointer;
     user-select: none;
     transition: background-color .2s, box-shadow .2s;
 }
@@ -941,8 +947,6 @@ input[type="checkbox"] {
 .caddie2,
 .action-button {
     border-radius: 100px;
-    margin-left: 5px;
-    margin-right: 5px;
     height: 40px;
     width: 40px;
     text-align: center;
@@ -985,6 +989,12 @@ input[type="checkbox"] {
 .item-gene:focus,
 input[type="checkbox"]:focus + .item-check {
     box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+    cursor: pointer;
+}
+
+.modif-btn {
+    position: relative;
+    left: -70px;
 }
 
 input[type="checkbox"]:checked + .item-check {
@@ -1012,17 +1022,19 @@ input[type="checkbox"]:checked + .item-check::before {
 }
 
 .delete-form {
-    padding-right: 0px;
-    margin-right: -15px;
-}
-
-.modif-form {
-    margin-left: 15px;
-    margin-right: 10px;
+    cursor: pointer;
 }
 
 ul {
     padding-left: 0px;
+}
+
+.add-form {
+    margin-left: -10px
+}
+
+.delete-btn {
+    color: red;
 }
 
 /***********************************************************************/
@@ -1054,189 +1066,13 @@ ul {
 /***********************************************************************/
 /* listView - Icones */
 
-.aisles-icons {}
-
-.famIcon1 {
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: contain;
+.aisles-icons {
+    padding: 0px;
+    margin-right: -30px;
 }
 
-.famIcon2 {
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: contain;
-}
-
-.bois,
-.ui-icon.bois {
-    background-image: url("https://img.icons8.com/color/48/000000/bottle-of-water.png");
-}
-
-.bois2 {
-    background-image: url("https://img.icons8.com/color/48/000000/beer.png");
-}
-
-.cond,
-.ui-icon.cond {
-    background-image: url("https://img.icons8.com/color/48/000000/olive-oil.png");
-}
-
-.cond2 {
-    background-image: url("https://img.icons8.com/color/48/000000/pepper-shaker.png");
-}
-
-.cons,
-.ui-icon.cons {
-    background-image: url("https://img.icons8.com/color/48/000000/tin-can.png");
-}
-
-.cons2 {
-    background-image: url("https://img.icons8.com/color/48/000000/spam-can.png");
-}
-
-.conf,
-.ui-icon.conf {
-    background-image: url("https://img.icons8.com/color/48/000000/jam.png");
-}
-
-.conf2 {
-    background-image: url("https://img.icons8.com/color/48/000000/coffee-pot.png");
-}
-
-.frui,
-.ui-icon.frui {
-    background-image: url("https://img.icons8.com/color/48/000000/pear.png");
-}
-
-.frui2 {
-    background-image: url("https://img.icons8.com/color/48/000000/eggplant.png");
-}
-
-.hygi,
-.ui-icon.hygi {
-    background-image: url("https://img.icons8.com/color/48/000000/soap-dispenser.png");
-}
-
-.hygi2 {
-    background-image: url("https://img.icons8.com/color/48/000000/toothpaste.png");
-}
-
-.lait,
-.ui-icon.lait {
-    background-image: url("https://img.icons8.com/color/48/000000/milk-bottle.png");
-}
-
-.lait2 {
-    background-image: url("https://img.icons8.com/color/48/000000/eggs.png");
-}
-
-.mena,
-.ui-icon.mena {
-    background-image: url("https://img.icons8.com/color/48/000000/duster.png");
-}
-
-.mena2 {
-    background-image: url("https://img.icons8.com/color/48/000000/cat.png");
-}
-
-.cere,
-.ui-icon.cere {
-    background-image: url("https://img.icons8.com/color/48/000000/toaster.png");
-}
-
-.cere2 {
-    background-image: url("https://img.icons8.com/color/48/000000/wheat.png");
-}
-
-.pate,
-.ui-icon.pate {
-    background-image: url("https://img.icons8.com/color/48/000000/spaghetti.png");
-}
-
-.pate2 {
-    background-image: url("https://img.icons8.com/color/48/000000/rice-bowl.png");
-}
-
-.frai,
-.ui-icon.frai {
-    background-image: url("https://img.icons8.com/color/48/000000/salami.png");
-}
-
-.frai2 {
-    background-image: url("https://img.icons8.com/color/48/000000/sandwich.png");
-}
-
-.surg,
-.ui-icon.surg {
-    background-image: url("https://img.icons8.com/color/48/000000/cooling.png");
-}
-
-.surg2 {
-    background-image: url("https://img.icons8.com/color/48/000000/ice-cream-cone.png");
-}
-
-.vian,
-.ui-icon.vian {
-    background-image: url("https://img.icons8.com/color/48/000000/steak.png");
-}
-
-.vian2 {
-    background-image: url("https://img.icons8.com/color/48/000000/bento.png");
-}
-
-.coup,
-.ui-icon.coup {
-    background-image: url("https://img.icons8.com/color/48/000000/jamon.png");
-}
-
-.coup2 {
-    background-image: url("https://img.icons8.com/color/48/000000/cheese.png");
-}
-
-.aper,
-.ui-icon.aper {
-    background-image: url("https://img.icons8.com/color/48/000000/nachos.png");
-}
-
-.aper2 {
-    background-image: url("https://img.icons8.com/color/48/000000/bavarian-pretzel.png");
-}
-
-.fari,
-.ui-icon.fari {
-    background-image: url("https://img.icons8.com/color/48/000000/sack-of-flour.png");
-}
-
-.fari2 {
-    background-image: url("https://img.icons8.com/color/48/000000/sugar-cubes.png");
-}
-
-.choc,
-.ui-icon.choc {
-    background-image: url("https://img.icons8.com/color/48/000000/cookies.png");
-}
-
-.choc2 {
-    background-image: url("https://img.icons8.com/color/48/000000/chocolate-bar.png");
-}
-
-.boul,
-.ui-icon.boul {
-    background-image: url("https://img.icons8.com/color/48/000000/baguette.png");
-}
-
-.boul2 {
-    background-image: url("https://img.icons8.com/color/48/000000/croissant.png");
-}
-
-.autr,
-.ui-icon.autr {
-    background-image: url("https://img.icons8.com/color/48/000000/magazine.png");
-}
-
-.autr2 {
-    background-image: url("https://img.icons8.com/color/48/000000/watering-can.png");
+.famIcon {
+    transform: scale(0.8);
 }
 
 /***********************************************************************/
@@ -1271,19 +1107,21 @@ ul {
     border-radius: 4px 4px 4px 4px;
     font-weight: normal;
     color: #555555;
-    cursor: pointer;
+}
+
+.rayon-num li {
+    cursor: default;
 }
 
 .sortable li {
     padding: .5em .5em .5em .7em;
+    cursor: move;
 }
 
-.rayon-num {
+.rayon-num,
+.list-group-item {
     padding: 0px;
-}
-
-.rayon-num li {
-    padding: 20px;
+    cursor: none;
 }
 
 .sortable li:active,
@@ -1293,8 +1131,9 @@ ul {
 }
 
 html > body .sortable li,
-.rayon-num li {
-    height: 3.1em;
+.rayon-num li,
+#newAisleGene {
+    height: 4.1em;
     line-height: 1.2em;
 }
 
@@ -1383,6 +1222,17 @@ span.ui-icon.rss {
 .ray-order,
 .fam-select {
     margin: auto
+}
+
+.fam-select {
+    position: relative;
+    left: 300%;
+    margin-right: 7px;
+}
+
+#newAisleGene {
+    margin-right: 5px;
+    margin-left: -10px;
 }
 
 /***********************************************************************/
@@ -1981,6 +1831,11 @@ label[for] {
 
     .dropdown-item {
         padding: .25rem 0.25rem;
+        margin-left: 2.5%;
+    }
+
+    .new-item {
+        margin-left: 2.5%;
     }
 
     .familles {
@@ -1989,12 +1844,18 @@ label[for] {
 
     .search-bar {
         flex-flow: nowrap;
+        top: 62px;
+        left: 10px;
+    }
+
+    .screen-avert {
+        top: 72px;
     }
 
     .search-bar input,
     .search-bar select,
     .ui-selectmenu-button.ui-button {
-        width: 180px;
+        width: 250px;
         height: 35px;
     }
 
@@ -2012,10 +1873,13 @@ label[for] {
         overflow: scroll;
     }
 
-    .ui-accordion .ui-accordion-header,
+    .ui-accordion .ui-accordion-header {
+        height: 50px;
+    }
+
     html > body .sortable li,
     .rayon-num li {
-        height: 60px;
+        height: 80px;
     }
 
     .ray {
@@ -2041,11 +1905,60 @@ label[for] {
         height: 60px;
     }
 
+    .item-gene {
+        padding: 7px 5px 7px 5px;
+        margin: 0px;
+        width: 700px;
+    }
+
+    .action-button,
+    .caddie2 {
+        width: 27px;
+        height: 27px;
+    }
+
+    .modif-form {
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 110%;
+        font-size: 0.8em;
+    }
+
+    .modif-btn {
+        left: -35px;
+    }
+
+    .fam-select {
+        padding-left: 0px;
+        left: 0%;
+    }
+
+    #newAisleGene {
+        margin-right: -7px;
+        margin-left: -1px;
+    }
+
+    .delete-form {
+        padding-right: 0px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+
+    .aisles-icons > span {
+        padding: 0px;
+    }
+
     /***********************************************************************/
     /* listView - Icones */
 
     .aisles-icons {
-        transform: scale(0.5);
+        height: 2em;
+    }
+
+    .famIcon1,
+    .famIcon2 {
+        height: 35px;
     }
 
     /***********************************************************************/
@@ -2124,7 +2037,7 @@ label[for] {
     }
 
     .search-bar input {
-        width: 120px;
+        width: 190px;
     }
 
     #recherche {
@@ -2147,8 +2060,13 @@ label[for] {
         font-size: 0.9em;
     }
 
-    .fam-select {
-        padding-left: 0px;
+    .modif-form {
+        width: 118%;
     }
+
+    .ui-widget input {
+        font-size: 0.9em;
+    }
+
 
 }

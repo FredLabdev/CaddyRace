@@ -41,18 +41,63 @@ class AislesManager extends Manager { // se situe dans le namespace
         return $aislesGeneIcons;
     }
     
-    /* public function changeAislesGeneOrder($aisleGeneId, $aisleGeneOrder) {
+        /* (Traité en AJAX) 
+    public function changeAislesGeneOrder($aisleGeneId, $aisleGeneOrder) {
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE aisles SET aisle_gene_order = :new-order WHERE id = :id');    
+        $req = $db->prepare('UPDATE aisles SET aisle_gene_order = :aisleNewOrder WHERE id = :aisleId');    
         $req->execute(array($aisleGeneId));
         $req->execute(array(
-            'new-order' => $aisleGeneOrder,
-            'id' => $aisleGeneId
+            'aisleNewOrder' => $aisleGeneOrder,
+            'aisleId' => $aisleGeneId
         ));
         $req->closeCursor();
     } */
     
-//**************************************************************************************
+    public function pushAisleGene($aisleGeneTitle, $aisleGeneOrder) {            
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO aisles(aisle_gene_title, aisle_gene_order) VALUES(:aisle_gene_title, :aisle_gene_order)');
+        $req->execute(array(
+            'aisle_gene_title' => $aisleGeneTitle,
+            'aisle_gene_order' => $aisleGeneOrder
+        ));
+        $req->closeCursor();
+    }
+        
+    public function pullAisleGene($aisleGeneId) {  
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM aisles WHERE id = ?');
+        $req->execute(array($aisleGeneId)); 
+        $req->closeCursor();
+    }
+    
+    public function changeAisleGeneTitle($aisleGeneId, $aisleGeneTitle) {            
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE aisles SET aisle_gene_title = :aisle_gene_title WHERE id = :id');
+        $req->execute(array(
+            'aisle_gene_title' => $aisleGeneTitle,
+            'id' => $aisleGeneId
+        ));
+        $req->closeCursor();
+    }
+    
+    public function duplicateAislesGene() {            
+        $db = $this->dbConnect();
+        $req = $db->query('CREATE TABLE aisles_1 LIKE aisles');
+        $req->closeCursor();
+        $req = $db->query('INSERT INTO aisles_1 SELECT * FROM aisles');
+        $req->closeCursor();
+    }
+    
+    public function duplicateAislesGeneDatas($memberId) {            
+        $db = $this->dbConnect();
+        $req = $db->query('INSERT INTO aisles_priv SELECT * FROM aisles');
+        $req->closeCursor();
+        $req = $db->prepare('UPDATE aisles_priv SET aisle_owner_id = ? WHERE aisle_owner_id = 1');
+        $req->execute(array($memberId));
+        $req->closeCursor();
+    }
+    
+    //**************************************************************************************
 
     public function getPostsBy5($offset) {
         $db = $this->dbConnect();

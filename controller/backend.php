@@ -17,6 +17,7 @@ try {
         $itemsGeneCountInAisleTab = array();
         $itemsGeneInAisleTab  = array();
         $aislesGeneIconsTab  = array();
+        $aislesGeneIconsTab2  = array();
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         foreach($aislesGeneTab as $aisleGene) {
             $itemsGeneCountInAisle = $ItemsManager->getItemsGeneCountInAisle($aisleGene['id']);  
@@ -25,6 +26,8 @@ try {
             $itemsGeneInAisleTab[] = $itemsGeneInAisle;
             $aislesGeneIcons = $AislesManager->getAislesGeneIcons($aisleGene['id']);    
             $aislesGeneIconsTab[] = $aislesGeneIcons;
+            $aislesGeneIcons = $AislesManager->getAislesGeneIcons($aisleGene['id']);    
+            $aislesGeneIconsTab2[] = $aislesGeneIcons;
         }
         $message_success;
         $message_error;
@@ -55,14 +58,39 @@ try {
         shopAdmin($message_success, $message_error);
     }
     
-    function orderAisleGene($aisleGeneId, $aisleGeneOrder) {
+    /* (Traité en AJAX) 
+    function orderAisleGene($aisleGeneId, $aisleGeneOrder) { 
         $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
         $AislesManager->changeAislesGeneOrder($aisleGeneId, $aisleGeneOrder);     
         $message_success =  'Votre rayon a bien été déplacé.';
         $message_error = "";
         shopAdmin($message_success, $message_error);
-    }
+    } */
 
+    function createAisleGene($aisleGeneTitle, $aisleGeneOrder) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->pushAisleGene($aisleGeneTitle, $aisleGeneOrder);     
+        $message_success =  'Votre rayon a bien été ajouté à la suite. Vous pouvez désormais le déplacer.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
+    }
+    
+    function deleteAisleGene($aisleGeneId) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->pullAisleGene($aisleGeneId); 
+        $message_success =  'Ce rayon a bien été supprimé.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
+    }
+        
+    function modifAisleGene($aisleGeneId, $aisleGeneTitle) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->changeAisleGeneTitle($aisleGeneId, $aisleGeneTitle);   
+        $message_success =  'Votre article a bien été modifié.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
+    }
+    
 //**************************************************************************************
     
     //**************************************************************************************

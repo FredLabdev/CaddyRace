@@ -62,5 +62,13 @@ class LoginManager extends Manager { // se situe dans le namespace
             'password' => password_hash($createPassword, PASSWORD_DEFAULT)
         ));
     }
+    
+    public function getMemberId($pseudo) {
+        $db = $this->dbConnect();
+        $getMemberId = $db->prepare('SELECT id FROM members WHERE pseudo = ?');
+        $getMemberId->execute(array($pseudo));
+        $memberId = $getMemberId->fetch();
+        return $memberId;
+    }
 
 }

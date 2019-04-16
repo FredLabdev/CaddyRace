@@ -126,7 +126,13 @@ try {
             $message_error = passwordControl($createPassword, $passwordConfirm, $message_error);    
             if ($message_error == '') { // Si tout ok on creer le nouveau membre,
                 $loginManager = new \FredLab\tp5_caddy_race\Model\LoginManager();
+                $pseudo = $createPseudo; // pour après
                 $loginManager->CreateMember($createName, $createFirstName, $createPseudo, $createMail, $createPassword);
+                $memberId = $loginManager->getMemberId($pseudo);
+                // $tableName = 'aisles_' + $memberId;
+                $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+                // $AislesManager->duplicateAislesGene(); 
+                $AislesManager->duplicateAislesGeneDatas($memberId); 
                 loginControl($createPseudo, $createPassword); // et on démmarre sa session
             } else {
                 require('view/frontend/loginView.php'); // retour au login avec affichage des erreurs

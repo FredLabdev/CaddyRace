@@ -140,9 +140,10 @@ $(function () {
         }
     });
     $("#sortable-admin").disableSelection();
+    /* $('#sortable-admin').sortable({
+        cancel: '#newAisleGene' // désactive la fonction sortable sur ce rayon mais désactive l'input sur les atres !
+    }); */
 });
-
-
 
 $(function () {
     $("#sortable-perso").sortable({

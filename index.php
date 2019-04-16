@@ -126,7 +126,7 @@ try {
                 
                 // Afficher la shopView
                else if ($_GET['action'] == 'shopAdmin') {
-                    shopAdmin("", ""); // TODO selon controller/model
+                    shopAdmin("", "");
                 }
                 // Créer un nouvel article Gene   
                else if ($_GET['action'] == 'createItemGene') {
@@ -141,36 +141,38 @@ try {
                 // Supprimer un article,   
                 else if ($_GET['action'] == 'deleteItemGene') {
                     $itemGeneId = getCleanParameter($_POST['itemGeneId']);
-                    deleteItemGene($itemGeneId); // TODO selon controller/model
+                    deleteItemGene($itemGeneId);
                 }
                 // Modifier un article   
                 else if ($_GET['action'] == 'modifItemGene') { 
                     $itemGeneId = getCleanParameter($_POST['itemGeneId']);
                     $itemGeneName = getCleanParameter($_POST['itemGeneName']);
-                    modifItemGene($itemGeneId, $itemGeneName); // TODO selon controller/model
+                    modifItemGene($itemGeneId, $itemGeneName);
                 }
-                 // Déplacer un rayon   
+                 /* Déplacer un rayon (Traité en AJAX)  
                 else if ($_GET['action'] == 'orderAisleGene') {
                     $aisleGeneId = getCleanParameter($_POST["aisleGeneId"]);
                     $aisleGeneOrder = getCleanParameter($_POST["aisleGeneOrder"]);
                     // $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
                     // $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
                     orderAisleGene($aisleGeneId, $aisleGeneOrder); // TODO selon controller/model
-                }
+                } */
                 // Créer un nouveau rayon   
                 else if ($_GET['action'] == 'createAisleGene') {
                     $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
                     $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
-                    createAisleGene($aisleGeneTitle, $aisleGeneOrder); // TODO selon controller/model
+                    createAisleGene($aisleGeneTitle, $aisleGeneOrder);
                 }
                 // Supprimer un rayon,   
                 else if ($_GET['action'] == 'deleteAisleGene') {
-                    deleteAisleGene($aisleGeneId); // TODO selon controller/model
+                    $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                    deleteAisleGene($aisleGeneId);
                 }
                 // Modifier un rayon   
                 else if ($_GET['action'] == 'modifAisleGene') {  
+                    $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
                     $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
-                    modifAisleGene($aisleGeneId, $aisleGeneTitle); // TODO selon controller/model
+                    modifAisleGene($aisleGeneId, $aisleGeneTitle);
                 }  
             
             //**************************************************************************************
