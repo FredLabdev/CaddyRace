@@ -4,16 +4,11 @@ namespace FredLab\tp5_caddy_race\Model;
 
 require_once("model/Manager.php");
 
-class AislesManager extends Manager { // se situe dans le namespace
-
-    // private $postTitle;
-    // private $postContentHTML;
-    // private $postExtract;
-    // private $postBefore;
-    // private $postId;
-    // private $newPostTitle;
-    // private $newPostContentHTML;
-    // private $postExtract;
+class AislesManager extends Manager {
+    
+    //**************************************************************************************
+    //     AislesManager backend  
+    //**************************************************************************************
 
     public function getAislesGeneCount() {
         $db = $this->dbConnect();
@@ -28,7 +23,7 @@ class AislesManager extends Manager { // se situe dans le namespace
         $req = $db->query('SELECT * FROM aisles ORDER BY aisle_gene_order');
         $aislesGeneTab = array(); 
         while ($aisleGene = $req->fetch()) {
-            $aislesGeneTab[] = $aisleGene; // on créer un tableau regroupant les 5 posts
+            $aislesGeneTab[] = $aisleGene;
         }
         $req->closeCursor();
         return $aislesGeneTab;
@@ -36,7 +31,7 @@ class AislesManager extends Manager { // se situe dans le namespace
     
     public function getAislesGeneIcons($aisleGeneId) {
         $db = $this->dbConnect();
-        $aislesGeneIcons = $db->prepare('SELECT icon_adress FROM icons WHERE aile_id = ? ORDER BY icon_class');    
+        $aislesGeneIcons = $db->prepare('SELECT icon_adress FROM icons WHERE aile_gene_id = ? ORDER BY icon_class');    
         $aislesGeneIcons->execute(array($aisleGeneId));
         return $aislesGeneIcons;
     }
@@ -80,98 +75,77 @@ class AislesManager extends Manager { // se situe dans le namespace
         $req->closeCursor();
     }
     
-    public function duplicateAislesGene() {            
+    //**************************************************************************************
+    //     AislesManager frontend  
+    //**************************************************************************************
+
+    /* public function duplicateAislesGene() { // option création d'une table privée par membre           
         $db = $this->dbConnect();
         $req = $db->query('CREATE TABLE aisles_1 LIKE aisles');
         $req->closeCursor();
         $req = $db->query('INSERT INTO aisles_1 SELECT * FROM aisles');
         $req->closeCursor();
-    }
+    } */
     
     public function duplicateAislesGeneDatas($memberId) {            
-        $db = $this->dbConnect();
-        $req = $db->query('INSERT INTO aisles_priv SELECT * FROM aisles');
-        $req->closeCursor();
-        $req = $db->prepare('UPDATE aisles_priv SET aisle_owner_id = ? WHERE aisle_owner_id = 1');
+        $db = $this->dbConnect(); // copie la table Générale dans la table des rayons Privés,
+        $req = $db->query('INSERT INTO aisles_priv(aisle_priv_title, aisle_priv_owner_id, aisle_priv_order, aisle_gene_refer_id) SELECT aisle_gene_title, aisle_gene_owner_id, aisle_gene_order, id FROM aisles');
+        $req->closeCursor(); // puis remplace l'id admin "1" copiée, par celle du nouveau membre propriétaire.
+        $req = $db->prepare('UPDATE aisles_priv SET aisle_priv_owner_id = ? WHERE aisle_priv_owner_id = 1');
         $req->execute(array($memberId));
         $req->closeCursor();
     }
     
-    //**************************************************************************************
-
-    public function getPostsBy5($offset) {
+    public function getAislesCount() {
         $db = $this->dbConnect();
-        $getPostsBy5 = $db->prepare('SELECT id, chapter_title, chapter_content, chapter_extract, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS date FROM posts ORDER BY creation_date DESC LIMIT 5 OFFSET :idmax'); // OFFSET selon indice page
-        $getPostsBy5->bindValue(':idmax', $offset, \PDO::PARAM_INT);
-        $getPostsBy5->execute();
-        $postsBy5 = array(); 
-        while ($post = $getPostsBy5->fetch()) {
-            $postsBy5[] = $post; // on créer un tableau regroupant les 5 posts
-        }
-        return $postsBy5;
+        $req = $db->query('SELECT COUNT(id) AS count FROM aisles_priv');
+        $aislesCount = $req->fetch();
+        $req->closeCursor();
+        return $aislesCount;
     }
 
-    public function getPost($postId) {
+    public function getAislesTab() {
         $db = $this->dbConnect();
-        $getPostDetail = $db->prepare('SELECT id, chapter_title, chapter_content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts WHERE id = ?');
-        $getPostDetail->execute(array($postId));
-        $postDetails = array(); 
-        while ($postDetail = $getPostDetail->fetch()) {
-            $postDetails[] = $postDetail; // on créer un tableau regroupant les donnees des members
+        $req = $db->query('SELECT * FROM aisles_priv ORDER BY aisle_priv_order');
+        $aislesTab = array(); 
+        while ($aisle = $req->fetch()) {
+            $aislesTab[] = $aisle;
         }
-        return $postDetails;
+        $req->closeCursor();
+        return $aislesTab;
     }
     
-    public function getAllPosts() {
+    public function getAislesIcons($aisleId) {
         $db = $this->dbConnect();
-        $posts = $db->query('SELECT chapter_title, chapter_content FROM posts ORDER BY creation_date');
-        $postsAll = array(); 
-        while ($post = $posts->fetch()) {
-            $postsAll[] = $post; // on créer un tableau regroupant les posts
-        }
-        return $postsAll;
+        $aislesIcons = $db->prepare('SELECT icon_adress FROM icons WHERE aile_gene_id = ? ORDER BY icon_class');    
+        $aislesIcons->execute(array($aisleId));
+        return $aislesIcons;
     }
     
-//**************************************************************************************
-//                        Model backend AislesManager           
-//**************************************************************************************
-    
-    public function addPost($postTitle, $postContentHTML, $postExtract, $postBefore) {            
+    public function pushAisle($aisleTitle, $aisleOrder) {            
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO posts(creation_date, chapter_title, chapter_content, chapter_extract) VALUES(NOW(), :titre, :contenu, :extract)');
+        $req = $db->prepare('INSERT INTO aisles_priv(aisle_priv_title, aisle_priv_order) VALUES(:aisle_priv_title, :aisle_priv_order)');
         $req->execute(array(
-            'titre' => $postTitle,
-            'contenu' => $postContentHTML,
-            'extract' => $postExtract
+            'aisle_priv_title' => $aisleTitle,
+            'aisle_priv_order' => $aisleOrder
         ));
         $req->closeCursor();
     }
- 
-    public function changePostTitle($postId, $newPostTitle) {
+        
+    public function pullAisle($aisleId) {  
         $db = $this->dbConnect();
-        $modifTitle = $db->prepare('UPDATE posts SET chapter_title = :nvtitre WHERE id = :idnum');
-        $modifTitle->execute(array(
-            'nvtitre' => $newPostTitle,
-            'idnum' => $postId
-        )); 
+        $req = $db->prepare('DELETE FROM aisles_priv WHERE id = ?');
+        $req->execute(array($aisleId)); 
+        $req->closeCursor();
     }
-
-    public function changePostContent($postId, $newPostContentHTML, $postExtract) {
+    
+    public function changeAisleTitle($aisleId, $aisleTitle) {            
         $db = $this->dbConnect();
-        $modifContent = $db->prepare('UPDATE posts SET chapter_content = :nvcontenu, chapter_extract = :nvextract WHERE id = :idnum');
-        $modifContent->execute(array(
-            'nvcontenu' => $newPostContentHTML,
-            'nvextract' => $postExtract,
-            'idnum' => $postId
-        )); 
-    }
-
-    public function deletePost($postId) {  
-        $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM posts WHERE id = :idnum');
+        $req = $db->prepare('UPDATE aisles_priv SET aisle_priv_title = :aisle_priv_title WHERE id = :id');
         $req->execute(array(
-            'idnum' => $postId
-        ));  
+            'aisle_priv_title' => $aisleTitle,
+            'id' => $aisleId
+        ));
         $req->closeCursor();
     }
     

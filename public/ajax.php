@@ -24,4 +24,17 @@
         };
     }
 
+    if ($_GET['action'] == 'orderAisle') {
+        $i = 1;
+        foreach($_POST['aisleId'] as $aisleId) {
+            $req = $bdd->prepare('UPDATE aisles_priv SET aisle_priv_order = :aisleNewOrder WHERE id = :aisleId'); 
+            $req->execute(array(
+                'aisleId' => $aisleId,
+                'aisleNewOrder' =>$i
+            ));
+            $req->closeCursor();
+            $i++;
+        };
+    }
+
 ?>

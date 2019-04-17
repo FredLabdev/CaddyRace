@@ -738,8 +738,10 @@ ul.bs-autocomplete-menu a {
     border: none;
 }
 
-#liste,
-#rayons {
+#items-admin,
+#list,
+#aisles-admin,
+#aisles {
     margin-top: 80px;
     background-color: darkorange;
 }
@@ -761,12 +763,12 @@ ul.bs-autocomplete-menu a {
     display: none;
 }
 
-#liste-tab:hover,
-#rayons-tab:hover,
-#liste-tab:focus,
-#rayons-tab:focus,
-#liste-tab:active,
-#rayons-tab:active {
+.liste-tab:hover,
+.rayons-tab:hover,
+.liste-tab:focus,
+.rayons-tab:focus,
+.liste-tab:active,
+.rayons-tab:active {
     background: darkorange;
 }
 
@@ -1863,8 +1865,10 @@ label[for] {
         margin-left: 46px;
     }
 
-    #liste,
-    #rayons {
+    #items-admin,
+    #list,
+    #aisles-admin,
+    #aisles {
         margin-top: 60px;
     }
 

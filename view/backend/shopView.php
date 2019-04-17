@@ -9,7 +9,7 @@
     ob_start(); 
 ?>
 
-<!-- MENU ADMIN -->
+<!-- MENU ADMIN BOUTIQUE -->
 
 <div id="tabs-Admin" class="tabs">
 
@@ -17,19 +17,20 @@
         <nav class="list-nav navbar navbar-light bg-orange fixed-top justify-content-end">
             <ul class="nav nav-pills nav-stacked align-items-center">
                 <li class="nav-item ">
-                    <a class="nav-link" href="#liste" id="liste-tab"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Articles</span></a>
+                    <a class="nav-link liste-tab" href="#items-admin"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Articles</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#rayons" id="rayons-tab"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
+                    <a class="nav-link rayons-tab" href="#aisles-admin"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <!-- LES ARTICLES PAR RAYONS -->
+    <!-- TAB DES ARTICLES RANGES PAR RAYONS -->
 
-    <div id="liste">
+    <div id="items-admin">
 
+        <!-------------- Search Bar d'un article dans la barre de nav -------------->
         <form class="search-bar form-inline">
             <input type="text" class="typeahead tt-query" id="recherche2" placeholder="Vérifier existence d'un article" autocomplete="off" spellcheck="false" />
         </form>
@@ -44,12 +45,14 @@
             </div>
         </div>
 
+        <!-------------- Magasin en accordéon -------------->
         <div id="accordion-Admin">
 
             <!-------------- Boucle primaire des rayons -------------->
             <?php    
              for ($i=0; $i<$aislesGeneCount['count']; $i++) {
             ?>
+            <!--------------- En-tête du rayon -------------------->
             <div class="d-flex flex-row">
                 <?php
                 foreach ($aislesGeneIconsTab[$i] as $aislesGeneIcons) {
@@ -91,7 +94,7 @@
                             <input type="hidden" name="itemGeneId" value="<?= $itemGeneInAisle['id'] ?>" />
                             <button type="submit" class="action-button delete-btn"><i class="fas fa-trash-alt"></i></button>
                         </form>
-                        <!---------------- Input article ---------------------->
+                        <!---------------- Le nom de l'article et sa modification ---------------------->
                         <form class="modif-form form-row col-11 justify-content-start align-items-center" method="post" action="index.php?action=modifItemGene">
                             <input type="hidden" name="itemGeneId" value="<?= $itemGeneInAisle['id'] ?>" />
                             <input type="text" name="itemGeneName" class="modif-form item-gene col-10" value="<?= $itemGeneInAisle['item_gene_name'] ?>" />
@@ -108,24 +111,29 @@
             ?>
 
         </div>
+
     </div>
 
-    <!-- LES RAYONS -->
+    <!-- TAB DES RAYONS -->
 
-    <div id="rayons">
+    <div id="aisles-admin">
 
+        <!-------------- Message dans la barre de nav -------------->
         <div class="screen-avert d-md-none">
             EASIER ON SCREEN ...
         </div>
 
+        <!-------------- Début du circuit de rayons -------------->
         <div class="rayons-org col-10 offset-1">
             <div class="row">
                 <div class="col-12 circuit text-center bg-green">
                     <i class="fas fa-flag fa-2x"></i> Entrée circuit
                 </div>
             </div>
+
             <div class="row">
 
+                <!-------------- Rayons "sortables" pour ordonner -------------->
                 <ul id="sortable-admin" class="sortable col-11">
                     <!-------------- Boucle des rayons -------------->
                     <?php    
@@ -133,14 +141,14 @@
                     ?>
                     <li class="ui-state-default row" id="aisleId_<?= $aislesGeneTab[$i]['id'] ?>">
 
-                        <!---------------- Groupe icones ---------------------->
+                        <!---------------- Groupe de boutons et icones ---------------------->
                         <div class="col-sm-3 aisles-icons d-flex justify-content-center align-items-center">
                             <!---------------- Bouton delete ---------------------->
                             <form class="delete-form d-flex justify-content-start align-items-center col-sm-3" method="post" action="index.php?action=deleteAisleGene">
                                 <input type="hidden" name="aisleGeneId" value="<?= $aislesGeneTab[$i]['id'] ?>" />
                                 <button type="submit" class="action-button delete-btn"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <!---------------- Icones ---------------------->
+                            <!---------------- Icones des rayons ---------------------->
                             <?php
                             foreach ($aislesGeneIconsTab2[$i] as $aislesGeneIcons2) {
                             ?>
@@ -148,14 +156,13 @@
                             <?php
                             }
                             ?>
-                            <!---------------- Icone rayon mobile -------------------->
+                            <!---------------- logo rayon mobile -------------------->
                             <i class="fam-select orange fas fa-stream col-sm-3 d-flex justify-content-end align-items-center"></i>
                         </div>
-                        <!---------------- Input Titre -------------------->
+                        <!---------------- Le titre du rayon et sa modification -------------------->
                         <form class="modif-form form-row col-sm-8 justify-content-start align-items-center" method="post" action="index.php?action=modifAisleGene">
                             <input type="hidden" name="aisleGeneId" value="<?= $aislesGeneTab[$i]['id'] ?>" />
                             <input type="text" name="aisleGeneTitle" class="item-gene col-sm-12" value="<?= $aislesGeneTab[$i]['aisle_gene_title'] ?>" />
-                            <!---------------- Bouton modif -------------------->
                             <button type="submit" class="action-button modif-btn"><i class="fas fa-pencil-alt"></i></button>
                         </form>
                     </li>
@@ -165,8 +172,8 @@
                     ?>
                 </ul>
 
+                <!-------------- Boucle des repères num ---------->
                 <ul class="list-group rayon-num col-1">
-                    <!-------------- Boucle des repères num ---------->
                     <?php    
                     for ($i=0; $i<$aislesGeneCount['count']; $i++) {
                     ?>
@@ -197,6 +204,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-------------- Fin du circuit de rayons -------------->
             <div class="row">
                 <div class="col-12 circuit text-center bg-red">
                     <i class="fas fa-flag-checkered fa-2x"></i> Sortie Circuit

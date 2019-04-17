@@ -78,7 +78,7 @@
         if($_SESSION['pseudo']) {
         ?>
     <li class="nav-item">
-        <a class="nav-link bg-orange" href="index.php?action=list"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Liste
+        <a class="nav-link bg-orange" href="index.php?action=shopList"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Liste
         </a>
     </li>
     <li class="nav-item">
@@ -269,7 +269,7 @@
             </div>
         </div>
         <div class="sm-row xs-column justify-content-center align-items-center white">
-            <span><i class="far fa-copyright"></i> 2019 FredLab</span><span>Brainmade with <strong class="rwd-line">HTML CSS PHP SQL GIT</strong></span><span><a href="index.php?action=contact">contact</a></span>
+            <span><i class="far fa-copyright"></i> 2019 FredLab</span><span>Brainmade with <strong class="rwd-line">HTML CSS JS JQUERY AJAX API PHP SQL</strong></span><span><a href="index.php?action=contact">contact</a></span>
         </div>
         <div class="offset-10 fixed-bottom popup3">
             <a href="#popup3"><i class="fas fa-comment-dots fa-7x"></i></a>

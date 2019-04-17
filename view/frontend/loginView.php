@@ -17,7 +17,7 @@ ob_start();
             <?php } ?>
         </div>
         <form class="login-form" method="post" action="index.php?action=login">
-            <div class="form-row">
+            <div class="form">
                 <div class="form-group">
                     <label class="orange">Votre pseudo :</label>
                     <input id="pseudo_login" type="text" name="pseudo_connect" placeholder="pseudo" />
@@ -55,7 +55,7 @@ ob_start();
             <?php } ?>
         </div>
         <form class="login-form" method="post" action="index.php?action=newMember">
-            <div class="form-row">
+            <div class="form">
                 <div class="form-group">
                     <label class="black">Nom :</label>
                     <input id="name_create" type="text" name="name" placeholder="last name" value="<?php if (isset($_POST['name'])){echo $_POST['name'];} ?>" />

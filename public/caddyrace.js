@@ -146,11 +146,43 @@ $(function () {
 });
 
 $(function () {
-    $("#sortable-perso").sortable({
-        placeholder: "ui-state-highlight"
+    $("#sortable").sortable({
+        opacity: 0.8, // réduit l'opacité lors du déplacement
+        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+        placeholder: '.ui-state-highlight',
+        forcePlaceholderSize: true, // force le redimensionnement du placeholder
+        revert: true,
+        stop: function (event, ui) {
+            var aisleNewPos = ui.item.index() + 1; // récupère la position d'arrivée du seul rayon sorti
+            // var aisleGeneId = ui.item.attr('id'); // récupèrerait son id
+            var order = $(this).sortable('serialize'); // récupère sous forme de tableau tous les id des rayons classés dans le nouvel ordre. Attention pour serialize les id doivent avoir un préfixe textuel => id="aisleId_" + indice php // sinon faire un 'toArray'
+
+            /* var ids = [];
+            for (var i = 0, c = order.length; i < c; i++) { // idem récupère les id classés dans le nouvel ordre
+                ids.push($('#sortable-admin li:eq(' + i + ')').attr('id'));
+            }  */
+
+            $.ajax({
+                dataType: "html",
+                type: 'POST',
+                url: 'public/ajax.php?action=orderAisleGene',
+                data: order,
+                success: function () {
+                    /*alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder + " et le nouvel ordre est : " + order);*/
+                    alert("Ce rayon a bien été déplacé en position n° " + aisleNewPos);
+                },
+                error: function () {
+                    alert('failed');
+                }
+            });
+        }
     });
-    $("#sortable-perso").disableSelection();
+    $("#sortable").disableSelection();
+    /* $('#sortable-admin').sortable({
+        cancel: '#newAisleGene' // désactive la fonction sortable sur ce rayon mais désactive l'input sur les atres !
+    }); */
 });
+
 
 // => Passage de mousse a touch sur mobile (complément touch-punch)
 

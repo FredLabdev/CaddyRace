@@ -4,10 +4,10 @@ namespace FredLab\tp5_caddy_race\Model;
 
 require_once("model/Manager.php");
 
-class ItemsManager extends Manager { // se situe dans le namespace
+class ItemsManager extends Manager {
 
 //**************************************************************************************
-//                                Model ItemsManager           
+//         ItemsManager backend           
 //**************************************************************************************
 
     public function getItemsGeneCountInAisle($aisleGeneId) {
@@ -52,45 +52,75 @@ class ItemsManager extends Manager { // se situe dans le namespace
         ));
         $req->closeCursor();
     }
+    
+    //**************************************************************************************
+    //         ItemsManager frontend           
+    //**************************************************************************************
+    
+    public function duplicateItemsGeneDatas($memberId) {            
+        // copie la table Générale dans la table des articles Privés,
+        $db = $this->dbConnect(); 
+        $req = $db->query('INSERT INTO items_priv(aisle_priv_id, item_priv_name, item_priv_owner_id) SELECT aisle_gene_id, item_gene_name, item_gene_owner_id FROM items');
+        $req->closeCursor(); 
+        // puis remplace l'id admin "1" copiée, par celle du nouveau membre propriétaire.
+        $req = $db->prepare('UPDATE items_priv SET item_priv_owner_id = ? WHERE item_priv_owner_id = 1');
+        $req->execute(array($memberId));
+        $req->closeCursor();
+        // et on modifie les ids des rayons de référence dupliqués par les ids des rayons Privés précédemment créés
+        $changeItemAisleGene = $db->query('UPDATE i SET i.aisle_priv_id = a.id FROM items_priv AS i INNER JOIN aisles AS a ON i.aisle_priv_id = a.aisle_gene_refer_id');
+        // si ça ne marche pas faire d'abord INNER JOIN puis le UPDATE de la fonction changeItemAisleGene ci-dessous avec le [] récupéré (voir MemberManager)
+    }
+    
+    /* public function changeItemAisleGene($aisleId2, $aisleId1) {            
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE items_priv SET aisle_priv_id = :aisle_priv_id2 WHERE aisle_priv_id = :aisle_priv_id1');
+        $req->execute(array(
+            'aisle_priv_id2' => $aisleId2,
+            'aisle_priv_id1' => $aisleId1
+        ));
+        $req->closeCursor();
+    } */
 
-//**************************************************************************************
-    
-    public function getMemberNoComment($member) {
+    public function getItemsCountInAisle($aisleId) {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT block_comment FROM members WHERE pseudo = ?');
-        $req->execute(array($member));
-        $addCommentRight = $req->fetch();
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE aisle_priv_id = ?');
+        $req->execute(array($aisleId));
+        $itemsCountInAisle = $req->fetch();
         $req->closeCursor();
-        return $addCommentRight;
+        return $itemsCountInAisle;
     }
     
-    public function signalComment($commentId, $signalId, $member) {  
+    public function getItemsInAisle($aisleId) {
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET comment_signal = :comment_signal, signal_author = :member, signal_date = NOW() WHERE id = :commentId');
+        $itemsInAisle = $db->prepare('SELECT * FROM items_priv WHERE aisle_priv_id = ? ORDER BY item_priv_name');
+        $itemsInAisle->execute(array($aisleId));
+        return $itemsInAisle;
+    }
+    
+    public function pushItem($aisleId, $itemName) {            
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO items_priv(aisle_priv_id, item_priv_name) VALUES(:aisle_priv_id, :item_priv_name)');
         $req->execute(array(
-            'comment_signal' => $signalId,
-            'member' => $member,
-            'commentId' => $commentId
-        ));  
+            'aisle_priv_id' => $aisleId,
+            'item_priv_name' => $itemName
+        ));
         $req->closeCursor();
     }
     
-    public function getSignalComments() {
+    public function pullItem($itemId) {  
         $db = $this->dbConnect();
-        $getSignalComments = $db->query('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin\')comment_date_fr, signal_author, DATE_FORMAT(signal_date, \'%d/%m/%Y à %Hh%imin\')signal_date_fr FROM comments WHERE comment_signal = 1 ORDER BY comment_date');
-        $signalComments = array(); 
-        while ($signalComment = $getSignalComments->fetch()) {
-            $signalComments[] = $signalComment; // on créer un tableau regroupant les members
-        }
-        return $signalComments;
+        $req = $db->prepare('DELETE FROM items_priv WHERE id = ?');
+        $req->execute(array($itemId)); 
+        $req->closeCursor();
     }
     
-    public function deleteComments($postId) {  
+    public function changeItemName($itemId, $itemName) {            
         $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM comments WHERE post_id = :postidnum');
+        $req = $db->prepare('UPDATE items_priv SET item_priv_name = :item_priv_name WHERE id = :id');
         $req->execute(array(
-            'postidnum' => $postId
-        ));  
+            'item_priv_name' => $itemName,
+            'id' => $itemId
+        ));
         $req->closeCursor();
     }
     

@@ -4,10 +4,10 @@ namespace FredLab\tp5_caddy_race\Model;
 
 require_once("model/Manager.php");
 
-class LoginManager extends Manager { // se situe dans le namespace
+class LoginManager extends Manager {
 
 //**************************************************************************************
-//                                  Model loginManager           
+//         loginManager          
 //**************************************************************************************
 
     public function getPseudoIdem($pseudo) {
@@ -63,12 +63,12 @@ class LoginManager extends Manager { // se situe dans le namespace
         ));
     }
     
-    public function getMemberId($pseudo) {
+    public function getMemberId($createPseudo) {
         $db = $this->dbConnect();
-        $getMemberId = $db->prepare('SELECT id FROM members WHERE pseudo = ?');
-        $getMemberId->execute(array($pseudo));
-        $memberId = $getMemberId->fetch();
-        return $memberId;
+        $req = $db->prepare('SELECT id FROM members WHERE pseudo = ?');
+        $req->execute(array($createPseudo));
+        $getMemberId = $req->fetch();
+        return $getMemberId;
     }
 
 }

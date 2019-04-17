@@ -9,37 +9,22 @@
     ob_start(); 
 ?>
 
-<!-- MENU COURSES -->
+<!-- MENU PERSO -->
 
 <div id="tabs" class="tabs">
 
     <div class="row">
-        <nav class="list-nav navbar navbar-light bg-dark fixed-top">
-            <form class="search-bar form-inline">
-                <a href="#" id="addItem"><i class="tohide2 item-action far fa-plus-circle fa-2x orange"></i></a>
-                <input type="text" class="typeahead tt-query" id="recherche" placeholder="Que vous manque-t-il ?" autocomplete="off" spellcheck="false" />
-                <span class="nav-item">
-                    <a class="nav-link" href="#popup5" id="addList"><i class="tohide item-action fas fa-check-circle fa-2x green"></i></a>
-                </span>
-            </form>
-            <div id="popup5" class="overlay">
-                <div class="text-center popup popup-sm">
-                    <h3>Ajouté !</h3>
-                    <a class="close" href="#">&times;</a>
-                    <div class="content orange">
-                        Cet article est désormais ajouté à votre liste dans le rayon !
-                    </div>
-                </div>
-            </div>
+        <nav class="list-nav navbar navbar-light bg-dark fixed-top justify-content-end">
             <ul class="nav nav-pills nav-stacked align-items-center">
                 <li class="nav-item ">
-                    <a class="nav-link" href="#liste" id="liste-tab"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Liste</span></a>
+                    <a class="nav-link liste-tab" href="#list"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Liste</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#rayons" id="rayons-tab"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
+                    <a class="nav-link rayons-tab" href="#aisles"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
                 </li>
             </ul>
 
+            <!-------------- TODO: Search Bar d'association d'un nouvel article dans un rayon -------------->
             <div id="raySelect" class="bg-dark">
                 <form class="search-bar form-inline" action="#">
                     <select name="rayon" id="rayon" required>
@@ -116,675 +101,196 @@
                     </div>
                 </div>
             </div>
+
         </nav>
     </div>
 
-    <!-- LISTE -->
+    <!-- TAB DE LA LISTE DE COURSES ORDONNEE PAR RAYONS PUIS ARTICLES COCHES EN TETE -->
 
-    <div id="liste">
-        <div id="accordion">
+    <div id="list">
 
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 autr"></span>
-                <span class="col-1 famIcon2 autr2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="one">Divers</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=1; $i<5; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 hygi"></span>
-                <span class="col-1 famIcon2 hygi2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="two">Toilette, Maquillage</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=6; $i<10; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 fari"></span>
-                <span class="col-1 famIcon2 fari2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="three">Dessert, Farine, Compotes</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=11; $i<15; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 choc"></span>
-                <span class="col-1 famIcon2 choc2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="three2">Goûters, Chocolat</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=16; $i<20; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 conf"></span>
-                <span class="col-1 famIcon2 conf2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="four">Confiture, Café, Thé</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=21; $i<25; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 cere"></span>
-                <span class="col-1 famIcon2 cere2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="five">Pain, Céréales</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=26; $i<30; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 mena"></span>
-                <span class="col-1 famIcon2 mena2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="six">Ménage, Animaux</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=31; $i<35; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 cond"></span>
-                <span class="col-1 famIcon2 cond2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="seven">Huile, Condiments, Pdts monde</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=36; $i<40; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 pate"></span>
-                <span class="col-1 famIcon2 pate2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="height">Pâtes, Riz, Thon, Potages</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=41; $i<45; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 cons"></span>
-                <span class="col-1 famIcon2 cons2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="nine">Conserve, Plats cuisinés</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=46; $i<50; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 bois"></span>
-                <span class="col-1 famIcon2 bois2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="ten">Boissons</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=51; $i<55; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 aper"></span>
-                <span class="col-1 famIcon2 aper2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="eleven">Biscuits apéritifs</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=56; $i<60; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 lait"></span>
-                <span class="col-1 famIcon2 lait2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="twelve">Laitages, Oeufs</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=61; $i<65; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 surg"></span>
-                <span class="col-1 famIcon2 surg2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="thirteen">Surgelés</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=66; $i<70; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 frai"></span>
-                <span class="col-1 famIcon2 frai2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="else">Charcuterie, Pâtes tarte</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=71; $i<75; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 vian"></span>
-                <span class="col-1 famIcon2 vian2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="else">Viandes, Poissons, Traiteur</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=76; $i<80; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 coup"></span>
-                <span class="col-1 famIcon2 coup2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="else">A la coupe</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=81; $i<85; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 frui"></span>
-                <span class="col-1 famIcon2 frui2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="else">Fruits, Légumes</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=86; $i<90; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-
-            <div class="d-flex flex-row">
-                <span class="col-1 famIcon1 boul"></span>
-                <span class="col-1 famIcon2 boul2"></span>
-                <h4 class="ray col-xs-7 col-sm-8" id="else">Boulangerie</h4>
-                <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas fa-shopping-cart caddie1"></i>
-                    <span class="caddie2 d-flex justify-content-center align-items-center">22</span>
-                </span>
-            </div>
-            <div>
-                <?php    
-            for ($i=91; $i<95; $i++) {
-               ?>
-                <a class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-                    <span class="action-button d-flex p-2"><i class="fas fa-trash"></i></span>
-                    <input type="checkbox" name="checkbox-<?= $i ?>" id="checkbox-<?= $i ?>">
-                    <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                        <?= $i ?></label>
-                    <span class="action-button d-flex align-items-center p-2"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <?php
-            }
-            ?>
-            </div>
-        </div>
-    </div>
-
-    <!-- RAYONS -->
-
-    <div id="rayons">
-
-        <div class="rayons-org col-10 offset-1">
-            <div class="row">
-                <div class="col-12 circuit text-center bg-green">
-                    <i class="fas fa-flag fa-2x"></i> Entrée circuit
+        <!-------------- Search Bar d'ajout d'un article à la liste ou si inconnu de création -------------->
+        <form class="search-bar form-inline">
+            <a href="#" id="addItem"><i class="tohide2 item-action far fa-plus-circle fa-2x orange"></i></a>
+            <input type="text" class="typeahead tt-query" id="recherche" placeholder="Que vous manque-t-il ?" autocomplete="off" spellcheck="false" />
+            <span class="nav-item">
+                <a class="nav-link" href="#popup5" id="addList"><i class="tohide item-action fas fa-check-circle fa-2x green"></i></a>
+            </span>
+        </form>
+        <!-- <form class="modif-form new-item form-row col-11 offset-1 justify-content-start align-items-center" method="post" action="index.php?action=createItemGene">
+            <input type="hidden" name="aisleGeneId" value=" <?= $aislesTab[$i]['id'] ?>" />
+            <input type="text" name="itemGeneName" class="item-gene col-10" placeholder="Rajouter un article dans ce rayon ?" focus />
+            <button type="submit" class="action-button modif-btn"><i class="fas fa-plus"></i></button>
+        </form> -->
+        <!-------------- popup 5 -------------->
+        <div id="popup5" class="overlay">
+            <div class="text-center popup popup-sm">
+                <h3>Ajouté !</h3>
+                <a class="close" href="#">&times;</a>
+                <div class="content orange">
+                    Cet article est désormais ajouté à votre liste dans le rayon !
                 </div>
             </div>
-            <div class="row">
-                <ul id="sortable-perso" class="sortable col-10">
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 autr"></span>
-                        <span class="col-1 famIcon2 autr2"></span>
-                        <h4 class="ray-order col-7">Divers</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
+        </div>
 
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 hygi"></span>
-                        <span class="col-1 famIcon2 hygi2"></span>
-                        <h4 class="ray-order col-7">Toilette, Maquillage</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
+        <!-------------- Magasin en accordéon -------------->
+        <div id="accordion">
 
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 fari"></span>
-                        <span class="col-1 famIcon2 fari2"></span>
-                        <h4 class="ray-order col-7">Dessert, Farine, Compotes</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 choc"></span>
-                        <span class="col-1 famIcon2 choc2"></span>
-                        <h4 class="ray-order col-7">Goûters, Chocolat</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 conf"></span>
-                        <span class="col-1 famIcon2 conf2"></span>
-                        <h4 class="ray-order col-7">Confiture, Café, Thé</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 cere"></span>
-                        <span class="col-1 famIcon2 cere2"></span>
-                        <h4 class="ray-order col-7">Pain, Céréales</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 mena"></span>
-                        <span class="col-1 famIcon2 mena2"></span>
-                        <h4 class="ray-order col-7">Ménage, Animaux</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 cond"></span>
-                        <span class="col-1 famIcon2 cond2"></span>
-                        <h4 class="ray-order col-7">Huile, Condiments, Pdts monde</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 pate"></span>
-                        <span class="col-1 famIcon2 pate2"></span>
-                        <h4 class="ray-order col-7">Pâtes, Riz, Thon, Potages</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 cons"></span>
-                        <span class="col-1 famIcon2 cons2"></span>
-                        <h4 class="ray-order col-7">Conserves, Plats cuisinés</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 bois"></span>
-                        <span class="col-1 famIcon2 bois2"></span>
-                        <h4 class="ray-order col-7">Boissons</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 aper"></span>
-                        <span class="col-1 famIcon2 aper2"></span>
-                        <h4 class="ray-order col-7">Biscuits apéritif</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 lait"></span>
-                        <span class="col-1 famIcon2 lait2"></span>
-                        <h4 class="ray-order col-7">Laitages, Oeufs</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 surg"></span>
-                        <span class="col-1 famIcon2 surg2"></span>
-                        <h4 class="ray-order col-7">Surgelés</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 frai"></span>
-                        <span class="col-1 famIcon2 frai2"></span>
-                        <h4 class="ray-order col-7">Charcuterie, pâtes tarte</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 vian"></span>
-                        <span class="col-1 famIcon2 vian2"></span>
-                        <h4 class="ray-order col-7">Viandes, Poissons</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 coup"></span>
-                        <span class="col-1 famIcon2 coup2"></span>
-                        <h4 class="ray-order col-7">A la coupe</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 frui"></span>
-                        <span class="col-1 famIcon2 frui2"></span>
-                        <h4 class="ray-order col-7">Fruits, Légumes</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1 boul"></span>
-                        <span class="col-1 famIcon2 boul2"></span>
-                        <h4 class="ray-order col-7">Boulangerie</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-
-                    <li class="ui-state-default row">
-                        <i class="fas fa-sort"></i>
-                        <span class="col-1 famIcon1"></span>
-                        <span class="col-1 famIcon2"><i class="fas fa-plus-square fa-2x"></i></span>
-                        <h4 class="ray-order col-7">Ajouter un rayon ?</h4>
-                        <i class="fam-select orange fas fa-stream col-1"></i>
-                    </li>
-                </ul>
-                <ul class="list-group rayon-num col-2">
-                    <?php    
-                    for ($i=1; $i<=20; $i++) {
+            <!-------------- Boucle primaire des rayons -------------->
+            <?php    
+             for ($i=0; $i<$aislesCount['count']; $i++) {
+            ?>
+            <!--------------- En-tête du rayon -------------------->
+            <div class="d-flex flex-row">
+                <?php
+                foreach ($aislesIconsTab[$i] as $aislesIcons) {
+                ?>
+                <span class="col-1 d-flex justify-content-center align-items-center"><img class="famIcon" src="public/picture/items/<?= $aislesIcons['icon_adress'] ?>" alt="item picture" title="item" /></span>
+                <?php
+                }
+                ?>
+                <h4 class="ray col-xs-8 col-sm-8" id="one">
+                    <?= $aislesTab[$i]['aisle_priv_title'] ?>
+                </h4>
+                <!--------------- Comptage des articles du rayon -------------------->
+                <span class="d-flex flex-row justify-content-between align-items-center">
+                    <i class="fam-select orange far fa-th"></i>
+                    <span class="caddie2 d-flex justify-content-center align-items-center">
+                        <?= $itemsCountInAisleTab[$i]['count'] ?>
+                    </span>
+                </span>
+            </div>
+            <!--------------- Contenu d'un rayon -------------------->
+            <div>
+                <ul>
+                    <!---------------- Boucle secondaire des articles ---------------------->
+                    <?php
+                    foreach ($itemsInAisleTab[$i] as $itemInAisle) {
                     ?>
-                    <li class="list-group-item">
-                        <?= $i ?>
+                    <li class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
+                        <!---------------- Supprimer un article du magasin ---------------------->
+                        <form class="delete-form d-flex p-2" method="post" action="index.php?action=deleteItem">
+                            <input type="hidden" name="itemId" value="<?= $itemInAisle['id'] ?>" />
+                            <button type="submit" class="action-button delete-btn"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+
+                        <!---------------- Le nom de l'article à cocher/décocher ---------------------->
+                        <form class="modif-form form-row justify-content-start align-items-center" method="post" action="index.php?action=modifItem">
+                            <input type="checkbox" name="itemId-checkbox-<?= $i ?>" id="checkbox-<?= $i ?>" value="<?= $itemInAisle['id'] ?>">
+                            <input type="text" name="itemName" class="modif-form item-gene" value="<?= $itemInAisle['item_priv_name'] ?>" />
+                            <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
+                                <?= $i ?></label>
+                        </form>
+                        <!---------------- La modification d'un article ---------------------->
+                        <form class="modif-form form-row d-flex align-items-center p-2" method="post" action="index.php?action=modifItem">
+                            <button type="submit" class="action-button"><i class="fas fa-pencil-alt"></i></button>
+                        </form>
                     </li>
                     <?php
                     }
                     ?>
                 </ul>
             </div>
+            <?php
+            }
+            ?>
+
+        </div>
+
+    </div>
+
+    <!-- TAB DES RAYONS -->
+
+    <div id="aisles">
+
+        <!-------------- Message dans la barre de nav -------------->
+        <div class="screen-avert d-md-none">
+            EASIER ON SCREEN ...
+        </div>
+
+        <!-------------- Début du circuit de rayons -------------->
+        <div class="rayons-org col-10 offset-1">
+            <div class="row">
+                <div class="col-12 circuit text-center bg-green">
+                    <i class="fas fa-flag fa-2x"></i> Entrée circuit
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-------------- Rayons "sortables" pour ordonner -------------->
+                <ul id="sortable" class="sortable col-11">
+                    <!-------------- Boucle des rayons -------------->
+                    <?php    
+                    for ($i=0; $i<$aislesCount['count']; $i++) {
+                    ?>
+                    <li class="ui-state-default row" id="aisleId_<?= $aislesTab[$i]['id'] ?>">
+
+                        <!---------------- Groupe de boutons et icones ---------------------->
+                        <div class="col-sm-3 aisles-icons d-flex justify-content-center align-items-center">
+                            <!---------------- Bouton delete ---------------------->
+                            <form class="delete-form d-flex justify-content-start align-items-center col-sm-3" method="post" action="index.php?action=deleteAisle">
+                                <input type="hidden" name="aisleId" value="<?= $aislesTab[$i]['id'] ?>" />
+                                <button type="submit" class="action-button delete-btn"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                            <!---------------- Icones des rayons ---------------------->
+                            <?php
+                            foreach ($aislesIconsTab2[$i] as $aislesIcons2) {
+                            ?>
+                            <span class="col-sm-3 d-flex align-items-center"><img class="famIcon" src="public/picture/items/<?= $aislesIcons2['icon_adress'] ?>" alt="item picture" title="item" /></span>
+                            <?php
+                            }
+                            ?>
+                            <!---------------- logo rayon mobile -------------------->
+                            <i class="fam-select orange fas fa-stream col-sm-3 d-flex justify-content-end align-items-center"></i>
+                        </div>
+                        <!---------------- Le titre du rayon et sa modification -------------------->
+                        <form class="modif-form form-row col-sm-8 justify-content-start align-items-center" method="post" action="index.php?action=modifAisle">
+                            <input type="hidden" name="aisleId" value="<?= $aislesTab[$i]['id'] ?>" />
+                            <input type="text" name="aisleTitle" class="item-gene col-sm-12" value="<?= $aislesTab[$i]['aisle_priv_title'] ?>" />
+                            <button type="submit" class="action-button modif-btn"><i class="fas fa-pencil-alt"></i></button>
+                        </form>
+                    </li>
+
+                    <?php
+                    }
+                    ?>
+                </ul>
+
+                <!-------------- Boucle des repères num ---------->
+                <ul class="list-group rayon-num col-1">
+                    <?php    
+                    for ($i=0; $i<$aislesCount['count']; $i++) {
+                    ?>
+                    <li class="list-group-item d-flex flex-row justify-content-center align-items-center">
+                        <span class="caddie2 d-flex justify-content-center align-items-center">
+                            <?= $i+1 ?>
+                        </span>
+                        <?php
+                    }
+                    ?>
+                </ul>
+                <form action="" method="post">
+                    <input type="hidden" name="sortable" />
+                </form>
+
+            </div>
+
+            <!----------------  Ajouter un rayon ------------>
+            <div class="row">
+                <div class="col-11">
+                    <div class="row" id="newAisle">
+                        <span class="col-sm-3"></span>
+                        <form class="modif-form form-row col-sm-8 justify-content-start align-items-center" method="post" action="index.php?action=createAisle">
+                            <input type="hidden" name="aisleOrder" value="<?= $aislesCount['count']+1 ?>" />
+                            <input type="text" name="aisleTitle" class="item-gene add-form col-sm-12" placeholder="Rajouter un rayon au circuit ?" focus />
+                            <button type="submit" class="action-button modif-btn"><i class="fas fa-plus"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-------------- Fin du circuit de rayons -------------->
             <div class="row">
                 <div class="col-12 circuit text-center bg-red">
                     <i class="fas fa-flag-checkered fa-2x"></i> Sortie Circuit
