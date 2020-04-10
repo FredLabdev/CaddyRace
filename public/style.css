@@ -1,6 +1,31 @@
 /***********************************************************************/
 /* Généralités */
 
+@viewport {
+    zoom: 1.0;
+    width: device-width;
+    initial-scale: 1;
+    maximum-scale: 1;
+}
+
+/*Font Awesome Fonts*/
+
+@font-face {
+    font-family: 'FontAwesome-webfont';
+    src: url('fonts/fontawesome-webfont.eot') format('eot'),
+        url('fonts/fontawesome-webfont.svg') format('svg'),
+        url('fonts/fontawesome-webfont.ttf') format('ttf'),
+        url('fonts/fontawesome-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+    font-family: 'FontAwesome';
+    src: url('fonts/fontawesome-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 html {
     height: 100%;
 }
@@ -13,7 +38,6 @@ body {
 
 main {
     margin-top: 115px;
-    min-height: 100%;
 }
 
 .container-fluid {
@@ -119,10 +143,6 @@ input[type='submit'],
 /***********************************************************************/
 /* Navbar */
 
-.navbar {
-    height: 115px;
-}
-
 .pos-f-t {
     display: none;
 }
@@ -150,13 +170,16 @@ input[type='submit'],
 }
 
 .nav {
-    position: relative;
-    top: 10px;
+    flex-wrap: nowrap;
 }
 
 .nav-link {
     font-weight: bold;
     color: white;
+}
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    padding: 10px;
 }
 
 .nav-link:hover {
@@ -181,12 +204,8 @@ input[type='submit'],
     color: darkorange;
 }
 
-.alert {
-    position: absolute;
-    top: -78px;
-    left: -10px;
-    padding-top: 0px;
-    background-attachment: scroll;
+.dropdown-menu {
+    overflow: auto;
 }
 
 .alert2 {
@@ -194,7 +213,7 @@ input[type='submit'],
     top: 8px;
     padding: 3px;
     border: 3px solid darkorange;
-    border-radius: 50%;
+    border-radius: 100%;
     background-color: darkorange;
     font-weight: bold;
 }
@@ -213,6 +232,14 @@ footer div:nth-child(2) {
 footer div:nth-child(3) {
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.contact-form {
+    border: 5px solid lightgray;
+    border-radius: 10px;
+    border-style: ridge;
+    background-color: darkorange;
+    padding: 5px;
 }
 
 .contact-form:nth-child(3) {
@@ -322,7 +349,7 @@ footer div:nth-child(3) span:nth-child(3) {
     color: #06D85F;
 }
 
-.popup .content {
+.popup-lg .content {
     max-height: 30%;
     overflow: auto;
 }
@@ -341,9 +368,6 @@ footer div:nth-child(3) span:nth-child(3) {
     bottom: 35px;
 }
 
-.popup3 a i:nth-child(1):hover ~ #light {
-    color: darkgoldenrod;
-}
 
 /***********************************************************************/
 /* Home View */
@@ -461,18 +485,12 @@ carousel-indicators {
 
 .enter-btn span:nth-child(1n) {
     font-family: 'Orbitron', serif;
-    font-size: 1.5em;
 }
 
 .enter-btn i:nth-child(1n) {
     font-size: 2em;
     padding-right: 5px;
     color: darkorange;
-}
-
-.logo2 span:nth-child(1n) {
-    font-size: 1em;
-    margin-bottom: -6px;
 }
 
 /***********************************************************************/
@@ -501,9 +519,9 @@ carousel-indicators {
 
 .login-title,
 .member-title {
-    padding-top: 30px;
+    padding-top: 10px;
     text-align: left;
-    margin-left: 20%;
+    margin: 5%;
 }
 
 .login-form {
@@ -525,6 +543,28 @@ s .member-link {
 
 .form-check {
     margin-bottom: 1rem;
+}
+
+.connect {
+    height: 50px;
+    padding-top: 0px;
+}
+
+.logo2 span,
+.logo3 span {
+    padding-bottom: 0px;
+    font-size: 1em;
+}
+
+.logo2 img:nth-child(3n) {
+    padding-top: 27px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+}
+
+.logo3 img:nth-child(3n) {
+    padding-right: 0px;
+    padding-bottom: 0px;
 }
 
 /***********************************************************************/
@@ -661,68 +701,84 @@ ul.bs-autocomplete-menu a {
 }
 
 /***********************************************************************/
-/* listView */
+/* listView Nav */
 
-#list-nav {
+.list-nav {
     top: 115px;
+    flex-wrap: nowrap;
 }
 
-.bs-example {
-    position: absolute;
-    top: 3px;
-    left: -553px;
+.search-bar,
+.screen-avert {
+    position: fixed;
+    top: 126px;
+    left: 50px;
+    z-index: 1040;
 }
 
-.bs-example input {
-    width: 250px;
+.search-bar input,
+.search-bar select,
+.ui-selectmenu-button.ui-button {
+    width: 500px;
     height: 55px;
+}
+
+.ui-corner-all {
+    border-radius: 0px;
+}
+
+.ui-widget.ui-widget-content {
+    border: none;
 }
 
 .ui-widget-content {
     z-index: 10;
+    background-color: #fff;
+    color: black;
+    border: none;
 }
 
-#liste,
-#liste2,
-#pref,
-#pref2,
-#caddie,
-#tobuy,
-#topay {
-    margin-top: 115px;
+#items-admin,
+#list,
+#aisles-admin,
+#aisles {
+    margin-top: 80px;
 }
 
-#liste-nav,
-#pref-nav,
-#caddie-nav {
+#items-admin,
+#aisles-admin {
+    background-color: darkorange;
+}
+
+#list,
+#aisles {
     background-color: #343A40;
+}
+
+#addItem,
+#addItem-Admin {
+    padding: .5rem .5rem;
+}
+
+#raySelect,
+#raySelect-Admin {
+    width: 100%;
     position: absolute;
-    top: 3px;
-    left: -301px;
-}
-
-#liste-nav2,
-#pref-nav2,
-#caddie-nav2 {
-    background-color: #343A40;
-    position: absolute;
-    top: 3px;
-    left: -148px;
-}
-
-#liste-nav,
-#liste-nav2 {
-    z-index: 3;
-}
-
-#pref-nav,
-#pref-nav2 {
-    z-index: 2;
-}
-
-#caddie-nav,
-#caddie-nav2 {
     z-index: 1;
+    top: 75px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    display: none;
+}
+
+.liste-tab:hover,
+.rayons-tab:hover,
+.liste-tab:focus,
+.rayons-tab:focus,
+.liste-tab:active,
+.rayons-tab:active {
+    background: darkorange;
 }
 
 .posts-extracts {
@@ -793,7 +849,7 @@ ul.bs-autocomplete-menu a {
     display: inline;
 }
 
-.posts-view {
+.alert-admin {
     padding: 60px;
     background: url('picture/picture2.jpg');
     background-attachment: fixed;
@@ -853,180 +909,191 @@ a:visited.ui-button,
     color: #fff;
 }
 
-.ui-widget-content a {
-    width: 150px;
-}
-
-.dropdown-item:hover {
-    color: #fff;
-}
-
-.alert3,
-.alert3b {
-    height: 30px;
-    width: 50px;
-    margin: auto;
-    margin-right: 50%;
-    padding: 3px;
-    text-align: right;
-    font-weight: bold;
-    color: dodgerblue;
-}
-
-.alert3 {
-    color: darkorange;
-}
-
-.alert3 i,
-.alert3b i {
-    color: lightgray;
-}
-
 .ui-icon-triangle-1-e {
     background-position: -62px -16px;
 }
 
 /***********************************************************************/
-/* listView - Rayons */
+/* listView - items checkbox */
 
-.famIcon1 {
-    background-repeat: no-repeat;
-    background-position: right;
+.ui-accordion .ui-accordion-content {
+    padding: 1em 0em;
+    background-color: darkorange;
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    left: -9999px;
+}
+
+.item-check {
+    display: block;
+    position: relative;
+    margin: 3px 10px 3px 10px;
+    padding: 15px 30px 15px 62px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    color: black;
+    background-color: lightgray;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color .2s, box-shadow .2s;
 }
 
 
-.famIcon2 {
-    background-repeat: no-repeat;
-    background-position: left;
+.item-gene {
+    display: block;
+    position: relative;
+    margin: 3px 10px 3px 10px;
+    padding: 15px 30px 15px 62px;
+    color: black;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    white-space: nowrap;
+    user-select: none;
+    transition: background-color .2s, box-shadow .2s;
 }
 
-.bois {
-    background-image: url("https://img.icons8.com/color/48/000000/bottle-of-water.png");
+.caddie2,
+.action-button {
+    border-radius: 100px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
 }
 
-.bois2 {
-    background-image: url("https://img.icons8.com/color/48/000000/beer.png");
+.caddie2 {
+    border: 3px solid darkorange;
 }
 
-.cond {
-    background-image: url("https://img.icons8.com/color/48/000000/olive-oil.png");
+.caddie3 {
+    position: relative;
+    top: -10px;
+    border: 3px solid darkorange;
+    padding: 2px;
+    margin-left: 15px;
+    border-radius: 100px;
+    color: #fff;
 }
 
-.cond2 {
-    background-image: url("https://img.icons8.com/color/48/000000/pepper-shaker.png");
+.item-check::before {
+    content: "\f07a";
+    font-family: 'FontAwesome';
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+    padding-left: .2rem;
+    padding-right: .2rem;
+    color: #fff;
+    display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
 }
 
-.cons {
-    background-image: url("https://img.icons8.com/color/48/000000/tin-can.png");
+.item-check,
+.action-button,
+.item-gene:focus,
+input[type="checkbox"]:focus + .item-check {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+    cursor: pointer;
 }
 
-.cons2 {
-    background-image: url("https://img.icons8.com/color/48/000000/spam-can.png");
+.modif-btn {
+    position: relative;
+    left: -70px;
 }
 
-.frui {
-    background-image: url("https://img.icons8.com/color/48/000000/pear.png");
+input[type="checkbox"]:checked + .item-check {
+    color: #fff;
+    background-color: #343A40;
 }
 
-.frui2 {
-    background-image: url("https://img.icons8.com/color/48/000000/eggplant.png");
+input[type="checkbox"]:checked + .item-check::before {
+    color: darkorange;
 }
 
-.hygi {
-    background-image: url("https://img.icons8.com/color/48/000000/soap-dispenser.png");
+.dropdown-item:active,
+.dropdown-item:hover {
+    background-color: darkorange;
 }
 
-.hygi2 {
-    background-image: url("https://img.icons8.com/color/48/000000/toothpaste.png");
+.right {
+    position: absolute;
+    top: 10px;
+    left: 60%;
 }
 
-.lait {
-    background-image: url("https://img.icons8.com/color/48/000000/milk-bottle.png");
+.form-row {
+    flex-wrap: nowrap;
 }
 
-.lait2 {
-    background-image: url("https://img.icons8.com/color/48/000000/cheese.png");
+.delete-form {
+    cursor: pointer;
 }
 
-.mena {
-    background-image: url("https://img.icons8.com/color/48/000000/duster.png");
+ul {
+    padding-left: 0px;
 }
 
-.mena2 {
-    background-image: url("https://img.icons8.com/color/48/000000/cat.png");
+.add-form {
+    margin-left: -10px
 }
 
-.cere {
-    background-image: url("https://img.icons8.com/color/48/000000/baguette.png");
+.delete-btn {
+    color: red;
 }
 
-.cere2 {
-    background-image: url("https://img.icons8.com/color/48/000000/wheat.png");
+/***********************************************************************/
+/* shopView - Icones */
+
+.item-gene::before {
+    content: "\f02a";
+    font-family: 'FontAwesome';
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+    padding-left: .2rem;
+    padding-right: .2rem;
+    color: #fff;
+    display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
 }
 
-.pate {
-    background-image: url("https://img.icons8.com/color/48/000000/spaghetti.png");
+.item-gene:focus {
+    color: #fff;
+    background-color: #343A40;
 }
 
-.pate2 {
-    background-image: url("https://img.icons8.com/color/48/000000/rice-bowl.png");
+/***********************************************************************/
+/* listView - Icones */
+
+.aisles-icons {
+    padding: 0px;
+    margin-right: -30px;
 }
 
-.frai {
-    background-image: url("https://img.icons8.com/color/48/000000/sandwich.png");
+.famIcon {
+    transform: scale(0.8);
 }
-
-.frai2 {
-    background-image: url("https://img.icons8.com/color/48/000000/salami.png");
-}
-
-.gate {
-    background-image: url("https://img.icons8.com/color/48/000000/jam.png");
-}
-
-.gate2 {
-    background-image: url("https://img.icons8.com/color/48/000000/cookies.png");
-}
-
-.surg {
-    background-image: url("https://img.icons8.com/color/48/000000/cooling.png");
-}
-
-.surg2 {
-    background-image: url("https://img.icons8.com/color/48/000000/ice-cream-cone.png");
-}
-
-.vian {
-    background-image: url("https://img.icons8.com/color/48/000000/steak.png");
-}
-
-.vian2 {
-    background-image: url("https://img.icons8.com/color/48/000000/fish-food.png");
-}
-
-.autr {}
-
-.autr2 {
-    background-image: url("https://img.icons8.com/color/48/000000/bento.png");
-}
-
-
-
-/*Pain & cereales "https://img.icons8.com/color/48/000000/toaster.png"
-Chocolat "https://img.icons8.com/color/48/000000/chocolate-bar.png"
-Apéro "https://img.icons8.com/color/48/000000/bavarian-pretzel.png"
-A la coupe "https://img.icons8.com/color/48/000000/jamon.png"
-huile "https://img.icons8.com/color/48/000000/olive-oil.png"
-café "https://img.icons8.com/color/48/000000/coffee-pot.png
-"https://img.icons8.com/color/48/000000/espresso-cup.png"
 
 /***********************************************************************/
 /* listView - Rayons */
 
+.rayon-num {}
+
 .circuit {
-    height: 3em;
+    height: 3.1em;
     line-height: 1.2em;
-    margin: 0 5px 5px 5px;
     padding: 5px;
     font-size: 1.2em;
     border: 1px solid #d3d3d3;
@@ -1035,39 +1102,56 @@ café "https://img.icons8.com/color/48/000000/coffee-pot.png
     color: #fff;
 }
 
-#sortable {
+.sortable {
     list-style-type: none;
     margin: 0;
     padding: 0;
     width: 100%;
 }
 
-#sortable li {
-    margin: 0 5px 5px 5px;
-    padding: 5px;
-    font-size: 1.2em;
+.sortable li,
+.rayon-num li {
+    margin: 2px 0 0 0;
+    font-size: 1em;
     height: 1.5em;
     border: 1px solid #d3d3d3;
     border-radius: 4px 4px 4px 4px;
     font-weight: normal;
     color: #555555;
-    cursor: pointer;
 }
 
-#sortable li:active,
-#sortable li:hover {
+.rayon-num li {
+    cursor: default;
+}
+
+.sortable li {
+    padding: .5em .5em .5em .7em;
+    cursor: move;
+}
+
+.rayon-num,
+.list-group-item {
+    padding: 0px;
+    cursor: none;
+}
+
+.sortable li:active,
+.sortable li:hover {
     color: #fff;
     background: #343A40;
 }
 
-html > body #sortable li {
-    height: 3em;
+html > body .sortable li,
+.rayon-num li,
+#newAisleGene {
+    height: 4.1em;
     line-height: 1.2em;
 }
 
 .ui-state-highlight {
     height: 1.5em;
     line-height: 1.2em;
+    background: red;
 }
 
 /* select with custom icons */
@@ -1077,21 +1161,22 @@ html > body #sortable li {
 }
 
 .ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
-    height: 24px;
-    width: 24px;
+    height: 40px;
+    width: 40px;
     top: 0.1em;
+    margin-left: -10px;
 }
 
 .ui-selectmenu-button.ui-button {
     text-align: left;
     white-space: nowrap;
-    width: 12em;
     position: relative;
-    right: 170px;
-}
-
-.ui-selectmenu-icon.ui-icon {
-    margin-right: 20px;
+    margin-left: 68px;
+    border: 5px solid lightgray;
+    border-radius: 10px;
+    border-style: outset;
+    background-color: lightgray;
+    color: black;
 }
 
 /* select with CSS avatar icons */
@@ -1109,12 +1194,6 @@ option.avatar {
     position: relative;
     top: -20px;
     right: -250px;
-}
-
-.fam-select {
-    position: relative;
-    top: 15px;
-    right: 3px;
 }
 
 #files1-button,
@@ -1140,11 +1219,6 @@ option.avatar {
     background: none;
 }
 
-.famSelect {
-    position: relative;
-    right: -50px;
-}
-
 span.ui-icon.video {
     background-image: url("https://img.icons8.com/color/48/000000/cucumber.png");
     background-size: contain;
@@ -1153,6 +1227,23 @@ span.ui-icon.video {
 span.ui-icon.rss {
     background-image: url("https://img.icons8.com/color/48/000000/pear.png");
     background-size: contain;
+}
+
+.ray,
+.ray-order,
+.fam-select {
+    margin: auto
+}
+
+.fam-select {
+    position: relative;
+    left: 300%;
+    margin-right: 7px;
+}
+
+#newAisleGene {
+    margin-right: 5px;
+    margin-left: -10px;
 }
 
 /***********************************************************************/
@@ -1221,22 +1312,26 @@ span.ui-icon.rss {
 /***********************************************************************/
 /* Members Edit view */
 
+.profil-form {
+    width: 50%;
+    margin-left: 10%;
+}
+
+.profil-form label {
+    width: 200px;
+}
+
 #members {
     padding: 40px;
     width: 1080px;
 }
 
 #members {
-    background: url('picture/picture10.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
     margin-bottom: 0px;
 }
 
 #member {
     padding: 40px;
-    background: url('picture/picture9.jpg');
-    background-repeat: no-repeat;
     height: 750px;
     margin-bottom: 0px;
     color: red;
@@ -1255,23 +1350,41 @@ span.ui-icon.rss {
 
 input,
 .input_novalue,
+input:invalid,
 textarea,
 #champ,
-.posts-extracts {
-    border: 5px solid darkorange;
-    color: white;
+.posts-extracts,
+.search-bar select,
+.rayons-org {
+    border: 5px solid lightgray;
     border-radius: 10px;
+    border-style: ridge;
+    background-color: #fff;
+}
+
+.rayons-org {
+    background-color: #343A40;
+}
+
+.input_focus {
+    background-color: lightgray;
+    border: 5px solid darkorange;
     border-style: ridge;
 }
 
-input:focus,
-input:after,
 .input_value,
 textarea:focus,
 textarea:after,
 #champ:focus,
 #champ:after {
     background-color: #343A40;
+    color: #fff;
+    border: 5px solid darkorange;
+    border-style: ridge;
+}
+
+.desinscrire {
+    padding-top: 0px;
 }
 
 /***********************************************************************/
@@ -1346,10 +1459,7 @@ input[type=email] {
 }
 
 .exit-text {
-    position: relative;
     margin: auto;
-    left: -20px;
-    top: -60px;
 }
 
 /***********************************************************************/
@@ -1459,19 +1569,12 @@ label[for] {
     }
 
     .navbar-toggler {
-        background-color: white;
-        color: darkorange;
         height: 50px;
     }
 
-    .navbar-toggler i,
     .navbar-toggler .menu {
         position: relative;
-        top: -10px;
-    }
-
-    .navbar-toggler .menu {
-        left: 28px;
+        bottom: 5px;
     }
 
     .nav-ecran {
@@ -1489,7 +1592,7 @@ label[for] {
     }
 
     .navbar-brand .logo img:nth-child(3n) {
-        padding-bottom: 13px;
+        padding-bottom: 7px;
     }
 
     .navbar-brand .logo span {
@@ -1507,6 +1610,16 @@ label[for] {
         top: -2px;
     }
 
+    navbarToggleExternalContent {
+        z-index: 1;
+    }
+
+    .alert-admin {
+        padding: 0px;
+        left: 50px;
+        top: -10px;
+    }
+
     /***********************************************************************/
     /* Footer */
 
@@ -1514,8 +1627,12 @@ label[for] {
         display: block;
     }
 
-    footer div:nth-child(1) {
-        padding-top: 20px;
+    .popup-lg {
+        padding-top: 5px;
+    }
+
+    .popup-sm {
+        padding-top: 40px;
     }
 
     footer div:nth-child(3) {
@@ -1570,11 +1687,14 @@ label[for] {
         width: 24%;
     }
 
-
     footer div:nth-child(3) span:hover:after,
     footer div:nth-child(3) span:hover:before,
     footer div:nth-child(3) span:nth-child(2):hover strong:after,
-    footer div:nth-child(3) span:nth-child(2):hover strong:before {
+    footer div:nth-child(3) span:nth-child(2):hover strong:before,
+    footer div:nth-child(3) span:focus:after,
+    footer div:nth-child(3) span:focus:before,
+    footer div:nth-child(3) span:nth-child(2):focus strong:after,
+    footer div:nth-child(3) span:nth-child(2):focus strong:before {
         transform: scaleX(1);
     }
 
@@ -1583,8 +1703,16 @@ label[for] {
     }
 
     .popup {
-        margin-top: 50px;
         width: 80%;
+    }
+
+    .popup-lg {
+        height: 450px;
+        margin-top: 50px;
+    }
+
+    .popup-sm {
+        height: 200px;
     }
 
     .popup3 a {
@@ -1596,8 +1724,10 @@ label[for] {
         left: -15px;
     }
 
-    #popup3 {
-        overflow-y: scroll;
+    .contact-form {
+        height: 250px;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .popup3 a i:nth-child(2) {
@@ -1690,46 +1820,167 @@ label[for] {
         min-height: 0px;
     }
 
-    .login,
-    .newMember {
-        background-position: right -200px top -50px;
-    }
-
-    .newMember {
-        background-position: right -350px top -50px;
-    }
-
     .login-brand {
         font-size: 1.5em;
     }
 
     /***********************************************************************/
-    /* Posts View Extracts */
+    /* List View */
 
-    # {
-        height: 50px;
+    .list-nav {
         top: 50px;
+        height: 60px;
+    }
+
+    .list-nav-text {
+        display: none;
+    }
+
+    .tabs {
+        z-index: 0;
+    }
+
+    .dropdown-item {
+        padding: .25rem 0.25rem;
+        margin-left: 2.5%;
+    }
+
+    .new-item {
+        margin-left: 2.5%;
+    }
+
+    .familles {
+        height: 500px;
+    }
+
+    .search-bar {
+        flex-flow: nowrap;
+        top: 62px;
+        left: 10px;
+    }
+
+    .screen-avert {
+        top: 72px;
+    }
+
+    .search-bar input,
+    .search-bar select,
+    .ui-selectmenu-button.ui-button {
+        width: 250px;
+        height: 35px;
+    }
+
+    .ui-selectmenu-button.ui-button {
+        margin-left: 46px;
+    }
+
+    #items-admin,
+    #list,
+    #aisles-admin,
+    #aisles {
+        margin-top: 60px;
+    }
+
+    .rayons-org {
+        height: 540px;
+        overflow: scroll;
+    }
+
+    .ui-accordion .ui-accordion-header {
+        height: 50px;
+    }
+
+    html > body .sortable li,
+    .rayon-num li {
+        height: 80px;
+    }
+
+    .ray {
+        font-size: 1.3em;
+    }
+
+    .ray-order {
+        font-size: 1em;
+    }
+
+    .ui-widget {
+        font-size: 0.9em;
+    }
+
+    .ui-accordion-header-icon,
+    i.fas.fa-sort {
+        display: none;
+    }
+
+    #raySelect,
+    #raySelect-Admin {
+        top: 60px;
+        height: 60px;
+    }
+
+    .item-gene {
+        padding: 7px 5px 7px 5px;
+        margin: 0px;
+        width: 700px;
+    }
+
+    .action-button,
+    .caddie2 {
+        width: 27px;
+        height: 27px;
+    }
+
+    .modif-form {
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 110%;
+        font-size: 0.8em;
+    }
+
+    .modif-btn {
+        left: -35px;
+    }
+
+    .fam-select {
+        padding-left: 0px;
+        left: 0%;
+    }
+
+    #newAisleGene {
+        margin-right: -7px;
+        margin-left: -1px;
+    }
+
+    .delete-form {
+        padding-right: 0px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+
+    .aisles-icons > span {
+        padding: 0px;
+    }
+
+    /***********************************************************************/
+    /* listView - Icones */
+
+    .aisles-icons {
+        height: 2em;
+    }
+
+    .famIcon1,
+    .famIcon2 {
+        height: 35px;
+    }
+
+    /***********************************************************************/
+    /* listView - items checkbox */
+
+    .right {
+        top: 50px;
+        left: 40%;
         z-index: 1;
-    }
-
-    .posts-view {
-        padding: 5%;
-    }
-
-    .comments-content {
-        padding: 5%;
-    }
-
-    .post-content {
-        max-height: 400px;
-    }
-
-    .alert3 {
-        margin-right: 10%;
-    }
-
-    .alert3b {
-        margin-right: -5%;
     }
 
     /***********************************************************************/
@@ -1748,17 +1999,13 @@ label[for] {
 
     #members,
     .member-text {
+        font-size: 0.9em;
         width: auto;
+        margin: 10px;
     }
 
     #members {
         padding: 20px;
-    }
-
-    .deleteMember {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
     }
 
     /***********************************************************************/
@@ -1777,12 +2024,11 @@ label[for] {
         background-size: cover;
         background-position: center;
         width: auto;
-        height: 500px;
+        height: 400px;
     }
 
     .return-button {
         left: 10px;
-        top: 200px;
     }
 
     /***********************************************************************/
@@ -1792,5 +2038,48 @@ label[for] {
         background-size: cover;
         background-position: center;
     }
+
+}
+
+
+
+@media all and (max-width: 350px) {
+
+    .familles {
+        height: 400px;
+    }
+
+    .search-bar input {
+        width: 190px;
+    }
+
+    #recherche {
+        font-size: 0.7em;
+    }
+
+    .rayons-org {
+        height: 440px;
+        overflow-y: scroll;
+    }
+
+    .rayon-num,
+    .ray {
+        padding-right: 2px;
+        font-size: 1em;
+    }
+
+    .ray-order {
+        padding-right: 2px;
+        font-size: 0.9em;
+    }
+
+    .modif-form {
+        width: 118%;
+    }
+
+    .ui-widget input {
+        font-size: 0.9em;
+    }
+
 
 }

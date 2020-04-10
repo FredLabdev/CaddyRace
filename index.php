@@ -3,7 +3,10 @@ session_start();
 require('controller/frontend.php');
 require('controller/backend.php');
 
+header('Access-Control-Allow-Origin: *');
+
 try {
+    
 
     //**************************************************************************************
     //**************************************************************************************
@@ -18,14 +21,14 @@ try {
         //**************************************************************************************
         
         //**************************************************************************************
-        // => homeView (Démo/Avis site/Appli)           
+        // => homeView (Démo/Avis/Connect)           
 
         if ($_GET['action'] == 'home') {
             require('view/frontend/homeView.php');
         }
 
         //**************************************************************************************
-        // => loginView (Log In/ Créer compte)                        
+        // => loginView (Log In/ New member)                        
        
         // Log In membre
         else if ($_GET['action'] == 'login') {
@@ -38,7 +41,7 @@ try {
             }
         } 
 
-        // Créer compte membre
+        // Nouveau membre
         else if ($_GET['action'] == 'newMember') {
             $name = getCleanParameter($_POST['name']);
             $first_name = getCleanParameter($_POST['first_name']);
@@ -61,117 +64,125 @@ try {
         else if (!empty($_SESSION['pseudo']) && !empty($_SESSION['password'])) {
             
             //**************************************************************************************
-            // => listView (Afficher/Trier liste, Ajouter/Retirer un itemToBuy dans la liste)
-            // Afficher la liste
-            if ($_GET['action'] == 'list') {
-                
-                // Trier la liste
-                if ($_POST['sortList']) {
-                    // par Alphabet:
-                    if ($_POST['alphab']) {
-                        sortListABC(); // TODO selon controller/model
-                    }   // par Familles:
-                    else if ($_POST['family']) {
-                        sortListFamily(); // TODO selon controller/model
-                    }   // par Rayons du shop :
-                    else if ($_POST['shop']) {
-                        sortListShop(1,"",""); // TODO selon controller/model
-                    } 
-                    else {
-                        throw new Exception('Identifiant de classement vide ou erronné');
-                    }
-                } 
-                // Ajouter un itemToBuy existant à la liste     
-                else if ($_GET['action'] == 'addItem') {
-                    if (isset($_GET['itemId']) && $_GET['itemId'] > 0) {
-                        $itemId = getCleanParameter($_GET['itemId']);
-                        addItem($itemId); // TODO selon controller/model
-                    }
-                    else {
-                        throw new Exception('Identifiant d\'item vide ou erronné');
-                    }
-                }
-                
-                //********************************************************************************
-                // => vers itemView (Afficher, Modifier, Créer, Supprimer un item)
-                
-                // Editer un item (Nom, Famille et Rayon rattachés, suppression)    
-                else if ($_GET['action'] == 'item') {
-                    if (isset($_GET['itemId']) && $_GET['itemId'] > 0) {
-                        $itemId = getCleanParameter($_GET['itemId']);
-
-                        // Modifier un item   
-                        if ($_GET['action'] == 'itemModif') {  
-                            $itemName = getCleanParameter($_POST['itemName']);
-                            modifItem($itemId, $itemName); // TODO selon controller/model
-                        } 
-                        // Créer un nouvel item   
-                        else if ($_GET['action'] == 'createItem') {
-                            $itemName = getCleanParameter($_POST['itemName']);
-                            $itemFamily = getCleanParameter($_POST['itemFamily']);
-                            $itemAisle = getCleanParameter($_POST['itemAisle']);
-                            newItem($itemName, $itemFamily, $itemAisle); // TODO selon controller/model
-                        }
-                        // Supprimer un item,   
-                        else if ($_GET['action'] == 'itemDelete') {
-                            itemErase($itemId); // TODO selon controller/model
-                        }
-                        // Afficher un item (par défaut)
-                        else {
-                            item($itemId, "", ""); // TODO selon controller/model
-                        }
-                    } 
-                    else {
-                        throw new Exception('Identifiant d\'item vide ou erronné');
-                    }
-                }
-                
-                //**************************************************************************************
-                // => listView (Afficher liste par défaut) 
-                
-                // Afficher la liste par Rayons du shop (par défaut):
-                else {
-                    sortListShop(1,"",""); // TODO selon controller/model
-                }  
-            }
-            
-            //**************************************************************************************
-            // => itemsView(backend) Interface de Gestion de la base de données commune
-
-            else if ($_GET['action'] == 'items') {
-                if (isset($_GET['itemsId']) && $_GET['itemsId'] > 0) {
-                    $itemsId = getCleanParameter($_GET['itemsId']);
-
-                    // Modifier un item   
-                    if ($_GET['action'] == 'itemsModif') {  
-                        $itemsName = getCleanParameter($_POST['itemsName']);
-                        modifItems($itemsId, $itemsName); // TODO selon controller/model
-                    } 
-                    // Créer un nouvel item   
-                    else if ($_GET['action'] == 'createItems') {
-                        $itemsName = getCleanParameter($_POST['itemsName']);
-                        $itemsFamily = getCleanParameter($_POST['itemsFamily']);
-                        $itemsAisle = getCleanParameter($_POST['itemsAisle']);
-                        newItems($itemsName, $itemsFamily, $itemsAisle); // TODO selon controller/model
-                    }
-                    // Supprimer un item,   
-                    else if ($_GET['action'] == 'itemsDelete') {
-                        itemsErase($itemsId); // TODO selon controller/model
-                    }
-                    // Afficher un item (par défaut)
-                    else {
-                        items($itemsId, "", ""); // TODO selon controller/model
-                    }
-                } 
-                else {
-                    throw new Exception('Identifiant d\'item vide ou erronné');
-                }
-            }
-            
-            //**************************************************************************************
-            // => profilView(frontend) / => membersView(backend)         
+            // => listView(frontend) Interface de Gestion des tables Persos d'Articles & Rayons
            
+            /*/ Trier sa liste
+            if ($_POST['sortList']) {
+                // par Alphabet:
+                if ($_POST['alphab']) {
+                    sortListABC(); // TODO selon controller/model
+                }   // par Rayons du shop :
+                else if ($_POST['shop']) {
+                    sortListShop(1,"",""); // TODO selon controller/model
+                } 
+                else {
+                    throw new Exception('Identifiant de classement vide ou erronné');
+                }
+            } */
+            
+            //**************************************************************************************
+            // => listView(frontend) Interface de Gestion des tables Persos d'Articles & Rayons
+            
+            // Afficher sa listView Perso,
+            if ($_GET['action'] == 'shopList') {
+                 shopList("", "");
+            }
+            // Créer un nouvel article,   
+            else if ($_GET['action'] == 'createItem') {
+                 $itemName = getCleanParameter($_POST['itemName']);
+                 $aisleId = getCleanParameter($_POST['aisleId']);
+                 if ($aisleId) {
+                     createItem($aisleId, $itemName);
+                 } else {
+                     throw new Exception('Aucun identifiant de rayon envoyé');
+                 }
+             } 
+             // Supprimer un article,   
+             else if ($_GET['action'] == 'deleteItem') {
+                 $itemId = getCleanParameter($_POST['itemId']);
+                 deleteItem($itemId);
+             }
+             // Modifier un article, 
+             else if ($_GET['action'] == 'modifItem') { 
+                 $itemId = getCleanParameter($_POST['itemId']);
+                 $itemName = getCleanParameter($_POST['itemName']);
+                 modifItem($itemId, $itemName);
+             }
+             // Créer un nouveau rayon,
+             else if ($_GET['action'] == 'createAisle') {
+                 $aisleTitle = getCleanParameter($_POST['aisleTitle']);
+                 $aisleOrder = getCleanParameter($_POST['aisleOrder']);
+                 createAisle($aisleTitle, $aisleOrder);
+             }
+             // Supprimer un rayon,   
+             else if ($_GET['action'] == 'deleteAisle') {
+                 $aisleId = getCleanParameter($_POST['aisleId']);
+                 deleteAisle($aisleId);
+             }
+             // Modifier un rayon,
+             else if ($_GET['action'] == 'modifAisle') {  
+                 $aisleId = getCleanParameter($_POST['aisleId']);
+                 $aisleTitle = getCleanParameter($_POST['aisleTitle']);
+                 modifAisle($aisleId, $aisleTitle);
+             }                  
+            
+            //**************************************************************************************
+            // => shopView(backend) Interface de Gestion des tables Générales Communes d'Articles & Rayons
+                
+            // Afficher la shopView Admin,
+            else if ($_GET['action'] == 'shopAdmin') {
+                shopAdmin("", "");
+            }
+            // Créer un nouvel article Gene,   
+           else if ($_GET['action'] == 'createItemGene') {
+                $itemGeneName = getCleanParameter($_POST['itemGeneName']);
+                $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                if ($aisleGeneId) {
+                    createItemGene($aisleGeneId, $itemGeneName);
+                } else {
+                    throw new Exception('Aucun identifiant de rayon envoyé');
+                }
+            } 
+            // Supprimer un article Gene,   
+            else if ($_GET['action'] == 'deleteItemGene') {
+                $itemGeneId = getCleanParameter($_POST['itemGeneId']);
+                deleteItemGene($itemGeneId);
+            }
+            // Modifier un article Gene, 
+            else if ($_GET['action'] == 'modifItemGene') { 
+                $itemGeneId = getCleanParameter($_POST['itemGeneId']);
+                $itemGeneName = getCleanParameter($_POST['itemGeneName']);
+                modifItemGene($itemGeneId, $itemGeneName);
+            }
+             /* Déplacer un rayon Gene (Traité en AJAX)  
+            else if ($_GET['action'] == 'orderAisleGene') {
+                $aisleGeneId = getCleanParameter($_POST["aisleGeneId"]);
+                $aisleGeneOrder = getCleanParameter($_POST["aisleGeneOrder"]);
+                // $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                // $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
+                orderAisleGene($aisleGeneId, $aisleGeneOrder); // TODO selon controller/model
+            } */
+            // Créer un nouveau rayon Gene,
+            else if ($_GET['action'] == 'createAisleGene') {
+                $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
+                $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
+                createAisleGene($aisleGeneTitle, $aisleGeneOrder);
+            }
+            // Supprimer un rayon Gene,   
+            else if ($_GET['action'] == 'deleteAisleGene') {
+                $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                deleteAisleGene($aisleGeneId);
+            }
+            // Modifier un rayon Gene,
+            else if ($_GET['action'] == 'modifAisleGene') {  
+                $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
+                modifAisleGene($aisleGeneId, $aisleGeneTitle);
+            }  
+            
+            //**************************************************************************************
             // => membersView(backend) Editer le profil d'un membre
+            
             else if ($_GET['action'] == 'membersDetail') {
                 $member = getCleanParameter($_POST['member']);
                 if (isset($member)) {
@@ -185,14 +196,16 @@ try {
                 }
              }
 
+            //**************************************************************************************
             // => profilView(frontend) Editer son propre profil (frontend)   
             else if ($_GET['action'] == 'memberDetail') {
                 memberDetail("", "", $_SESSION['id'], "");
             }
 
-            // Modifier un profil
+            //**************************************************************************************
             else if ($_GET['action'] == 'memberModif') {  
 
+                //**********************************************************************************
                 // => membersView(backend) dun membre
                 if ($_POST['member_modif']) {
                     $member_modif = getCleanParameter($_POST['member_modif']);
@@ -206,9 +219,10 @@ try {
                         memberDetail("",  'Veuillez sélectionner une action', "", 'backend');
                     }
 
-                // => profilView(frontend) le sien  
+                //**********************************************************************************    
+                // => profilView(frontend) le siens  
                 } else if ($_POST['personal_modif']) { 
-                    $personal_modif = getCleanParameter($_POST['personal_modif']);
+                    $personal_modif = $_POST['personal_modif'];
                     $champ = getCleanParameter($_POST['champ']);
                     $modif_champ = getCleanParameter($_POST['modif_champ']);
                     $modif_champ_confirm = getCleanParameter($_POST['modif_champ_confirm']);
@@ -230,6 +244,7 @@ try {
                 }
             }
 
+            //**************************************************************************************
             // => profilView(frontend) Supprimer son profil
             else if ($_GET['action'] == 'memberDelete') {
                 if ($_GET['memberErase']) {
@@ -295,6 +310,12 @@ try {
                 sessionEnd();
             } 
             
+            //**************************************************************************************
+            // => Afficher Accueil du site (par défaut):
+            else {
+                shopList("",""); // TODO selon controller/model
+            } 
+            
         //**************************************************************************************
         // Si action url sans connexion préalable            
         //**************************************************************************************
@@ -311,13 +332,13 @@ try {
     //**************************************************************************************
     //**************************************************************************************
 
-            // Soit on récupère un cookie autorisé d'un précédent login_ok,    
+    // Soit on récupère un cookie autorisé d'un précédent login_ok,    
     else if ($_COOKIE['password']) {
         $pseudo = getCleanParameter($_COOKIE['pseudo']);
         $password = getCleanParameter($_COOKIE['password']);
         loginAvailable($pseudo, $password);
     }
-            // Soit on dirige vers la page d'accueil en libre accés, 
+    // Soit on dirige vers la page d'accueil en libre accés, 
     else {
         header('Location: index.php?action=home'); 
     }

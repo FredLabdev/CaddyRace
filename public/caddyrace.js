@@ -1,452 +1,614 @@
- //**************************************************************************************
- // => listView/Nav - Tabs Mise en forme       
- //**************************************************************************************
-
- function focusListe() {
-     document.getElementById('liste-nav').style.zIndex = 3;
-     document.getElementById('pref-nav').style.zIndex = 2;
-     document.getElementById('caddie-nav').style.zIndex = 1;
-     document.getElementById('liste-nav2').style.zIndex = 3;
-     document.getElementById('pref-nav2').style.zIndex = 2;
-     document.getElementById('caddie-nav2').style.zIndex = 1;
-     document.getElementById('list-tab').style.color = 'darkorange';
-     document.getElementById('byABC-tab').style.background = 'darkorange';
-     document.getElementById('byFam-tab').style.background = '#343A40';
-     document.getElementById('pref-tab').style.color = '#fff';
-     document.getElementById('caddie-tab').style.color = '#fff';
- }
-
- function focusListe1() {
-     document.getElementById('list-tab').style.color = 'darkorange';
-     document.getElementById('byABC-tab').style.background = 'darkorange';
-     document.getElementById('byFam-tab').style.background = '#343A40';
- }
-
- function focusListe2() {
-     document.getElementById('list-tab').style.color = 'darkorange';
-     document.getElementById('byFam-tab').style.background = 'darkorange';
-     document.getElementById('byABC-tab').style.background = '#343A40';
- }
-
- function focusPref() {
-     document.getElementById('liste-nav').style.zIndex = 1;
-     document.getElementById('pref-nav').style.zIndex = 3;
-     document.getElementById('caddie-nav').style.zIndex = 2;
-     document.getElementById('liste-nav2').style.zIndex = 1;
-     document.getElementById('pref-nav2').style.zIndex = 3;
-     document.getElementById('caddie-nav2').style.zIndex = 2;
-     document.getElementById('fam-tab').style.background = 'darkorange';
-     document.getElementById('pref-tab').style.color = 'darkorange';
-     document.getElementById('ray-tab').style.background = '#343A40';
-     document.getElementById('list-tab').style.color = '#fff';
-     document.getElementById('caddie-tab').style.color = '#fff';
- }
-
- function focusPref1() {
-     document.getElementById('fam-tab').style.background = 'darkorange';
-     document.getElementById('ray-tab').style.background = '#343A40';
-     document.getElementById('pref-tab').style.color = 'darkorange';
- }
-
- function focusPref2() {
-     document.getElementById('ray-tab').style.background = 'darkorange';
-     document.getElementById('fam-tab').style.background = '#343A40';
-     document.getElementById('pref-tab').style.color = 'darkorange';
- }
-
- function focusCaddie() {
-     document.getElementById('liste-nav').style.zIndex = 2;
-     document.getElementById('pref-nav').style.zIndex = 1;
-     document.getElementById('caddie-nav').style.zIndex = 3;
-     document.getElementById('liste-nav2').style.zIndex = 2;
-     document.getElementById('pref-nav2').style.zIndex = 1;
-     document.getElementById('caddie-nav2').style.zIndex = 3;
-     document.getElementById('caddie-tab').style.color = 'darkorange';
-     document.getElementById('to-buy').style.background = 'darkorange';
-     document.getElementById('to-pay').style.background = '#343A40';
-     document.getElementById('list-tab').style.color = '#fff';
-     document.getElementById('pref-tab').style.color = '#fff';
- }
-
- function focusCaddie1() {
-     document.getElementById('caddie-tab').style.color = 'darkorange';
-     document.getElementById('to-buy').style.background = 'darkorange';
-     document.getElementById('to-pay').style.background = '#343A40';
- }
-
- function focusCaddie2() {
-     document.getElementById('caddie-tab').style.color = 'darkorange';
-     document.getElementById('to-pay').style.background = 'darkorange';
-     document.getElementById('to-buy').style.background = '#343A40';
- }
-
- //**************************************************************************************
- // => listView/Tris jQuery - Tabs & Accordion         
- //**************************************************************************************
-
- $(function () {
-     $("#tabs").tabs();
- });
-
- $(function () {
-     $("#accordion").accordion({
-         heightStyle: "content"
-     });
-     $("#accordion").accordion({
-         collapsible: true
-     });
- });
-
- $(function () {
-     $("#caddie-accordion").accordion({
-         heightStyle: "content"
-     });
-     $("#caddie-accordion").accordion({
-         collapsible: true
-     });
- });
-
- //**************************************************************************************
- // => listView/Rayons jQuery - Sortable        
- //**************************************************************************************
-
- $(function () {
-     $("#sortable").sortable({
-         placeholder: "ui-state-highlight"
-     });
-     $("#sortable").disableSelection();
- });
-
- //**************************************************************************************
- // => listView/Rayons jQuery - Selectmenu        
- //**************************************************************************************
-
- $(function () {
-     $.widget("custom.iconselectmenu", $.ui.selectmenu, {
-         _renderItem: function (ul, item) {
-             var li = $("<li>"),
-                 wrapper = $("<div>", {
-                     text: item.label
-                 });
-
-             if (item.disabled) {
-                 li.addClass("ui-state-disabled");
-             }
-
-             $("<span>", {
-                     style: item.element.attr("data-style"),
-                     "class": "ui-icon " + item.element.attr("data-class")
-                 })
-                 .appendTo(wrapper);
-
-             return li.append(wrapper).appendTo(ul);
-         }
-     });
-
-     $("#files1")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-     $("#files2")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons customicons");
-
-     $("#files3")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons customicons");
-
-     $("#files4")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files5")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files6")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files7")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files8")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files9")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files10")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files11")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files12")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files13")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files14")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files15")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files16")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files17")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files18")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files19")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#files20")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons");
-
-
-     $("#people")
-         .iconselectmenu()
-         .iconselectmenu("menuWidget")
-         .addClass("ui-menu-icons avatar");
- });
-
- //**************************************************************************************
- // => exitView - Interactions pour la déconnexion         
- //**************************************************************************************
-
- function deconnect_confirm() {
-     if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
-         document.location.href = "index.php?action=deconnexion";
-         return true;
-     } else {
-         alert("Je me disais aussi...");
-         return false;
-     }
- }
-
- document.getElementById("deconnexion").addEventListener('click', function (e) {
-     e.preventDefault();
-     deconnect_confirm();
- });
-
- document.getElementById("deconnexion_xs").addEventListener('click', function (e) {
-     e.preventDefault();
-     deconnect_confirm();
- });
-
- //**************************************************************************************
- // => nav dropdown automatique au hover         
- //**************************************************************************************
-
- $('ul.nav li.dropdown').hover(function () {
-     $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
- }, function () {
-     $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
- });
-
- //**************************************************************************************
- // => listView nav search autocomplete         
- //**************************************************************************************
-
- var liste = [
-    "Draggable",
-    "Droppable",
-    "Resizable",
-    "Selectable",
-    "Sortable"
+/* eslint-env jquery */
+/* global $ */
+/* global alert */
+/* global document */
+/* global navigator */
+/* global confirm */
+"use strict";
+
+//**************************************************************************************
+// => listView/Tris jQuery - Tabs - Accordion        
+//**************************************************************************************
+
+$(function () {
+    $("#tabs").tabs();
+});
+
+$(function () {
+    $("#accordion").accordion({
+        heightStyle: "content"
+    });
+    $("#accordion").accordion({
+        collapsible: true
+    });
+});
+
+
+//**************************************************************************************
+// => shopView/Tris jQuery - Tabs - Accordion        
+//**************************************************************************************
+
+$(function () {
+    $("#tabs-Admin").tabs();
+});
+
+$(function () {
+    $("#accordion-Admin").accordion({
+        heightStyle: "content"
+    });
+    $("#accordion-Admin").accordion({
+        collapsible: true
+    });
+});
+
+//**************************************************************************************
+// => listView/Rayons jQuery - Sortable        
+//**************************************************************************************
+
+/* $(function () {
+    $("#sortable").sortable({
+        placeholder: 'fond',
+        update: function () {
+            var order = $("#sortable").sortable("serialize");
+            $("#info").load("ajax.php" + order);
+        }
+    })
+    $("#sortable").disableSelection();
+}); 
+
+$(function () {
+    $("#sortable-admin").sortable({
+        opacity: 0.8, // réduit l'opacité lors du déplacement
+        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+        placeholder: '.ui-state-highlight',
+        forcePlaceholderSize: true, // force le redimensionnement du placeholder
+        revert: true,
+        stop: function (event, ui) {
+            var order = $("this").sortable("serialize");
+
+            var aisleGeneOrder = ui.item.index() + 1;
+            var aisleGeneId = ui.item.attr('id');
+            $.ajax({
+                type: "post",
+                url: "index.php?action=orderAisleGene",
+                data: {
+                    aisleGeneOrder: aisleGeneOrder,
+                    aisleGeneId: aisleGeneId
+                },
+                success: function (data) {
+                    alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder);
+                }
+            });
+        }
+    })
+    $("#sortable-admin").disableSelection();
+}); 
+
+$(function () {
+    $("#sortable-admin").sortable({
+        opacity: 0.8, // réduit l'opacité lors du déplacement
+        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+        placeholder: '.ui-state-highlight',
+        forcePlaceholderSize: true, // force le redimensionnement du placeholder
+        revert: true,
+        stop: function (event, ui) {
+            var order = $("this").sortable("serialize");
+
+            var aisleGeneInfos = "aisleGeneId=" + ui.item.attr('id') + "&aisleGeneOrder=" + (ui.item.index() + 1);
+
+
+            ajaxPost("index.php?action=orderAisleGene", aisleGeneInfos,
+                function (reponse) {
+                    alert("La nouvelle position du rayon : " + ui.item.attr('id') + " est " + (ui.item.index() + 1) + " et : " + aisleGeneInfos);
+                }
+            )
+        }
+    });
+    $("#sortable-admin").disableSelection();
+}); */
+
+$(function () {
+    $("#sortable-admin").sortable({
+        opacity: 0.8, // réduit l'opacité lors du déplacement
+        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+        placeholder: '.ui-state-highlight',
+        forcePlaceholderSize: true, // force le redimensionnement du placeholder
+        revert: true,
+        stop: function (event, ui) {
+            var aisleNewPos = ui.item.index() + 1; // récupère la position d'arrivée du seul rayon sorti
+            // var aisleGeneId = ui.item.attr('id'); // récupèrerait son id
+            var order = $(this).sortable('serialize'); // récupère sous forme de tableau tous les id des rayons classés dans le nouvel ordre. Attention pour serialize les id doivent avoir un préfixe textuel => id="aisleId_" + indice php // sinon faire un 'toArray'
+
+            /* var ids = [];
+            for (var i = 0, c = order.length; i < c; i++) { // idem récupère les id classés dans le nouvel ordre
+                ids.push($('#sortable-admin li:eq(' + i + ')').attr('id'));
+            }  */
+
+            $.ajax({
+                dataType: "html",
+                type: 'POST',
+                url: 'public/ajax.php?action=orderAisleGene',
+                data: order,
+                success: function () {
+                    /*alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder + " et le nouvel ordre est : " + order);*/
+                    alert("Ce rayon a bien été déplacé en position n° " + aisleNewPos);
+                },
+                error: function () {
+                    alert('failed');
+                }
+            });
+        }
+    });
+    $("#sortable-admin").disableSelection();
+    /* $('#sortable-admin').sortable({
+        cancel: '#newAisleGene' // désactive la fonction sortable sur ce rayon mais désactive l'input sur les atres !
+    }); */
+});
+
+$(function () {
+    $("#sortable").sortable({
+        opacity: 0.8, // réduit l'opacité lors du déplacement
+        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+        placeholder: '.ui-state-highlight',
+        forcePlaceholderSize: true, // force le redimensionnement du placeholder
+        revert: true,
+        stop: function (event, ui) {
+            var aisleNewPos = ui.item.index() + 1; // récupère la position d'arrivée du seul rayon sorti
+            // var aisleGeneId = ui.item.attr('id'); // récupèrerait son id
+            var order = $(this).sortable('serialize'); // récupère sous forme de tableau tous les id des rayons classés dans le nouvel ordre. Attention pour serialize les id doivent avoir un préfixe textuel => id="aisleId_" + indice php // sinon faire un 'toArray'
+
+            /* var ids = [];
+            for (var i = 0, c = order.length; i < c; i++) { // idem récupère les id classés dans le nouvel ordre
+                ids.push($('#sortable-admin li:eq(' + i + ')').attr('id'));
+            }  */
+
+            $.ajax({
+                dataType: "html",
+                type: 'POST',
+                url: 'public/ajax.php?action=orderAisleGene',
+                data: order,
+                success: function () {
+                    /*alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder + " et le nouvel ordre est : " + order);*/
+                    alert("Ce rayon a bien été déplacé en position n° " + aisleNewPos);
+                },
+                error: function () {
+                    alert('failed');
+                }
+            });
+        }
+    });
+    $("#sortable").disableSelection();
+    /* $('#sortable-admin').sortable({
+        cancel: '#newAisleGene' // désactive la fonction sortable sur ce rayon mais désactive l'input sur les atres !
+    }); */
+});
+
+
+// => Passage de mousse a touch sur mobile (complément touch-punch)
+
+/iPad|iPhone/.test(navigator.userAgent) && (function ($) {
+
+    var proto = $.ui.mouse.prototype,
+        _mouseInit = proto._mouseInit;
+
+    $.extend(proto, {
+        _mouseInit: function () {
+            this.element
+                .bind("touchstart." + this.widgetName, $.proxy(this, "_touchStart"));
+
+            _mouseInit.apply(this, arguments);
+        },
+
+        _touchStart: function (event) {
+            if (event.originalEvent.targetTouches.length != 1) {
+                return false;
+            }
+
+            this.element
+                .bind("touchmove." + this.widgetName, $.proxy(this, "_touchMove"))
+                .bind("touchend." + this.widgetName, $.proxy(this, "_touchEnd"));
+
+            this._modifyEvent(event);
+
+            this._mouseDown(event);
+
+            return false;
+        },
+
+        _touchMove: function (event) {
+            this._modifyEvent(event);
+            this._mouseMove(event);
+        },
+
+        _touchEnd: function (event) {
+            this.element
+                .unbind("touchmove." + this.widgetName)
+                .unbind("touchend." + this.widgetName);
+            this._mouseUp(event);
+        },
+
+        _modifyEvent: function (event) {
+            event.which = 1;
+            var target = event.originalEvent.targetTouches[0];
+            event.pageX = target.clientX;
+            event.pageY = target.clientY;
+        }
+
+    });
+
+})(jQuery);
+
+//**************************************************************************************
+// => listView/Rayons jQuery - Selectmenu        
+//**************************************************************************************
+
+$(function () {
+    $.widget("custom.iconselectmenu", $.ui.selectmenu, {
+        _renderItem: function (ul, item) {
+            var li = $("<li>"),
+                wrapper = $("<div>", {
+                    text: item.label
+                });
+
+            if (item.disabled) {
+                li.addClass("ui-state-disabled");
+            }
+
+            $("<span>", {
+                    style: item.element.attr("data-style"),
+                    "class": "ui-icon " + item.element.attr("data-class")
+                })
+                .appendTo(wrapper);
+
+            return li.append(wrapper).appendTo(ul);
+        }
+    });
+
+    $("#rayon")
+        .iconselectmenu()
+        .iconselectmenu("menuWidget")
+        .addClass("ui-menu-icons customicons");
+});
+
+//**************************************************************************************
+// => nav dropdown automatique au hover         
+//**************************************************************************************
+
+$('ul.nav li.dropdown').hover(function () {
+    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+}, function () {
+    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+});
+
+//**************************************************************************************
+// => listView nav search autocomplete         
+//**************************************************************************************
+
+var liste = [
+    "Abricot Perso",
+    "Ananas Perso",
+    "Banane Perso",
+    "Cacahuètes Perso",
 ];
 
- $('#recherche').autocomplete({
-     source: liste
- });
+$('#recherche').autocomplete({
+    source: liste
+});
 
+$(".tohide").hide();
+$(".tohide2").show();
+$('#recherche').autocomplete({
+    source: liste,
+    select: function (event, ui) {
+        var selectedItem = ui.item;
+        if (selectedItem.value !== '') {
+            $(".tohide").show();
+            $(".tohide2").hide();
+        }
+    }
+});
 
+/*/**************************************************************************************
+// => shopView - Ajouter un article dans un rayon      
+//**************************************************************************************
 
+$(function () {
+    var $list, $newItemGeneForm;
+    $list = $('#aisle1');
+    $newItemGeneForm = $('#newItemGeneForm');
+    $newItemGeneForm.on("submit", function (e) {
+        e.preventDefault();
+        $itemGeneField = $('#itemGeneField');
+        var text = $itemGeneField.val();
+        $list.append('<li class="dropdown-item d-flex flex-row justify-content-center align-items-center"><span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span><input type="text" class="item-gene col-9"  value="' + text + '"/></li>');
+        $itemGeneField.val('');
+    });
+    $list.on('click', 'span', function () {
+        var $trash = $(this);
+        $trash.parent().remove();
+    })
+});
+*/
 
- //**************************************************************************************
- // => loginView Log In - Interactions pour les input formulaires  
- //**************************************************************************************
+//**************************************************************************************
+// => listView : Focus sur article à modifier au click sur icone "pencil"         
+//**************************************************************************************
 
- var pseudoLogin = document.getElementById('pseudo_login');
- var passwordLogin = document.getElementById('password_login');
+if (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=shopList") > -1) {
 
- pseudoLogin.addEventListener("input", function (event) {
-     pseudoLogin.className = "input_value"; // on change l'apparence du champ
- }, false);
- passwordLogin.addEventListener("input", function (event) {
-     passwordLogin.className = "input_value"; // on change l'apparence du champ
- }, false);
+    var list = document.getElementById("liste");
+    var items = document.querySelectorAll(".item-check");
 
- // TODO: LE JS SUIVANT SUR LOGINVIEW NE MARCHE PAS ET BLOQUE LA SUITE !? A VOIR AUSSI...
+    if (list) {
+        var icons = list.querySelectorAll(".item-modif");
+        for (var i = 0, c = icons.length; i < c; i++) {
+            items[i].onclick = function () {
+                var itemName = this.innerText;
+                var input = document.createElement('input');
+                input.value = itemName;
+                input.type = "text";
+                input.className = "right";
+                this.appendChild(input);
+                input.focus();
+                input.onblur = function () {
+                    this.parentNode.innerText = this.value;
+                }
+            }
+        }
+    }
 
- //**************************************************************************************
- // => loginView Create Account - Interactions pour les input formulaires  
- //**************************************************************************************
+}
+//**************************************************************************************
+// => Mises en formes des input formulaires  
+//**************************************************************************************
 
- var name = document.getElementById('name_create');
- var firstName = document.getElementById('first_name_create');
- var pseudo = document.getElementById('pseudo_create');
- var email = document.getElementById('email_create');
- var emailConfirm = document.getElementById('email_create_confirm');
- var password = document.getElementById('password_create');
- var passwordConfirm = document.getElementById('password_create_confirm');
+if (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=home") > -1) {
 
- name.setCustomValidity("");
- firstName.setCustomValidity("");
- pseudo.setCustomValidity("");
- email.setCustomValidity("");
- emailConfirm.setCustomValidity("");
- password.setCustomValidity("");
- passwordConfirm.setCustomValidity("");
+    var pseudoLogin = document.getElementById('pseudo_login');
+    pseudoLogin.addEventListener("focus", function () {
+        if (pseudoLogin.value == "") {
+            pseudoLogin.className = "input_focus";
+        } else {
+            pseudoLogin.className = "input_value";
+        }
+    }, false);
+    pseudoLogin.addEventListener("blur", function () {
+        if (pseudoLogin.value == "") {
+            pseudoLogin.className = "input_novalue";
+        } else {
+            pseudoLogin.className = "input_value";
+        }
+    }, false);
 
- name.addEventListener("input", function (event) {
-     name.className = "input_value"; // on change l'apparence du champ
- }, false);
- firstName.addEventListener("input", function (event) {
-     firstName.className = "input_value"; // on change l'apparence du champ
- }, false);
- pseudo.addEventListener("input", function (event) {
-     pseudo.className = "input_value"; // on change l'apparence du champ
- }, false);
- email.addEventListener("input", function (event) {
-     email.className = "input_value"; // on change l'apparence du champ
-     emailConfirm.setAttribute("required", ""); // on rend le 2nd champ obligatoire
-     if (!email.value) { // si le champ est vide.
-         emailConfirm.removeAttribute("required"); // on désactive le 2nd champ obligatoire
-     }
- }, false);
- emailConfirm.addEventListener("input", function (event) {
-     emailConfirm.className = "input_value"; // on change l'apparence du champ
- }, false);
- password.addEventListener("input", function (event) {
-     password.className = "input_value"; // on change l'apparence du champ
-     passwordConfirm.setAttribute("required", ""); // on rend le 2nd champ obligatoire
-     if (!password.value) { // si le champ est vide.
-         passwordConfirm.removeAttribute("required"); // on désactive le 2nd champ obligatoire
-     }
- }, false);
- passwordConfirm.addEventListener("input", function (event) {
-     passwordConfirm.className = "input_value"; // on change l'apparence du champ
- }, false);
+    var passwordLogin = document.getElementById('password_login');
+    passwordLogin.addEventListener("focus", function () {
+        passwordLogin.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    passwordLogin.addEventListener("blur", function () {
+        if (passwordLogin.value == "") {
+            passwordLogin.className = "input_novalue";
+        } else {
+            passwordLogin.className = "input_value";
+        }
+    }, false);
 
- // FIN DES TODO */
+    var nameCreate = document.getElementById('name_create');
+    nameCreate.addEventListener("focus", function () {
+        nameCreate.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    nameCreate.addEventListener("blur", function () {
+        if (nameCreate.value == "") {
+            nameCreate.className = "input_novalue";
+        } else {
+            nameCreate.className = "input_value";
+        }
+    }, false);
 
- //**************************************************************************************
- // => profilView - Interactions pour les input formulaires        
- //**************************************************************************************
+    var firstNameCreate = document.getElementById('first_name_create');
+    firstNameCreate.addEventListener("focus", function () {
+        firstNameCreate.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    firstNameCreate.addEventListener("blur", function () {
+        if (firstNameCreate.value == "") {
+            firstNameCreate.className = "input_novalue";
+        } else {
+            firstNameCreate.className = "input_value";
+        }
+    }, false);
 
- var form = document.getElementById('form_modif');
- var champ = document.getElementById('champ');
- var missChamp = document.getElementById('modif_champ');
- var missChampConfirm = document.getElementById('modif_champ_confirm');
- var errorChamp = document.getElementById('error1');
- var errorChampConfirm = document.getElementById('error2');
+    var pseudoCreate = document.getElementById('pseudo_create');
+    pseudoCreate.addEventListener("focus", function () {
+        pseudoCreate.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    pseudoCreate.addEventListener("blur", function () {
+        if (pseudoCreate.value == "") {
+            pseudoCreate.className = "input_novalue";
+        } else {
+            pseudoCreate.className = "input_value";
+        }
+    }, false);
 
- if (missChamp.validity.valueMissing) {
-     if (champ.value == "1") {
-         missChamp.setCustomValidity("Veuillez entrer votre nouvelle adresse mail.");
-     } else {
-         missChamp.setCustomValidity("Veuillez entrer votre nouveau mot de passe.");
-     }
- } else {
-     missChamp.setCustomValidity("");
-     if (missChampConfirm.validity.valueMissing) {
-         if (champ.value == "1") {
-             missChampConfirm.setCustomValidity("Veuillez confirmer cette nouvelle adresse mail.");
-         } else {
-             missChampConfirm.setCustomValidity("Veuillez confirmer ce nouveau mot de passe.");
-         }
-     } else {
-         missChampConfirm.setCustomValidity("");
-     }
- }
+    var emailCreate = document.getElementById('email_create');
+    emailCreate.addEventListener("focus", function () {
+        emailCreate.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    emailCreate.addEventListener("blur", function () {
+        if (emailCreate.value == "") {
+            emailCreate.className = "input_novalue";
+        } else {
+            emailCreate.className = "input_value";
+        }
+    }, false);
 
- champ.addEventListener("input", function (event) {
-     champ.className = "input_value"; // on change l'apparence du champ
- }, false);
+    var email2Create = document.getElementById('email_create_confirm');
+    email2Create.addEventListener("focus", function () {
+        email2Create.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    email2Create.addEventListener("blur", function () {
+        if (email2Create.value == "") {
+            email2Create.className = "input_novalue";
+        } else {
+            email2Create.className = "input_value";
+        }
+    }, false);
 
- missChamp.addEventListener("input", function (event) {
-     // Chaque fois que l'utilisateur saisit quelque chose dans le 1er champ
-     // S'il y a un message d'erreur affiché et que le champ est valide, on retire l'erreur
-     missChamp.className = "input_value"; // on change l'apparence du champ
-     errorChamp.innerHTML = ""; // On réinitialise le contenu
-     errorChamp.className = "error"; // On réinitialise l'état visuel du message
-     errorChampConfirm.innerHTML = ""; // On réinitialise le contenu
-     errorChampConfirm.className = "error"; // On réinitialise l'état visuel du message
-     missChampConfirm.setAttribute("required", ""); // on rend le 2nd champ obligatoire
-     if (!missChamp.value) { // si le champ est vide.
-         missChampConfirm.removeAttribute("required"); // on désactive le 2nd champ obligatoire
-     }
- }, false);
+    var passwordCreate = document.getElementById('password_create');
+    passwordCreate.addEventListener("focus", function () {
+        passwordCreate.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    passwordCreate.addEventListener("blur", function () {
+        if (passwordCreate.value == "") {
+            passwordCreate.className = "input_novalue";
+        } else {
+            passwordCreate.className = "input_value";
+        }
+    }, false);
 
- missChampConfirm.addEventListener("input", function (event) {
-     // Chaque fois que l'utilisateur saisit quelque chose dans le 2nd champ
-     missChampConfirm.className = "input_value"; // on change l'apparence du champ
-     errorChampConfirm.innerHTML = ""; // On réinitialise le contenu
-     errorChampConfirm.className = "error"; // On réinitialise l'état visuel du message
- }, false);
+    var password2Create = document.getElementById('password_create_confirm');
+    password2Create.addEventListener("focus", function () {
+        password2Create.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    password2Create.addEventListener("blur", function () {
+        if (password2Create.value == "") {
+            password2Create.className = "input_novalue";
+        } else {
+            password2Create.className = "input_value";
+        }
+    }, false);
 
- form.addEventListener("submit", function (event) {
-     if (errorChamp.innerHTML !== "") {
-         errorChamp.className = "error active";
-     }
-     if (errorChampConfirm.innerHTML !== "") {
-         errorChampConfirm.className = "error active";
-     }
- }, false);
+    var searchBar = document.getElementById('recherche');
+    searchBar.addEventListener("focus", function () {
+        searchBar.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    searchBar.addEventListener("blur", function () {
+        if (searchBar.value == "") {
+            searchBar.className = "input_novalue";
+        } else {
+            searchBar.className = "input_value";
+        }
+    }, false);
+
+    var champ = document.getElementById('champ');
+    champ.addEventListener("focus", function () {
+        champ.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    champ.addEventListener("blur", function () {
+        if (champ.value == "") {
+            champ.className = "input_novalue";
+        } else {
+            champ.className = "input_value";
+        }
+    }, false);
+
+    var missChamp = document.getElementById('modif_champ');
+    missChamp.addEventListener("focus", function () {
+        missChamp.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    missChamp.addEventListener("blur", function () {
+        if (missChamp.value == "") {
+            missChamp.className = "input_novalue";
+        } else {
+            missChamp.className = "input_value";
+        }
+    }, false);
+
+    var missChampConfirm = document.getElementById('modif_champ_confirm');
+    missChamp.addEventListener("focus", function () {
+        missChamp.className = "input_focus"; // on change l'apparence du champ
+    }, false);
+    missChamp.addEventListener("blur", function () {
+        if (missChamp.value == "") {
+            missChamp.className = "input_novalue";
+        } else {
+            missChamp.className = "input_value";
+        }
+    }, false);
+
+}
+
+//**************************************************************************************
+// => profilView - Interactions pour les input formulaires        
+//**************************************************************************************
+
+if ((window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=memberDetail") > -1) || (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=memberModif") > -1) || (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=memberDelete") > -1)) {
+   
+    var form = document.getElementById('form_modif');
+    var errorChamp = document.getElementById('error1');
+    var errorChampConfirm = document.getElementById('error2');
+
+    if (missChamp.validity.valueMissing) {
+        if (champ.value == "1") {
+            missChamp.setCustomValidity("Veuillez entrer votre nouvelle adresse mail.");
+        } else {
+            missChamp.setCustomValidity("Veuillez entrer votre nouveau mot de passe.");
+        }
+    } else {
+        missChamp.setCustomValidity("");
+        if (missChampConfirm.validity.valueMissing) {
+            if (champ.value == "1") {
+                missChampConfirm.setCustomValidity("Veuillez confirmer cette nouvelle adresse mail.");
+            } else {
+                missChampConfirm.setCustomValidity("Veuillez confirmer ce nouveau mot de passe.");
+            }
+        } else {
+            missChampConfirm.setCustomValidity("");
+        }
+    }
+
+    missChamp.addEventListener("input", function () {
+        // Chaque fois que l'utilisateur saisit quelque chose dans le 1er champ
+        // S'il y a un message d'erreur affiché et que le champ est valide, on retire l'erreur
+        missChamp.addClassclassName = "input_value"; // on change l'apparence du champ
+        errorChamp.innerHTML = ""; // On réinitialise le contenu
+        errorChamp.className = "error"; // On réinitialise l'état visuel du message
+        errorChampConfirm.innerHTML = ""; // On réinitialise le contenu
+        errorChampConfirm.className = "error"; // On réinitialise l'état visuel du message
+        missChampConfirm.setAttribute("required", ""); // on rend le 2nd champ obligatoire
+        if (!missChamp.value) { // si le champ est vide.
+            missChampConfirm.removeAttribute("required"); // on désactive le 2nd champ obligatoire
+        }
+    }, false);
+
+    missChampConfirm.addEventListener("input", function () {
+        // Chaque fois que l'utilisateur saisit quelque chose dans le 2nd champ
+        missChampConfirm.className = "input_value"; // on change l'apparence du champ
+        errorChampConfirm.innerHTML = ""; // On réinitialise le contenu
+        errorChampConfirm.className = "error"; // On réinitialise l'état visuel du message
+    }, false);
+
+    form.addEventListener("submit", function () {
+        if (errorChamp.innerHTML !== "") {
+            errorChamp.className = "error active";
+        }
+        if (errorChampConfirm.innerHTML !== "") {
+            errorChampConfirm.className = "error active";
+        }
+    }, false);
+
+}
+
+//**************************************************************************************
+// => exitView - Interactions pour la déconnexion         
+//**************************************************************************************
+
+if ((window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=home") === -1) || (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=connexion") === -1)) {
+    function deconnect_confirm() {
+        if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
+            document.location.href = "index.php?action=deconnexion";
+            return true;
+        } else {
+            alert("Je me disais aussi...");
+            return false;
+        }
+    }
+
+    document.getElementById("deconnexion").addEventListener('click', function (e) {
+        e.preventDefault();
+        deconnect_confirm();
+    });
+
+    document.getElementById("deconnexion_xs").addEventListener('click', function (e) {
+        e.preventDefault();
+        deconnect_confirm();
+    });
+} 

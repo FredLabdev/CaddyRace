@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no, maximum-scale=1">
     <meta name="description" content="CaddyRace, appli pour faire vos courses, une course" />
-    <meta name="author" content="Frédéric Labourel">
+    <meta name="author" content="LABDEV - Frédéric Labourel">
 
     <!-- Favicone du site dans la barre du navigateur -->
     <link rel="icon" href="public/picture/ico/favicon.ico" type="image/x-icon" />
@@ -19,8 +19,8 @@
     <!-- Facebook Open Graph data -->
     <meta property="og:title" content="Caddy race" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.facebook.com/caddyrace" />
-    <meta property="og:image" content="public/picture/ico/logo.png" />
+    <meta property="og:url" content="http://fredlabourel.fr/caddyrace" />
+    <meta name="image" property="og:image" content="public/picture/brand/caddyrace3.jpg" />
     <meta property="og:description" content="Caddy Race, vos courses, une course" />
 
     <!-- Twitter Card data -->
@@ -31,7 +31,7 @@
     <meta name="twitter:creator" content="@author_handle">
 
     <!-- Twitter Summary card images must be at least 200x200px -->
-    <meta name="twitter:image" content="public/picture/ico/logo.png">
+    <meta name="twitter:image" content="public/picture/brand/caddyrace.jpg">
 
     <!-- Icones du site en raccourci écran Apple -->
     <link rel="apple-touch-icon-precomposed" href="public/picture/ico/apple-touch-icon-57-precomposed.png" />
@@ -44,11 +44,12 @@
     <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron|Open+Sans+Condensed:300" rel="stylesheet">
 
     <!-- Bibliothèque CSS FontAwesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Bibliothèque CSS Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bibliothèque CSS jQuery UI -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <!-- Bibliothèque CSS perso -->
     <link href="public/style.css" rel="stylesheet" />
 </head>
@@ -74,15 +75,10 @@
     <?php ob_start(); ?>
 
     <?php
-        if($_SESSION['pseudo']) {
+        if (isset ($_SESSION['pseudo'])) {
         ?>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?action=list"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />
-            <span class="alert posts-view black">
-                <span class="alert2">
-                    22
-                </span>
-            </span>
+        <a class="nav-link bg-orange" href="index.php?action=shopList"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Liste
         </a>
     </li>
     <li class="nav-item">
@@ -100,7 +96,7 @@
     if (($_SESSION['group_id'] == 1 || $_SESSION['group_id'] == 2) && $signalComments) {
     ?>
 
-        <div class="alert posts-view black">
+        <div class="alert alert-admin black">
             <a href="#popup4">
                 <i class="fas fa-exclamation-circle fa-2x red"></i>
             </a>
@@ -154,7 +150,7 @@
     }
     ?>
         <div class="dropdown-menu">
-            <a class="dropdown-item nav-link" href="index.php?action=items"><i class="fas fa-barcode fa-2x"></i> Articles</a>
+            <a class="dropdown-item nav-link" href="index.php?action=shopAdmin"><i class="fas fa-barcode fa-2x"></i> Boutique</a>
             <a class="dropdown-item nav-link" href="index.php?action=membersDetail"><i class="fas fa-users-cog fa-2x"></i> Membres</a>
         </div>
     </li>
@@ -170,20 +166,24 @@
     <!-- MENU ECRANS -->
 
     <nav class="navbar nav-ecran navbar-light bg-dark fixed-top white">
-        <div class="container">
-            <span class="logo d-flex align-items-end">
-                <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
-                <span>addy</span>
-                <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
-                <span>ace</span>
-            </span>
-            <ul class="nav nav-pills nav-stacked align-items-end">
-                <?= $ul ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="deconnexion" title="Deconnexion"><i class="fas fa-power-off fa-2x red"></i> Deconnexion</a>
-                </li>
-            </ul>
-        </div>
+        <span class="logo d-flex align-items-end">
+            <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
+            <span>addy</span>
+            <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
+            <span>ace</span>
+        </span>
+        <ul class="nav nav-pills nav-stacked align-items-center">
+            <?= $ul ?>
+            <?php
+                if (isset ($_SESSION['pseudo'])) {
+                ?>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="deconnexion" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
+            </li>
+            <?php
+                } 
+                ?>
+        </ul>
     </nav>
 
     <!-- MENU SMARTPHONES -->
@@ -192,26 +192,40 @@
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <div class="container-fluid menu-xs">
-                    <ul class="nav nav-pills nav-stacked justify-content-end">
+                    <ul class="nav flex-column nav-pills nav-stacked justify-content-end">
                         <?= $ul ?>
-                        <li>
-                            <a class="nav-link" href="#" id="deconnexion_xs"><i class="fas fa-power-off fa-2x red"></i> Deconnexion</a>
+                        <?php
+                        if(isset($_SESSION['pseudo'])) {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="deconnexion_xs" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
                         </li>
+                        <?php
+                        } else {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link bg-orange" href="index.php"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Retour démo
+                            </a>
+                        </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-light bg-dark">
+        <nav class="navbar">
             <button class="navbar-toggler container-fluid justify-content-around align-items-center bg-dark" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="navbar-brand">
                     <span class="logo white">
-                        <img src="public/picture/brand/caddy-icon-C-38x38.png" alt="caddy picture" />
+                        <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
                         <span>addy</span>
-                        <img src="public/picture/brand/caddy-icon-R-22x17.png" alt="caddy picture" />
+                        <img src="public/picture/brand/caddy-icon-R-15x12-white.png" alt="caddy picture" />
                         <span>ace</span>
                     </span>
                 </div>
-                <span class="menu white">Menu</span>
+                <span class="menu orange">Menu</span>
+                <span class="caddie3">128</span>
             </button>
         </nav>
     </div>
@@ -226,7 +240,7 @@
         <div class="sm-row xs-column justify-content-around align-items-center bg-orange">
             <a href="#popup1"><img src="public/picture/mini/App_Store_Badge.png" alt="apple_store_picture" width="175px" /></a>
             <div id="popup1" class="overlay">
-                <div class="popup">
+                <div class="popup popup-sm">
                     <h3>Pas encore :D</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content orange">
@@ -236,7 +250,7 @@
             </div>
             <a href="#popup2"><img src="public/picture/mini/Google_Play_Badge.png" alt="google_play_picture" width="200px" /></a>
             <div id="popup2" class="overlay">
-                <div class="popup">
+                <div class="popup popup-sm">
                     <h3>Là non plus :D</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content orange">
@@ -245,29 +259,29 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-around align-items-center bg-orange">
-            <h2 class="col-12">Restez informé</h2>
+        <div class="justify-content-around align-items-center bg-orange">
+            <h2>Restez informé</h2>
             <div>
-                <button class="btn btn-info social-link"><a href="https://www.facebook.com/frederic.labourel.3" target=_blank><span class="glyphicon glyphicon-facebook"><i class="fab fa-facebook-f fa-lg white"></i></span></a></button>
-                <button class="btn btn-info social-link"><a href="mailto: fred.labourel@wanadoo.fr"><span class="glyphicon glyphicon-calendar"><i class="fas fa-at fa-lg white"></i></span></a></button>
-                <button class="btn btn-info social-link"><a href="https://www.linkedin.com/in/frederic-labourel-84b059b0/" target=_blank><span class="glyphicon glyphicon-shopping-cart"><i class="fab fa-linkedin-in white"></i></span></a></button>
-                <button class="btn btn-info social-link"><a href="https://github.com/freddieLab" target=_blank><span class="glyphicon glyphicon-bullhorn fa-lg"><i class="fab fa-github white"></i></span></a></button>
+                <button class="btn btn-info social-link"><a href="https://www.facebook.com/labdev.web/" target=_blank><span class="glyphicon glyphicon-facebook"><i class="fab fa-facebook-f fa-lg white"></i></span></a></button>
+                <button class="btn btn-info social-link"><a href="mailto: fred@labdev.fr"><span class="glyphicon glyphicon-calendar"><i class="fas fa-at fa-lg white"></i></span></a></button>
+                <button class="btn btn-info social-link"><a href="https://www.linkedin.com/in/frederic-labourel/" target=_blank><span class="glyphicon glyphicon-shopping-cart"><i class="fab fa-linkedin-in white"></i></span></a></button>
+                <button class="btn btn-info social-link"><a href="https://github.com/FredLabdev" target=_blank><span class="glyphicon glyphicon-bullhorn fa-lg"><i class="fab fa-github white"></i></span></a></button>
             </div>
         </div>
         <div class="sm-row xs-column justify-content-center align-items-center white">
-            <span><i class="far fa-copyright"></i> 2019 FredLab</span><span>Brainmade with <strong class="rwd-line">HTML CSS PHP SQL GIT</strong></span><span><a href="index.php?action=contact">contact</a></span>
+            <span><i class="far fa-copyright"></i> 2019 Labdev</span><span>Brainmade with <strong class="rwd-line">HTML CSS JS JQUERY AJAX API PHP SQL</strong></span><span><a href="index.php?action=contact">contact</a></span>
         </div>
         <div class="offset-10 fixed-bottom popup3">
-            <a href="#popup3"><i class="far fa-comment-alt fa-7x"></i><i id="light" class="fas fa-lightbulb fa-3x"></i></a>
+            <a href="#popup3"><i class="fas fa-comment-dots fa-7x"></i></a>
             <div id="popup3" class="overlay">
-                <div class="popup">
+                <div class="popup popup-lg">
                     <h3>Votre avis <i class="far fa-lightbulb fa-2x"></i><br>nous éclaire !</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content black">
-                        Une question, une idéee, n'hésitez pas à tout poser ici sur le tapis !
+                        Une question, une idée, n'hésitez pas à tout poser ici sur le tapis !
                     </div>
                     <div class="row justify-content-center align-items-center">
-                        <?php if($message_error) { ?>
+                        <?php if(isset($message_error)) { ?>
                         <span class="alert alert-danger col-4 offset-4">
                             <?= $message_error; ?>
                         </span>
@@ -277,16 +291,22 @@
                     <form class="contact-form" method="post" action="index.php?action=contactForm">
                         <div class="form-row">
                             <div class="col-12">
+                                <?php
+                                if(!isset(($_SESSION['pseudo']))) {
+                                ?>
                                 <div class="form-group text-left">
-                                    <label class="black">Votre nom :</label>
-                                    <input class="bg-dark" type="text" name="name" value="<?= $_SESSION['name'] ?>" />
+                                    <label>Votre nom :</label>
+                                    <input class="col-lg-12" type="text" name="name" value="<?php if(isset($_SESSION['name'])) { echo $_SESSION['name']; }?>" />
                                 </div>
                                 <div class="form-group text-left">
-                                    <label class="black">Votre prénom :</label>
-                                    <input class="bg-dark" type="text" name="first_name" value="<?= $_SESSION['first_name'] ?>" />
+                                    <label>Votre prénom :</label>
+                                    <input class="col-lg-12" type="text" name="first_name" value="<?php if(isset($_SESSION['first-name'])) { echo $_SESSION['first_name']; } ?>" />
                                 </div>
+                                <?php
+                                }
+                                ?>
                                 <div class="form-group text-left">
-                                    <label class="black text-left">Votre message : </label>
+                                    <label class="text-left">Votre message : </label>
                                     <textarea class="col-lg-12" rows="8"></textarea>
                                 </div>
                                 <div class="form-group">
@@ -302,7 +322,7 @@
 
     <?php $footer = ob_get_clean(); ?>
 
-    <!-- CONTAINER BOOTSRTAP -->
+    <!-- CONTAINER BOOTSTRAP -->
 
     <main role="main" class="container-fluid">
 
@@ -315,21 +335,25 @@
             if ($template == 'frontend') {
                 echo $frontend;
             }
-            echo $all2;
+            if (isset ($all2)) { echo $all2; };
             if ($template == 'backend') {
                 echo $backend;
-            }    
+            }  
+        
         ?>
 
     </main>
 
     <?= $footer ?>
 
-    <!-- (1) Bibliothèque JavaScript jQuery -->
+    <!-- (1) Bibliothèque jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- (2) Bibliothèque JavaScript jQuery UI -->
+    <!-- (2) Bibliothèque jQuery UI -->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- (2b) Bibliothèque jQuery Touch screen  -->
+    <script src="jquery.ui.touch-punch.min.js"></script>
 
     <!-- (3) Bibliothèque JavaScript Bootstrap-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -340,8 +364,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="public/caddyrace.js"></script>
     <script src="public/ajax.js"></script>
+    <script src="public/caddyrace.js"></script>
 
 </body>
 

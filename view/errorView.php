@@ -1,11 +1,14 @@
 <?php 
-    session_start();
-    $title = 'Forteroche/Erreurs';
-    if ($_SESSION['group_id'] == 1) {
+   /* session_start(); */
+    $title = 'CaddyRace/Erreurs';
+/*
+  if ($_SESSION['group_id'] == 1) {
         $template = 'backend';
     } else {
         $template = 'frontend';
     }
+*/
+    $template = 'frontend';
     ob_start();
 ?>
 

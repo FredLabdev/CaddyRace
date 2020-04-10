@@ -1,100 +1,108 @@
 <?php
 
-require_once('model/CommentManager.php');
+require_once('model/AislesManager.php');
+require_once('model/ItemsManager.php');
+require_once('model/LoginManager.php');
 require_once('model/MemberManager.php');
-require_once('model/PostManager.php');
 
 try {
     
     //**************************************************************************************
-    // Controller backend PostManager (+backend CommentManager) (+Controller frontend PostManager)          
+    //            Controller backend ItemsManager         
     //**************************************************************************************
 
-    function postExtract($text) {
-        $max=200;
-        if (strlen($text) > $max) { // vérifie que texte plus long que max extrait
-            // récupère 1er espace après $max pour éviter de couper un mot en plein milieu
-            $space = strpos($text,' ',$max);
-            //récupère l'extrait jusqu'à l'espace préalablement cherché auquel on ajoute "..."
-            $postExtract = substr($text,0,$space).'...';
-        } else {
-            $postExtract = $text;
+    function shopAdmin($message_success, $message_error) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $aislesGeneCount = $AislesManager->getAislesGeneCount();
+        $aislesGeneTab = $AislesManager->getAislesGeneTab();
+        $itemsGeneCountInAisleTab = array();
+        $itemsGeneInAisleTab  = array();
+        $aislesGeneIconsTab  = array();
+        $aislesGeneIconsTab2  = array();
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        foreach($aislesGeneTab as $aisleGene) {
+            $itemsGeneCountInAisle = $ItemsManager->getItemsGeneCountInAisle($aisleGene['id']);  
+            $itemsGeneCountInAisleTab[] = $itemsGeneCountInAisle;
+            $itemsGeneInAisle = $ItemsManager->getItemsGeneInAisle($aisleGene['id']);    
+            $itemsGeneInAisleTab[] = $itemsGeneInAisle;
+            $aislesGeneIcons = $AislesManager->getAislesGeneIcons($aisleGene['id']);    
+            $aislesGeneIconsTab[] = $aislesGeneIcons;
+            $aislesGeneIcons = $AislesManager->getAislesGeneIcons($aisleGene['id']);    
+            $aislesGeneIconsTab2[] = $aislesGeneIcons;
         }
-        return $postExtract;
-    }
-
-    function newPost($postTitle, $postContentHTML, $postContentText, $postBefore) {
-        if ($postTitle == "" || $postContentHTML == "") {
-            $message_error =  'Erreur : Veuillez renseigner tous les champs';
-            listPosts(1, $message_success, $message_error);
-        } else {
-            $postExtract = postExtract($postContentText);
-            $postManager = new \FredLab\tp5_caddy_race\Model\PostManager();
-            if(!empty($postBefore)) {
-                $postManager->addPost($postTitle, $postContentHTML, $postExtract, $postBefore); 
-            } else {
-                $postManager->addPost($postTitle, $postContentHTML, $postExtract, "");     
-            }
-            $message_success =  'Votre billet "' . $postTitle . '" a bien été publié !';
-            listPosts(1, $message_success, "");
-        }
+        $message_success;
+        $message_error;
+        require('view/backend/shopView.php');
     }
     
-    function modifPost($postId, $newPostTitle, $newPostContentHTML, $newPostContentText) {
-        $postManager = new \FredLab\tp5_caddy_race\Model\PostManager();
-        $postManager->changePostTitle($postId, $newPostTitle);
-        $postExtract = postExtract($newPostContentText);
-        $postManager->changePostContent($postId, $newPostContentHTML, $postExtract);
-        $message_success =  'L\'épisode a bien été modifié ci-dessous !';
-        post($postId, $message_success, "");        
-    }
-
-    function postErase($postId) {
-        $postManager = new \FredLab\tp5_caddy_race\Model\PostManager();
-        $postManager->deletePost($postId);     
-        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $commentManager->deleteComments($postId);     
-        $message_success =  'Ce billet et ses commentaires ont bien été supprimés !';
-        listPosts(1, $message_success, "");
-    }
-
-    //**************************************************************************************
-    //           Controller CommentManager (+Controller frontend PostManager)                  
-    //**************************************************************************************
-
-    function addCommentRequest($postId, $member, $newComment) {
-        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $addCommentRight = $commentManager->getMemberNoComment($member);
+    function createItemGene($aisleGeneId, $itemGeneName) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->pushItemGene($aisleGeneId, $itemGeneName);     
+        $message_success =  'Votre article a bien été ajouté dans ce rayon.';
         $message_error = "";
-        if($addCommentRight['block_comment'] == 1) {
-            $message_error =  'Désolé vous n\'êtes pas autorisé à poster des comments';
-        } else if($newComment == "") {
-            $message_error =  'Désolé votre message est vide';
-        } else {
-            $commentManager->addComment($postId, $member, $newComment);     
-            $message_success =  'Votre commentaire a bien été publié ci-dessous';
-        }
-        post($postId, $message_success, $message_error);
+        shopAdmin($message_success, $message_error);
     }
     
-    function modifCommentRequest($postId, $member, $commentId, $modifComment) {
-        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $addCommentRight = $commentManager->getMemberNoComment($member);
+    function deleteItemGene($itemGeneId) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->pullItemGene($itemGeneId); 
+        $message_success =  'Cet article a bien été supprimé.';
         $message_error = "";
-        if($addCommentRight['block_comment'] == 1) {
-            $message_error =  'Désolé vous n\'êtes pas autorisé à poster des comments';
-        } else if ($modifComment == "") {
-            $message_error =  'Désolé votre message est vide';
-        } else {
-            $commentManager->replaceComment($commentId, $modifComment);     
-            $message_success =  'Votre commentaire a bien été modifié et publié ci-dessous';
-        }
-        post($postId, $message_success, $message_error);
+        shopAdmin($message_success, $message_error);
     }
+    
+    function modifItemGene($itemGeneId, $itemGeneName) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->changeItemGeneName($itemGeneId, $itemGeneName);     
+        $message_success =  'Votre article a bien été modifié.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
+    }
+    
+    //**************************************************************************************
+    //            Controller backend AislesManager         
+    //**************************************************************************************
+    
+    /* (Traité en AJAX) 
+    function orderAisleGene($aisleGeneId, $aisleGeneOrder) { 
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->changeAislesGeneOrder($aisleGeneId, $aisleGeneOrder);     
+        $message_success =  'Votre rayon a bien été déplacé.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
+    } */
+
+    function createAisleGene($aisleGeneTitle, $aisleGeneOrder) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->pushAisleGene($aisleGeneTitle, $aisleGeneOrder);     
+        $message_success =  'Votre rayon a bien été ajouté à la suite. Vous pouvez désormais le déplacer.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
+    }
+    
+    function deleteAisleGene($aisleGeneId) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->pullAisleGene($aisleGeneId); 
+        $message_success =  'Ce rayon a bien été supprimé.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
+    }
+        
+    function modifAisleGene($aisleGeneId, $aisleGeneTitle) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->changeAisleGeneTitle($aisleGeneId, $aisleGeneTitle);   
+        $message_success =  'Votre article a bien été modifié.';
+        $message_error = "";
+        shopAdmin($message_success, $message_error);
+    }
+    
+    //**************************************************************************************
+    //         Controller backend MemberManager          
+    //**************************************************************************************
 
     function commentSignal($postId, $commentId, $signalId, $member) {
-        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $commentManager->signalComment($commentId, $signalId, $member);     
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->signalComment($commentId, $signalId, $member);     
         if ($signalId == 1) {
             $message_error =  'Ce commentaire a bien été signalé à l\'administrateur!';
         } else {
@@ -102,22 +110,6 @@ try {
         }
         post($postId, $message_success, $message_error);
     }
-    
-    function commentErase($postId, $commentId) {
-        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $commentManager->deleteComment($commentId); 
-        if ($postId != "") {
-            $message_success =  'Ce commentaire a bien été Supprimé !';
-            post($postId, $message_success, "");
-        } else {
-            $message_success =  'Ce commentaire a bien été Supprimé !';
-            listPosts(1, $message_success, "");
-        }
-    }
-
-    //**************************************************************************************
-    //         Controller backend MemberManager (+Controller frontend PostManager)              
-    //**************************************************************************************
 
     function memberBloqComment($memberId, $blockId, $template) {
         $memberManager = new \FredLab\tp5_caddy_race\Model\MemberManager();
@@ -129,10 +121,6 @@ try {
         }
         memberDetail($message_success, "", $memberId, $template);
     }
-
-    //**************************************************************************************
-    //         Controller backend MemberManager (+Controller frontend PostManager)              
-    //**************************************************************************************
 
     function memberModerator($memberId, $moderatorId, $template) {
         $memberManager = new \FredLab\tp5_caddy_race\Model\MemberManager();

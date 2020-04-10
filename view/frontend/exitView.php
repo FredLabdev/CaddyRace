@@ -5,7 +5,7 @@ $noMenu = 'no_menu';
 ob_start(); 
 ?>
 
-<div class="exit d-flex flex-lg-row flex-sm-column">
+<div class="exit d-flex flex-column">
     <a href="index.php" class="return-button btn btn-success btn-lg exit-text" name="login">Back to race ?</a>
     <h2 class="exit-text orange">
         <?= $message_success ?>

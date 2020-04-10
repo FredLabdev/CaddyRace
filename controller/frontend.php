@@ -1,12 +1,91 @@
 <?php
 
-require_once('model/CommentManager.php');
+require_once('model/AislesManager.php');
+require_once('model/ItemsManager.php');
 require_once('model/LoginManager.php');
 require_once('model/MemberManager.php');
-require_once('model/PostManager.php');
-
 
 try {
+    
+    //**************************************************************************************
+    //            Controller frontend ItemsManager         
+    //**************************************************************************************
+
+    function shopList($message_success, $message_error) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $aislesCount = $AislesManager->getAislesCount();
+        $aislesTab = $AislesManager->getAislesTab();
+        $itemsCountInAisleTab = array();
+        $itemsInAisleTab  = array();
+        $aislesIconsTab  = array();
+        $aislesIconsTab2  = array();
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        foreach($aislesTab as $aisle) {
+            $itemsCountInAisle = $ItemsManager->getItemsCountInAisle($aisle['id']);  
+            $itemsCountInAisleTab[] = $itemsCountInAisle;
+            $itemsInAisle = $ItemsManager->getItemsInAisle($aisle['id']);    
+            $itemsInAisleTab[] = $itemsInAisle;
+            $aislesIcons = $AislesManager->getAislesIcons($aisle['id']);    
+            $aislesIconsTab[] = $aislesIcons;
+            $aislesIcons = $AislesManager->getAislesIcons($aisle['id']);    
+            $aislesIconsTab2[] = $aislesIcons;
+        }
+        $message_success;
+        $message_error;
+        require('view/frontend/listView.php');
+    }
+    
+    function createItem($aisleId, $itemName) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->pushItem($aisleId, $itemName);     
+        $message_success =  'Votre article a bien été ajouté dans ce rayon.';
+        $message_error = "";
+        shopList($message_success, $message_error);
+    }
+    
+    function deleteItem($itemId) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->pullItem($itemId); 
+        $message_success =  'Cet article a bien été supprimé.';
+        $message_error = "";
+        shopList($message_success, $message_error);
+    }
+    
+    function modifItem($itemId, $itemName) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->changeItemName($itemId, $itemName);     
+        $message_success =  'Votre article a bien été modifié.';
+        $message_error = "";
+        shopList($message_success, $message_error);
+    }
+    
+    //**************************************************************************************
+    //            Controller frontend AislesManager         
+    //**************************************************************************************
+
+    function createAisle($aisleTitle, $aisleOrder) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->pushAisle($aisleTitle, $aisleOrder);     
+        $message_success =  'Votre rayon a bien été ajouté à la suite. Vous pouvez désormais le déplacer.';
+        $message_error = "";
+        shopList($message_success, $message_error);
+    }
+    
+    function deleteAisle($aisleId) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->pullAisle($aisleId); 
+        $message_success =  'Ce rayon a bien été supprimé.';
+        $message_error = "";
+        shopList($message_success, $message_error);
+    }
+        
+    function modifAisle($aisleId, $aisleTitle) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $AislesManager->changeAisleTitle($aisleId, $aisleTitle);   
+        $message_success =  'Votre article a bien été modifié.';
+        $message_error = "";
+        shopList($message_success, $message_error);
+    }
     
     //**************************************************************************************
     //                        Controller frontend LoginManager           
@@ -19,7 +98,8 @@ try {
             $login_error = 'Erreur : pseudo et/ou mot de passe erroné(s).';
         }
         $loginManager = new \FredLab\tp5_caddy_race\Model\LoginManager();
-        $dbPassword = ($loginManager->getPasswordFromPseudo($pseudo))['password']; 
+        $passwordFromPseudo = ($loginManager->getPasswordFromPseudo($pseudo)); 
+        $dbPassword = $passwordFromPseudo['password']; 
         $isPasswordCorrect = password_verify($password, $dbPassword); 
         if ($dbPassword) {
             if ($isPasswordCorrect) {
@@ -122,11 +202,23 @@ try {
             $message_error = '';
             $message_error = pseudoControl($createPseudo, $message_error);
             $message_error = mailControl($createMail, $mailConfirm, $message_error);
-            $message_error = passwordControl($createPassword, $passwordConfirm, $message_error);    
-            if ($message_error == '') { // Si tout ok on creer le nouveau membre,
+            $message_error = passwordControl($createPassword, $passwordConfirm, $message_error); 
+            // Si tout ok on creer le nouveau membre,
+            if ($message_error == '') {
                 $loginManager = new \FredLab\tp5_caddy_race\Model\LoginManager();
                 $loginManager->CreateMember($createName, $createFirstName, $createPseudo, $createMail, $createPassword);
-                loginControl($createPseudo, $createPassword); // et on démmarre sa session
+                $getMemberId = $loginManager->getMemberId($createPseudo);
+                // on récupère son numéro d'id créée pour affecter ses rayons et articles privés
+                $memberId =  $getMemberId['id'];
+                // on duplique les rayons Géné dans les rayons Privés avec son id
+                $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+                $AislesManager->duplicateAislesGeneDatas($memberId);
+                // on duplique les articles Géné dans les articles Privés avec son id
+                // on modifie les ids des rayons de référence dupliqués par les ids des rayons Privés précédemment créés
+                $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+                $ItemsManager->duplicateItemsGeneDatas($memberId);
+                // et on démarre sa session
+                loginControl($createPseudo, $createPassword);
             } else {
                 require('view/frontend/loginView.php'); // retour au login avec affichage des erreurs
             }
@@ -134,65 +226,7 @@ try {
     }
 
     //**************************************************************************************
-    //             Controller frontend PostManager (+frontend CommentManager)            
-    //**************************************************************************************
-
-    function sortListShop($page, $message_success, $message_error) {
-        $postManager = new \FredLab\tp5_caddy_race\Model\PostManager();
-        $postsCount = $postManager->getPostsCount();
-        $postsList = $postManager->getPosts();
-        $pages_max = getPagesMax($postsCount);
-        if ($page <= $pages_max) {
-            $offset = ($page-1)*5;  
-            $postsBy5 = $postManager->getPostsBy5($offset);
-            $commentsCountBy5 = array(); 
-            $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-            foreach($postsBy5 as $postBy5) {
-                $commentsCount = $commentManager->getCommentsCount($postBy5['id']);                
-                $commentsCountBy5[] = $commentsCount;
-            } 
-            $billet_max = $postsCount['nbre_posts']-($offset);
-            $message_success;
-            $message_error;
-            if ($billet_max <= 5) {
-                $billet_min = 1;
-            } else {
-                $billet_min = $billet_max-4;
-            };
-            $signalComments = $commentManager->getSignalComments();
-            require('view/frontend/listView.php');
-        } else {
-            if ($postsCount['nbre_posts'] == 0) {
-                $message_success = 'Aucun billet n\'est encore de publié...';
-            } else {
-                $message_error = 'Mauvais indice de page !';
-            };
-            require('view/frontend/listView.php');
-        }
-    }
-
-    function getPagesMax($postsCount) {
-        if (($postsCount['nbre_posts']%5) == 0) {
-            $pages_max = (int)($postsCount['nbre_posts']/5);    
-        } else {
-            $pages_max = ((int)($postsCount['nbre_posts']/5))+1;    
-        }
-        return $pages_max;
-    }
-
-    function post($postId, $message_success, $message_error) {
-        $postManager = new \FredLab\tp5_caddy_race\Model\PostManager();
-        $postDetails = $postManager->getPost($postId);
-        $message_success;
-        $message_error;
-        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
-        $comments = $commentManager->getComments($postId);
-        $commentsCount = $commentManager->getCommentsCount($postId);
-        require('view/frontend/itemView.php');
-    }
-
-    //**************************************************************************************
-    //        Controller frontend MemberManager (+Controller frontend Login Manager)          
+    //        Controller frontend MemberManager
     //**************************************************************************************
 
     function membersHome($message_success, $message_error, $memberDetails) {
@@ -216,11 +250,9 @@ try {
     function memberDetail($message_success, $message_error, $memberId, $template) {
         $memberManager = new \FredLab\tp5_caddy_race\Model\MemberManager();
         $memberDetails = $memberManager->getMemberDetail($memberId);
-        if ($template != "") {
-        membersHome($message_success, $message_error, $memberDetails);            
-        } else {
+      
         memberHome($message_success, $message_error, $memberDetails);
-        }
+        
     }
 
     function newMail($memberId, $newMail, $mailConfirm) {
