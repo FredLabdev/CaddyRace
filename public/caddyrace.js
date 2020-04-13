@@ -45,68 +45,6 @@ $(function () {
 // => listView/Rayons jQuery - Sortable        
 //**************************************************************************************
 
-/* $(function () {
-    $("#sortable").sortable({
-        placeholder: 'fond',
-        update: function () {
-            var order = $("#sortable").sortable("serialize");
-            $("#info").load("ajax.php" + order);
-        }
-    })
-    $("#sortable").disableSelection();
-}); 
-
-$(function () {
-    $("#sortable-admin").sortable({
-        opacity: 0.8, // réduit l'opacité lors du déplacement
-        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
-        placeholder: '.ui-state-highlight',
-        forcePlaceholderSize: true, // force le redimensionnement du placeholder
-        revert: true,
-        stop: function (event, ui) {
-            var order = $("this").sortable("serialize");
-
-            var aisleGeneOrder = ui.item.index() + 1;
-            var aisleGeneId = ui.item.attr('id');
-            $.ajax({
-                type: "post",
-                url: "index.php?action=orderAisleGene",
-                data: {
-                    aisleGeneOrder: aisleGeneOrder,
-                    aisleGeneId: aisleGeneId
-                },
-                success: function (data) {
-                    alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder);
-                }
-            });
-        }
-    })
-    $("#sortable-admin").disableSelection();
-}); 
-
-$(function () {
-    $("#sortable-admin").sortable({
-        opacity: 0.8, // réduit l'opacité lors du déplacement
-        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
-        placeholder: '.ui-state-highlight',
-        forcePlaceholderSize: true, // force le redimensionnement du placeholder
-        revert: true,
-        stop: function (event, ui) {
-            var order = $("this").sortable("serialize");
-
-            var aisleGeneInfos = "aisleGeneId=" + ui.item.attr('id') + "&aisleGeneOrder=" + (ui.item.index() + 1);
-
-
-            ajaxPost("index.php?action=orderAisleGene", aisleGeneInfos,
-                function (reponse) {
-                    alert("La nouvelle position du rayon : " + ui.item.attr('id') + " est " + (ui.item.index() + 1) + " et : " + aisleGeneInfos);
-                }
-            )
-        }
-    });
-    $("#sortable-admin").disableSelection();
-}); */
-
 $(function () {
     $("#sortable-admin").sortable({
         opacity: 0.8, // réduit l'opacité lors du déplacement
@@ -182,7 +120,6 @@ $(function () {
         cancel: '#newAisleGene' // désactive la fonction sortable sur ce rayon mais désactive l'input sur les atres !
     }); */
 });
-
 
 // => Passage de mousse a touch sur mobile (complément touch-punch)
 
@@ -308,34 +245,15 @@ $('#recherche').autocomplete({
     }
 });
 
-/*/**************************************************************************************
-// => shopView - Ajouter un article dans un rayon      
-//**************************************************************************************
-
-$(function () {
-    var $list, $newItemGeneForm;
-    $list = $('#aisle1');
-    $newItemGeneForm = $('#newItemGeneForm');
-    $newItemGeneForm.on("submit", function (e) {
-        e.preventDefault();
-        $itemGeneField = $('#itemGeneField');
-        var text = $itemGeneField.val();
-        $list.append('<li class="dropdown-item d-flex flex-row justify-content-center align-items-center"><span class="item-delete d-flex p-2"><i class="fas fa-trash"></i></span><input type="text" class="item-gene col-9"  value="' + text + '"/></li>');
-        $itemGeneField.val('');
-    });
-    $list.on('click', 'span', function () {
-        var $trash = $(this);
-        $trash.parent().remove();
-    })
-});
-*/
-
 //**************************************************************************************
 // => listView : Focus sur article à modifier au click sur icone "pencil"         
 //**************************************************************************************
 
-if (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=shopList") > -1) {
-
+if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=shopList") > -1) {
+    /*
+    remplacer tous les liens par les liens en ligne =>
+    "https://fredlabourel.fr/caddyrace/index.php?action=..."
+    */
     var list = document.getElementById("liste");
     var items = document.querySelectorAll(".item-check");
 
@@ -362,8 +280,11 @@ if (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?ac
 // => Mises en formes des input formulaires  
 //**************************************************************************************
 
-if (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=home") > -1) {
-
+if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=home") > -1) {
+    /*
+    remplacer tous les liens par les liens en ligne =>
+    "https://fredlabourel.fr/caddyrace/index.php?action=..."
+    */
     var pseudoLogin = document.getElementById('pseudo_login');
     pseudoLogin.addEventListener("focus", function () {
         if (pseudoLogin.value == "") {
@@ -530,8 +451,11 @@ if (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?ac
 // => profilView - Interactions pour les input formulaires        
 //**************************************************************************************
 
-if ((window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=memberDetail") > -1) || (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=memberModif") > -1) || (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=memberDelete") > -1)) {
-   
+if ((window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=memberDetail") > -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=memberModif") > -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=memberDelete") > -1)) {
+    /*
+    remplacer tous les liens par les liens en ligne =>
+    "https://fredlabourel.fr/caddyrace/index.php?action=..."
+    */
     var form = document.getElementById('form_modif');
     var errorChamp = document.getElementById('error1');
     var errorChampConfirm = document.getElementById('error2');
@@ -591,7 +515,11 @@ if ((window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?a
 // => exitView - Interactions pour la déconnexion         
 //**************************************************************************************
 
-if ((window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=home") === -1) || (window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?action=connexion") === -1)) {
+if ((window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=home") === -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=connexion") === -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=deconnexion") === -1)) {
+    /*
+    remplacer tous les liens par les liens en ligne =>
+    "https://fredlabourel.fr/caddyrace/index.php?action=..."
+    */
     function deconnect_confirm() {
         if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
             document.location.href = "index.php?action=deconnexion";
@@ -601,14 +529,16 @@ if ((window.location.href.indexOf("https://fredlabourel.fr/caddyrace/index.php?a
             return false;
         }
     }
-
-    document.getElementById("deconnexion").addEventListener('click', function (e) {
-        e.preventDefault();
-        deconnect_confirm();
-    });
-
-    document.getElementById("deconnexion_xs").addEventListener('click', function (e) {
-        e.preventDefault();
-        deconnect_confirm();
-    });
+    if (document.getElementById("deconnexion")) {
+        document.getElementById("deconnexion").addEventListener('click', function (e) {
+            e.preventDefault();
+            deconnect_confirm();
+        });
+    }
+    else if (document.getElementById("deconnexion")) {
+        document.getElementById("deconnexion_xs").addEventListener('click', function (e) {
+            e.preventDefault();
+            deconnect_confirm();
+        });
+    }
 } 

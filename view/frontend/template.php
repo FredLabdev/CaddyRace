@@ -269,13 +269,13 @@
             </div>
         </div>
         <div class="sm-row xs-column justify-content-center align-items-center white">
-            <span><i class="far fa-copyright"></i> 2019 Labdev</span><span>Brainmade with <strong class="rwd-line">HTML CSS JS JQUERY AJAX API PHP SQL</strong></span><span><a href="index.php?action=contact">contact</a></span>
+            <span><i class="fas fa-copyright"></i> 2019 Labdev</span><span>Brainmade with <strong class="rwd-line">HTML CSS JS JQUERY AJAX API PHP SQL</strong></span><span><a href="index.php?action=contact">contact</a></span>
         </div>
         <div class="offset-10 fixed-bottom popup3">
             <a href="#popup3"><i class="fas fa-comment-dots fa-7x"></i></a>
             <div id="popup3" class="overlay">
                 <div class="popup popup-lg">
-                    <h3>Votre avis <i class="far fa-lightbulb fa-2x"></i><br>nous éclaire !</h3>
+                    <h3>Votre avis <i class="fas fa-lightbulb fa-2x"></i><br>nous éclaire !</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content black">
                         Une question, une idée, n'hésitez pas à tout poser ici sur le tapis !

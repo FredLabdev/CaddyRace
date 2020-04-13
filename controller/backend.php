@@ -37,9 +37,13 @@ try {
     
     function createItemGene($aisleGeneId, $itemGeneName) {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
-        $ItemsManager->pushItemGene($aisleGeneId, $itemGeneName);     
-        $message_success =  'Votre article a bien été ajouté dans ce rayon.';
         $message_error = "";
+        if($itemGeneName == "") {
+            $message_error =  'Désolé votre nouvel article est vide';
+        } else {
+            $ItemsManager->pushItemGene($aisleGeneId, $itemGeneName);     
+            $message_success =  'Votre article a bien été ajouté dans ce rayon.';
+        }
         shopAdmin($message_success, $message_error);
     }
     

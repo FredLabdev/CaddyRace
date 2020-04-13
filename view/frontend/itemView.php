@@ -136,7 +136,7 @@
     <!-- BOUTON ET TEXTAREA POUR AJOUTER UN COMMENTAIRE -->
 
     <p>
-        <a class="btn btn-primary col-5 offset-6" data-toggle="collapse" href="#newComment" role="button" aria-expanded="false" aria-controls="newComment"><i class="far fa-comment-alt"></i>Commenter
+        <a class="btn btn-primary col-5 offset-6" data-toggle="collapse" href="#newComment" role="button" aria-expanded="false" aria-controls="newComment"><i class="fas fa-comment-alt"></i>Commenter
         </a>
     </p>
     <div class="collapse col-12" id="newComment">

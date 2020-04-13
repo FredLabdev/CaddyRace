@@ -1006,6 +1006,7 @@ input[type="checkbox"]:focus + .item-check {
 .modif-btn {
     position: relative;
     left: -70px;
+    background-color: rgba(179, 179, 179, 1);
 }
 
 input[type="checkbox"]:checked + .item-check {

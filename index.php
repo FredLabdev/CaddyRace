@@ -85,14 +85,14 @@ try {
             
             // Afficher sa listView Perso,
             if ($_GET['action'] == 'shopList') {
-                 shopList("", "");
+                 shopList($_SESSION['id'], "", "");
             }
             // Créer un nouvel article,   
             else if ($_GET['action'] == 'createItem') {
                  $itemName = getCleanParameter($_POST['itemName']);
                  $aisleId = getCleanParameter($_POST['aisleId']);
                  if ($aisleId) {
-                     createItem($aisleId, $itemName);
+                     createItem($_SESSION['id'], $aisleId, $itemName);
                  } else {
                      throw new Exception('Aucun identifiant de rayon envoyé');
                  }
@@ -100,30 +100,30 @@ try {
              // Supprimer un article,   
              else if ($_GET['action'] == 'deleteItem') {
                  $itemId = getCleanParameter($_POST['itemId']);
-                 deleteItem($itemId);
+                 deleteItem($_SESSION['id'], $itemId);
              }
              // Modifier un article, 
              else if ($_GET['action'] == 'modifItem') { 
                  $itemId = getCleanParameter($_POST['itemId']);
                  $itemName = getCleanParameter($_POST['itemName']);
-                 modifItem($itemId, $itemName);
+                 modifItem($_SESSION['id'], $itemId, $itemName);
              }
              // Créer un nouveau rayon,
              else if ($_GET['action'] == 'createAisle') {
                  $aisleTitle = getCleanParameter($_POST['aisleTitle']);
                  $aisleOrder = getCleanParameter($_POST['aisleOrder']);
-                 createAisle($aisleTitle, $aisleOrder);
+                 createAisle($_SESSION['id'], $aisleTitle, $aisleOrder);
              }
              // Supprimer un rayon,   
              else if ($_GET['action'] == 'deleteAisle') {
                  $aisleId = getCleanParameter($_POST['aisleId']);
-                 deleteAisle($aisleId);
+                 deleteAisle($_SESSION['id'], $aisleId);
              }
              // Modifier un rayon,
              else if ($_GET['action'] == 'modifAisle') {  
                  $aisleId = getCleanParameter($_POST['aisleId']);
                  $aisleTitle = getCleanParameter($_POST['aisleTitle']);
-                 modifAisle($aisleId, $aisleTitle);
+                 modifAisle($_SESSION['id'], $aisleId, $aisleTitle);
              }                  
             
             //**************************************************************************************
@@ -134,7 +134,7 @@ try {
                 shopAdmin("", "");
             }
             // Créer un nouvel article Gene,   
-           else if ($_GET['action'] == 'createItemGene') {
+            else if ($_GET['action'] == 'createItemGene') {
                 $itemGeneName = getCleanParameter($_POST['itemGeneName']);
                 $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
                 if ($aisleGeneId) {
@@ -313,7 +313,7 @@ try {
             //**************************************************************************************
             // => Afficher Accueil du site (par défaut):
             else {
-                shopList("",""); // TODO selon controller/model
+                shopList($_SESSION['id'], "", ""); // TODO selon controller/model
             } 
             
         //**************************************************************************************

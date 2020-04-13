@@ -96,22 +96,23 @@ class AislesManager extends Manager {
         $req->closeCursor();
     }
     
-    public function getAislesCount() {
+    public function getAislesCount($memberId) {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT COUNT(id) AS count FROM aisles_priv');
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM aisles_priv WHERE aisle_priv_owner_id = ?');
+        $req->execute(array($memberId));
         $aislesCount = $req->fetch();
         $req->closeCursor();
         return $aislesCount;
     }
-
-    public function getAislesTab() {
+    
+    public function getAislesTab($memberId) {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT * FROM aisles_priv ORDER BY aisle_priv_order');
+        $getAislesTab = $db->prepare('SELECT * FROM aisles_priv WHERE aisle_priv_owner_id = ? ORDER BY aisle_priv_order');
+        $getAislesTab->execute(array($memberId)); 
         $aislesTab = array(); 
-        while ($aisle = $req->fetch()) {
+        while ($aisle = $getAislesTab->fetch()) {
             $aislesTab[] = $aisle;
         }
-        $req->closeCursor();
         return $aislesTab;
     }
     
@@ -122,29 +123,34 @@ class AislesManager extends Manager {
         return $aislesIcons;
     }
     
-    public function pushAisle($aisleTitle, $aisleOrder) {            
+    public function pushAisle($memberId, $aisleTitle, $aisleOrder) {            
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO aisles_priv(aisle_priv_title, aisle_priv_order) VALUES(:aisle_priv_title, :aisle_priv_order)');
+        $req = $db->prepare('INSERT INTO aisles_priv(aisle_priv_owner_id, aisle_priv_title, aisle_priv_order) VALUES(:member_id, :aisle_priv_title, :aisle_priv_order)');
         $req->execute(array(
+            'member_id' => $memberId,
             'aisle_priv_title' => $aisleTitle,
             'aisle_priv_order' => $aisleOrder
         ));
         $req->closeCursor();
     }
         
-    public function pullAisle($aisleId) {  
+    public function pullAisle($memberId, $aisleId) {  
         $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM aisles_priv WHERE id = ?');
-        $req->execute(array($aisleId)); 
+        $req = $db->prepare('DELETE FROM aisles_priv WHERE aisle_priv_owner_id = :member_id AND id = :item_id');
+        $req->execute(array(
+            'member_id' => $memberId,
+            'item_id' => $aisleId
+        )); 
         $req->closeCursor();
     }
     
-    public function changeAisleTitle($aisleId, $aisleTitle) {            
+    public function changeAisleTitle($memberId, $aisleId, $aisleTitle) {            
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE aisles_priv SET aisle_priv_title = :aisle_priv_title WHERE id = :id');
+        $req = $db->prepare('UPDATE aisles_priv SET aisle_priv_title = :aisle_priv_title WHERE aisle_priv_owner_id = :member_id AND id = :aisle_id');
         $req->execute(array(
             'aisle_priv_title' => $aisleTitle,
-            'id' => $aisleId
+            'member_id' => $memberId,            
+            'aisle_id' => $aisleId
         ));
         $req->closeCursor();
     }

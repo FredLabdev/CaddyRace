@@ -80,46 +80,57 @@ class ItemsManager extends Manager {
         ));
         $req->closeCursor();
     } */
-
-    public function getItemsCountInAisle($aisleId) {
+    
+    public function getItemsCountInAisle($memberId, $aisleId) {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE aisle_priv_id = ?');
-        $req->execute(array($aisleId));
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND aisle_priv_id = :aisle_priv_id');
+        $req->execute(array(
+            'member_id' => $memberId,
+            'aisle_priv_id' => $aisleId
+        ));
         $itemsCountInAisle = $req->fetch();
         $req->closeCursor();
         return $itemsCountInAisle;
     }
-    
-    public function getItemsInAisle($aisleId) {
+
+    public function getItemsInAisle($memberId, $aisleId) {
         $db = $this->dbConnect();
-        $itemsInAisle = $db->prepare('SELECT * FROM items_priv WHERE aisle_priv_id = ? ORDER BY item_priv_name');
-        $itemsInAisle->execute(array($aisleId));
+        $itemsInAisle = $db->prepare('SELECT * FROM items_priv WHERE item_priv_owner_id = :member_id AND aisle_priv_id = :aisle_priv_id ORDER BY item_priv_name');
+        $itemsInAisle->execute(array(
+            'member_id' => $memberId,
+            'aisle_priv_id' => $aisleId
+        ));
         return $itemsInAisle;
     }
     
-    public function pushItem($aisleId, $itemName) {            
+    public function pushItem($memberId, $aisleId, $itemName) {            
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO items_priv(aisle_priv_id, item_priv_name) VALUES(:aisle_priv_id, :item_priv_name)');
+        $req = $db->prepare('INSERT INTO items_priv(aisle_priv_id, item_priv_name) VALUES(:aisle_priv_id, :item_priv_name) WHERE item_priv_owner_id = :member_id ');
         $req->execute(array(
             'aisle_priv_id' => $aisleId,
-            'item_priv_name' => $itemName
+            'item_priv_name' => $itemName,
+            'member_id' => $memberId
         ));
         $req->closeCursor();
     }
     
-    public function pullItem($itemId) {  
+    public function pullItem($memberId, $itemId) {  
         $db = $this->dbConnect();
-        $req = $db->prepare('DELETE FROM items_priv WHERE id = ?');
-        $req->execute(array($itemId)); 
+        $req = $db->prepare('DELETE FROM items_priv WHERE item_priv_owner_id = :member_id AND id = :item_id');
+        $req->execute(array(
+            'member_id' => $memberId,
+            'item_id' => $itemId
+        )); 
         $req->closeCursor();
     }
     
-    public function changeItemName($itemId, $itemName) {            
+    public function changeItemName($memberId, $itemId, $itemName) {            
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE items_priv SET item_priv_name = :item_priv_name WHERE id = :id');
+        $req = $db->prepare('UPDATE items_priv SET item_priv_name = :item_priv_name WHERE item_priv_owner_id = :member_id AND id = :item_id');
         $req->execute(array(
             'item_priv_name' => $itemName,
-            'id' => $itemId
+            'member_id' => $memberId,
+            'item_id' => $itemId
         ));
         $req->closeCursor();
     }

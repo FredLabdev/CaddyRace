@@ -11,23 +11,23 @@ try {
     //            Controller frontend ItemsManager         
     //**************************************************************************************
 
-    function shopList($message_success, $message_error) {
+    function shopList($memberId, $message_success, $message_error) {
         $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
-        $aislesCount = $AislesManager->getAislesCount();
-        $aislesTab = $AislesManager->getAislesTab();
+        $aislesCount = $AislesManager->getAislesCount($memberId);
+        $aislesTab = $AislesManager->getAislesTab($memberId);
         $itemsCountInAisleTab = array();
         $itemsInAisleTab  = array();
         $aislesIconsTab  = array();
         $aislesIconsTab2  = array();
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         foreach($aislesTab as $aisle) {
-            $itemsCountInAisle = $ItemsManager->getItemsCountInAisle($aisle['id']);  
+            $itemsCountInAisle = $ItemsManager->getItemsCountInAisle($memberId, $aisle['aisle_gene_refer_id']);  
             $itemsCountInAisleTab[] = $itemsCountInAisle;
-            $itemsInAisle = $ItemsManager->getItemsInAisle($aisle['id']);    
+            $itemsInAisle = $ItemsManager->getItemsInAisle($memberId, $aisle['aisle_gene_refer_id']);    
             $itemsInAisleTab[] = $itemsInAisle;
-            $aislesIcons = $AislesManager->getAislesIcons($aisle['id']);    
+            $aislesIcons = $AislesManager->getAislesIcons($aisle['aisle_gene_refer_id']);    
             $aislesIconsTab[] = $aislesIcons;
-            $aislesIcons = $AislesManager->getAislesIcons($aisle['id']);    
+            $aislesIcons = $AislesManager->getAislesIcons($aisle['aisle_gene_refer_id']);    
             $aislesIconsTab2[] = $aislesIcons;
         }
         $message_success;
@@ -35,56 +35,56 @@ try {
         require('view/frontend/listView.php');
     }
     
-    function createItem($aisleId, $itemName) {
+    function createItem($memberId, $aisleId, $itemName) {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
-        $ItemsManager->pushItem($aisleId, $itemName);     
+        $ItemsManager->pushItem($memberId, $aisleId, $itemName);     
         $message_success =  'Votre article a bien été ajouté dans ce rayon.';
         $message_error = "";
-        shopList($message_success, $message_error);
+        shopList($memberId, $message_success, $message_error);
     }
     
-    function deleteItem($itemId) {
+    function deleteItem($memberId, $itemId) {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
-        $ItemsManager->pullItem($itemId); 
+        $ItemsManager->pullItem($memberId, $itemId); 
         $message_success =  'Cet article a bien été supprimé.';
         $message_error = "";
-        shopList($message_success, $message_error);
+        shopList($memberId, $message_success, $message_error);
     }
     
-    function modifItem($itemId, $itemName) {
+    function modifItem($memberId, $itemId, $itemName) {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
-        $ItemsManager->changeItemName($itemId, $itemName);     
+        $ItemsManager->changeItemName($memberId, $itemId, $itemName);     
         $message_success =  'Votre article a bien été modifié.';
         $message_error = "";
-        shopList($message_success, $message_error);
+        shopList($memberId, $message_success, $message_error);
     }
     
     //**************************************************************************************
     //            Controller frontend AislesManager         
     //**************************************************************************************
 
-    function createAisle($aisleTitle, $aisleOrder) {
+    function createAisle($memberId, $aisleTitle, $aisleOrder) {
         $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
-        $AislesManager->pushAisle($aisleTitle, $aisleOrder);     
+        $AislesManager->pushAisle($memberId, $aisleTitle, $aisleOrder);     
         $message_success =  'Votre rayon a bien été ajouté à la suite. Vous pouvez désormais le déplacer.';
         $message_error = "";
-        shopList($message_success, $message_error);
+        shopList($memberId, $message_success, $message_error);
     }
     
-    function deleteAisle($aisleId) {
+    function deleteAisle($memberId, $aisleId) {
         $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
-        $AislesManager->pullAisle($aisleId); 
+        $AislesManager->pullAisle($memberId, $aisleId); 
         $message_success =  'Ce rayon a bien été supprimé.';
         $message_error = "";
-        shopList($message_success, $message_error);
+        shopList($memberId, $message_success, $message_error);
     }
         
-    function modifAisle($aisleId, $aisleTitle) {
+    function modifAisle($memberId, $aisleId, $aisleTitle) {
         $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
-        $AislesManager->changeAisleTitle($aisleId, $aisleTitle);   
+        $AislesManager->changeAisleTitle($memberId, $aisleId, $aisleTitle);   
         $message_success =  'Votre article a bien été modifié.';
         $message_error = "";
-        shopList($message_success, $message_error);
+        shopList($memberId, $message_success, $message_error);
     }
     
     //**************************************************************************************
@@ -138,10 +138,10 @@ try {
 
     function homePageDirect($pseudo, $group) {
         if ($_SESSION['group_id']) {
-            header('Location: index.php?action=list'); 
+            header('Location: index.php?action=shopList'); 
         }  
         else if ($group !== 1) {
-            header('Location: index.php?action=list');
+            header('Location: index.php?action=shopList');
         }  
     }
 
@@ -250,9 +250,11 @@ try {
     function memberDetail($message_success, $message_error, $memberId, $template) {
         $memberManager = new \FredLab\tp5_caddy_race\Model\MemberManager();
         $memberDetails = $memberManager->getMemberDetail($memberId);
-      
+        if ($template != "") {
+        membersHome($message_success, $message_error, $memberDetails);            
+        } else {
         memberHome($message_success, $message_error, $memberDetails);
-        
+        }
     }
 
     function newMail($memberId, $newMail, $mailConfirm) {
@@ -310,7 +312,8 @@ try {
 
     function sessionEnd() {
         $message_success = 'A très bientôt sur CaddyRace' . ' ' . $_SESSION['first_name'];
-        $_SESSION = array(); // Suppression des variables de session et de la session
+        $_SESSION = array(); 
+        $_COOKIE = array();// Suppression des variables de session et de la session
         session_destroy();
         setcookie('pseudo', ''); // Suppression des cookies de connexion automatique
         setcookie('password', '');

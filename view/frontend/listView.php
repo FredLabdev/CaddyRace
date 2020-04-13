@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     $title = 'CaddyRace/Accueil';
     if ($_SESSION['group_id'] == 1) {
         $template = 'backend';
@@ -17,7 +16,7 @@
         <nav class="list-nav navbar navbar-light bg-dark fixed-top justify-content-end">
             <ul class="nav nav-pills nav-stacked align-items-center">
                 <li class="nav-item ">
-                    <a class="nav-link liste-tab" href="#list"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Liste</span></a>
+                    <a class="nav-link liste-tab" href="#list"><i class="fas fa-th fa-2x"></i><span class="list-nav-text"> Liste</span></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link rayons-tab" href="#aisles"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
@@ -111,7 +110,7 @@
 
         <!-------------- Search Bar d'ajout d'un article à la liste ou si inconnu de création -------------->
         <form class="search-bar form-inline">
-            <a href="#" id="addItem"><i class="tohide2 item-action far fa-plus-circle fa-2x orange"></i></a>
+            <a href="#" id="addItem"><i class="tohide2 item-action fas fa-plus-circle fa-2x orange"></i></a>
             <input type="text" class="typeahead tt-query" id="recherche" placeholder="Que vous manque-t-il ?" autocomplete="off" spellcheck="false" />
             <span class="nav-item">
                 <a class="nav-link" href="#popup5" id="addList"><i class="tohide item-action fas fa-check-circle fa-2x green"></i></a>
@@ -154,7 +153,7 @@
                 </h4>
                 <!--------------- Comptage des articles du rayon -------------------->
                 <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange far fa-th"></i>
+                    <i class="fam-select orange fas fa-th"></i>
                     <span class="caddie2 d-flex justify-content-center align-items-center">
                         <?= $itemsCountInAisleTab[$i]['count'] ?>
                     </span>
@@ -179,7 +178,7 @@
                             <input type="checkbox" name="itemId-checkbox-<?= $i ?>" id="checkbox-<?= $i ?>" value="<?= $itemInAisle['id'] ?>">
                             <input type="text" name="itemName" class="modif-form item-gene" value="<?= $itemInAisle['item_priv_name'] ?>" />
                             <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                                <?= $i ?></label>
+                                <?= $itemInAisle['id'] ?></label>
                         </form>
                         <!---------------- La modification d'un article ---------------------->
                         <form class="modif-form form-row d-flex align-items-center p-2" method="post" action="index.php?action=modifItem">

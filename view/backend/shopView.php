@@ -9,6 +9,19 @@
     ob_start(); 
 ?>
 
+<!-- MESSAGES -->
+
+<?php
+    function phpAlert($msg) {
+        echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+    }
+    if ($message_error) {
+        phpAlert($message_error);
+    } else if ($message_success) {
+        phpAlert($message_success);
+    }
+?>
+
 <!-- MENU ADMIN BOUTIQUE -->
 
 <div id="tabs-Admin" class="tabs">
@@ -17,7 +30,7 @@
         <nav class="list-nav navbar navbar-light bg-orange fixed-top justify-content-end">
             <ul class="nav nav-pills nav-stacked align-items-center">
                 <li class="nav-item ">
-                    <a class="nav-link liste-tab" href="#items-admin"><i class="far fa-th fa-2x"></i><span class="list-nav-text"> Articles</span></a>
+                    <a class="nav-link liste-tab" href="#items-admin"><i class="fas fa-th fa-2x"></i><span class="list-nav-text"> Articles</span></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link rayons-tab" href="#aisles-admin"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
@@ -66,7 +79,7 @@
                 </h4>
                 <!--------------- Comptage des articles du rayon -------------------->
                 <span class="d-flex flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange far fa-th"></i>
+                    <i class="fam-select orange fas fa-th"></i>
                     <span class="caddie2 d-flex justify-content-center align-items-center">
                         <?= $itemsGeneCountInAisleTab[$i]['count'] ?>
                     </span>
@@ -78,9 +91,9 @@
                     <!---------------- Y ajouter un article ---------------------->
                     <li class="dropdown-item d-flex justify-content-center align-items-center" href="#">
                         <span class="col-1"></span>
-                        <form class="modif-form new-item form-row col-11 offset-1 justify-content-start align-items-center" method="post" action="index.php?action=createItemGene">
+                        <form class="modif-form new-item form-row col-11 offset-1 justify-content-start align-items-center" name="createItemGene" method="post" action="index.php?action=createItemGene">
                             <input type="hidden" name="aisleGeneId" value="<?= $aislesGeneTab[$i]['id'] ?>" />
-                            <input type="text" name="itemGeneName" class="item-gene col-10" placeholder="Rajouter un article dans ce rayon ?" focus />
+                            <input id="item-gene-name" type="text" name="itemGeneName" class="item-gene col-10" placeholder="Rajouter un article dans ce rayon ?" focus />
                             <button type="submit" class="action-button modif-btn"><i class="fas fa-plus"></i></button>
                         </form>
                     </li>
@@ -109,11 +122,11 @@
             <?php
             }
             ?>
-
+            
         </div>
 
     </div>
-
+    
     <!-- TAB DES RAYONS -->
 
     <div id="aisles-admin">
