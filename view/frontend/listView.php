@@ -8,6 +8,19 @@
     ob_start(); 
 ?>
 
+<!-- MESSAGES -->
+
+<?php
+    function phpAlert($msg) {
+        echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+    }
+    if ($message_error) {
+        phpAlert($message_error);
+    } else if ($message_success) {
+        phpAlert($message_success);
+    }
+?>
+
 <!-- MENU PERSO -->
 
 <div id="tabs" class="tabs">
@@ -16,7 +29,10 @@
         <nav class="list-nav navbar navbar-light bg-dark fixed-top justify-content-end">
             <ul class="nav nav-pills nav-stacked align-items-center">
                 <li class="nav-item ">
-                    <a class="nav-link liste-tab" href="#list"><i class="fas fa-th fa-2x"></i><span class="list-nav-text"> Liste</span></a>
+                    <a class="nav-link liste-tab" href="#caddie"><i class="fas fa-scroll fa-2x"></i><span class="list-nav-text"> Liste</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link liste-tab" href="#list"><i class="fas fa-th fa-2x"></i><span class="list-nav-text"> Articles</span></a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link rayons-tab" href="#aisles"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
@@ -104,6 +120,12 @@
         </nav>
     </div>
 
+    <!-- TAB DE LA LISTE DE COURSES ORDONNEE PAR ARTILCES A,B,C ou RAYONS  -->
+
+    <div id="caddie">
+        
+    </div>
+        
     <!-- TAB DE LA LISTE DE COURSES ORDONNEE PAR RAYONS PUIS ARTICLES COCHES EN TETE -->
 
     <div id="list">
@@ -162,28 +184,38 @@
             <!--------------- Contenu d'un rayon -------------------->
             <div>
                 <ul>
+                    <!---------------- Y ajouter un article ---------------------->
+                    <li class="dropdown-item d-flex justify-content-center align-items-center" href="#">
+                        <span class="col-1"></span>
+                        <form class="modif-form new-item form-row col-11 offset-1 justify-content-start align-items-center" name="createItem" method="post" action="index.php?action=createItem">
+                            <input type="hidden" name="aisleId" value="<?= $aislesTab[$i]['aisle_priv_order'] ?>" />
+                            <input id="item-gene-name" type="text" name="itemName" class="item-gene col-10" placeholder="Rajouter un article dans ce rayon ?" focus />
+                            <button type="submit" class="action-button modif-btn"><i class="fas fa-plus"></i></button>
+                        </form>
+                    </li>
                     <!---------------- Boucle secondaire des articles ---------------------->
                     <?php
                     foreach ($itemsInAisleTab[$i] as $itemInAisle) {
                     ?>
                     <li class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
                         <!---------------- Supprimer un article du magasin ---------------------->
-                        <form class="delete-form d-flex p-2" method="post" action="index.php?action=deleteItem">
+                        <form class="delete-form col-1 d-flex justify-content-end" method="post" action="index.php?action=deleteItem">
                             <input type="hidden" name="itemId" value="<?= $itemInAisle['id'] ?>" />
                             <button type="submit" class="action-button delete-btn"><i class="fas fa-trash-alt"></i></button>
                         </form>
 
-                        <!---------------- Le nom de l'article à cocher/décocher ---------------------->
-                        <form class="modif-form form-row justify-content-start align-items-center" method="post" action="index.php?action=modifItem">
+                        <!---------------- Le nom de l'article, sa modification, et l'ajout à la liste cocher/décocher ---------------------->
+                        <form class="modif-form form-row col-11 justify-content-start align-items-center" method="post" action="index.php?action=modifItem">
+                            <input type="hidden" name="itemId" value="<?= $itemInAisle['id'] ?>" />
+                            <input type="text" name="itemName" class="modif-form item-gene col-10" value="<?= $itemInAisle['item_priv_name'] ?>" />
+                            <button type="submit" class="action-button modif-btn"><i class="fas fa-pencil-alt"></i></button>
+                        </form>
+                        <form class="modif-form form-row justify-content-start align-items-center" method="post" action="index.php?action=toBuyItem">
                             <input type="checkbox" name="itemId-checkbox-<?= $i ?>" id="checkbox-<?= $i ?>" value="<?= $itemInAisle['id'] ?>">
-                            <input type="text" name="itemName" class="modif-form item-gene" value="<?= $itemInAisle['item_priv_name'] ?>" />
-                            <label class="item-check col-9" for="checkbox-<?= $i ?>">Article
-                                <?= $itemInAisle['id'] ?></label>
+                            <input type="hidden" name="itemId" value="<?= $itemInAisle['id'] ?>" />
+                            <label class="item-check col-1" for="checkbox-<?= $i ?>"></label>
                         </form>
-                        <!---------------- La modification d'un article ---------------------->
-                        <form class="modif-form form-row d-flex align-items-center p-2" method="post" action="index.php?action=modifItem">
-                            <button type="submit" class="action-button"><i class="fas fa-pencil-alt"></i></button>
-                        </form>
+                        
                     </li>
                     <?php
                     }
@@ -226,29 +258,32 @@
                     <li class="ui-state-default row" id="aisleId_<?= $aislesTab[$i]['id'] ?>">
 
                         <!---------------- Groupe de boutons et icones ---------------------->
-                        <div class="col-sm-3 aisles-icons d-flex justify-content-center align-items-center">
-                            <!---------------- Bouton delete ---------------------->
-                            <form class="delete-form d-flex justify-content-start align-items-center col-sm-3" method="post" action="index.php?action=deleteAisle">
-                                <input type="hidden" name="aisleId" value="<?= $aislesTab[$i]['id'] ?>" />
-                                <button type="submit" class="action-button delete-btn"><i class="fas fa-trash-alt"></i></button>
-                            </form>
+                        <div class="col-sm-2 aisles-icons d-flex justify-content-center align-items-center">
+
                             <!---------------- Icones des rayons ---------------------->
                             <?php
                             foreach ($aislesIconsTab2[$i] as $aislesIcons2) {
                             ?>
-                            <span class="col-sm-3 d-flex align-items-center"><img class="famIcon" src="public/picture/items/<?= $aislesIcons2['icon_adress'] ?>" alt="item picture" title="item" /></span>
+                            <span class="col-sm-6 d-flex align-items-center"><img class="famIcon" src="public/picture/items/<?= $aislesIcons2['icon_adress'] ?>" alt="item picture" title="item" /></span>
                             <?php
                             }
                             ?>
-                            <!---------------- logo rayon mobile -------------------->
-                            <i class="fam-select orange fas fa-stream col-sm-3 d-flex justify-content-end align-items-center"></i>
                         </div>
+                        <!---------------- Bouton delete ---------------------->
+                        <form class="delete-form d-flex justify-content-start align-items-center col-offset-1-sm-1" method="post" action="index.php?action=deleteAisle">
+                            <input type="hidden" name="aisleId" value="<?= $aislesTab[$i]['id'] ?>" />
+                            <button type="submit" class="action-button delete-btn"><i class="fas fa-trash-alt"></i></button>
+                        </form>
                         <!---------------- Le titre du rayon et sa modification -------------------->
-                        <form class="modif-form form-row col-sm-8 justify-content-start align-items-center" method="post" action="index.php?action=modifAisle">
+                        <form class="modif-form form-row col-sm-9 justify-content-start align-items-center" method="post" action="index.php?action=modifAisle">
                             <input type="hidden" name="aisleId" value="<?= $aislesTab[$i]['id'] ?>" />
                             <input type="text" name="aisleTitle" class="item-gene col-sm-12" value="<?= $aislesTab[$i]['aisle_priv_title'] ?>" />
                             <button type="submit" class="action-button modif-btn"><i class="fas fa-pencil-alt"></i></button>
                         </form>
+                       <!---------------- logo rayon mobile -------------------->
+                        <div class="col-sm-1 aisles-icons d-flex justify-content-center align-items-center">                             
+                            <i class="fam-select orange fas fa-stream col-sm-3 d-flex justify-content-end align-items-center"></i>
+                        </div>
                     </li>
 
                     <?php

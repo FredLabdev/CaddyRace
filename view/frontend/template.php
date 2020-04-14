@@ -76,11 +76,16 @@
 
     <?php
         if (isset ($_SESSION['pseudo'])) {
+            if($_SESSION['group_id'] != 1) {
         ?>
     <li class="nav-item">
-        <a class="nav-link bg-orange" href="index.php?action=shopList"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Liste
+        <a class="nav-link" href="index.php?action=shopList"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-shopping-cart fa-2x" title="Boutique"></i> Caddy
         </a>
     </li>
+    <?php
+            }
+    
+        ?>
     <li class="nav-item">
         <a class="nav-link" href="index.php?action=memberDetail"><i class="fas fa-user fa-2x" title="Profil"></i> Profil</a>
     </li>

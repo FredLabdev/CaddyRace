@@ -11,6 +11,10 @@
     }
 
     // On analyse la variable POST action (qui permet éventuellement de gérer plusieurs scripts de mise à jour)
+
+    //**************************************************************************************
+    // => Backend: shopView/Rayons jQuery - Sortable        
+    //**************************************************************************************
     if ($_GET['action'] == 'orderAisleGene') {
         $i = 1;
         foreach($_POST['aisleId'] as $aisleId) {
@@ -24,6 +28,9 @@
         };
     }
 
+    //**************************************************************************************
+    // => Frontend: listView/Rayons jQuery - Sortable        
+    //**************************************************************************************
     if ($_GET['action'] == 'orderAisle') {
         $i = 1;
         foreach($_POST['aisleId'] as $aisleId) {

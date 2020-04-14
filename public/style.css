@@ -926,6 +926,7 @@ input[type="checkbox"] {
     left: -9999px;
 }
 
+/*
 .item-check {
     display: block;
     position: relative;
@@ -941,13 +942,14 @@ input[type="checkbox"] {
     user-select: none;
     transition: background-color .2s, box-shadow .2s;
 }
-
+*/
 
 .item-gene {
     display: block;
     position: relative;
     margin: 3px 10px 3px 10px;
     padding: 15px 30px 15px 62px;
+    padding-left: 100px !important;
     color: black;
     box-shadow: 0 0 20px rgba(0, 0, 0, .2);
     white-space: nowrap;
@@ -985,17 +987,20 @@ input[type="checkbox"] {
     padding-left: .2rem;
     padding-right: .2rem;
     color: #fff;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
+    top: -20px;
     border: 3px solid #fff;
     border-radius: 100px;
     transition: background-color .2s;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(179, 179, 179, 1);
 }
 
-.item-check,
+.item-check::before,
 .action-button,
 .item-gene:focus,
 input[type="checkbox"]:focus + .item-check {
@@ -1005,7 +1010,7 @@ input[type="checkbox"]:focus + .item-check {
 
 .modif-btn {
     position: relative;
-    left: -70px;
+    left: -60px;
     background-color: rgba(179, 179, 179, 1);
 }
 
@@ -1047,6 +1052,9 @@ ul {
 
 .delete-btn {
     color: red;
+    position: relative;
+    left: 85px;
+    z-index: 1;
 }
 
 /***********************************************************************/
@@ -1238,7 +1246,6 @@ span.ui-icon.rss {
 
 .fam-select {
     position: relative;
-    left: 300%;
     margin-right: 7px;
 }
 
@@ -1514,6 +1521,7 @@ input.modal-closing-trick {
 
 label[for] {
     cursor: pointer;
+    left: -200px;
 }
 
 .preload * {

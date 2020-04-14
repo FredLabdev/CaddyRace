@@ -42,7 +42,7 @@ $(function () {
 });
 
 //**************************************************************************************
-// => listView/Rayons jQuery - Sortable        
+// => Backend: shopView/Rayons jQuery - Sortable        
 //**************************************************************************************
 
 $(function () {
@@ -83,6 +83,10 @@ $(function () {
     }); */
 });
 
+//**************************************************************************************
+// => Frontend: listView/Rayons jQuery - Sortable        
+//**************************************************************************************
+
 $(function () {
     $("#sortable").sortable({
         opacity: 0.8, // réduit l'opacité lors du déplacement
@@ -103,7 +107,7 @@ $(function () {
             $.ajax({
                 dataType: "html",
                 type: 'POST',
-                url: 'public/ajax.php?action=orderAisleGene',
+                url: 'public/ajax.php?action=orderAisle',
                 data: order,
                 success: function () {
                     /*alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder + " et le nouvel ordre est : " + order);*/
@@ -121,7 +125,9 @@ $(function () {
     }); */
 });
 
-// => Passage de mousse a touch sur mobile (complément touch-punch)
+//**************************************************************************************
+// => Passage de mousse a touch sur mobile (complément touch-punch) 
+//**************************************************************************************
 
 /iPad|iPhone/.test(navigator.userAgent) && (function ($) {
 

@@ -105,7 +105,7 @@ class ItemsManager extends Manager {
     
     public function pushItem($memberId, $aisleId, $itemName) {            
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO items_priv(aisle_priv_id, item_priv_name) VALUES(:aisle_priv_id, :item_priv_name) WHERE item_priv_owner_id = :member_id ');
+        $req = $db->prepare('INSERT INTO items_priv(aisle_priv_id, item_priv_name, item_priv_owner_id) VALUES(:aisle_priv_id, :item_priv_name, :member_id)');
         $req->execute(array(
             'aisle_priv_id' => $aisleId,
             'item_priv_name' => $itemName,
