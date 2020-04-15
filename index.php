@@ -108,6 +108,11 @@ try {
                  $itemName = getCleanParameter($_POST['itemName']);
                  modifItem($_SESSION['id'], $itemId, $itemName);
              }
+             // Passer/Retirer un article en panier, 
+             else if ($_GET['action'] == 'itemCheck') { 
+                 $itemId = getCleanParameter($_POST['itemId']);
+                 checkItem($_SESSION['id'], $itemId);
+             }            
              // Créer un nouveau rayon,
              else if ($_GET['action'] == 'createAisle') {
                  $aisleTitle = getCleanParameter($_POST['aisleTitle']);

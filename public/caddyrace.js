@@ -15,6 +15,15 @@ $(function () {
 });
 
 $(function () {
+    $("#accordion-caddie").accordion({
+        heightStyle: "content"
+    });
+    $("#accordion-caddie").accordion({
+        collapsible: true
+    });
+});
+
+$(function () {
     $("#accordion").accordion({
         heightStyle: "content"
     });
@@ -125,6 +134,29 @@ $(function () {
     }); */
 });
 
+                            //**************************************************************************************
+                            // => Frontend: listView/Articles jQuery - Mise en liste
+                            //**************************************************************************************
+                            /*
+                                $(function () {
+                                    $("#<?= $itemInAisle['id'] ?>").change(function(){
+                                        var value = $(this).val();
+                                        var url = $(this).attr("url"); 
+                                        $.ajax({
+                                            type: "POST",
+                                            url: 'public/ajax.php?action=itemToBuy',
+                                            data: "value="+value,        //POST variable name value
+                                            success: function () {
+                                                alert("Cet article a bien été ajouté dans votre panier");
+                                            },
+                                            error: function () {
+                                                alert('failed');
+                                            }
+                                        }); 
+                                    }); 
+                                });
+                            */
+                                
 //**************************************************************************************
 // => Passage de mousse a touch sur mobile (complément touch-punch) 
 //**************************************************************************************

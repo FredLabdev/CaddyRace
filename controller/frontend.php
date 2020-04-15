@@ -16,19 +16,31 @@ try {
         $aislesCount = $AislesManager->getAislesCount($memberId);
         $aislesTab = $AislesManager->getAislesTab($memberId);
         $itemsCountInAisleTab = array();
+        $itemsCountInAisleToBuyTab = array();
         $itemsInAisleTab  = array();
+        $itemsToBuyTab  = array();
+        $itemsToPickTab  = array();
         $aislesIconsTab  = array();
         $aislesIconsTab2  = array();
+        $aislesIconsTab3  = array();
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         foreach($aislesTab as $aisle) {
             $itemsCountInAisle = $ItemsManager->getItemsCountInAisle($memberId, $aisle['aisle_gene_refer_id']);  
             $itemsCountInAisleTab[] = $itemsCountInAisle;
+            $itemsCountInAisleToBuy = $ItemsManager->getItemsCountInAisleToBuy($memberId, $aisle['aisle_gene_refer_id']);  
+            $itemsCountInAisleToBuyTab[] = $itemsCountInAisleToBuy;
             $itemsInAisle = $ItemsManager->getItemsInAisle($memberId, $aisle['aisle_gene_refer_id']);    
             $itemsInAisleTab[] = $itemsInAisle;
+            $itemsToBuy = $ItemsManager->getItemsToBuy($memberId, $aisle['aisle_gene_refer_id']);    
+            $itemsToBuyTab[] = $itemsToBuy;
+            $itemsToPick= $ItemsManager->getItemsToPick($memberId, $aisle['aisle_gene_refer_id']);    
+            $itemsToPickTab[] = $itemsToPick;
             $aislesIcons = $AislesManager->getAislesIcons($aisle['aisle_gene_refer_id']);    
             $aislesIconsTab[] = $aislesIcons;
             $aislesIcons = $AislesManager->getAislesIcons($aisle['aisle_gene_refer_id']);    
             $aislesIconsTab2[] = $aislesIcons;
+            $aislesIcons = $AislesManager->getAislesIcons($aisle['aisle_gene_refer_id']);    
+            $aislesIconsTab3[] = $aislesIcons;
         }
         $message_success;
         $message_error;
@@ -59,6 +71,14 @@ try {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         $ItemsManager->changeItemName($memberId, $itemId, $itemName);     
         $message_success =  'Votre article a bien été modifié.';
+        $message_error = "";
+        shopList($memberId, $message_success, $message_error);
+    }
+    
+    function checkItem($memberId, $itemId) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->changeItemCheck($itemId);     
+        $message_success =  'Cet article a bien été ajouté/oté de votre panier.';
         $message_error = "";
         shopList($memberId, $message_success, $message_error);
     }

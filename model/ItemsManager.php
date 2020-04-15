@@ -92,15 +92,50 @@ class ItemsManager extends Manager {
         $req->closeCursor();
         return $itemsCountInAisle;
     }
+    
+    public function getItemsCountInAisleToBuy($memberId, $aisleId) {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND aisle_priv_id = :aisle_priv_id AND item_priv_purchase = :item_tobuy');
+        $req->execute(array(
+            'member_id' => $memberId,
+            'aisle_priv_id' => $aisleId,
+            'item_tobuy' => 1
+        ));
+        $itemsCountInAisleToBuy = $req->fetch();
+        $req->closeCursor();
+        return $itemsCountInAisleToBuy;
+    }
 
     public function getItemsInAisle($memberId, $aisleId) {
         $db = $this->dbConnect();
         $itemsInAisle = $db->prepare('SELECT * FROM items_priv WHERE item_priv_owner_id = :member_id AND aisle_priv_id = :aisle_priv_id ORDER BY item_priv_name');
         $itemsInAisle->execute(array(
             'member_id' => $memberId,
-            'aisle_priv_id' => $aisleId
+            'aisle_priv_id' => $aisleId        
         ));
         return $itemsInAisle;
+    }
+    
+    public function getItemsToBuy($memberId, $aisleId) {
+        $db = $this->dbConnect();
+        $itemsToBuy = $db->prepare('SELECT * FROM items_priv WHERE item_priv_owner_id = :member_id AND aisle_priv_id = :aisle_priv_id AND item_priv_purchase = :item_tobuy ORDER BY item_priv_name');
+        $itemsToBuy->execute(array(
+            'member_id' => $memberId,
+            'aisle_priv_id' => $aisleId,
+            'item_tobuy' => 1
+        ));
+        return $itemsToBuy;
+    }
+    
+    public function getItemsToPick($memberId, $aisleId) {
+        $db = $this->dbConnect();
+        $itemsToPick = $db->prepare('SELECT * FROM items_priv WHERE item_priv_owner_id = :member_id AND aisle_priv_id = :aisle_priv_id AND item_priv_purchase = :item_tobuy ORDER BY item_priv_name');
+        $itemsToPick->execute(array(
+            'member_id' => $memberId,
+            'aisle_priv_id' => $aisleId,
+            'item_tobuy' => 1
+        ));
+        return $itemsToPick;
     }
     
     public function pushItem($memberId, $aisleId, $itemName) {            
@@ -132,6 +167,25 @@ class ItemsManager extends Manager {
             'member_id' => $memberId,
             'item_id' => $itemId
         ));
+        $req->closeCursor();
+    }
+    
+    public function changeItemCheck($itemId) {   
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT item_priv_purchase FROM items_priv WHERE id = ?');
+        $req->execute(array($itemId)); 
+        $itemCheckStatus = $req->fetch();
+        $req->closeCursor();
+        if ($itemCheckStatus['item_priv_purchase'] == 0) {
+            $itemNewCheckStatus = 1;
+        } else {
+            $itemNewCheckStatus = 0;
+        }
+        $req = $db->prepare('UPDATE items_priv SET item_priv_purchase = :change_check WHERE id = :item_id');
+        $req->execute(array(
+            'change_check' => $itemNewCheckStatus,
+            'item_id' => $itemId
+        )); 
         $req->closeCursor();
     }
     

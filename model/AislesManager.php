@@ -104,7 +104,7 @@ class AislesManager extends Manager {
         $req->closeCursor();
         return $aislesCount;
     }
-    
+        
     public function getAislesTab($memberId) {
         $db = $this->dbConnect();
         $getAislesTab = $db->prepare('SELECT * FROM aisles_priv WHERE aisle_priv_owner_id = ? ORDER BY aisle_priv_order');

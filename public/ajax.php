@@ -13,7 +13,7 @@
     // On analyse la variable POST action (qui permet éventuellement de gérer plusieurs scripts de mise à jour)
 
     //**************************************************************************************
-    // => Backend: shopView/Rayons jQuery - Sortable        
+    // => Backend: shopView/Rayons jQuery - Sortable orderAisleGene      
     //**************************************************************************************
     if ($_GET['action'] == 'orderAisleGene') {
         $i = 1;
@@ -29,7 +29,7 @@
     }
 
     //**************************************************************************************
-    // => Frontend: listView/Rayons jQuery - Sortable        
+    // => Frontend: listView/Rayons jQuery - Sortable orderAisle       
     //**************************************************************************************
     if ($_GET['action'] == 'orderAisle') {
         $i = 1;
@@ -43,5 +43,14 @@
             $i++;
         };
     }
-
+/*
+    //**************************************************************************************
+    // => Frontend: listView/Articles jQuery - Mise en panier itemToBuy        
+    //**************************************************************************************
+    if ($_GET['action'] == 'itemToBuy') {
+        $req = $db->prepare('UPDATE items_priv SET item_priv_purchase = 1 WHERE id = ?');
+        $req->execute(array($_POST['itemId']));
+        $req->closeCursor();
+    }
+*/
 ?>
