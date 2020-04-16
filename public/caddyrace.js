@@ -258,7 +258,7 @@ $('ul.nav li.dropdown').hover(function () {
 //**************************************************************************************
 // => listView nav search autocomplete         
 //**************************************************************************************
-
+/*
 var liste = [
     "Abricot Perso",
     "Ananas Perso",
@@ -282,6 +282,22 @@ $('#recherche').autocomplete({
         }
     }
 });
+*/
+$(function(){  
+    $("#itemDescription").on('input', function() { 
+        $("#itemDescription").autocomplete({
+            source: 'public/autocomplete.php?req='+$("#itemDescription").val(),
+            select: function( event, ui ) {
+                var selectedItem = ui.item;
+                if (selectedItem.value !== '') {
+                    $(".tohide").removeClass("tohide");
+                }
+                $("#itemDescription").val(ui.item.item_priv_name);
+                $("#itemId").val(ui.item.id);
+            } 
+        }); 
+    }); 
+}); 
 
 //**************************************************************************************
 // => listView : Focus sur article à modifier au click sur icone "pencil"         

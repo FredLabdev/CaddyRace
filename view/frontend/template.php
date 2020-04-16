@@ -75,17 +75,22 @@
     <?php ob_start(); ?>
 
     <?php
-        if (isset ($_SESSION['pseudo'])) {
-            if($_SESSION['group_id'] != 1) {
-        ?>
+    if (isset ($_SESSION['pseudo'])) {
+        if($_SESSION['group_id'] != 1) {
+    ?>
+    <!--------------- Comptage total des articles en panier -------------------->
+    <span class="<?php if ((isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] == 0) || (isset($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] == 0)) {echo 'hidden';} ?> d-flex flex-row justify-content-between align-items-center">
+        <span class="caddie2 orange d-flex justify-content-center align-items-center">
+        <?php if (isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] >= 1) { echo $itemsToBuyCount['count']; } else if (isset ($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] >= 1) { echo $itemsToBuyCount2['count']; } ?>
+        </span>
+    </span>
     <li class="nav-item">
         <a class="nav-link" href="index.php?action=shopList"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-shopping-cart fa-2x" title="Boutique"></i> Caddy
         </a>
     </li>
     <?php
-            }
-    
-        ?>
+        }
+    ?>
     <li class="nav-item">
         <a class="nav-link" href="index.php?action=memberDetail"><i class="fas fa-user fa-2x" title="Profil"></i> Profil</a>
     </li>

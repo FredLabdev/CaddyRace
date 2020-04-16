@@ -24,6 +24,7 @@ try {
         $aislesIconsTab2  = array();
         $aislesIconsTab3  = array();
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $itemsToBuyCount = $ItemsManager->getItemsToBuyCount($memberId);
         foreach($aislesTab as $aisle) {
             $itemsCountInAisle = $ItemsManager->getItemsCountInAisle($memberId, $aisle['aisle_gene_refer_id']);  
             $itemsCountInAisleTab[] = $itemsCountInAisle;
@@ -264,10 +265,12 @@ try {
         require('view/backend/membersView.php');      
     }
 
-     function memberHome($message_success, $message_error, $memberDetails) {
+     function memberHome($message_success, $message_error, $memberId, $memberDetails) {
         $message_success;
         $message_error;
         $memberDetails;
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $itemsToBuyCount2 = $ItemsManager->getItemsToBuyCount2($memberId);
         require('view/frontend/profilView.php');      
     }
     
@@ -277,7 +280,7 @@ try {
         if ($template != "") {
         membersHome($message_success, $message_error, $memberDetails);            
         } else {
-        memberHome($message_success, $message_error, $memberDetails);
+        memberHome($message_success, $message_error, $memberId, $memberDetails);
         }
     }
 

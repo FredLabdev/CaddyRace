@@ -105,6 +105,30 @@ class ItemsManager extends Manager {
         $req->closeCursor();
         return $itemsCountInAisleToBuy;
     }
+    
+    public function getItemsToBuyCount($memberId) {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND item_priv_purchase = :item_tobuy');
+        $req->execute(array(
+            'member_id' => $memberId,
+            'item_tobuy' => 1
+        ));
+        $itemsToBuyCount = $req->fetch();
+        $req->closeCursor();
+        return $itemsToBuyCount;
+    }
+    
+    public function getItemsToBuyCount2($memberId) {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND item_priv_purchase = :item_tobuy');
+        $req->execute(array(
+            'member_id' => $memberId,
+            'item_tobuy' => 1
+        ));
+        $itemsToBuyCount2 = $req->fetch();
+        $req->closeCursor();
+        return $itemsToBuyCount2;
+    }
 
     public function getItemsInAisle($memberId, $aisleId) {
         $db = $this->dbConnect();

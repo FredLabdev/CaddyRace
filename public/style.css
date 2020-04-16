@@ -110,7 +110,7 @@ input[type='submit'],
 }
 
 .orange {
-    color: darkorange;
+    color: darkorange !important;
 }
 
 .bg-blue {
@@ -594,6 +594,10 @@ s .member-link {
 /***********************************************************************/
 /* listView autocomplete searchbar */
 
+.tohide {
+    visibility: hidden;
+}
+
 ul.bs-autocomplete-menu {
     position: absolute;
     top: 0;
@@ -930,7 +934,7 @@ a:visited.ui-button,
 
 .ui-accordion .ui-accordion-content {
     padding: 1em 0em;
-    background-color: lightgreen;
+    background-color: lightgrey;
 }
 
 input[type="checkbox"] {
@@ -1041,7 +1045,7 @@ input[type="checkbox"]:checked + .item-check::before {
 }
 
 .ui-widget input.to-buy {
-    background: lightgreen;
+    background: lightgrey;
     color: darkorange;
 }
 
@@ -1089,6 +1093,7 @@ ul {
     position: relative;
     left: 85px;
     z-index: 1;
+    background-color: rgba(179, 179, 179, 1);
 }
 
 /***********************************************************************/

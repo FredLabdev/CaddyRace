@@ -144,14 +144,14 @@
                 <h4 class="ray col-xs-8 col-sm-8" id="one">
                     <?= $aislesTab[$i]['aisle_priv_title'] ?>
                 </h4>
-                <!--------------- Comptage des articles en panier -------------------->
+                <!--------------- Comptage des articles du rayon en panier -------------------->
                 <span class="<?php if ($itemsCountInAisleToBuyTab[$i]['count'] == 0) {echo 'hidden';} ?> d-flex col-1 flex-row justify-content-between align-items-center">
                     <i class="fam-select orange fas item-check"></i>
                     <span class="caddie2 orange d-flex justify-content-center align-items-center">
                         <?= $itemsCountInAisleToBuyTab[$i]['count'] ?>
                     </span>
                 </span>
-                <!--------------- Comptage des articles du rayon -------------------->
+                <!--------------- Comptage des articles du rayon en magasin -------------------->
                 <span class="d-flex col-1 flex-row justify-content-between align-items-center">
                 </span>
             </div>
@@ -199,12 +199,22 @@
     <div id="list">
 
         <!-------------- Search Bar d'ajout d'un article à la liste ou si inconnu de création -------------->
-        <form class="search-bar form-inline">
+<!--    <form class="search-bar form-inline">
             <a href="#" id="addItem"><i class="tohide2 item-action fas fa-plus-circle fa-2x orange"></i></a>
             <input type="text" class="typeahead tt-query" id="recherche" placeholder="Que vous manque-t-il ?" autocomplete="off" spellcheck="false" />
             <span class="nav-item">
                 <a class="nav-link" href="#popup5" id="addList"><i class="tohide item-action fas fa-check-circle fa-2x green"></i></a>
             </span>
+        </form>
+-->                  
+        <form class="search-bar form-inline" method="post" action="index.php?action=itemCheck">
+            <p id="box"><input type="text" name="itemDescription" id="itemDescription" value="" /></p>
+            <p>
+                <input type="hidden" name="itemId" id="itemId" value="" />
+                <button type="submit" class="tohide action-button">
+                    <i class="item-action fas item-check orange"></i>
+                </button>
+            </p>
         </form>
 
         <!-------------- popup 5 -------------->
