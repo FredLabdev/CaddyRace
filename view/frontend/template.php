@@ -77,15 +77,25 @@
     <?php
     if (isset ($_SESSION['pseudo'])) {
         if($_SESSION['group_id'] != 1) {
-    ?>
-    <!--------------- Comptage total des articles en panier -------------------->
+    ?>  
+    
+    <!--------------- Comptage total des articles en caddy -------------------->
+    <span class="<?php if ((isset($itemsInCaddyCount['count']) && $itemsInCaddyCount['count'] == 0) || (isset($itemsInCaddyCount2['count']) && $itemsInCaddyCount2['count'] == 0)) {echo 'hidden';} ?> d-flex flex-row justify-content-between align-items-center">
+        <i class="fam-select fas fa-shopping-cart <?php if ((isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] == 0) || (isset ($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] == 0)) {echo 'green';} else  {echo 'white';} ?>" title="Boutique"></i>
+        <span class="items <?php if ((isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] == 0) || (isset ($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] == 0)) {echo 'green';} else  {echo 'white';} ?> d-flex justify-content-center align-items-center">
+        <?php if (isset ($itemsInCaddyCount['count']) && $itemsInCaddyCount['count'] >= 1) { echo $itemsInCaddyCount['count']; } else if (isset ($itemsInCaddyCount2['count']) && $itemsInCaddyCount2['count'] >= 1) { echo $itemsInCaddyCount2['count']; } ?>
+        </span>
+    </span>
+    
+    <!--------------- Comptage total des articles en liste -------------------->
     <span class="<?php if ((isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] == 0) || (isset($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] == 0)) {echo 'hidden';} ?> d-flex flex-row justify-content-between align-items-center">
+        <i class="fam-select fas fa-scroll orange"></i>
         <span class="caddie2 orange d-flex justify-content-center align-items-center">
         <?php if (isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] >= 1) { echo $itemsToBuyCount['count']; } else if (isset ($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] >= 1) { echo $itemsToBuyCount2['count']; } ?>
         </span>
     </span>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?action=shopList"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-shopping-cart fa-2x" title="Boutique"></i> Caddy
+        <a class="nav-link" href="index.php?action=shopList"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-shopping-cart fa-2x" title="Boutique"></i> Shoplist
         </a>
     </li>
     <?php
@@ -175,7 +185,7 @@
 
     <!-- MENU ECRANS -->
 
-    <nav class="navbar nav-ecran navbar-light bg-dark fixed-top white">
+    <nav class="navbar nav-ecran navbar-light bg-dark white">
         <span class="logo d-flex align-items-end">
             <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
             <span>addy</span>

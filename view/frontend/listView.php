@@ -10,7 +10,9 @@
 
 <!-- MESSAGES -->
 
+
 <?php
+/*
     function phpAlert($msg) {
         echo '<script type="text/javascript">alert("' . $msg . '")</script>';
     }
@@ -19,118 +21,70 @@
     } else if ($message_success) {
         phpAlert($message_success);
     }
+*/
 ?>
 
 <!-- MENU PERSO -->
 
-<div id="tabs" class="tabs">
+<div id="tabs" class="tabs bg-dark">
 
     <div class="row">
-        <nav class="list-nav navbar navbar-light bg-dark fixed-top justify-content-end">
+        <!-------------- Search Bar d'ajout d'un article à la liste ou si inconnu de création -------------->
+        <form class="search-bar col-lg-4" method="post" action="index.php?action=itemCheck">
+           <input type="text" name="itemDescription" id="itemDescription" placeholder="Que vous manque-t-il de connu, et qui ne soit pas déjà dans votre liste ?" value="" />
+            <p>
+                <input type="hidden" name="itemId" id="itemId" value="" />
+                <input type="hidden" name="sessionId" id="sessionId" value="<?php echo $_SESSION['id'] ?>" />
+                <button type="submit" class="tohide action-button">
+                    <i class="item-action fas fa-scroll orange"></i>
+                </button>
+            </p>
+        </form>
+        <nav class="col-lg-8 list-nav navbar navbar-light bg-dark justify-content-end">
             <ul class="nav nav-pills nav-stacked align-items-center">
-                <li class="nav-item ">
+                <div class="col-lg-6 after-race">
+                    <form class="form-inline" method="post" action="index.php?action=caddyToList">
+                            <input type="hidden" name="sessionId" value="<?php echo $_SESSION['id'] ?>" />
+                            <button type="submit" class="action-button2 bg-dgrey">
+                                <i class="item-action green fas fa-shopping-cart"></i>
+                                <i class="fas fa-arrow-alt-circle-right grey"></i>
+                                <i class="item-action fas fa-scroll orange"></i>
+                            </button>
+                    </form>
+                    <i class="fas fa-flag-checkered fa-2x green"></i>
+                    <form class="form-inline" method="post" action="index.php?action=caddyToShop">
+                            <input type="hidden" name="sessionId" value="<?php echo $_SESSION['id'] ?>" />
+                            <button type="submit" class="action-button2 bg-dgrey">
+                                <i class="item-action green fas fa-shopping-cart"></i>
+                                <i class="fas fa-arrow-alt-circle-right grey"></i>
+                                <i class="item-action white fas fa-th"></i>
+                            </button>
+                    </form>
+                </div>
+                <li class="col-lg-2 nav-item ">
                     <a class="nav-link liste-tab" href="#caddie"><i class="fas fa-scroll fa-2x"></i><span class="list-nav-text"> Liste</span></a>
                 </li>
-                <li class="nav-item ">
+                <li class="col-lg-2 nav-item ">
                     <a class="nav-link liste-tab" href="#list"><i class="fas fa-th fa-2x"></i><span class="list-nav-text"> Articles</span></a>
                 </li>
-                <li class="nav-item ">
+                <li class="col-lg-2 nav-item ">
                     <a class="nav-link rayons-tab" href="#aisles"><i class="fas fa-stream fa-2x"></i><span class="list-nav-text"> Rayons</span></a>
                 </li>
             </ul>
-
-            <!-------------- TODO: Search Bar d'association d'un nouvel article dans un rayon -------------->
-            <div id="raySelect" class="bg-dark">
-                <form class="search-bar form-inline" action="#">
-                    <select name="rayon" id="rayon" required>
-                        <option value="" hidden>
-                            Rangez-le dans son rayon.
-                        </option>
-                        <option class="ray-order" data-class="autr">
-                            Divers
-                        </option>
-                        <option class="ray-order" data-class="hygi">
-                            Toilette, Maquillage
-                        </option>
-                        <option class="ray-order" data-class="fari">
-                            Dessert, Farine, Compotes
-                        </option>
-                        <option class="ray-order" data-class="choc">
-                            Goûters, Chocolat
-                        </option>
-                        <option class="ray-order" data-class="conf">
-                            Confiture, Café, Thé
-                        </option>
-                        <option class="ray-order" data-class="cere">
-                            Pain, Céréales
-                        </option>
-                        <option class="ray-order" data-class="mena">
-                            Ménage, Animaux
-                        </option>
-                        <option class="ray-order" data-class="cond">
-                            Huile, Condiments, Pdts monde
-                        </option>
-                        <option class="ray-order" data-class="pate">
-                            Pâtes, Riz, Thon, Potages
-                        </option>
-                        <option class="ray-order" data-class="cons">
-                            Conserve, Plats cuisinés
-                        </option>
-                        <option class="ray-order" data-class="bois">
-                            Boissons
-                        </option>
-                        <option class="ray-order" data-class="aper">
-                            Biscuits apéritifs
-                        </option>
-                        <option class="ray-order" data-class="lait">
-                            Laitages, Oeufs
-                        </option>
-                        <option class="ray-order" data-class="surg">
-                            Surgelés
-                        </option>
-                        <option class="ray-order" data-class="frai">
-                            Charcuterie, Pâtes tarte
-                        </option>
-                        <option class="ray-order" data-class="vian">
-                            Viandes, Poissons, traiteur
-                        </option>
-                        <option class="ray-order" data-class="coup">
-                            A la coupe
-                        </option>
-                        <option class="ray-order" data-class="frui">
-                            Fruits, Légumes
-                        </option>
-                        <option class="ray-order" data-class="boul">
-                            Boulangerie
-                        </option>
-                    </select>
-                </form>
-
-                <div id="popup6" class="overlay">
-                    <div class="text-center popup popup-sm">
-                        <h3>Article créé</h3>
-                        <a class="close" href="#">&times;</a>
-                        <div class="content orange">
-                            Vous pouvez maintenant l'ajouter à votre liste !
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </nav>
     </div>
 
     <!-- TAB DE LA LISTE DE COURSES ORDONNEE PAR ARTILCES A,B,C ou RAYONS  -->
 
     <div id="caddie">
-
+        
         <!-------------- Magasin en accordéon -------------->
         <div id="accordion-caddie">
 
             <!-------------- Boucle 1ère des rayons -------------->
             <?php    
              for ($i=0; $i<$aislesCount['count']; $i++) {
-                 if ($itemsCountInAisleToBuyTab[$i]['count'] >= 1) {
+                 if (($itemsCountInAisleToBuyTab[$i]['count'] >= 1) || ($itemsCountInAisleInCadTab[$i]['count'] >= 1)) {
             ?>
             <!--------------- En-tête du rayon -------------------->
             <div class="d-flex flex-row">
@@ -144,22 +98,32 @@
                 <h4 class="ray col-xs-8 col-sm-8" id="one">
                     <?= $aislesTab[$i]['aisle_priv_title'] ?>
                 </h4>
-                <!--------------- Comptage des articles du rayon en panier -------------------->
+                <!--------------- Comptage des articles mis dans le caddy -------------------->
+                <span class="d-flex col-1 flex-row justify-content-between align-items-center">
+                    <?php 
+                    if ($itemsCountInAisleInCadTab[$i]['count'] >= 1) {
+                    ?>
+                        <i class="fam-select <?php if ($itemsCountInAisleToBuyTab[$i]['count'] == 0) {echo 'green';} else  {echo 'white';} ?> fas fa-shopping-cart"></i>
+                        <span class="items <?php if ($itemsCountInAisleToBuyTab[$i]['count'] == 0) {echo 'green';} ?>  d-flex justify-content-center align-items-center">
+                            <?= $itemsCountInAisleInCadTab[$i]['count'] ?>
+                        </span>
+                    <?php 
+                    }
+                    ?>
+                </span>
+                <!--------------- Comptage des articles du rayon en liste -------------------->
                 <span class="<?php if ($itemsCountInAisleToBuyTab[$i]['count'] == 0) {echo 'hidden';} ?> d-flex col-1 flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas item-check"></i>
+                    <i class="fam-select orange fas fa-scroll"></i>
                     <span class="caddie2 orange d-flex justify-content-center align-items-center">
                         <?= $itemsCountInAisleToBuyTab[$i]['count'] ?>
                     </span>
-                </span>
-                <!--------------- Comptage des articles du rayon en magasin -------------------->
-                <span class="d-flex col-1 flex-row justify-content-between align-items-center">
                 </span>
             </div>
             <!--------------- Contenu d'un rayon -------------------->
             <div>
                 <ul>
                     
-                    <!---------------- Boucle 2ndaire des articles en panier ---------------------->
+                    <!---------------- Boucle 2ndaire des articles en liste ---------------------->
                     <?php
                     foreach ($itemsToPickTab[$i] as $itemsToPick) {
                         if($itemsToPick['item_priv_purchase'] == 1) {
@@ -167,15 +131,15 @@
                     <li class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
 
                         <!---------------- Le nom de l'article, sa modification ---------------------->
-                        <form class="modif-form form-row col-10 col-push-1 justify-content-end align-items-center" method="post" action="index.php?action=modifItem">
+                        <form class="modif-form form-row col-10 col-push-1 justify-content-center align-items-center" method="post" action="index.php?action=modifItem">
                             <input type="hidden" name="itemId" value="<?= $itemsToPick['id'] ?>" />
                             <input type="text" name="itemName" class="col-10 to-caddy" value="<?= $itemsToPick['item_priv_name'] ?>" />
                         </form>
                         
-                          <!---------------- Ajout à la liste par chekbox cocher/décocher ---------------------->                      
-                        <form class="modif-form form-row col-lg-8 justify-content-start align-items-center to-check" method="post" action="index.php?action=itemCheck">
+                          <!---------------- Ajout au caddy par chekbox cocher ---------------------->                      
+                        <form class="modif-form form-row col-lg-8 justify-content-center align-items-center to-check" method="post" action="index.php?action=itemCaddy">
                             <input type="hidden" name="itemId" value="<?= $itemsToPick['id'] ?>" />
-                            <button type="submit" class="col-lg-12 action-button modif-btn"><i class="col-1"></i></button>
+                            <button type="submit" class="col-lg-12 action-button"><i class="col-1"></i></button>
                         </form>
                         
                     </li>
@@ -197,25 +161,6 @@
     <!-- TAB DE LA LISTE DE COURSES ORDONNEE PAR RAYONS PUIS ARTICLES COCHES EN TETE -->
 
     <div id="list">
-
-        <!-------------- Search Bar d'ajout d'un article à la liste ou si inconnu de création -------------->
-<!--    <form class="search-bar form-inline">
-            <a href="#" id="addItem"><i class="tohide2 item-action fas fa-plus-circle fa-2x orange"></i></a>
-            <input type="text" class="typeahead tt-query" id="recherche" placeholder="Que vous manque-t-il ?" autocomplete="off" spellcheck="false" />
-            <span class="nav-item">
-                <a class="nav-link" href="#popup5" id="addList"><i class="tohide item-action fas fa-check-circle fa-2x green"></i></a>
-            </span>
-        </form>
--->                  
-        <form class="search-bar form-inline" method="post" action="index.php?action=itemCheck">
-            <p id="box"><input type="text" name="itemDescription" id="itemDescription" value="" /></p>
-            <p>
-                <input type="hidden" name="itemId" id="itemId" value="" />
-                <button type="submit" class="tohide action-button">
-                    <i class="item-action fas item-check orange"></i>
-                </button>
-            </p>
-        </form>
 
         <!-------------- popup 5 -------------->
         <div id="popup5" class="overlay">
@@ -247,9 +192,9 @@
                 <h4 class="ray col-xs-8 col-sm-8" id="one">
                     <?= $aislesTab[$i]['aisle_priv_title'] ?>
                 </h4>
-                <!--------------- Comptage des articles en panier -------------------->
+                <!--------------- Comptage des articles en liste -------------------->
                 <span class="<?php if ($itemsCountInAisleToBuyTab[$i]['count'] == 0) {echo 'hidden';} ?> d-flex col-1 flex-row justify-content-between align-items-center">
-                    <i class="fam-select orange fas item-check"></i>
+                    <i class="fam-select orange fas fa-scroll"></i>
                     <span class="caddie2 orange d-flex justify-content-center align-items-center">
                         <?= $itemsCountInAisleToBuyTab[$i]['count'] ?>
                     </span>
@@ -266,24 +211,22 @@
             <div>
                 <ul>
                     
-                    <!---------------- Boucle 2ndaire des articles en panier ---------------------->
+                    <!---------------- Boucle 2ndaire des articles en liste ---------------------->
                     <?php
                     foreach ($itemsToBuyTab[$i] as $itemtoBuy) {
                         if($itemtoBuy['item_priv_purchase'] == 1) {
                     ?>
                     <li class="dropdown-item d-flex flex-row justify-content-center align-items-center" href="#">
-
-                        <!---------------- Le nom de l'article, sa modification ---------------------->
-                        <form class="modif-form form-row col-10 col-push-1 justify-content-end align-items-center" method="post" action="index.php?action=modifItem">
-                            <input type="hidden" name="itemId" value="<?= $itemtoBuy['id'] ?>" />
+                        <span class="col-1"></span>
+                        <!---------------- Le nom de l'article ---------------------->
+                        <div class="modif-form form-row col-10 offset-1 justify-content-start align-items-center" method="post" action="index.php?action=modifItem">
                             <input type="text" name="itemName" class="col-10 to-caddy" value="<?= $itemtoBuy['item_priv_name'] ?>" />
-                        </form>
-                        
-                          <!---------------- Ajout à la liste par chekbox cocher/décocher ---------------------->                      
-                        <form class="modif-form form-row col-lg-8 justify-content-start align-items-center to-check" method="post" action="index.php?action=itemCheck">
-                            <input type="hidden" name="itemId" value="<?= $itemtoBuy['id'] ?>" />
-                            <button type="submit" class="col-lg-12 action-button modif-btn"><i class="col-1"></i></button>
-                        </form>
+                            <!---------------- Ajout à la liste par chekbox cocher/décocher ---------------------->                     
+                            <form class="modif-form form-row col-lg-10 justify-content-start align-items-center to-check" method="post" action="index.php?action=itemCheck">
+                                <input type="hidden" name="itemId" value="<?= $itemtoBuy['id'] ?>" />
+                                <button type="submit" class="action-button"><i class="col-1"></i></button>
+                            </form>
+                        </div>
                         
                     </li>
                     <?php
@@ -321,13 +264,21 @@
                         if($itemInAisle['item_priv_purchase'] == 0) {
                         ?>
                           <!---------------- Ajout à la liste par chekbox cocher/décocher ---------------------->                      
-                        <form class="modif-form form-check form-row justify-content-start align-items-center" method="post" action="index.php?action=itemCheck">
+                        <form class="modif-form form-check form-row justify-content-center align-items-center" method="post" action="index.php?action=itemCheck">
                             <input type="hidden" name="itemId" value="<?= $itemInAisle['id'] ?>" />
-                            <button type="submit" class="action-button modif-btn"><i class="fas item-check"></i></button>
+                            <button type="submit" class="action-button modif-btn"><i class="fas fa-scroll"></i></button>
                         </form>
                         <?php      
-                        } ?>
-                        
+                        } else if($itemInAisle['item_priv_purchase'] == 2) {
+                        ?>
+                          <!---------------- Article déjà en caddie -> Remise en liste par chekbox cocher/décocher ---------------------->                      
+                        <form class="modif-form form-check form-row justify-content-start align-items-center" method="post" action="index.php?action=itemCheck">
+                            <input type="hidden" name="itemId" value="<?= $itemInAisle['id'] ?>" />
+                            <button type="submit" class="action-button green modif-btn"><i class="fas fa-shopping-cart"></i></button>
+                        </form>
+                        <?php      
+                        } 
+                        ?>
                     </li>
                     <?php
                     }

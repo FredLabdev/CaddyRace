@@ -17,6 +17,7 @@ try {
         $aislesTab = $AislesManager->getAislesTab($memberId);
         $itemsCountInAisleTab = array();
         $itemsCountInAisleToBuyTab = array();
+        $itemsCountInAisleInCadTab = array();
         $itemsInAisleTab  = array();
         $itemsToBuyTab  = array();
         $itemsToPickTab  = array();
@@ -25,11 +26,14 @@ try {
         $aislesIconsTab3  = array();
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         $itemsToBuyCount = $ItemsManager->getItemsToBuyCount($memberId);
+        $itemsInCaddyCount = $ItemsManager->getItemsInCaddyCount($memberId);
         foreach($aislesTab as $aisle) {
             $itemsCountInAisle = $ItemsManager->getItemsCountInAisle($memberId, $aisle['aisle_gene_refer_id']);  
             $itemsCountInAisleTab[] = $itemsCountInAisle;
             $itemsCountInAisleToBuy = $ItemsManager->getItemsCountInAisleToBuy($memberId, $aisle['aisle_gene_refer_id']);  
             $itemsCountInAisleToBuyTab[] = $itemsCountInAisleToBuy;
+            $itemsCountInAisleInCad = $ItemsManager->getItemsCountInAisleInCad($memberId, $aisle['aisle_gene_refer_id']);  
+            $itemsCountInAisleInCadTab[] = $itemsCountInAisleInCad;
             $itemsInAisle = $ItemsManager->getItemsInAisle($memberId, $aisle['aisle_gene_refer_id']);    
             $itemsInAisleTab[] = $itemsInAisle;
             $itemsToBuy = $ItemsManager->getItemsToBuy($memberId, $aisle['aisle_gene_refer_id']);    
@@ -78,8 +82,40 @@ try {
     
     function checkItem($memberId, $itemId) {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
-        $ItemsManager->changeItemCheck($itemId);     
-        $message_success =  'Cet article a bien été ajouté/oté de votre panier.';
+        $itemNewCheckStatus = $ItemsManager->changeItemCheck($itemId);   
+        if ($itemNewCheckStatus == 0) {
+            $message_success =  'Cet article a bien été retiré de votre liste.';
+        } else {
+            $message_success =  'Cet article a bien été ajouté dans votre liste.';
+        }
+        $message_error = "";
+        shopList($memberId, $message_success, $message_error);
+    }
+    
+    function caddyItem($memberId, $itemId) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $itemNewCheckStatus = $ItemsManager->putItemCaddy($itemId);   
+        if ($itemNewCheckStatus == 2) {
+            $message_success =  'Cet article a bien été déposé dans votre caddy.';
+        } else {
+            $message_success =  'Nothing was changed';
+        }
+        $message_error = "";
+        shopList($memberId, $message_success, $message_error);
+    }
+    
+    function caddyToList($memberId) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->changeItemsToList($memberId);   
+        $message_success =  'Les articles achetés ont tous été remis dans une nouvelle liste.';
+        $message_error = "";
+        shopList($memberId, $message_success, $message_error);
+    }
+    
+    function caddyToShop($memberId) {
+        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+        $ItemsManager->deleteItemsList($memberId);   
+        $message_success =  'La liste a bien été remise à zéro.';
         $message_error = "";
         shopList($memberId, $message_success, $message_error);
     }
@@ -270,7 +306,8 @@ try {
         $message_error;
         $memberDetails;
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
-        $itemsToBuyCount2 = $ItemsManager->getItemsToBuyCount2($memberId);
+        $itemsToBuyCount2 = $ItemsManager->getItemsToBuyCount($memberId);
+        $itemsInCaddyCount2 = $ItemsManager->getItemsInCaddyCount($memberId);
         require('view/frontend/profilView.php');      
     }
     

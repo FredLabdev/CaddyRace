@@ -14,9 +14,9 @@
     // => Frontend: listView jQuery - Autocomplete search item      
     //**************************************************************************************
  
-    $reponse = $bdd->prepare('SELECT * FROM items_priv WHERE item_priv_owner_id = :member_id AND item_priv_name LIKE :req'); 
+    $reponse = $bdd->prepare('SELECT * FROM items_priv WHERE item_priv_purchase = 0 AND item_priv_owner_id = :member_id AND item_priv_name LIKE :req'); 
     $reponse->execute(array(
-        'member_id' => 132,
+        'member_id' => $_GET['sessionId'],
         'req' => '%'.$_GET['req'].'%'
     )); 
     $liste = array(); 

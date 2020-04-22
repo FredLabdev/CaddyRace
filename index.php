@@ -112,7 +112,20 @@ try {
              else if ($_GET['action'] == 'itemCheck') { 
                  $itemId = getCleanParameter($_POST['itemId']);
                  checkItem($_SESSION['id'], $itemId);
-             }            
+             }   
+             // Mettre un article en caddy, 
+             else if ($_GET['action'] == 'itemCaddy') { 
+                 $itemId = getCleanParameter($_POST['itemId']);
+                 caddyItem($_SESSION['id'], $itemId);
+             }  
+             // Mettre un article en caddy, 
+             else if ($_GET['action'] == 'caddyToList') {
+                 caddyToList($_SESSION['id']);
+             } 
+             // Mettre un article en caddy, 
+             else if ($_GET['action'] == 'caddyToShop') {
+                 caddyToShop($_SESSION['id']);
+             } 
              // Créer un nouveau rayon,
              else if ($_GET['action'] == 'createAisle') {
                  $aisleTitle = getCleanParameter($_POST['aisleTitle']);

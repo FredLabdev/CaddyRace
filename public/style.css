@@ -36,10 +36,6 @@ body {
     height: 100vh;
 }
 
-main {
-    margin-top: 115px;
-}
-
 .container-fluid {
     padding-left: 0px;
     padding-right: 0px;
@@ -101,6 +97,9 @@ input[type='submit'],
     color: black;
 }
 
+.grey {
+    color: lightgray;
+}
 .white {
     color: white;
 }
@@ -127,6 +126,10 @@ input[type='submit'],
 
 .bg-grey {
     background-color: lightgray;
+}
+
+.bg-dgrey {
+    background-color: #343A40;
 }
 
 .bg-green {
@@ -708,12 +711,6 @@ ul.bs-autocomplete-menu a {
 /***********************************************************************/
 /* listView Nav */
 
-.list-nav {
-    top: 115px;
-    flex-wrap: nowrap;
-}
-
-.search-bar,
 .screen-avert {
     position: fixed;
     top: 126px;
@@ -721,10 +718,25 @@ ul.bs-autocomplete-menu a {
     z-index: 1040;
 }
 
+.search-bar {
+    display: flex;
+    padding: .5rem 1rem;
+}
+
+.after-race {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.after-race > form, .after-race > i {
+    margin-right: 7px;
+}
+
 .search-bar input,
 .search-bar select,
 .ui-selectmenu-button.ui-button {
-    width: 500px;
+    width: 700px;
     height: 55px;
 }
 
@@ -744,14 +756,6 @@ ul.bs-autocomplete-menu a {
 }
 
 #items-admin,
-#list,
-#caddie,
-#aisles-admin,
-#aisles {
-    margin-top: 80px;
-}
-
-#items-admin,
 #aisles-admin {
     background-color: darkorange;
 }
@@ -764,18 +768,6 @@ ul.bs-autocomplete-menu a {
 #addItem,
 #addItem-Admin {
     padding: .5rem .5rem;
-}
-
-#raySelect,
-#raySelect-Admin {
-    width: 100%;
-    position: absolute;
-    z-index: 1;
-    top: 75px;
-    left: 0px;
-    display: flex;
-    align-items: center;
-    display: none;
 }
 
 .liste-tab:hover,
@@ -889,14 +881,21 @@ ul.bs-autocomplete-menu a {
 a.ui-button:active,
 .ui-button:active,
 .ui-button.ui-state-active:hover,
+#accordion-caddie > .ui-state-active > span:nth-child(3) + h4 + span > i ,
 .ui-widget-content .ui-state-active > span:nth-child(6) > i {
     color: #555555;
     background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
 }
 
+#accordion-caddie > .ui-state-active > span:nth-child(3) + h4 + span > i + span,
 .ui-widget-content .ui-state-active > span:nth-child(6) > i + span {
     border: 3px solid #555555;
 }
+
+#accordion-caddie > .ui-state-active > span:nth-child(3) + h4 + span > i + span.items.green {
+    color: #555555;
+}
+
 
 .ui-widget-header,
 .ui-widget-header .ui-state-default {
@@ -928,6 +927,10 @@ a:visited.ui-button,
 .ui-icon-triangle-1-e {
     background-position: -62px -16px;
 }
+
+/***********************************************************************/
+/* listView - tabs */
+
 
 /***********************************************************************/
 /* listView - items checkbox */
@@ -982,12 +985,33 @@ input[type="checkbox"] {
     text-align: center;
 }
 
+.action-button2 {
+    border-radius: 100px;
+    height: 40px;
+    width: 120px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+    cursor: pointer;
+    border: 5px solid lightgray;
+    border-style: outset;
+}
+
+.action-button2 > i {
+    width: 40px;
+}
+
 .items {
     border: 3px solid #fff;
 }
 
+.items.green {
+    border: 3px solid #82EF9E;
+}
+
 .caddie2 {
-    border: 3px solid darkorange;
+    border: 3px solid darkorange !important;
 }
 
 .caddie3 {
@@ -1037,7 +1061,6 @@ input[type="checkbox"]:checked + .item-check::before {
     background-color: darkorange;
     margin: 3px 10px 3px 10px;
     padding: 15px 30px 15px 62px;
-    left: -109px;
     white-space: nowrap;
     text-align: center;
     border-radius: 100px;
@@ -1053,12 +1076,14 @@ input[type="checkbox"]:checked + .item-check::before {
     position: absolute;
     z-index: 2;
     height: 50px;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
 }
 
 .to-check > button {
     background: none;
-    left: -20px;
     height: 50px;
+    width: 100%;
 }
 
 .dropdown-item:active,
@@ -1959,12 +1984,6 @@ label[for] {
     .ui-accordion-header-icon,
     i.fas.fa-sort {
         display: none;
-    }
-
-    #raySelect,
-    #raySelect-Admin {
-        top: 60px;
-        height: 60px;
     }
 
     .item-gene {

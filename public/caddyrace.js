@@ -286,7 +286,8 @@ $('#recherche').autocomplete({
 $(function(){  
     $("#itemDescription").on('input', function() { 
         $("#itemDescription").autocomplete({
-            source: 'public/autocomplete.php?req='+$("#itemDescription").val(),
+            placeholder: 'Que vous manque-t-il ?',
+            source: 'public/autocomplete.php?sessionId='+$("#sessionId").val()+'&req='+$("#itemDescription").val(),
             select: function( event, ui ) {
                 var selectedItem = ui.item;
                 if (selectedItem.value !== '') {
@@ -298,6 +299,32 @@ $(function(){
         }); 
     }); 
 }); 
+
+//**************************************************************************************
+// => exitView - Interactions pour la déconnexion         
+//**************************************************************************************
+
+    function deconnect_confirm() {
+        if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
+            document.location.href = "index.php?action=deconnexion";
+            return true;
+        } else {
+            alert("Je me disais aussi...");
+            return false;
+        }
+    }
+    if (document.getElementById("deconnexion")) {
+        document.getElementById("deconnexion").addEventListener('click', function (e) {
+            e.preventDefault();
+            deconnect_confirm();
+        });
+    }
+    else if (document.getElementById("deconnexion")) {
+        document.getElementById("deconnexion_xs").addEventListener('click', function (e) {
+            e.preventDefault();
+            deconnect_confirm();
+        });
+    }
 
 //**************************************************************************************
 // => listView : Focus sur article à modifier au click sur icone "pencil"         
@@ -564,35 +591,3 @@ if ((window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/ind
     }, false);
 
 }
-
-//**************************************************************************************
-// => exitView - Interactions pour la déconnexion         
-//**************************************************************************************
-
-if ((window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=home") === -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=connexion") === -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=deconnexion") === -1)) {
-    /*
-    remplacer tous les liens par les liens en ligne =>
-    "https://fredlabourel.fr/caddyrace/index.php?action=..."
-    */
-    function deconnect_confirm() {
-        if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
-            document.location.href = "index.php?action=deconnexion";
-            return true;
-        } else {
-            alert("Je me disais aussi...");
-            return false;
-        }
-    }
-    if (document.getElementById("deconnexion")) {
-        document.getElementById("deconnexion").addEventListener('click', function (e) {
-            e.preventDefault();
-            deconnect_confirm();
-        });
-    }
-    else if (document.getElementById("deconnexion")) {
-        document.getElementById("deconnexion_xs").addEventListener('click', function (e) {
-            e.preventDefault();
-            deconnect_confirm();
-        });
-    }
-} 

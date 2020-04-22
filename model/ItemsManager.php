@@ -106,6 +106,19 @@ class ItemsManager extends Manager {
         return $itemsCountInAisleToBuy;
     }
     
+    public function getItemsCountInAisleInCad($memberId, $aisleId) {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND aisle_priv_id = :aisle_priv_id AND item_priv_purchase = :item_incaddy');
+        $req->execute(array(
+            'member_id' => $memberId,
+            'aisle_priv_id' => $aisleId,
+            'item_incaddy' => 2
+        ));
+        $itemsCountInAisleInCad = $req->fetch();
+        $req->closeCursor();
+        return $itemsCountInAisleInCad;
+    }
+    
     public function getItemsToBuyCount($memberId) {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND item_priv_purchase = :item_tobuy');
@@ -118,16 +131,16 @@ class ItemsManager extends Manager {
         return $itemsToBuyCount;
     }
     
-    public function getItemsToBuyCount2($memberId) {
+    public function getItemsInCaddyCount($memberId) {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND item_priv_purchase = :item_tobuy');
+        $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND item_priv_purchase = :item_incaddy');
         $req->execute(array(
             'member_id' => $memberId,
-            'item_tobuy' => 1
+            'item_incaddy' => 2
         ));
-        $itemsToBuyCount2 = $req->fetch();
+        $itemsInCaddyCount = $req->fetch();
         $req->closeCursor();
-        return $itemsToBuyCount2;
+        return $itemsInCaddyCount;
     }
 
     public function getItemsInAisle($memberId, $aisleId) {
@@ -200,7 +213,7 @@ class ItemsManager extends Manager {
         $req->execute(array($itemId)); 
         $itemCheckStatus = $req->fetch();
         $req->closeCursor();
-        if ($itemCheckStatus['item_priv_purchase'] == 0) {
+        if (($itemCheckStatus['item_priv_purchase'] == 0) || ($itemCheckStatus['item_priv_purchase'] == 2)) {
             $itemNewCheckStatus = 1;
         } else {
             $itemNewCheckStatus = 0;
@@ -209,6 +222,48 @@ class ItemsManager extends Manager {
         $req->execute(array(
             'change_check' => $itemNewCheckStatus,
             'item_id' => $itemId
+        )); 
+        $req->closeCursor();
+        return $itemNewCheckStatus;
+    }
+    
+    public function putItemCaddy($itemId) {   
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT item_priv_purchase FROM items_priv WHERE id = ?');
+        $req->execute(array($itemId)); 
+        $itemCheckStatus = $req->fetch();
+        $req->closeCursor();
+        if ($itemCheckStatus['item_priv_purchase'] == 1) {
+            $itemNewCheckStatus = 2;
+        } else {
+            $itemNewCheckStatus = 0;
+        }
+        $req = $db->prepare('UPDATE items_priv SET item_priv_purchase = :change_check WHERE id = :item_id');
+        $req->execute(array(
+            'change_check' => $itemNewCheckStatus,
+            'item_id' => $itemId
+        )); 
+        $req->closeCursor();
+        return $itemNewCheckStatus;
+    }
+    
+    public function changeItemsToList($memberId) {   
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE items_priv SET item_priv_purchase = :change_check WHERE item_priv_owner_id = :member_id AND item_priv_purchase = :former_check');
+        $req->execute(array(
+            'change_check' => 1,
+            'member_id' => $memberId,
+            'former_check' => 2
+        )); 
+        $req->closeCursor();
+    }
+        
+    public function deleteItemsList($memberId) {   
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE items_priv SET item_priv_purchase = :change_check WHERE item_priv_owner_id = :member_id');
+        $req->execute(array(
+            'change_check' => 0,
+            'member_id' => $memberId,
         )); 
         $req->closeCursor();
     }
