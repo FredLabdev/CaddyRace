@@ -155,6 +155,8 @@ input[type='submit'],
 
 .logo {
     height: 100px;
+    position: relative;
+    top: -15px;
 }
 
 .logo img {
@@ -180,6 +182,12 @@ input[type='submit'],
 .nav-link {
     font-weight: bold;
     color: white;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    display: flex;
+    justify-content: center;
+    margin: 0px;
 }
 
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
@@ -208,6 +216,11 @@ input[type='submit'],
     color: darkorange;
 }
 
+.dropdown-item {
+    display: flex;
+    justify-content: center;
+}
+
 .dropdown-menu {
     overflow: auto;
 }
@@ -220,6 +233,10 @@ input[type='submit'],
     border-radius: 100%;
     background-color: darkorange;
     font-weight: bold;
+}
+
+.dropdown-menu.show {
+    display: block;
 }
 
 /***********************************************************************/
@@ -718,25 +735,29 @@ ul.bs-autocomplete-menu a {
     z-index: 1040;
 }
 
+.dropdown-menu {
+    background-color: #343a40;
+    min-width: none;
+}
+
+.dropdown-toggle {
+    display: flex;
+    justify-content: center;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
 .search-bar {
     display: flex;
-    padding: .5rem 1rem;
-}
-
-.after-race {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-
-.after-race > form, .after-race > i {
-    margin-right: 7px;
+    padding: .5rem 1rem;
 }
 
 .search-bar input,
 .search-bar select,
 .ui-selectmenu-button.ui-button {
-    width: 700px;
     height: 55px;
 }
 
@@ -924,8 +945,10 @@ a:visited.ui-button,
     color: #fff;
 }
 
-.ui-icon-triangle-1-e {
+.ui-icon-triangle-1-e,
+.ui-icon-triangle-1-s {
     background-position: -62px -16px;
+    display: none;
 }
 
 /***********************************************************************/
@@ -934,6 +957,10 @@ a:visited.ui-button,
 
 /***********************************************************************/
 /* listView - items checkbox */
+
+.ui-widget input[placeholder] {
+    padding-left: 5px !important;
+}
 
 .ui-accordion .ui-accordion-content {
     padding: 1em 0em;
@@ -974,6 +1001,7 @@ input[type="checkbox"] {
     white-space: nowrap;
     user-select: none;
     transition: background-color .2s, box-shadow .2s;
+    padding-left: 50px !important;
 }
 
 .items,
@@ -983,6 +1011,7 @@ input[type="checkbox"] {
     height: 40px;
     width: 40px;
     text-align: center;
+    padding: 7px;
 }
 
 .action-button2 {
@@ -1014,16 +1043,6 @@ input[type="checkbox"] {
     border: 3px solid darkorange !important;
 }
 
-.caddie3 {
-    position: relative;
-    top: -10px;
-    border: 3px solid darkorange;
-    padding: 2px;
-    margin-left: 15px;
-    border-radius: 100px;
-    color: #fff;
-}
-
 .item-check::before {
     content: "\f07a";
     font-family: 'FontAwesome';
@@ -1045,7 +1064,6 @@ input[type="checkbox"]:focus + .item-check {
 .form-check {
     margin-right: -53px;
     top: 7px;
-    left: -100px;
 }
 
 input[type="checkbox"]:checked + .item-check {
@@ -1076,8 +1094,6 @@ input[type="checkbox"]:checked + .item-check::before {
     position: absolute;
     z-index: 2;
     height: 50px;
-    padding-right: 15px !important;
-    padding-left: 15px !important;
 }
 
 .to-check > button {
@@ -1097,8 +1113,10 @@ input[type="checkbox"]:checked + .item-check::before {
     left: 60%;
 }
 
-.form-row {
+.form-row>[class*=col-] {
     flex-wrap: nowrap;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .delete-form {
@@ -1303,15 +1321,12 @@ span.ui-icon.rss {
 }
 
 .ray,
-.ray-order,
-.fam-select {
+.ray-order {
     margin: auto
 }
 
 .fam-select {
     position: relative;
-    margin-right: 7px;
-    margin-left: 7px;
 }
 
 #newAisleGene {
@@ -1610,6 +1625,212 @@ label[for] {
 /* ======================================================================= */
 /* ======================================================================= */
 
+@media all and (min-width: 768px) {
+    #tabs > .row > .fixed-top {
+        position: relative;
+    }
+    
+}
+
+@media all and (max-width: 1199px) {
+    
+    /***********************************************************************/
+    /* Navbar */
+    
+    .list-nav-text {
+        display: none;
+    }
+    
+}
+
+
+@media all and (max-width: 847px) {
+    
+    /***********************************************************************/
+    /* Navbar */
+    
+    .nav-ecran > ul {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    /* ******************************************************************** */
+    /*                                   BURGER                             */
+    /* ******************************************************************** */
+
+    .mobile-menu::before {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: flex !important;
+        justify-content: center;
+        cursor: pointer;
+        transition-property: opacity, filter;
+        transition-duration: 0.15s;
+        transition-timing-function: linear;
+        font-family: inherit;
+        font-size: inherit;
+        font-style: inherit;
+        font-variant-caps: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        line-height: inherit;
+        color: inherit;
+        text-transform: none;
+        background-color: transparent;
+        border-top-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width: 0px;
+        border-left-width: 0px;
+        border-top-style: initial;
+        border-right-style: initial;
+        border-bottom-style: initial;
+        border-left-style: initial;
+        border-top-color: initial;
+        border-right-color: initial;
+        border-bottom-color: initial;
+        border-left-color: initial;
+        border-image-source: initial;
+        border-image-slice: initial;
+        border-image-width: initial;
+        border-image-outset: initial;
+        border-image-repeat: initial;
+        margin: 0;
+        overflow-x: visible;
+        overflow-y: visible;
+        outline-color: initial;
+        outline-style: none;
+        outline-width: initial;
+        position: relative;
+        right: -15px;
+        padding: 7px 5px;
+    }
+    
+    .mobile-menu .hamburger-box {
+        width: 24px;
+    }
+    
+    .mobile-menu .hamburger-inner {
+        display: block;
+        top: 50%;
+        margin-top: -2px;
+    }
+
+    /*                           3 BARRES                             */
+    /* ************************************************************** */
+    
+    .mobile-menu .hamburger-inner, .mobile-menu .hamburger-inner::before, .mobile-menu .hamburger-inner::after {
+        width: 24px;
+        height: 2px;
+        background-color: rgb(255, 255, 255);
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        position: absolute;
+        transition-property: transform;
+        transition-duration: 0.15s;
+        transition-timing-function: ease;
+    }
+    
+    .mobile-menu .hamburger-inner {
+        transition-duration: 0.22s;
+        transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+   
+    /*                       BARRES HAUTE ET BASSE                    */
+    /* ************************************************************** */
+    
+    ::after, ::before {
+        box-sizing: inherit;
+    }
+    
+    .mobile-menu .hamburger-inner::before, .mobile-menu .hamburger-inner::after {
+        content: "";
+        display: block;
+    }
+
+    /*                           BARRE HAUTE                          */
+    /* ************************************************************** */
+    
+    .mobile-menu .hamburger-inner::before {
+        top: -7px;
+    }
+    
+    .mobile-menu .hamburger-inner::before {
+        transition-duration: 0.1s, 0.1s;
+        transition-timing-function: ease-in, ease-in;
+        transition-delay: 0.25s, initial;
+        transition-property: top, opacity;
+    }
+   
+    /*                           BARRE BASSE                          */
+    /* ************************************************************** */
+  
+    .mobile-menu .hamburger-inner::after {
+        bottom: -7px;
+    }
+    
+    .mobile-menu .hamburger-inner::after {
+        transition-duration: 0.1s, 0.22s;
+        transition-timing-function: ease-in, cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        transition-delay: 0.25s, initial;
+        transition-property: bottom, transform;
+    }
+
+    /*                   MENU OUVERT = CROIX CLOSED                   */
+    /* ************************************************************** */
+    
+    .mobile-menu.closed:hover {
+        background: #18191b !important;
+    }
+    
+    .mobile-menu.closed .hamburger-inner {
+        background-color: rgba(106, 57, 245, 1);
+        transform: rotate(225deg);
+        transition-delay: 0.12s;
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    
+    .mobile-menu.closed .hamburger-inner::before {
+        top: 0px;
+        background-color: rgb(74, 155, 207);
+        opacity: 0;
+        transition-duration: 0.1s, 0.1s;
+        transition-timing-function: ease-out, ease-out;
+        transition-delay: initial, 0.12s;
+        transition-property: top, opacity;
+    }
+    
+    .mobile-menu.closed .hamburger-inner::after {
+        bottom: 0px;
+        background-color: rgb(74, 155, 207);
+        transform: rotate(-90deg);
+        transition-duration: 0.1s, 0.22s;
+        transition-timing-function: ease-out, cubic-bezier(0.215, 0.61, 0.355, 1);
+        transition-delay: initial, 0.12s;
+        transition-property: bottom, transform;
+    }
+    
+    /***********************************************************************/
+    /* ListView */
+    
+    .items,
+    .action-button,
+    .caddie2 {
+        width: 27px;
+        height: 27px;
+    }
+    
+    .items,
+    .caddie2,
+    .delete-btn {
+        transform: scale(0.7);
+    }
+    
+}
+
 @media all and (max-width: 768px) {
 
     /***********************************************************************/
@@ -1627,6 +1848,14 @@ label[for] {
     /***********************************************************************/
     /* Navbar */
 
+    .logo {
+        top: 0px;
+    }
+    
+    .fa-2x {
+        font-size: 1.5em;
+    }
+    
     .menu-xs {
         padding-left: 0px;
     }
@@ -1637,9 +1866,23 @@ label[for] {
         z-index: 2;
     }
 
+    button.navbar-toggler,
+    button.navbar-toggler > .navbar-brand,
+    button.navbar-toggler > .navbar-menu,
+    button.navbar-toggler > .navbar-descript {
+        margin-right: 0px; 
+        margin-left: 0px;
+        padding-right: 0px; 
+        padding-left: 0px;
+    }
+    
     .navbar {
         height: auto;
         padding: 0px;
+    }
+    
+    .nav-smartphone {
+        border-bottom: 1px solid orange;
     }
 
     .navbar-toggler {
@@ -1668,10 +1911,15 @@ label[for] {
     .navbar-brand .logo img:nth-child(3n) {
         padding-bottom: 7px;
     }
+    
+    .navbar-brand .logo span:nth-child(4n) {
+        position: relative;
+        left: -3px;
+    }
 
     .navbar-brand .logo span {
         font-family: 'Orbitron', serif;
-        font-size: 2.2em;
+        font-size: 1.5em;
         font-stretch: ultra-expanded;
     }
 
@@ -1693,7 +1941,22 @@ label[for] {
         left: 50px;
         top: -10px;
     }
+    
+    .navbar-menu {
+        padding-bottom: 10px;
+    }
 
+    .navbar-descript {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .navbar-descript > span {
+        font-size: 0.4em;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
     /***********************************************************************/
     /* Footer */
 
@@ -1901,36 +2164,34 @@ label[for] {
     /***********************************************************************/
     /* List View */
 
-    .list-nav {
-        top: 50px;
-        height: 60px;
-    }
-
-    .list-nav-text {
-        display: none;
-    }
-
     .tabs {
         z-index: 0;
     }
 
+    #tabs > .row > .fixed-top {
+        top: 50px;
+    }
+    
+    #caddie, #list, #aisles {
+        position: relative;
+        top: 54px;
+    }
+    
+    .dropdown, .dropleft, .dropright, .dropup {
+        left: 5px;
+    }
+    
     .dropdown-item {
         padding: .25rem 0.25rem;
-        margin-left: 2.5%;
     }
 
-    .new-item {
-        margin-left: 2.5%;
+    .dropdown-toggle > span {
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     .familles {
         height: 500px;
-    }
-
-    .search-bar {
-        flex-flow: nowrap;
-        top: 62px;
-        left: 10px;
     }
 
     .screen-avert {
@@ -1948,13 +2209,6 @@ label[for] {
         margin-left: 46px;
     }
 
-    #items-admin,
-    #list,
-    #aisles-admin,
-    #aisles {
-        margin-top: 60px;
-    }
-
     .rayons-org {
         height: 540px;
         overflow: scroll;
@@ -1962,6 +2216,12 @@ label[for] {
 
     .ui-accordion .ui-accordion-header {
         height: 50px;
+        padding-top: 0px;
+    }
+    
+    .ui-accordion .ui-accordion-header > span {
+        padding-left: 0px;
+        margin: auto;
     }
 
     html > body .sortable li,
@@ -1970,7 +2230,8 @@ label[for] {
     }
 
     .ray {
-        font-size: 1.3em;
+        font-size: 1.1em;
+        padding-left: 0px;
     }
 
     .ray-order {
@@ -1986,32 +2247,36 @@ label[for] {
         display: none;
     }
 
+    .ui-accordion-content > ul {
+        position: relative;
+        left: -15%;
+    }
+    
     .item-gene {
         padding: 7px 5px 7px 5px;
         margin: 0px;
         width: 700px;
-    }
-
-    .action-button,
-    .caddie2 {
-        width: 27px;
-        height: 27px;
+        padding-left: 40px !important;
     }
 
     .modif-form {
-        padding-left: 0px;
         padding-right: 0px;
-        width: 110%;
         font-size: 0.8em;
+    }
+    
+    .modif-form:not(.form-check){
+        padding-left: 0px;
     }
 
     .modif-btn {
         left: -35px;
+        transform: scale(0.7);
     }
 
     .fam-select {
         padding-left: 0px;
         left: 0%;
+        transform: scale(0.7);
     }
 
     #newAisleGene {
@@ -2024,7 +2289,10 @@ label[for] {
         margin-right: 10px;
         margin-left: 10px;
     }
-
+    
+    .delete-btn {
+        left: 40px;
+    }
 
     .aisles-icons > span {
         padding: 0px;
@@ -2035,6 +2303,10 @@ label[for] {
 
     .aisles-icons {
         height: 2em;
+    }
+    
+    .famIcon {
+        transform: scale(0.6);
     }
 
     .famIcon1,
@@ -2133,7 +2405,7 @@ label[for] {
     .rayon-num,
     .ray {
         padding-right: 2px;
-        font-size: 1em;
+        font-size: 0.8em;
     }
 
     .ray-order {
@@ -2147,6 +2419,11 @@ label[for] {
 
     .ui-widget input {
         font-size: 0.9em;
+    }
+    
+    .navbar-descript > span {
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
 

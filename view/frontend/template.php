@@ -78,22 +78,6 @@
     if (isset ($_SESSION['pseudo'])) {
         if($_SESSION['group_id'] != 1) {
     ?>  
-    
-    <!--------------- Comptage total des articles en caddy -------------------->
-    <span class="<?php if ((isset($itemsInCaddyCount['count']) && $itemsInCaddyCount['count'] == 0) || (isset($itemsInCaddyCount2['count']) && $itemsInCaddyCount2['count'] == 0)) {echo 'hidden';} ?> d-flex flex-row justify-content-between align-items-center">
-        <i class="fam-select fas fa-shopping-cart <?php if ((isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] == 0) || (isset ($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] == 0)) {echo 'green';} else  {echo 'white';} ?>" title="Boutique"></i>
-        <span class="items <?php if ((isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] == 0) || (isset ($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] == 0)) {echo 'green';} else  {echo 'white';} ?> d-flex justify-content-center align-items-center">
-        <?php if (isset ($itemsInCaddyCount['count']) && $itemsInCaddyCount['count'] >= 1) { echo $itemsInCaddyCount['count']; } else if (isset ($itemsInCaddyCount2['count']) && $itemsInCaddyCount2['count'] >= 1) { echo $itemsInCaddyCount2['count']; } ?>
-        </span>
-    </span>
-    
-    <!--------------- Comptage total des articles en liste -------------------->
-    <span class="<?php if ((isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] == 0) || (isset($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] == 0)) {echo 'hidden';} ?> d-flex flex-row justify-content-between align-items-center">
-        <i class="fam-select fas fa-scroll orange"></i>
-        <span class="caddie2 orange d-flex justify-content-center align-items-center">
-        <?php if (isset ($itemsToBuyCount['count']) && $itemsToBuyCount['count'] >= 1) { echo $itemsToBuyCount['count']; } else if (isset ($itemsToBuyCount2['count']) && $itemsToBuyCount2['count'] >= 1) { echo $itemsToBuyCount2['count']; } ?>
-        </span>
-    </span>
     <li class="nav-item">
         <a class="nav-link" href="index.php?action=shopList"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-shopping-cart fa-2x" title="Boutique"></i> Shoplist
         </a>
@@ -234,19 +218,25 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar">
-            <button class="navbar-toggler container-fluid justify-content-around align-items-center bg-dark" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="navbar-brand">
-                    <span class="logo white">
-                        <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
-                        <span>addy</span>
-                        <img src="public/picture/brand/caddy-icon-R-15x12-white.png" alt="caddy picture" />
-                        <span>ace</span>
-                    </span>
-                </div>
-                <span class="menu orange">Menu</span>
-                <span class="caddie3">128</span>
-            </button>
+        <nav class="navbar nav-smartphone">
+
+                <button class="row navbar-toggler container-fluid justify-content-center align-items-center bg-dark" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="col-4 navbar-brand">
+                        <span class="logo white">
+                            <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
+                            <span>addy</span>
+                            <img src="public/picture/brand/caddy-icon-R-15x12-white.png" alt="caddy picture" />
+                            <span>ace</span>
+                        </span>
+                    </div>
+                    <div class="col-3 navbar-menu orange"><span id="mobile-menu" class="mobile-menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></span></div>
+                    <div class="col-5 navbar-descript">
+                        <span class="menu white">Liste</span>
+                        <span class="menu white">Articles</span>
+                        <span class="menu white">Rayons</span>
+                    </div>
+                </button>
+
         </nav>
     </div>
 
