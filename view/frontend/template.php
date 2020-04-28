@@ -1,3 +1,7 @@
+<!--********************************************************************************-->
+<!--********************************** TEMPLATE ************************************-->
+<!--********************************************************************************-->
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -49,7 +53,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bibliothèque CSS jQuery UI -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <!-- Bibliothèque CSS perso -->
     <link href="public/style.css" rel="stylesheet" />
 </head>
@@ -70,105 +73,48 @@
         </div>
     </noscript>
 
-    <!-- UL DU NAV (COMMUN) -->
-
+    <!-- UL DU NAV (COMMUN ORDIS & SMARTPHONES) -->
     <?php ob_start(); ?>
 
-    <?php
-    if (isset ($_SESSION['pseudo'])) {
-        if($_SESSION['group_id'] != 1) {
-    ?>  
+    <!-------------- Menu Membre uniquement -------------->
+    <?php if (isset ($_SESSION['group_id']) && $_SESSION['group_id'] != 1) { ?>  
     <li class="nav-item">
         <a class="nav-link" href="index.php?action=shopList"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-shopping-cart fa-2x" title="Boutique"></i> Shoplist
         </a>
     </li>
-    <?php
-        }
-    ?>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?action=aislesList"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-stream fa-2x" title="Rayons"></i> Rayons
+        </a>
+    </li>
     <li class="nav-item">
         <a class="nav-link" href="index.php?action=memberDetail"><i class="fas fa-user fa-2x" title="Profil"></i> Profil</a>
     </li>
-    <?php
-            if($_SESSION['group_id'] != 3) {
-        ?>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cloud fa-2x" title="Admin"></i> Admin</a>
-
-        <!-- ADMIN SEULEMENT: AVIS SIGNALES -->
-
-        <?php
-    if (($_SESSION['group_id'] == 1 || $_SESSION['group_id'] == 2) && $signalComments) {
-    ?>
-
-        <div class="alert alert-admin black">
-            <a href="#popup4">
-                <i class="fas fa-exclamation-circle fa-2x red"></i>
-            </a>
-            <div id="popup4" class="overlay">
-                <div class="popup">
-                    <h3 class="text-center">Avis signalés</h3>
-                    <a class="close" href="#">&times;</a>
-                    <div class="comments-content-signaled col-xs-10">
-                        <?php
-                    foreach($signalComments as $signalComment) {
-                ?>
-                        <div class="row justify-content-around">
-                            <span class="col-md-auto orange"><i class="fas fa-exclamation-circle"></i> signalé le
-                                <?= $signalComment['signal_date_fr']; ?> par
-                                <strong>
-                                    <?= $signalComment['signal_author']; ?></strong>
-                            </span>
-                            <span class="col-md-auto">
-                                <strong>
-                                    <?= $signalComment['author']; ?>
-                                </strong>
-                                <span>
-                                    le
-                                    <?= $signalComment['comment_date_fr']; ?>
-                                </span>
-                            </span>
-                        </div>
-                        <p class="alert alert-info row col-xs-12">
-                            <?= nl2br(htmlspecialchars($signalComment['comment'])); ?>
-                        </p>
-
-                        <!-- BOUTON SUPPRIMER UN COMMENTAIRE (uniquement si admin, modérateur, ou posté par sois-meme)-->
-
-                        <div class="boutons row">
-                            <form class="offset-lg-7" action="index.php?action=deleteComment" method="post">
-                                <input type="hidden" name="delete_comment" value="<?= $signalComment['id'] ?>" />
-                                <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash-alt"></i> Supprimer</button>
-                            </form>
-                            <a href="index.php?action=post&amp;billet=<?= $signalComment['post_id']; ?>" class="btn btn-primary btn-sm">Accéder à l'avis complet <i class="fab fa-readme"></i></a>
-
-                        </div>
-                        <?php
-                    }
-                ?>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <?php
-    }
-    ?>
-        <div class="dropdown-menu">
-            <a class="dropdown-item nav-link" href="index.php?action=shopAdmin"><i class="fas fa-barcode fa-2x"></i> Boutique</a>
-            <a class="dropdown-item nav-link" href="index.php?action=membersDetail"><i class="fas fa-users-cog fa-2x"></i> Membres</a>
-        </div>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?action=home" title="Demo"><i class="far fa-eye fa-2x"></i> Démo</a>
     </li>
-    <?php
-            }
-        } 
-        ?>
 
-    <?php $ul = ob_get_clean(); ?>
+    <!-------------- Menu Admin uniquement -------------->
+    <?php } else if (isset ($_SESSION['group_id']) && $_SESSION['group_id'] == 1) { ?>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?action=memberDetail"><i class="fas fa-user fa-2x" title="Profil"></i> Profil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?action=shopAdmin"><i class="fas fa-barcode fa-2x"></i> Boutique</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?action=aislesAdmin"><i class="fas fa-stream fa-2x" title="Rayons"></i> Rayons</a>
+    </li>
+        <li class="nav-item">
+        <a class="nav-link" href="index.php?action=membersDetail"><i class="fas fa-users-cog fa-2x"></i> Membres</a>
+    </li>
+    <?php } if (isset ($_SESSION['group_id'])) {
+                $ul = ob_get_clean(); 
+          } ?>
 
+    <!-- MENUS ORDIS & SMARTPHONES -->
     <?php ob_start(); ?>
-
-    <!-- MENU ECRANS -->
-
+    
+    <!-- MENUS ORDIS -->
     <nav class="navbar nav-ecran navbar-light bg-dark white">
         <span class="logo d-flex align-items-end">
             <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
@@ -177,75 +123,68 @@
             <span>ace</span>
         </span>
         <ul class="nav nav-pills nav-stacked align-items-center">
-            <?= $ul ?>
-            <?php
-                if (isset ($_SESSION['pseudo'])) {
-                ?>
+     
+            <!-------------- Insertion de l'UL commun pour ordis -------------->           
+            <?php if (isset($ul)) { echo $ul; } 
+            
+            /* -------------- Bouton de déconnexion uniquement si connecté -------------*/ 
+                  if (isset ($_SESSION['pseudo'])) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="#" id="deconnexion" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
             </li>
-            <?php
-                } 
-                ?>
+            <?php } ?>
+            
         </ul>
     </nav>
 
     <!-- MENU SMARTPHONES -->
-
     <div class="pos-f-t fixed-top">
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <div class="container-fluid menu-xs">
                     <ul class="nav flex-column nav-pills nav-stacked justify-content-end">
-                        <?= $ul ?>
-                        <?php
-                        if(isset($_SESSION['pseudo'])) {
-                        ?>
+                        
+                    <!-------------- Insertion de l'UL commun pour smartphones -------------->    
+                    <?php if (isset($ul)) { echo $ul; } ?>
+                              
+                        <!--------------  Bouton de déconnexion uniquement si connecté --------------> 
+                        <?php if(isset($_SESSION['pseudo'])) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="deconnexion_xs" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
+                            <a class="nav-link" href="#" id="deconnexion-xs" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
                         </li>
-                        <?php
-                        } else {
-                        ?>
+                        <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link bg-orange" href="index.php"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Retour démo
+                            <a class="nav-link bg-orange" href="index.php?action=login"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Start !
                             </a>
                         </li>
-                        <?php
-                        }
-                        ?>
+                        <?php }?>
+
                     </ul>
                 </div>
             </div>
         </div>
         <nav class="navbar nav-smartphone">
-
                 <button class="row navbar-toggler container-fluid justify-content-center align-items-center bg-dark" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                     <div class="col-4 navbar-brand">
                         <span class="logo white">
-                            <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
+                            <img src="public/picture/brand/caddy-icon-C-70x70.png" alt="caddy picture" />
                             <span>addy</span>
-                            <img src="public/picture/brand/caddy-icon-R-15x12-white.png" alt="caddy picture" />
+                            <img src="public/picture/brand/caddy-icon-R-32x32.png" alt="caddy picture" />
                             <span>ace</span>
                         </span>
                     </div>
                     <div class="col-3 navbar-menu orange"><span id="mobile-menu" class="mobile-menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></span></div>
                     <div class="col-5 navbar-descript">
-                        <span class="menu white">Liste</span>
-                        <span class="menu white">Articles</span>
-                        <span class="menu white">Rayons</span>
                     </div>
                 </button>
-
         </nav>
     </div>
 
     <?php $menu = ob_get_clean(); ?>
-
-    <?php ob_start(); ?>
+    <!-- RECUPERATION MENUS ORDIS & SMARTPHONES -->
 
     <!-- FOOTER -->
-
+    <?php ob_start(); ?>
     <footer class="text-center white">
         <div class="sm-row xs-column justify-content-around align-items-center bg-orange">
             <a href="#popup1"><img src="public/picture/mini/App_Store_Badge.png" alt="apple_store_picture" width="175px" /></a>
@@ -271,16 +210,19 @@
         </div>
         <div class="justify-content-around align-items-center bg-orange">
             <h2>Restez informé</h2>
-            <div>
-                <button class="btn btn-info social-link"><a href="https://www.facebook.com/labdev.web/" target=_blank><span class="glyphicon glyphicon-facebook"><i class="fab fa-facebook-f fa-lg white"></i></span></a></button>
-                <button class="btn btn-info social-link"><a href="mailto: fred@labdev.fr"><span class="glyphicon glyphicon-calendar"><i class="fas fa-at fa-lg white"></i></span></a></button>
-                <button class="btn btn-info social-link"><a href="https://www.linkedin.com/in/frederic-labourel/" target=_blank><span class="glyphicon glyphicon-shopping-cart"><i class="fab fa-linkedin-in white"></i></span></a></button>
-                <button class="btn btn-info social-link"><a href="https://github.com/FredLabdev" target=_blank><span class="glyphicon glyphicon-bullhorn fa-lg"><i class="fab fa-github white"></i></span></a></button>
+            <div class="d-flex justify-content-center align-items-center">
+                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://www.facebook.com/labdev.web/" target=_blank><span><i class="fab fa-facebook-f fa-lg white"></i></span></a></button>
+                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://twitter.com/labdev_web" target=_blank><span><i class="fab fa-twitter fa-lg white"></i></span></a></button>
+                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://www.instagram.com/labdev_web/" target=_blank><span><i class="fab fa-instagram fa-lg white"></i></span></a></button>
+                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://www.linkedin.com/in/frederic-labourel/" target=_blank><span><i class="fab fa-linkedin-in white"></i></span></a></button>
+                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://github.com/FredLabdev/" target=_blank><span><i class="fab fa-github white"></i></span></a></button>
             </div>
         </div>
         <div class="sm-row xs-column justify-content-center align-items-center white">
-            <span><i class="fas fa-copyright"></i> 2019 Labdev</span><span>Brainmade with <strong class="rwd-line">HTML CSS JS JQUERY AJAX API PHP SQL</strong></span><span><a href="index.php?action=contact">contact</a></span>
+            <span>CaddyRace</span><span>Copyrights © 2019 labdev. Tous droits réservés.</span><span><a href="mailto:fred@labdev.fr">contact</a></span><span class="site-info">Brainmade by Labdev</span>
         </div>
+        
+        <!--
         <div class="offset-10 fixed-bottom popup3">
             <a href="#popup3"><i class="fas fa-comment-dots fa-7x"></i></a>
             <div id="popup3" class="overlay">
@@ -298,6 +240,7 @@
                         <?php } ?>
                     </div>
 
+                    
                     <form class="contact-form" method="post" action="index.php?action=contactForm">
                         <div class="form-row">
                             <div class="col-12">
@@ -319,6 +262,7 @@
                                     <label class="text-left">Votre message : </label>
                                     <textarea class="col-lg-12" rows="8"></textarea>
                                 </div>
+
                                 <div class="form-group">
                                     <button type="button submit" class="btn btn-success white btn-lg" name="login"><i class="fas fa-paper-plane orange"></i> Soumettre</button>
                                 </div>
@@ -328,6 +272,7 @@
                 </div>
             </div>
         </div>
+        -->
     </footer>
 
     <?php $footer = ob_get_clean(); ?>
@@ -339,6 +284,7 @@
         <?php 
             echo $menu;
             echo $all1;
+            echo $all3;
             if ($template == 'adminModerator') {
                 echo $adminModerator;
             }
@@ -363,7 +309,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- (2b) Bibliothèque jQuery Touch screen  -->
-    <script src="jquery.ui.touch-punch.min.js"></script>
+    <script src="http://localhost:8888/caddyrace/CaddyRace/public/jquery.ui.touch-punch.js"></script>
 
     <!-- (3) Bibliothèque JavaScript Bootstrap-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

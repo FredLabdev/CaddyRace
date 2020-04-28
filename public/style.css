@@ -136,6 +136,10 @@ input[type='submit'],
     background-color: limegreen;
 }
 
+.bg-green-md {
+    background-color: mediumspringgreen !important;
+}
+
 .bg-red {
     background-color: red;
 }
@@ -164,7 +168,8 @@ input[type='submit'],
 }
 
 .logo img:nth-child(3n) {
-    padding-bottom: 28px;
+    padding-bottom: 21px;
+    padding-left: 10px;
 }
 
 .logo span {
@@ -219,6 +224,12 @@ input[type='submit'],
 .dropdown-item {
     display: flex;
     justify-content: center;
+    z-index: 0;
+    margin-left: 0px;
+}
+
+.item-to-caddy {
+    height: 70px;   
 }
 
 .dropdown-menu {
@@ -243,7 +254,7 @@ input[type='submit'],
 /* Footer */
 
 footer {
-    background-color: #343A40;
+    background-color: black;
 }
 
 footer div:nth-child(2) {
@@ -287,6 +298,7 @@ footer div:nth-child(3) a {
     background-color: darkorange;
     border: 3px solid white;
     color: white;
+    margin: 1%;
 }
 
 .social-link:hover {
@@ -303,15 +315,20 @@ footer div:nth-child(3) span:nth-child(1) {
     padding-right: 20px;
 }
 
-footer div:nth-child(3) span:nth-child(2) {
+footer div:nth-child(3) span:nth-child(2),
+footer div:nth-child(3) span:nth-child(3) {
     padding-left: 20px;
     padding-right: 20px;
     border-left: 1px solid lightgrey;
     border-right: 1px solid lightgrey;
 }
 
-footer div:nth-child(3) span:nth-child(3) {
+footer div:nth-child(3) span:nth-child(4) {
     padding-left: 20px;
+}
+
+.site-info {
+    color: hsla(0,0%,100%,.5);
 }
 
 .rwd-line {
@@ -393,29 +410,42 @@ footer div:nth-child(3) span:nth-child(3) {
 /***********************************************************************/
 /* Home View */
 
+.carousel {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .carousel-inner {
-    height: 850px;
-    background-color: lightgrey;
+    background: rgba(36, 36, 36, 1);
+    height: 100vh;
+}
+
+.carousel-indicators {
+    bottom: 150px;
 }
 
 .carousel-item {
     margin-left: 0px;
+    padding-top: 5%;
 }
 
 .title-slider1,
 .title-slider2,
 .title-slider3,
-.title-slider4 {
+.title-slider4,
+.title-slider5 {
     margin-top: 20px;
     font-family: 'Orbitron', serif;
     font-size: 2.5em;
     font-weight: bold;
     text-align: center;
-    color: black;
+    color: #fff;
 }
 
 .title-slider1 em,
-.title-slider3 em {
+.title-slider3 em,
+.title-slider4 em,
+.title-slider5 em {
     color: darkorange;
 }
 
@@ -423,26 +453,31 @@ footer div:nth-child(3) span:nth-child(3) {
     color: red;
 }
 
-.title-slider4 em {
-    color: green;
+.slider-img {
+    height: 65vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+}
+
+.slider-img > img {
+    transform: scale(0.8);
+    position: relative;
+    top: -40px;
 }
 
 .slider1,
 .slider2,
 .slider3,
-.slider4 {
+.slider4,
+.slider5 {
     padding-top: 20px;
-    width: 500px;
-    height: 500px;
-}
-
-.slider1 {
-    position: relative;
-    left: 55px;
 }
 
 .slider2,
-.slider3 {
+.slider5 {
     background-position: center;
     font-family: 'Orbitron', serif;
     font-size: 10em;
@@ -451,16 +486,51 @@ footer div:nth-child(3) span:nth-child(3) {
 }
 
 .slider2 {
-    background-image: url('picture/slider/allee_magasin2.jpg');
     padding-top: 0px;
-}
-
-.slider3 {
-    background-image: url('picture/slider/allee_magasin_good.jpg');
-    padding-top: 200px;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 950px;
+    width: 500px;
+}
 
+.slider2b {
+    position: relative;
+    top: -750px;
+}
+
+.slider2c {
+    position: relative;
+    top: -700px;
+    text-align: center;
+    font-size: 10em;
+    color: red;
+}
+
+.slider2 > img {
+    position: absolute;
+    bottom: 20%;
+    left: 40%;
+}
+
+.demo-nb {
+    padding-top: 20px;
+}
+
+.demo-nb > span{
+    border-radius: 100px;
+    height: 70px;
+    width: 70px;
+    text-align: center;
+    padding: 7px;
+    border: 3px solid darkorange !important;
+}
+
+.demo-nb > span.red {
+    border: 3px solid red !important;
+}
+
+.demo-nb > span.white {
+    border: 3px solid #fff !important;
 }
 
 .smiley {
@@ -483,12 +553,18 @@ footer div:nth-child(3) span:nth-child(3) {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    height: 100px;
-    width: 100px;
-    outline: black;
+    background: none;
+    width: auto;
+}
+    
+.carousel-control-prev {
+    left: 10px;
+}
 
-    border-radius: 50%;
-    filter: invert(100%);
+.carousel-control-prev-icon > i,
+.carousel-control-next-icon > i {
+    color: darkorange  !important;
+    font-size: 8em;
 }
 
 carousel-indicators {
@@ -542,7 +618,8 @@ carousel-indicators {
 .member-title {
     padding-top: 10px;
     text-align: left;
-    margin: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .login-form {
@@ -571,10 +648,18 @@ s .member-link {
     padding-top: 0px;
 }
 
+.logo3 {
+    position: relative;
+    top: 5px;
+}
+
 .logo2 span,
 .logo3 span {
     padding-bottom: 0px;
     font-size: 1em;
+    position: relative;
+    bottom: -10px;
+    left: -5px;
 }
 
 .logo2 img:nth-child(3n) {
@@ -586,6 +671,8 @@ s .member-link {
 .logo3 img:nth-child(3n) {
     padding-right: 0px;
     padding-bottom: 0px;
+    position: relative;
+    bottom: -10px;
 }
 
 /***********************************************************************/
@@ -613,6 +700,26 @@ s .member-link {
 
 /***********************************************************************/
 /* listView autocomplete searchbar */
+
+.item-searchbar {
+    z-index: 2;
+    position: relative;
+    top: 5px;
+    left: 10px;
+    color: rgba(0, 0, 0, 0.2);
+}
+
+#itemDescription::placeholder {
+    padding-left: 30px;
+}
+
+#itemDescription[placeholder]:focus {
+    padding-left: 45px !important;
+}
+    
+#itemDescription[placeholder]:focus::placeholder{
+    visibility: hidden;
+}
 
 .tohide {
     visibility: hidden;
@@ -746,13 +853,17 @@ ul.bs-autocomplete-menu a {
 }
 
 .dropdown-toggle::after {
-    display: none;
+    color: #82EF9E;
+    position: absolute;
+    bottom: 0px;
+    left: 45%;
 }
 
 .search-bar {
     display: flex;
     align-items: center;
     padding: .5rem 1rem;
+    left: -4%;
 }
 
 .search-bar input,
@@ -890,40 +1001,54 @@ ul.bs-autocomplete-menu a {
     padding: 0em;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
-    background: #343A40;
-    color: #fff;
+#accordion-list > .ui-state-default, 
+#accordion-list > .ui-widget-content .ui-state-default, 
+#accordion-list > .ui-widget-header .ui-state-default, 
+#accordion-items > .ui-state-active,
+#accordion-items > .ui-widget-content .ui-state-active,
+#accordion-items > .ui-widget-header .ui-state-active,
+#accordion-items > .ui-button, 
+html .ui-button.ui-state-disabled:hover, 
+html .ui-button.ui-state-disabled:active {
+    background: #343A40 !important;
+    color: #fff !important;
 }
 
-.ui-state-active,
-.ui-state-focus,
-.ui-widget-content .ui-state-active,
-.ui-widget-header .ui-state-active,
-a.ui-button:active,
-.ui-button:active,
-.ui-button.ui-state-active:hover,
-#accordion-caddie > .ui-state-active > span:nth-child(3) + h4 + span > i ,
-.ui-widget-content .ui-state-active > span:nth-child(6) > i {
-    color: #555555;
-    background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+#accordion-list > .ui-state-active,
+#accordion-list > .ui-widget-content .ui-state-active,
+#accordion-list > .ui-widget-header .ui-state-active,
+#accordion-list > a.ui-button:active,
+#accordion-list > .ui-button:active,
+#accordion-list > .ui-button.ui-state-active:hover,
+#accordion-list > .ui-state-active > span:nth-child(3) + h4 + span > i ,
+#accordion-list > .ui-widget-content .ui-state-active > span:nth-child(6) > i {
+    color: #555555 !important;
+    background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x !important;
 }
 
-#accordion-caddie > .ui-state-active > span:nth-child(3) + h4 + span > i + span,
 .ui-widget-content .ui-state-active > span:nth-child(6) > i + span {
+    border: 3px solid #fff;
+}
+
+#accordion-list > .ui-state-active > span:nth-child(3) + h4 + span > i + span {
     border: 3px solid #555555;
 }
 
-#accordion-caddie > .ui-state-active > span:nth-child(3) + h4 + span > i + span.items.green {
+#accordion-list > .ui-state-active > span:nth-child(3) + h4 + span > i + span.items.green {
     color: #555555;
 }
 
-
-.ui-widget-header,
+.ui-widget-header, 
 .ui-widget-header .ui-state-default {
     background: none;
     border: none;
 }
 
+.nav-stacked.ui-widget-header {
+    position: absolute;
+    right: 0px;
+}
+    
 .ui-widget-header a,
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -954,6 +1079,27 @@ a:visited.ui-button,
 /***********************************************************************/
 /* listView - tabs */
 
+.title {
+    height: 89px;
+}
+
+.refresh-btn {
+    border-radius: 100px;
+    height: 60px;
+    width: 160px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+    cursor: pointer;
+    border: 5px solid lightgray;
+    border-style: outset;
+}
+
+.fa-arrow-alt-circle-right {
+    font-size: 1.5em;
+}
 
 /***********************************************************************/
 /* listView - items checkbox */
@@ -962,9 +1108,12 @@ a:visited.ui-button,
     padding-left: 5px !important;
 }
 
-.ui-accordion .ui-accordion-content {
+#accordion-list > .ui-accordion-content {
     padding: 1em 0em;
-    background-color: lightgrey;
+}
+
+#accordion-items > .ui-accordion-content {
+    background-color: #5555;
 }
 
 input[type="checkbox"] {
@@ -1035,6 +1184,10 @@ input[type="checkbox"] {
     border: 3px solid #fff;
 }
 
+.items.dark {
+    border: 3px solid #555555;
+}
+
 .items.green {
     border: 3px solid #82EF9E;
 }
@@ -1075,19 +1228,28 @@ input[type="checkbox"]:checked + .item-check::before {
     color: darkorange;
 }
 
-.ui-widget input.to-caddy {
-    background-color: darkorange;
+.to-list, .to-caddy {
+    background-color: darkorange !important;
     margin: 3px 10px 3px 10px;
-    padding: 15px 30px 15px 62px;
+    padding: 0;
     white-space: nowrap;
     text-align: center;
     border-radius: 100px;
     border-style: outset;
 }
 
-.ui-widget input.to-buy {
+.to-caddy {
+    background-color: mediumspringgreen!important;
+}
+
+.to-buy {
     background: lightgrey;
     color: darkorange;
+}
+
+.in-caddy {
+    background: #555555;
+    color: #82EF9E;
 }
 
 .to-check {
@@ -1121,20 +1283,17 @@ input[type="checkbox"]:checked + .item-check::before {
 
 .delete-form {
     cursor: pointer;
+    position: relative;
+    left: 70px;
 }
 
 ul {
     padding-left: 0px;
 }
 
-.add-form {
-    margin-left: -10px
-}
-
 .delete-btn {
     color: red;
     position: relative;
-    left: 85px;
     z-index: 1;
     background-color: rgba(179, 179, 179, 1);
 }
@@ -1165,6 +1324,10 @@ ul {
     background-color: #343A40;
 }
 
+.item-gene:focus + button {
+    background-color: mediumspringgreen;
+}
+
 /***********************************************************************/
 /* listView - Icones */
 
@@ -1178,7 +1341,16 @@ ul {
 }
 
 /***********************************************************************/
-/* listView - Rayons */
+/* shopView - Rayons */
+
+.aisles-xs-message {
+    display: none;
+}
+
+.ui-sortable-handle > span {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
 
 .rayon-num {}
 
@@ -1235,7 +1407,7 @@ ul {
 html > body .sortable li,
 .rayon-num li,
 #newAisleGene {
-    height: 4.1em;
+    height: 5em;
     line-height: 1.2em;
 }
 
@@ -1541,13 +1713,8 @@ input[type=email] {
 
 .exit {
     text-align: center;
-    width: 1050px;
-    height: 700px;
+    height: 100vh;
     color: #FAFCEE;
-}
-
-.exit-text {
-    margin: auto;
 }
 
 /***********************************************************************/
@@ -1838,18 +2005,26 @@ label[for] {
 
     main {
         margin-top: 50px;
-
     }
 
     container {
         width: auto;
     }
+    
+    .form-row {
+        margin-left: 0px !important;
+    }
 
     /***********************************************************************/
     /* Navbar */
 
+    .navbar-toggler:not(:disabled):not(.disabled) {
+        background-color: black !important;
+    }
+    
     .logo {
         top: 0px;
+        left: -10px;
     }
     
     .fa-2x {
@@ -1883,6 +2058,7 @@ label[for] {
     
     .nav-smartphone {
         border-bottom: 1px solid orange;
+        background: black;
     }
 
     .navbar-toggler {
@@ -1905,22 +2081,30 @@ label[for] {
     }
 
     .navbar-brand .logo img {
-        padding-bottom: 25px;
+        padding-bottom: 0px;
+        transform: scale(0.5);
+        position: relative;
+        top: -12px;
     }
 
     .navbar-brand .logo img:nth-child(3n) {
-        padding-bottom: 7px;
+        padding-bottom: 10px;
+        top: -2px;
+        left: -18px;
+        padding-left: 0px;
     }
     
     .navbar-brand .logo span:nth-child(4n) {
         position: relative;
-        left: -3px;
+        left: -26px;
     }
 
     .navbar-brand .logo span {
         font-family: 'Orbitron', serif;
         font-size: 1.5em;
         font-stretch: ultra-expanded;
+        position: relative;
+        left: -17px;
     }
 
     .alert {
@@ -1953,13 +2137,36 @@ label[for] {
     
     .navbar-descript > span {
         font-size: 0.4em;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .refresh-btn {
+        height: 30px;
+        width: 65px;
+        font-size: 0.6em !important;
+    }
+    
+    .fa-arrow-alt-circle-right {
+        font-size: 1.2em;
+    }   
+
+    .nav-link:not(.dropdown-toggle) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 15px;
+        padding-left: 0px;
+        padding-right: 0px;
     }
     
     /***********************************************************************/
     /* Footer */
-
+    
+    footer > div:nth-child(1) {
+        padding-top: 20px;
+    }
+    
     .rwd-line {
         display: block;
     }
@@ -1981,7 +2188,8 @@ label[for] {
         font-size: 1.5em;
     }
 
-    footer div:nth-child(3) span:nth-child(2) {
+    footer div:nth-child(3) span:nth-child(2),
+    footer div:nth-child(3) span:nth-child(3) {
         border: none;
     }
 
@@ -2075,41 +2283,42 @@ label[for] {
         width: 100px;
     }
 
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 0.8em;
+    }
+    
     /***********************************************************************/
     /* Home View */
 
+    .carousel-indicators {
+        bottom: 10%;
+    }
+    
     .carousel-inner {
-        height: 320px;
     }
 
     .title-slider1,
     .title-slider2,
     .title-slider3,
-    .title-slider4 {
+    .title-slider4,
+    .title-slider5 {
         margin-top: 20px;
         font-size: 1em;
     }
 
-    .slider1,
-    .slider2,
-    .slider3,
-    .slider4 {
-        width: 150px;
-        height: 150px;
-    }
-
-    .slider1 {
-        left: 15px;
-    }
-
-    .slider2,
-    .slider3 {
-        width: 200px;
+    .slider-img > img {
+        margin: auto;
+        position: absolute;
+        top: -25px;
+        height: 100%;
     }
 
     .slider2 {
         font-size: 4em;
         padding-top: 0px;
+        width: auto;
     }
 
     .slider2 img {
@@ -2118,10 +2327,30 @@ label[for] {
         top: -45px;
         padding-top: 5px;
     }
+    
+    .slider2b, .slider2c {
+        transform: scale(0.5);
+    }
 
+    .slider2c {
+        top: -400px;
+    }
+    .slider2b {
+        top: -550px;
+    }
+    
     .slider3 {
         padding-top: 20px;
         overflow: hidden;
+    }
+    
+    .demo-nb {
+        padding-top: 10px;
+    }
+
+    .demo-nb > span{
+        height: 40px;
+        width: 40px;
     }
 
     .smiley {
@@ -2134,12 +2363,22 @@ label[for] {
         left: 45px;
     }
 
+    .carousel-control-prev-icon > i,
+    .carousel-control-next-icon > i {      
+        font-size: 3em;
+    }
+    
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
         height: 50px;
         width: 50px;
     }
 
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+    
     .enter {
         min-height: 250px;
     }
@@ -2148,7 +2387,7 @@ label[for] {
     .enter-btn i:nth-child(1n) {
         font-size: 1em;
     }
-
+    
     /* ==================================================================== */
     /* Login View */
 
@@ -2161,6 +2400,10 @@ label[for] {
         font-size: 1.5em;
     }
 
+    .login-form input {
+        width: 300%;
+    }
+    
     /***********************************************************************/
     /* List View */
 
@@ -2172,9 +2415,13 @@ label[for] {
         top: 50px;
     }
     
-    #caddie, #list, #aisles {
+    #list, #items, #aisles {
         position: relative;
         top: 54px;
+    }
+    
+    .title {
+        height: 47px;
     }
     
     .dropdown, .dropleft, .dropright, .dropup {
@@ -2182,7 +2429,12 @@ label[for] {
     }
     
     .dropdown-item {
-        padding: .25rem 0.25rem;
+        height: 45px;
+        padding: none;
+    }
+    
+    .to-check > button {
+        height: 30px;
     }
 
     .dropdown-toggle > span {
@@ -2198,11 +2450,31 @@ label[for] {
         top: 72px;
     }
 
+    .search-bar {
+        position: relative;
+        left: -7%;
+        padding-right: 0;
+    }
+    
     .search-bar input,
     .search-bar select,
     .ui-selectmenu-button.ui-button {
         width: 250px;
         height: 35px;
+    }
+    
+    #itemDescription[placeholder]:focus {
+        padding-left: 25px !important;
+    }
+     
+    .item-searchbar {
+        top: 3px;
+        left: 15px;
+    }
+    
+    #itemDescription::placeholder {
+        padding-left: 20px !important;
+        font-size: 0.7em;
     }
 
     .ui-selectmenu-button.ui-button {
@@ -2230,7 +2502,7 @@ label[for] {
     }
 
     .ray {
-        font-size: 1.1em;
+        font-size: 1em;
         padding-left: 0px;
     }
 
@@ -2286,18 +2558,27 @@ label[for] {
 
     .delete-form {
         padding-right: 0px;
-        margin-right: 10px;
-        margin-left: 10px;
     }
     
-    .delete-btn {
-        left: 40px;
+    .delete-form {
+        left: 25px;
     }
 
     .aisles-icons > span {
         padding: 0px;
     }
 
+    .list-items > div {
+        height: 50px !important;
+    }
+    
+    .list-items > form:nth-child(1) > input,
+    .list-items > form:nth-child(2) > button,
+    .list-items > div > input,
+    .list-items > div > form > button {
+        height: 27px !important;
+    }
+    
     /***********************************************************************/
     /* listView - Icones */
 
@@ -2323,6 +2604,23 @@ label[for] {
         z-index: 1;
     }
 
+    /***********************************************************************/
+    /* shopView */
+    
+    #aisles {
+        display: none;
+    }
+    
+    .aisles-xs-message {
+        margin: 10%;
+        position: relative;
+        text-align: center;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
     /***********************************************************************/
     /* Publishing view */
 
@@ -2360,15 +2658,8 @@ label[for] {
     /***********************************************************************/
     /* Exit View */
 
-    .exit {
-        background-size: cover;
-        background-position: center;
-        width: auto;
-        height: 400px;
-    }
-
-    .return-button {
-        left: 10px;
+    .exit-text {
+        font-size: 1em;
     }
 
     /***********************************************************************/
@@ -2380,8 +2671,6 @@ label[for] {
     }
 
 }
-
-
 
 @media all and (max-width: 350px) {
 
@@ -2422,9 +2711,49 @@ label[for] {
     }
     
     .navbar-descript > span {
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .item-searchbar {
+        left: 20px;
     }
 
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  */
+/*                                   MEDIA QUERIES                          */
+/*                                    SMARTPHONES                           */
+/*                                     LANDSCAPE                            */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  */
+
+@media all and (max-width: 900px) and (orientation: landscape) {
+    
+    ul.nav-stacked {
+        flex-direction: row !important;
+        justify-content: space-around !important;
+    }
+    
+    .carousel-item-next, .carousel-item-prev, .carousel-item.active {
+        display: flex;
+        align-items: center !important;
+    }
+    
+    .title-slider1, .title-slider2, .title-slider3, .title-slider4, .title-slider5 {
+        display: flex;
+        width: 60%;
+        text-align: left;
+        align-items: center;
+        margin-top: 0;
+    }
+    
+    .slider-img {
+        width: 20%;
+    }
+    
+    .demo-nb {
+        padding-top: 10px;
+        width: 100px;
+    }
 
 }

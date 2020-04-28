@@ -7,40 +7,129 @@
 "use strict";
 
 //**************************************************************************************
-// => listView/Tris jQuery - Tabs - Accordion        
+// => Stop Carousel automatic on mobile       
+//**************************************************************************************
+
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
+$('.carousel').carousel ({
+    interval: isMobile.any() ? false : 5000
+});
+
+//**************************************************************************************
+// => Carousel slider use mobile left/right
+//**************************************************************************************
+
+// => to hide a warning message with "touchstart"   
+jQuery.event.special.touchstart = 
+{
+  setup: function( _, ns, handle )
+  {
+    if ( ns.includes("noPreventDefault") ) 
+    {
+      this.addEventListener("touchstart", handle, { passive: false });
+    } 
+    else 
+    {
+      this.addEventListener("touchstart", handle, { passive: true });
+    }
+  }
+};
+
+$(".carousel").on("touchstart", function(event){
+        var xClick = event.originalEvent.touches[0].pageX;
+    $(this).one("touchmove", function(event){
+        var xMove = event.originalEvent.touches[0].pageX;
+        if( Math.floor(xClick - xMove) > 5 ){
+            $(this).carousel('next');
+        }
+        else if( Math.floor(xClick - xMove) < -5 ){
+            $(this).carousel('prev');
+        }
+    });
+    $(".carousel").on("touchend", function(){
+            $(this).off("touchmove");
+    });
+});
+
+
+//**************************************************************************************
+// => listView - Tabs / jQuery Accordion        
+//**************************************************************************************
+if (document.getElementById("list-tab")) {
+    var listTab = document.getElementById('list-tab');
+    listTab.addEventListener('click', function () {
+        var listRefresh = document.getElementById('list-refresh');
+        listRefresh.click();
+    });
+}
+
+if (document.getElementById("items-tab")) {
+    var itemsTab = document.getElementById('items-tab');
+    itemsTab.addEventListener('click', function () {
+        var itemsRefresh = document.getElementById('items-refresh');
+        itemsRefresh.click();
+    });
+}
+
+//**************************************************************************************
+// => listView - Tabs / jQuery Accordion        
 //**************************************************************************************
 
 $(function () {
     $("#tabs").tabs();
 });
 
+    // Accordéon de la liste
 $(function () {
-    $("#accordion-caddie").accordion({
+    $("#accordion-list").accordion({
         heightStyle: "content"
     });
-    $("#accordion-caddie").accordion({
-        collapsible: true
+    $("#accordion-list").accordion({
+        collapsible: true,
+        active: false, // placer après le collapsible true pour fermer tous les accordéons par défaut
     });
 });
 
+    // Accordéon du shop
 $(function () {
-    $("#accordion").accordion({
+    $("#accordion-items").accordion({
         heightStyle: "content"
     });
-    $("#accordion").accordion({
-        collapsible: true
+    $("#accordion-items").accordion({
+        collapsible: true,
+        active: false
     });
 });
-
 
 //**************************************************************************************
-// => shopView/Tris jQuery - Tabs - Accordion        
+// => ADMIN shopView - Tabs / jQuery Accordion        
 //**************************************************************************************
 
 $(function () {
     $("#tabs-Admin").tabs();
 });
 
+    // Accordéon du magasin général
 $(function () {
     $("#accordion-Admin").accordion({
         heightStyle: "content"
@@ -51,7 +140,7 @@ $(function () {
 });
 
 //**************************************************************************************
-// => Backend: shopView/Rayons jQuery - Sortable        
+// => ADMIN: shopView/Rayons / jQuery Sortable        
 //**************************************************************************************
 
 $(function () {
@@ -93,7 +182,7 @@ $(function () {
 });
 
 //**************************************************************************************
-// => Frontend: listView/Rayons jQuery - Sortable        
+// => listView - Rayons / jQuery Sortable        
 //**************************************************************************************
 
 $(function () {
@@ -134,28 +223,37 @@ $(function () {
     }); */
 });
 
-                            //**************************************************************************************
-                            // => Frontend: listView/Articles jQuery - Mise en liste
-                            //**************************************************************************************
-                            /*
-                                $(function () {
-                                    $("#<?= $itemInAisle['id'] ?>").change(function(){
-                                        var value = $(this).val();
-                                        var url = $(this).attr("url"); 
-                                        $.ajax({
-                                            type: "POST",
-                                            url: 'public/ajax.php?action=itemToBuy',
-                                            data: "value="+value,        //POST variable name value
-                                            success: function () {
-                                                alert("Cet article a bien été ajouté dans votre panier");
-                                            },
-                                            error: function () {
-                                                alert('failed');
-                                            }
-                                        }); 
-                                    }); 
-                                });
-                            */
+
+//**************************************************************************************
+// => listView/Articles jQuery - Mise en liste
+//**************************************************************************************
+
+$(function () {
+    $(".add-list").on('click', function(){
+        $(this).hide(); // on cache le bouton d'ajout en liste
+        var itemId = $(this).val(); // l'id de l'article récupérée 
+        var itemName = $(this).attr("data-value"); // le nom de l'article récupéré placé dans une data-value et qui correspond à l'id de l'input à changer
+        var inlistInput = document.getElementById(itemName);
+        inlistInput.classList.add('to-buy'); // modifie l'aspect de l'article mis en liste
+        $.ajax({
+            type: "POST",
+            url: 'public/ajax.php?action=itemToBuy',
+            data: {
+                myFunction: 'changeItemCheckAjax', // fonction à appeler dans le signature.php passé en data
+                myParams: itemId, // l'id de l'article récupérée 
+            },
+            success: function () {
+                var messages = document.getElementById('messages');
+                messages.setAttribute('itemId', 'coucou'); 
+                alert("Cet article a bien été ajouté dans votre panier");
+            },
+            error: function () {
+                alert('failed');
+            }
+        }); 
+    }); 
+});
+                    
                                 
 //**************************************************************************************
 // => Passage de mousse a touch sur mobile (complément touch-punch) 
@@ -258,31 +356,7 @@ $('ul.nav li.dropdown').hover(function () {
 //**************************************************************************************
 // => listView nav search autocomplete         
 //**************************************************************************************
-/*
-var liste = [
-    "Abricot Perso",
-    "Ananas Perso",
-    "Banane Perso",
-    "Cacahuètes Perso",
-];
 
-$('#recherche').autocomplete({
-    source: liste
-});
-
-$(".tohide").hide();
-$(".tohide2").show();
-$('#recherche').autocomplete({
-    source: liste,
-    select: function (event, ui) {
-        var selectedItem = ui.item;
-        if (selectedItem.value !== '') {
-            $(".tohide").show();
-            $(".tohide2").hide();
-        }
-    }
-});
-*/
 $(function(){  
     $("#itemDescription").on('input', function() { 
         $("#itemDescription").autocomplete({
@@ -301,7 +375,7 @@ $(function(){
 }); 
 
 //**************************************************************************************
-// => exitView - Interactions pour la déconnexion         
+// => exitView - Interactions pour la déconnexion     
 //**************************************************************************************
 
     function deconnect_confirm() {
@@ -319,8 +393,8 @@ $(function(){
             deconnect_confirm();
         });
     }
-    else if (document.getElementById("deconnexion")) {
-        document.getElementById("deconnexion_xs").addEventListener('click', function (e) {
+    if (document.getElementById("deconnexion-xs")) {
+        document.getElementById("deconnexion-xs").addEventListener('click', function (e) {
             e.preventDefault();
             deconnect_confirm();
         });
@@ -366,165 +440,191 @@ if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/inde
     remplacer tous les liens par les liens en ligne =>
     "https://fredlabourel.fr/caddyrace/index.php?action=..."
     */
-    var pseudoLogin = document.getElementById('pseudo_login');
-    pseudoLogin.addEventListener("focus", function () {
-        if (pseudoLogin.value == "") {
-            pseudoLogin.className = "input_focus";
-        } else {
-            pseudoLogin.className = "input_value";
-        }
-    }, false);
-    pseudoLogin.addEventListener("blur", function () {
-        if (pseudoLogin.value == "") {
-            pseudoLogin.className = "input_novalue";
-        } else {
-            pseudoLogin.className = "input_value";
-        }
-    }, false);
+    if (document.getElementById("pseudo_login")) {
+        var pseudoLogin = document.getElementById('pseudo_login');
+        pseudoLogin.addEventListener("focus", function () {
+            if (pseudoLogin.value == "") {
+                pseudoLogin.className = "input_focus";
+            } else {
+                pseudoLogin.className = "input_value";
+            }
+        }, false);
+        pseudoLogin.addEventListener("blur", function () {
+            if (pseudoLogin.value == "") {
+                pseudoLogin.className = "input_novalue";
+            } else {
+                pseudoLogin.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("password_login")) {
+        var passwordLogin = document.getElementById('password_login');
+        passwordLogin.addEventListener("focus", function () {
+            passwordLogin.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        passwordLogin.addEventListener("blur", function () {
+            if (passwordLogin.value == "") {
+                passwordLogin.className = "input_novalue";
+            } else {
+                passwordLogin.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("name_create")) {
+        var nameCreate = document.getElementById('name_create');
+        nameCreate.addEventListener("focus", function () {
+            nameCreate.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        nameCreate.addEventListener("blur", function () {
+            if (nameCreate.value == "") {
+                nameCreate.className = "input_novalue";
+            } else {
+                nameCreate.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("first_name_create")) {
+        var firstNameCreate = document.getElementById('first_name_create');
+        firstNameCreate.addEventListener("focus", function () {
+            firstNameCreate.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        firstNameCreate.addEventListener("blur", function () {
+            if (firstNameCreate.value == "") {
+                firstNameCreate.className = "input_novalue";
+            } else {
+                firstNameCreate.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("pseudo_create")) {
+        var pseudoCreate = document.getElementById('pseudo_create');
+        pseudoCreate.addEventListener("focus", function () {
+            pseudoCreate.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        pseudoCreate.addEventListener("blur", function () {
+            if (pseudoCreate.value == "") {
+                pseudoCreate.className = "input_novalue";
+            } else {
+                pseudoCreate.className = "input_value";
+            }
+        }, false);
+    }
 
-    var passwordLogin = document.getElementById('password_login');
-    passwordLogin.addEventListener("focus", function () {
-        passwordLogin.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    passwordLogin.addEventListener("blur", function () {
-        if (passwordLogin.value == "") {
-            passwordLogin.className = "input_novalue";
-        } else {
-            passwordLogin.className = "input_value";
-        }
-    }, false);
-
-    var nameCreate = document.getElementById('name_create');
-    nameCreate.addEventListener("focus", function () {
-        nameCreate.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    nameCreate.addEventListener("blur", function () {
-        if (nameCreate.value == "") {
-            nameCreate.className = "input_novalue";
-        } else {
-            nameCreate.className = "input_value";
-        }
-    }, false);
-
-    var firstNameCreate = document.getElementById('first_name_create');
-    firstNameCreate.addEventListener("focus", function () {
-        firstNameCreate.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    firstNameCreate.addEventListener("blur", function () {
-        if (firstNameCreate.value == "") {
-            firstNameCreate.className = "input_novalue";
-        } else {
-            firstNameCreate.className = "input_value";
-        }
-    }, false);
-
-    var pseudoCreate = document.getElementById('pseudo_create');
-    pseudoCreate.addEventListener("focus", function () {
-        pseudoCreate.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    pseudoCreate.addEventListener("blur", function () {
-        if (pseudoCreate.value == "") {
-            pseudoCreate.className = "input_novalue";
-        } else {
-            pseudoCreate.className = "input_value";
-        }
-    }, false);
-
-    var emailCreate = document.getElementById('email_create');
-    emailCreate.addEventListener("focus", function () {
-        emailCreate.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    emailCreate.addEventListener("blur", function () {
-        if (emailCreate.value == "") {
-            emailCreate.className = "input_novalue";
-        } else {
-            emailCreate.className = "input_value";
-        }
-    }, false);
-
-    var email2Create = document.getElementById('email_create_confirm');
-    email2Create.addEventListener("focus", function () {
-        email2Create.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    email2Create.addEventListener("blur", function () {
-        if (email2Create.value == "") {
-            email2Create.className = "input_novalue";
-        } else {
-            email2Create.className = "input_value";
-        }
-    }, false);
-
-    var passwordCreate = document.getElementById('password_create');
-    passwordCreate.addEventListener("focus", function () {
-        passwordCreate.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    passwordCreate.addEventListener("blur", function () {
-        if (passwordCreate.value == "") {
-            passwordCreate.className = "input_novalue";
-        } else {
-            passwordCreate.className = "input_value";
-        }
-    }, false);
-
-    var password2Create = document.getElementById('password_create_confirm');
-    password2Create.addEventListener("focus", function () {
-        password2Create.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    password2Create.addEventListener("blur", function () {
-        if (password2Create.value == "") {
-            password2Create.className = "input_novalue";
-        } else {
-            password2Create.className = "input_value";
-        }
-    }, false);
-
-    var searchBar = document.getElementById('recherche');
-    searchBar.addEventListener("focus", function () {
-        searchBar.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    searchBar.addEventListener("blur", function () {
-        if (searchBar.value == "") {
-            searchBar.className = "input_novalue";
-        } else {
-            searchBar.className = "input_value";
-        }
-    }, false);
-
-    var champ = document.getElementById('champ');
-    champ.addEventListener("focus", function () {
-        champ.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    champ.addEventListener("blur", function () {
-        if (champ.value == "") {
-            champ.className = "input_novalue";
-        } else {
-            champ.className = "input_value";
-        }
-    }, false);
-
-    var missChamp = document.getElementById('modif_champ');
-    missChamp.addEventListener("focus", function () {
-        missChamp.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    missChamp.addEventListener("blur", function () {
-        if (missChamp.value == "") {
-            missChamp.className = "input_novalue";
-        } else {
-            missChamp.className = "input_value";
-        }
-    }, false);
-
-    var missChampConfirm = document.getElementById('modif_champ_confirm');
-    missChamp.addEventListener("focus", function () {
-        missChamp.className = "input_focus"; // on change l'apparence du champ
-    }, false);
-    missChamp.addEventListener("blur", function () {
-        if (missChamp.value == "") {
-            missChamp.className = "input_novalue";
-        } else {
-            missChamp.className = "input_value";
-        }
-    }, false);
+    if (document.getElementById("email_create")) {
+        var emailCreate = document.getElementById('email_create');
+        emailCreate.addEventListener("focus", function () {
+            emailCreate.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        emailCreate.addEventListener("blur", function () {
+            if (emailCreate.value == "") {
+                emailCreate.className = "input_novalue";
+            } else {
+                emailCreate.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("email_create_confirm")) {
+        var email2Create = document.getElementById('email_create_confirm');
+        email2Create.addEventListener("focus", function () {
+            email2Create.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        email2Create.addEventListener("blur", function () {
+            if (email2Create.value == "") {
+                email2Create.className = "input_novalue";
+            } else {
+                email2Create.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("password_create")) {
+        var passwordCreate = document.getElementById('password_create');
+        passwordCreate.addEventListener("focus", function () {
+            passwordCreate.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        passwordCreate.addEventListener("blur", function () {
+            if (passwordCreate.value == "") {
+                passwordCreate.className = "input_novalue";
+            } else {
+                passwordCreate.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("password_create_confirm")) {
+        var password2Create = document.getElementById('password_create_confirm');
+        password2Create.addEventListener("focus", function () {
+            password2Create.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        password2Create.addEventListener("blur", function () {
+            if (password2Create.value == "") {
+                password2Create.className = "input_novalue";
+            } else {
+                password2Create.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("recherche")) {
+        var searchBar = document.getElementById('recherche');
+        searchBar.addEventListener("focus", function () {
+            searchBar.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        searchBar.addEventListener("blur", function () {
+            if (searchBar.value == "") {
+                searchBar.className = "input_novalue";
+            } else {
+                searchBar.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("champ")) {
+        var champ = document.getElementById('champ');
+        champ.addEventListener("focus", function () {
+            champ.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        champ.addEventListener("blur", function () {
+            if (champ.value == "") {
+                champ.className = "input_novalue";
+            } else {
+                champ.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("modif_champ")) {
+        var missChamp = document.getElementById('modif_champ');
+        missChamp.addEventListener("focus", function () {
+            missChamp.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        missChamp.addEventListener("blur", function () {
+            if (missChamp.value == "") {
+                missChamp.className = "input_novalue";
+            } else {
+                missChamp.className = "input_value";
+            }
+        }, false);
+    }
+    
+    if (document.getElementById("modif_champ_confirm")) {
+        var missChampConfirm = document.getElementById('modif_champ_confirm');
+        missChamp.addEventListener("focus", function () {
+            missChamp.className = "input_focus"; // on change l'apparence du champ
+        }, false);
+        missChamp.addEventListener("blur", function () {
+            if (missChamp.value == "") {
+                missChamp.className = "input_novalue";
+            } else {
+                missChamp.className = "input_value";
+            }
+        }, false);
+    }
 
 }
 

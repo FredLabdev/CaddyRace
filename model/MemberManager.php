@@ -90,6 +90,14 @@ class MemberManager extends Manager {
         $deleteMember->execute(array(
             'idnum' => $memberId
         )); 
+        $deleteMemberAisles = $db->prepare('DELETE FROM aisles_priv WHERE aisle_priv_owner_id = :idnum');
+        $deleteMemberAisles->execute(array(
+            'idnum' => $memberId
+        )); 
+        $deleteMemberItems = $db->prepare('DELETE FROM items_priv WHERE item_priv_owner_id = :idnum');
+        $deleteMemberItems->execute(array(
+            'idnum' => $memberId
+        )); 
     }
     
     //**************************************************************************************

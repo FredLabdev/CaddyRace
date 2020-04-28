@@ -79,18 +79,18 @@ class AislesManager extends Manager {
     //     AislesManager frontend  
     //**************************************************************************************
 
-    /* public function duplicateAislesGene() { // option création d'une table privée par membre           
+    /*  
+    public function getIconsListTab($memberId) {
         $db = $this->dbConnect();
-        $req = $db->query('CREATE TABLE aisles_1 LIKE aisles');
-        $req->closeCursor();
-        $req = $db->query('INSERT INTO aisles_1 SELECT * FROM aisles');
-        $req->closeCursor();
-    } */
-    
+        $iconsListTab = $db->prepare('SELECT icon_adress FROM icons WHERE aile_gene_id = ? ORDER BY icon_class');    
+        $aislesIcons->execute(array($aisleId));
+        return $aislesIcons;
+    }
+    */
     public function duplicateAislesGeneDatas($memberId) {            
         $db = $this->dbConnect(); // copie la table Générale dans la table des rayons Privés,
         $req = $db->query('INSERT INTO aisles_priv(aisle_priv_title, aisle_priv_owner_id, aisle_priv_order, aisle_gene_refer_id) SELECT aisle_gene_title, aisle_gene_owner_id, aisle_gene_order, id FROM aisles');
-        $req->closeCursor(); // puis remplace l'id admin "1" copiée, par celle du nouveau membre propriétaire.
+        $req->closeCursor(); // puis remplace l'id admin "1" copiée, par celle du nouveau membre propriétaire.        
         $req = $db->prepare('UPDATE aisles_priv SET aisle_priv_owner_id = ? WHERE aisle_priv_owner_id = 1');
         $req->execute(array($memberId));
         $req->closeCursor();

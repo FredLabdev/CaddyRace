@@ -35,9 +35,9 @@ try {
             $pseudo_connect = getCleanParameter($_POST['pseudo_connect']);
             $password_connect = getCleanParameter($_POST['password_connect']);
             if (!empty($pseudo_connect) && !empty($password_connect)) {
-                loginControl($pseudo_connect, $password_connect);
+                loginControl($pseudo_connect, $password_connect, 1);
             } else { 
-                loginControl("","");
+                loginControl("","", 1);
             }
         } 
 
@@ -81,72 +81,113 @@ try {
             } */
             
             //**************************************************************************************
-            // => listView(frontend) Interface de Gestion des tables Persos d'Articles & Rayons
+            // => aislesView(frontend) Interface de Gestion des Rayons
+            //**************************************************************************************
             
-            // Afficher sa listView Perso,
-            if ($_GET['action'] == 'shopList') {
-                 shopList($_SESSION['id'], "", "");
+            // Afficher ses rayons Perso,
+            if ($_GET['action'] == 'aislesList') {
+                aislesList($_SESSION['id'], "", "");
+            }
+            // Créer un nouveau rayon,
+            else if ($_GET['action'] == 'createAisle') {
+                $aisleTitle = getCleanParameter($_POST['aisleTitle']);
+                $aisleOrder = getCleanParameter($_POST['aisleOrder']);
+                createAisle($_SESSION['id'], $aisleTitle, $aisleOrder);
+            }
+            // Supprimer un rayon,   
+            else if ($_GET['action'] == 'deleteAisle') {
+                $aisleId = getCleanParameter($_POST['aisleId']);
+                deleteAisle($_SESSION['id'], $aisleId);
+            }
+            // Modifier un rayon,
+            else if ($_GET['action'] == 'modifAisle') {  
+                $aisleId = getCleanParameter($_POST['aisleId']);
+                $aisleTitle = getCleanParameter($_POST['aisleTitle']);
+                modifAisle($_SESSION['id'], $aisleId, $aisleTitle);
+            }   
+            
+            //**************************************************************************************
+            // => listView(frontend) Interface de Gestion des Articles et de la liste
+            //**************************************************************************************
+            
+            // Afficher son magasin Perso,
+            else if ($_GET['action'] == 'shopList') {
+                 shopList($_SESSION['id'], "", "", 'shop');
+            }
+            // Afficher sa liste Perso,
+            else if ($_GET['action'] == 'caddyList') {
+                 shopList($_SESSION['id'], "", "", 'caddy');
             }
             // Créer un nouvel article,   
             else if ($_GET['action'] == 'createItem') {
-                 $itemName = getCleanParameter($_POST['itemName']);
-                 $aisleId = getCleanParameter($_POST['aisleId']);
-                 if ($aisleId) {
-                     createItem($_SESSION['id'], $aisleId, $itemName);
-                 } else {
-                     throw new Exception('Aucun identifiant de rayon envoyé');
-                 }
-             } 
-             // Supprimer un article,   
-             else if ($_GET['action'] == 'deleteItem') {
-                 $itemId = getCleanParameter($_POST['itemId']);
-                 deleteItem($_SESSION['id'], $itemId);
-             }
-             // Modifier un article, 
-             else if ($_GET['action'] == 'modifItem') { 
-                 $itemId = getCleanParameter($_POST['itemId']);
-                 $itemName = getCleanParameter($_POST['itemName']);
-                 modifItem($_SESSION['id'], $itemId, $itemName);
-             }
-             // Passer/Retirer un article en panier, 
-             else if ($_GET['action'] == 'itemCheck') { 
-                 $itemId = getCleanParameter($_POST['itemId']);
-                 checkItem($_SESSION['id'], $itemId);
-             }   
-             // Mettre un article en caddy, 
-             else if ($_GET['action'] == 'itemCaddy') { 
-                 $itemId = getCleanParameter($_POST['itemId']);
-                 caddyItem($_SESSION['id'], $itemId);
-             }  
-             // Mettre un article en caddy, 
-             else if ($_GET['action'] == 'caddyToList') {
-                 caddyToList($_SESSION['id']);
-             } 
-             // Mettre un article en caddy, 
-             else if ($_GET['action'] == 'caddyToShop') {
-                 caddyToShop($_SESSION['id']);
-             } 
-             // Créer un nouveau rayon,
-             else if ($_GET['action'] == 'createAisle') {
-                 $aisleTitle = getCleanParameter($_POST['aisleTitle']);
-                 $aisleOrder = getCleanParameter($_POST['aisleOrder']);
-                 createAisle($_SESSION['id'], $aisleTitle, $aisleOrder);
-             }
-             // Supprimer un rayon,   
-             else if ($_GET['action'] == 'deleteAisle') {
-                 $aisleId = getCleanParameter($_POST['aisleId']);
-                 deleteAisle($_SESSION['id'], $aisleId);
-             }
-             // Modifier un rayon,
-             else if ($_GET['action'] == 'modifAisle') {  
-                 $aisleId = getCleanParameter($_POST['aisleId']);
-                 $aisleTitle = getCleanParameter($_POST['aisleTitle']);
-                 modifAisle($_SESSION['id'], $aisleId, $aisleTitle);
-             }                  
+                $itemName = getCleanParameter($_POST['itemName']);
+                $aisleId = getCleanParameter($_POST['aisleId']);
+                if ($aisleId) {
+                    createItem($_SESSION['id'], $aisleId, $itemName);
+                } else {
+                    throw new Exception('Aucun identifiant de rayon envoyé');
+                }
+            } 
+            // Supprimer un article,   
+            else if ($_GET['action'] == 'deleteItem') {
+                $itemId = getCleanParameter($_POST['itemId']);
+                deleteItem($_SESSION['id'], $itemId);
+            }
+            // Modifier un article, 
+            else if ($_GET['action'] == 'modifItem') { 
+                $itemId = getCleanParameter($_POST['itemId']);
+                $itemName = getCleanParameter($_POST['itemName']);
+                modifItem($_SESSION['id'], $itemId, $itemName);
+            }
+            // Passer/Retirer un article en panier, 
+            else if ($_GET['action'] == 'itemCheck') { 
+                $itemId = getCleanParameter($_POST['itemId']);
+                checkItem($_SESSION['id'], $itemId);
+            }   
+            // Mettre un article en caddy, 
+            else if ($_GET['action'] == 'itemCaddy') { 
+                $itemId = getCleanParameter($_POST['itemId']);
+                caddyItem($_SESSION['id'], $itemId);
+            }  
+            // Mettre un article en caddy, 
+            else if ($_GET['action'] == 'caddyToList') {
+                caddyToList($_SESSION['id']);
+            } 
+            // Mettre un article en caddy, 
+            else if ($_GET['action'] == 'caddyToShop') {
+                caddyToShop($_SESSION['id']);
+            }                
             
             //**************************************************************************************
-            // => shopView(backend) Interface de Gestion des tables Générales Communes d'Articles & Rayons
-                
+            // => shopView(backend) Interface de Gestion des tables Générales des Rayons
+            //**************************************************************************************
+
+            // Afficher la shopView Admin,
+            else if ($_GET['action'] == 'aislesAdmin') {
+                aislesAdmin($_SESSION['id'], "", "");
+            }
+            // Créer un nouveau rayon Gene,
+            else if ($_GET['action'] == 'createAisleGene') {
+                $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
+                $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
+                createAisleGene($aisleGeneTitle, $aisleGeneOrder);
+            }
+            // Supprimer un rayon Gene,   
+            else if ($_GET['action'] == 'deleteAisleGene') {
+                $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                deleteAisleGene($aisleGeneId);
+            }
+            // Modifier un rayon Gene,
+            else if ($_GET['action'] == 'modifAisleGene') {  
+                $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
+                $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
+                modifAisleGene($aisleGeneId, $aisleGeneTitle);
+            }  
+            
+            //**************************************************************************************
+            // => shopView(backend) Interface de Gestion des tables Générales d'Articles
+            //**************************************************************************************
+            
             // Afficher la shopView Admin,
             else if ($_GET['action'] == 'shopAdmin') {
                 shopAdmin("", "");
@@ -172,34 +213,10 @@ try {
                 $itemGeneName = getCleanParameter($_POST['itemGeneName']);
                 modifItemGene($itemGeneId, $itemGeneName);
             }
-             /* Déplacer un rayon Gene (Traité en AJAX)  
-            else if ($_GET['action'] == 'orderAisleGene') {
-                $aisleGeneId = getCleanParameter($_POST["aisleGeneId"]);
-                $aisleGeneOrder = getCleanParameter($_POST["aisleGeneOrder"]);
-                // $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
-                // $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
-                orderAisleGene($aisleGeneId, $aisleGeneOrder); // TODO selon controller/model
-            } */
-            // Créer un nouveau rayon Gene,
-            else if ($_GET['action'] == 'createAisleGene') {
-                $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
-                $aisleGeneOrder = getCleanParameter($_POST['aisleGeneOrder']);
-                createAisleGene($aisleGeneTitle, $aisleGeneOrder);
-            }
-            // Supprimer un rayon Gene,   
-            else if ($_GET['action'] == 'deleteAisleGene') {
-                $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
-                deleteAisleGene($aisleGeneId);
-            }
-            // Modifier un rayon Gene,
-            else if ($_GET['action'] == 'modifAisleGene') {  
-                $aisleGeneId = getCleanParameter($_POST['aisleGeneId']);
-                $aisleGeneTitle = getCleanParameter($_POST['aisleGeneTitle']);
-                modifAisleGene($aisleGeneId, $aisleGeneTitle);
-            }  
             
             //**************************************************************************************
             // => membersView(backend) Editer le profil d'un membre
+            //**************************************************************************************
             
             else if ($_GET['action'] == 'membersDetail') {
                 $member = getCleanParameter($_POST['member']);
@@ -325,14 +342,16 @@ try {
             // => exitView (Deconnexion (javascript))          
            
             else if ($_GET['action'] == 'deconnexion') {
-                sessionEnd();
+                sessionEnd("");
             } 
             
             //**************************************************************************************
             // => Afficher Accueil du site (par défaut):
-            else {
-                shopList($_SESSION['id'], "", ""); // TODO selon controller/model
-            } 
+            else if ($_SESSION['id'] == 1) {
+                shopAdmin("", "");
+            } else {
+                shopList($_SESSION['id'], "", "", 'caddy'); 
+            }
             
         //**************************************************************************************
         // Si action url sans connexion préalable            

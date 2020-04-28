@@ -66,16 +66,24 @@ try {
     //**************************************************************************************
     //            Controller backend AislesManager         
     //**************************************************************************************
-    
-    /* (Traité en AJAX) 
-    function orderAisleGene($aisleGeneId, $aisleGeneOrder) { 
-        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
-        $AislesManager->changeAislesGeneOrder($aisleGeneId, $aisleGeneOrder);     
-        $message_success =  'Votre rayon a bien été déplacé.';
-        $message_error = "";
-        shopAdmin($message_success, $message_error);
-    } */
 
+    function aislesAdmin($memberId, $message_success, $message_error) {
+        $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
+        $aislesGeneCount2 = $AislesManager->getAislesGeneCount();
+        $aislesGeneTab2 = $AislesManager->getAislesGeneTab();
+        /*
+        $iconsListTab = array();
+        $iconsListTab = $AislesManager->getIconsListTab($memberId);
+        */
+        foreach($aislesGeneTab2 as $aisleGene) {
+            $aislesGeneIcons = $AislesManager->getAislesGeneIcons($aisleGene['id']);    
+            $aislesGeneIconsTab2[] = $aislesGeneIcons;
+        }
+        $message_success;
+        $message_error;
+        require('view/backend/aislesGeneView.php');
+    }
+    
     function createAisleGene($aisleGeneTitle, $aisleGeneOrder) {
         $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
         $AislesManager->pushAisleGene($aisleGeneTitle, $aisleGeneOrder);     

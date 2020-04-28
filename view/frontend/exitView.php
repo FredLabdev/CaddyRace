@@ -1,3 +1,7 @@
+<!--********************************************************************************-->
+<!--******************************** DISCONNEXION **********************************-->
+<!--********************************************************************************-->
+
 <?php 
 $title = 'CaddyRace/Exit';
 $template = 'frontend';
@@ -5,7 +9,7 @@ $noMenu = 'no_menu';
 ob_start(); 
 ?>
 
-<div class="exit d-flex flex-column">
+<div class="exit d-flex flex-column justify-content-center align-items-center">
     <a href="index.php?action=home" class="return-button btn btn-success btn-lg exit-text" name="login">Back to race ?</a>
     <h2 class="exit-text orange">
         <?= $message_success ?>

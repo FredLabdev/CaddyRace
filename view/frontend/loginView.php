@@ -1,3 +1,9 @@
+<!--********************************************************************************-->
+<!--************************************ LOGIN *************************************-->
+<!--*********************************      &       *********************************-->
+<!--******************************* CREATE NEW PROFIL ******************************-->
+<!--********************************************************************************-->
+
 <?php 
 $title = 'CaddyRace/Login';
 $template = 'frontend';
@@ -5,6 +11,10 @@ ob_start();
 ?>
 
 <div class="loginView bg-dark">
+    
+    <!--********************************************************************************-->
+    <!--************************************ LOGIN *************************************-->
+    <!--********************************************************************************-->
     <div class="login">
         <h4 class="login-title">
             <i class="fas fa-user-check orange"></i> Connexion :
@@ -31,7 +41,7 @@ ob_start();
 
                 <div class="form-group">
                     <button type="button submit" class="connect btn btn-success white btn-lg" name="login">
-                        <span class="logo logo3 white">
+                        <span class="logo3 white">
                             <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
                             <span>addy</span>
                             <img src="public/picture/brand/caddy-icon-R-15x12-white.png" alt="caddy picture" />
@@ -43,6 +53,9 @@ ob_start();
         </form>
     </div>
 
+    <!--********************************************************************************-->
+    <!--******************************* CREATE NEW PROFIL ******************************-->
+    <!--********************************************************************************-->
     <div class="newMember bg-grey">
         <h4 class="member-title black">
             <i class="fas fa-user-plus orange"></i> Nouveau venu ?

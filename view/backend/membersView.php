@@ -1,6 +1,5 @@
 <?php 
-    session_start();
-    $title = 'Forteroche/Membres';
+    $title = 'CaddyRace/Membres';
     if ($_SESSION['group_id'] == 1) {
         $template = 'backend';
     } else {

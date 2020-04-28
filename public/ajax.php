@@ -43,14 +43,31 @@
             $i++;
         };
     }
-/*
+
     //**************************************************************************************
     // => Frontend: listView/Articles jQuery - Mise en panier itemToBuy        
     //**************************************************************************************
-    if ($_GET['action'] == 'itemToBuy') {
-        $req = $db->prepare('UPDATE items_priv SET item_priv_purchase = 1 WHERE id = ?');
-        $req->execute(array($_POST['itemId']));
+    function changeItemCheckAjax($itemId) { 
+        $bdd = new PDO('mysql:host=localhost;dbname=caddyrace', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $req = $bdd->prepare('SELECT item_priv_purchase FROM items_priv WHERE id = ?');
+        $req->execute(array($itemId)); 
+        $itemCheckStatus = $req->fetch();
         $req->closeCursor();
+        if (($itemCheckStatus['item_priv_purchase'] == 0) || ($itemCheckStatus['item_priv_purchase'] == 2)) {
+            $itemNewCheckStatus = 1;
+        } else {
+            $itemNewCheckStatus = 0;
+        }
+        $req = $bdd->prepare('UPDATE items_priv SET item_priv_purchase = :change_check WHERE id = :item_id');
+        $req->execute(array(
+            'change_check' => $itemNewCheckStatus,
+            'item_id' => $itemId
+        )); 
+        $req->closeCursor();
+
     }
-*/
+
+    if (isset($_POST['myFunction']) && $_POST['myFunction'] != '') {
+        $_POST['myFunction']($_POST['myParams']);
+    }
 ?>

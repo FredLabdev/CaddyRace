@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     $title = 'CaddyRace/Compte';
     if ($_SESSION['group_id'] == 1) {
         $template = 'backend';
@@ -72,6 +71,8 @@
 
     </div>
 
+    <?php if ($_SESSION['group_id'] != 1) { ?>
+    
     <div class="login bg-grey">
 
         <h4 class="login-title desinscrire black">
@@ -100,6 +101,8 @@
         </form>
 
     </div>
+
+    <?php } ?>
 
 </div>
 
