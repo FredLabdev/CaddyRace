@@ -1,5 +1,6 @@
 <?php
 
+require_once('model/CommentManager.php');
 require_once('model/AislesManager.php');
 require_once('model/ItemsManager.php');
 require_once('model/LoginManager.php');
@@ -348,9 +349,17 @@ try {
     //        Controller frontend MemberManager
     //**************************************************************************************
     
-    function homeDirect() {
+    function homeDirect($postId, $message_success, $message_error) {
         $memberManager = new \FredLab\tp5_caddy_race\Model\MemberManager();
         $membersCount2 = $memberManager->getMembersCount();
+    // RAJOUT DES COMMENTAIRES 
+        $commentsCountBy5 = array(); 
+        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+        $signalComments = $commentManager->getSignalComments();
+        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+        $comments = $commentManager->getComments(1);
+        $commentsCount = $commentManager->getCommentsCount(1);
+        
         require('view/frontend/homeView.php');      
     }
     
@@ -433,6 +442,74 @@ try {
         } else {
             require('view/frontend/loginView.php');
         }   
+    }
+
+    //**************************************************************************************
+    //           Controller CommentManager                   
+    //**************************************************************************************
+/*
+    function post($postId, $message_success, $message_error) {
+        $postManager = new \FredLab\tp4_blog_ecrivain\Model\PostManager();
+        $postDetails = $postManager->getPost($postId);
+        $message_success;
+        $message_error;
+        $commentManager = new \FredLab\tp4_blog_ecrivain\Model\CommentManager();
+        $comments = $commentManager->getComments($postId);
+        $commentsCount = $commentManager->getCommentsCount($postId);
+        require('view/frontend/postView.php');
+    } */
+    
+    function addCommentRequest($postId, $member, $newComment) {
+        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+        $addCommentRight = $commentManager->getMemberNoComment($member);
+        $message_error = "";
+        if($addCommentRight['block_comment'] == 1) {
+            $message_error =  'Désolé vous n\'êtes pas autorisé à poster des comments';
+        } else if($newComment == "") {
+            $message_error =  'Désolé votre message est vide';
+        } else {
+            $commentManager->addComment($postId, $member, $newComment);     
+            $message_success =  'Votre commentaire a bien été publié ci-dessous';
+        }
+        homeDirect(1, $message_success, $message_error);
+    }
+    
+    function modifCommentRequest($postId, $member, $commentId, $modifComment) {
+        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+        $addCommentRight = $commentManager->getMemberNoComment($member);
+        $message_error = "";
+        if($addCommentRight['block_comment'] == 1) {
+            $message_error =  'Désolé vous n\'êtes pas autorisé à poster des comments';
+        } else if ($modifComment == "") {
+            $message_error =  'Désolé votre message est vide';
+        } else {
+            $commentManager->replaceComment($commentId, $modifComment);     
+            $message_success =  'Votre commentaire a bien été modifié et publié ci-dessous';
+        }
+        homeDirect(1, $message_success, $message_error);
+    }
+
+    function commentSignal($postId, $commentId, $signalId, $member) {
+        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+        $commentManager->signalComment($commentId, $signalId, $member);     
+        if ($signalId == 1) {
+            $message_error =  'Ce commentaire a bien été signalé à l\'administrateur!';
+        } else {
+            $message_success =  'Ce commentaire ne sera plus signalé à l\'administrateur!';
+        }
+        homeDirect(1, $message_success, $message_error);
+    }
+    
+    function commentErase($postId, $commentId) {
+        $commentManager = new \FredLab\tp5_caddy_race\Model\CommentManager();
+        $commentManager->deleteComment($commentId); 
+        if ($postId != "") {
+            $message_success =  'Ce commentaire a bien été Supprimé !';
+            homeDirect(1, $message_success, "");
+        } else {
+            $message_success =  'Ce commentaire a bien été Supprimé !';
+            listPosts(1, $message_success, "");
+        }
     }
 
     //**************************************************************************************

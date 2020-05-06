@@ -24,7 +24,7 @@ try {
         // => homeView (Démo/Avis/Connect)           
 
         if ($_GET['action'] == 'home') {
-            homeDirect();
+            homeDirect(1, "", "");
            /* require('view/frontend/homeView.php'); */
         }
 
@@ -316,47 +316,56 @@ try {
             else if ($_GET['action'] == 'contact') { // TODO A remplacer par pop-up ci-dessous !
                 require('view/frontend/contactView.php');
             }  
-            
+
             //**************************************************************************************
             // => depuis toutes les vues (Donner avis site)
-
-            // Publier un avis à propos du site/Appli     
-            else if ($_GET['action'] == 'addOpinion') {
-                $newOpinion = getCleanParameter($_POST['newOpinion']);
-                addOpinionRequest($_SESSION['pseudo'], $newOpinion); // TODO selon controller/model
-            }
-
-            // Modifier un avis (self)          
-            else if ($_GET['action'] == 'modifOpinion') {
-                $modifOpinionId = getCleanParameter($_POST['modifOpinionId']);
-                $modifOpinion = getCleanParameter($_POST['modifOpinion']);
-                if (modifOpinionId) {
-                    modifOpinionRequest($_SESSION['pseudo'], $modifOpinionId, $modifOpinion); // TODO selon controller/model
+            
+                            // Ajouter un commentaire,     
+            else if ($_GET['action'] == 'addComment') {
+                $postId = getCleanParameter($_POST['postId']);
+                $nv_comment = getCleanParameter($_POST['nv_comment']);
+                if ($postId) {
+                    addCommentRequest($postId, $_SESSION['pseudo'], $nv_comment);
                 } else {
-                    throw new Exception('Identifiant d\'avis vide ou erronné');
+                    throw new Exception('Aucun identifiant de billet envoyé');
                 }
             }
 
-            // Signaler un avis (all)   
-            else if ($_GET['action'] == 'signalOpinion') {
-                $signalOpinion = getCleanParameter($_POST['signalOpinion']);
-                $signalOpinionId = getCleanParameter($_POST['signalOpinionId']);
-               if ($signalOpinionId) {
-                    commentSignal($signalOpinion, $signalOpinionId, $_SESSION['pseudo']);// TODO selon controller/model
+                // Modifier un commentaire,     
+            else if ($_GET['action'] == 'modifComment') {
+                $postId = getCleanParameter($_POST['postId']);
+                $modifCommentId = getCleanParameter($_POST['modifCommentId']);
+                $modifComment = getCleanParameter($_POST['modifComment']);
+                if ($postId) {
+                    modifCommentRequest($postId, $_SESSION['pseudo'], $modifCommentId, $modifComment);
                 } else {
-                    throw new Exception('Identifiant d\'avis à signaler vide ou erronné');
+                    throw new Exception('Aucun identifiant de billet envoyé');
                 }
             }
 
-            // Effacer un avis (self or admin/moderator)     
-            else if ($_GET['action'] == 'deleteOpinion') {
-                $deleteOpinionId = getCleanParameter($_POST['deleteOpinionId']);
-                if ($deleteOpinionId) {
-                    opinionErase($deleteOpinionId); // TODO selon controller/model 
+                       // signaler un commentaire,   
+            else if ($_GET['action'] == 'signalComment') {
+                $postId = getCleanParameter($_POST['postId']);
+                $signal_comment = getCleanParameter($_POST['signal_comment']);
+                $signal_commentId = getCleanParameter($_POST['signal_commentId']);
+               if ($postId) {
+                    commentSignal($postId, $signal_comment, $signal_commentId, $_SESSION['pseudo']);  
                 } else {
-                    throw new Exception('Identifiant d\'avis à supprimer vide ou erronné');
+                    throw new Exception('Aucun identifiant de billet envoyé');
                 }
             }
+
+                // Effacer un commentaire,     
+            else if ($_GET['action'] == 'deleteComment') {
+                $postId = getCleanParameter($_POST['postId']);
+                $delete_comment = getCleanParameter($_POST['delete_comment']);
+                if ($_POST['postId']) {
+                    commentErase($_POST['postId'], $delete_comment);  
+                } else {
+                    commentErase("", $delete_comment); 
+                }
+            }
+            
             
             //**************************************************************************************
             // => exitView (Deconnexion (javascript))          

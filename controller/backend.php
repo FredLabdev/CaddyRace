@@ -1,5 +1,6 @@
 <?php
 
+require_once('model/CommentManager.php');
 require_once('model/AislesManager.php');
 require_once('model/ItemsManager.php');
 require_once('model/LoginManager.php');
@@ -107,21 +108,11 @@ try {
         $message_error = "";
         shopAdmin($message_success, $message_error);
     }
+   
     
     //**************************************************************************************
     //         Controller backend MemberManager          
     //**************************************************************************************
-
-    function commentSignal($postId, $commentId, $signalId, $member) {
-        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
-        $ItemsManager->signalComment($commentId, $signalId, $member);     
-        if ($signalId == 1) {
-            $message_error =  'Ce commentaire a bien été signalé à l\'administrateur!';
-        } else {
-            $message_success =  'Ce commentaire ne sera plus signalé à l\'administrateur!';
-        }
-        post($postId, $message_success, $message_error);
-    }
 
     function memberBloqComment($memberId, $blockId, $template) {
         $memberManager = new \FredLab\tp5_caddy_race\Model\MemberManager();

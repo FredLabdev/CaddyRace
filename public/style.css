@@ -262,6 +262,11 @@ input[type='submit'],
     overflow: auto;
 }
 
+
+.alert {
+    word-break: break-word;
+}
+
 .alert2 {
     position: relative;
     top: 8px;
@@ -482,7 +487,7 @@ footer div:nth-child(3):not(.home-footer) span:nth-child(4) > span + a {
 
 .email a:hover:after {
     transition: left .4s ease-in-out,width .4s ease-in-out;
-    background: url("https://fredlabourel.fr/caddyrace/public/picture/ico/email.png") no-repeat center;
+    background: url("http://localhost:8888/caddyrace/CaddyRace_local/public/picture/ico/email.png") no-repeat center;
     background-size: cover;
     display: block;
     width: 30px;
@@ -608,7 +613,7 @@ footer div:nth-child(3):not(.home-footer) span:nth-child(4) > span + a {
   content: '';
 }
 .loader:after {
-  background-image: url('https://fredlabourel.fr/caddyrace/public/picture/brand/caddy-icon-C-70x70.png');
+  background-image: url('http://localhost:8888/caddyrace/CaddyRace_local/public/picture/brand/caddy-icon-C-70x70.png');
   background-repeat: no-repeat;    
   background-size: contain;
   width: 75%;
@@ -667,7 +672,7 @@ footer div:nth-child(3):not(.home-footer) span:nth-child(4) > span + a {
     font-size: 11px;
     position: relative;
     text-indent: -9999em;
-    background-image: url('https://fredlabourel.fr/caddyrace/public/picture/brand/caddy-icon-C-38x38.png');
+    background-image: url('http://localhost:8888/caddyrace/CaddyRace_local/public/picture/brand/caddy-icon-C-38x38.png');
     background-size: contain;
     background-repeat: no-repeat;
     -webkit-transform: translateZ(0);
@@ -735,7 +740,8 @@ footer div:nth-child(3):not(.home-footer) span:nth-child(4) > span + a {
 .title-slider2,
 .title-slider3,
 .title-slider4,
-.title-slider5 {
+.title-slider5,
+.title-slider6 {
     margin-top: 20px;
     font-family: 'Orbitron', serif;
     font-size: 2.5em;
@@ -747,7 +753,8 @@ footer div:nth-child(3):not(.home-footer) span:nth-child(4) > span + a {
 .title-slider1 em,
 .title-slider3 em,
 .title-slider4 em,
-.title-slider5 em {
+.title-slider5 em,
+.title-slider6 em {
     color: rgba(232, 102, 8, 1);
 }
 
@@ -755,7 +762,8 @@ footer div:nth-child(3):not(.home-footer) span:nth-child(4) > span + a {
     margin: 0px 7px;
 }
 
-.title-slider2 em {
+.title-slider2 em,
+.title-slider3 em {
     color: orangered;
 }
 /*
@@ -1218,6 +1226,7 @@ ul.bs-autocomplete-menu a {
     display: flex;
     justify-content: center;
     text-align: center;
+    font-family: 'Orbitron', serif;
 }
 
 .title-container {
@@ -2557,10 +2566,9 @@ label[for] {
         position: relative;
         left: -17px;
     }
-
-    .alert {
-        top: -28px;
-        left: 30px;
+    
+    .pagination, .posts-title, .news-title {
+        font-size: 1.2em;
     }
 
     .alert2 {
@@ -2872,7 +2880,8 @@ label[for] {
     .title-slider2,
     .title-slider3,
     .title-slider4,
-    .title-slider5 {
+    .title-slider5,
+    .title-slider6 {
         margin-top: 20px;
         font-size: 0.9em;
     }
@@ -3545,7 +3554,12 @@ label[for] {
          right: -30px;
     } 
     
-    .title-slider1, .title-slider2, .title-slider3, .title-slider4, .title-slider5 {
+    .title-slider1, 
+    .title-slider2, 
+    .title-slider4, 
+    .title-slider3, 
+    .title-slider5, 
+    .title-slider6 {
         display: flex;
         width: 60%;
         text-align: left;
@@ -3555,9 +3569,10 @@ label[for] {
     
     .title-slider1 > span:nth-child(1), 
     .title-slider2 > span:nth-child(1), 
-    .title-slider3 > span:nth-child(1), 
+    .title-slider3 > span:nth-child(1),    
     .title-slider4 > span:nth-child(1), 
-    .title-slider5 > span:nth-child(1) {
+    .title-slider5 > span:nth-child(1), 
+    .title-slider6 > span:nth-child(1) {
         width: 55%;
     }
     

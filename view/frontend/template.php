@@ -23,7 +23,7 @@
     <!-- Facebook Open Graph data -->
     <meta property="og:title" content="CaddyRace" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://fredlabourel.fr/caddyrace" />
+    <meta property="og:url" content="https://caddyrace.labdev.fr" />
     <meta name="image" property="og:image" content="public/picture/brand/caddyrace3.jpg" />
     <meta property="og:description" content="Caddy Race, vos courses, une course" />
 
@@ -90,7 +90,7 @@
         <a class="nav-link" href="index.php?action=memberDetail"><i class="fas fa-user fa-2x" title="Profil"></i> Profil</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?action=home" title="Demo"><i class="far fa-eye fa-2x"></i> Démo</a>
+        <a class="nav-link" href="index.php?action=home" title="Demo"><i class="far fa-eye fa-2x"></i> Démo-Avis</a>
     </li>
 
     <!-------------- Menu Admin uniquement -------------->
@@ -154,7 +154,7 @@
                         </li>
                         <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?action=home" title="Demo"><i class="far fa-eye fa-2x"></i> Démo</a>
+                            <a class="nav-link" href="index.php?action=home" title="Demo"><i class="far fa-eye fa-2x"></i> Démo-Avis</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link bg-orange" href="index.php?action=connexion"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Start !
@@ -319,7 +319,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- (2b) Bibliothèque jQuery Touch screen  -->
-    <script src="http://localhost:8888/caddyrace/CaddyRace/public/jquery.ui.touch-punch.js"></script>
+    <script src="http://localhost:8888/caddyrace/CaddyRace_local/public/jquery.ui.touch-punch.js"></script>
 
     <!-- (3) Bibliothèque JavaScript Bootstrap-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

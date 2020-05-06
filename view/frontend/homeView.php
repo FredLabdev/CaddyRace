@@ -25,6 +25,7 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
         </ol>
@@ -79,10 +80,25 @@
                     <img class="rounded mx-auto d-block slider2b" src="public/picture/slider/logo_liste_wrong2.png" alt="Second slide">
                 </div>
             </div>
-
+            
             <!-- SLIDE 3 -->
             <div class="carousel-item">
                 <div class="title-slider3">
+                    <span>
+                        Lassé des aplis du marché<br>qui sont incomplètes ?<br><em>CadyRace le fait et<br>pour gratuit !</em>
+                    </span>
+                    <span class="demo-nb d-flex flex-column justify-content-between align-items-center">
+                        <span class="d-flex justify-content-center align-items-center white"><i class="red fas fa-angry"></i></span>
+                    </span>
+                </div>
+                <div class="slider-img d-flex justify-content-center align-items-start">
+                    <a href="public/picture/slider/avis_concurrents.png"><img class="rounded mx-auto d-block slider3" src="public/picture/slider/avis_concurrents.png" alt="Third slide"></a>
+                </div>
+            </div>
+
+            <!-- SLIDE 4 -->
+            <div class="carousel-item">
+                <div class="title-slider4">
                     <span>
                         Rangez par glisser-déposer<br>vos rayons à l'identique<br><em>du circuit suivi<br>en magasin !</em>
                     </span>
@@ -91,13 +107,13 @@
                     </span>
                 </div>
                 <div class="slider-img d-flex justify-content-center align-items-start">
-                    <a href="public/picture/slider/demo_1.png"><img class="rounded mx-auto d-block slider3" src="public/picture/slider/demo_1.png" alt="Third slide"></a>
+                    <a href="public/picture/slider/demo_1.png"><img class="rounded mx-auto d-block slider3" src="public/picture/slider/demo_1.png" alt="Fourth slide"></a>
                 </div>
             </div>
 
-            <!-- SLIDE 4 -->
+            <!-- SLIDE 5 -->
             <div class="carousel-item">
-                <div class="title-slider4">
+                <div class="title-slider5">
                     <span>
                         Ajoutez, modifiez, recherchez tout !<br>dans votre magasin virtuel<br><em>et préparez votre liste<br>sur mesure</em>
                     </span>
@@ -106,13 +122,13 @@
                     </span>
                 </div>
                 <div class="slider-img d-flex justify-content-center align-items-start">
-                    <a href="public/picture/slider/demo_2.png"><img class="rounded mx-auto d-block slider4" src="public/picture/slider/demo_2.png" alt="Fourth slide"></a>
+                    <a href="public/picture/slider/demo_2.png"><img class="rounded mx-auto d-block slider4" src="public/picture/slider/demo_2.png" alt="Fifth slide"></a>
                 </div>
             </div>
 
-            <!-- SLIDE 5 -->
+            <!-- SLIDE 6 -->
             <div class="carousel-item">
-                <div class="title-slider5">
+                <div class="title-slider6">
                     <span>
                        En magasin, vous n'avez plus qu'à <br>suivre l'enchaînement logique <br><em>de votre liste<br><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" id="caddie-left" />CaddyRace<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" id="caddie-right" /></em>
                     </span>
@@ -121,7 +137,7 @@
                     </span>
                 </div>
                 <div class="slider-img d-flex justify-content-center align-items-start">
-                    <a href="public/picture/slider/demo_3.png"><img class="rounded mx-auto d-block slider5" src="public/picture/slider/demo_3.png" alt="Fifth slide"></a>
+                    <a href="public/picture/slider/demo_3.png"><img class="rounded mx-auto d-block slider5" src="public/picture/slider/demo_3.png" alt="Sixth slide"></a>
                 </div>
             </div>
 
@@ -140,8 +156,119 @@
 
     </div>
 </section>
+
+<section id="comments">
     
-<!-- ORDI SEULEMENT BOUTON D'ACCES AU LOGIN SI PAS DE CONNEXION -->
+<!-- LISTE DES COMMENTAIRES -->
+    <?php if (!(empty($_SESSION['pseudo'])) && !(empty($_SESSION['password']))) { ?>
+    <h3 class="posts-title orange">AVIS : Publiez le votre !</h3>
+    <?php } else { ?>
+    <h3 class="posts-title orange">LES AVIS :</h3>
+    <?php } ?>
+    <div class="comments-content">
+
+        <?php
+       while ($comment = $comments->fetch()) {  
+        ?>
+        <span class="row justify-content-around">
+            <strong class="white">
+                <?= $comment['author']; ?>
+            </strong>
+            <span class="green">
+                le
+                <?= $comment['comment_date_fr']; ?>
+            </span>
+        </span>
+        <p class="alert alert-info">
+            <?= nl2br(htmlspecialchars($comment['comment'])); ?>
+        </p>
+
+        <div class="boutons row justify-content-end">
+
+            <!-- BOUTON MODIFIER UN COMMENTAIRE (uniquement si sois-meme)-->
+
+            <?php
+            if ($comment['author'] == $_SESSION['pseudo']) {
+            ?>
+
+            <a class="btn btn-outline-light btn-sm" data-toggle="collapse" href="#modifComment<?= $comment['id'] ?>" role="button" aria-expanded="false" aria-controls="modifComment"><i class="fas fa-eraser"></i> Modifier
+            </a>
+            <?php
+            } 
+            ?>
+
+            <!-- BOUTON SUPPRIMER UN COMMENTAIRE (uniquement si admin, modérateur, ou posté par sois-meme)-->
+
+            <?php
+            if ($_SESSION['group_id'] == 1 || $_SESSION['group_id'] == 2 || $comment['author'] == $_SESSION['pseudo']) {
+            ?>
+            <form action="index.php?action=deleteComment" method="post">
+                <input type="hidden" name="postId" value="1" />
+                <input type="hidden" name="delete_comment" value="<?= $comment['id'] ?>" />
+                <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash-alt"></i> Retirer</button>
+            </form>
+            <?php
+            } 
+            ?>
+
+            <?php if($comment['comment_signal'] == 0) { ?>
+
+            <!-- BOUTON SIGNALER UN COMMENTAIRE -->
+
+            <form action="index.php?action=signalComment" method="post">
+                <input type="hidden" name="postId" value="1" />
+                <input type="hidden" name="signal_commentId" value="<?= 1 ?>" />
+                <input type="hidden" name="signal_comment" value="<?= $comment['id'] ?>" />
+                <button class="btn btn-warning btn-sm" type="submit" name="messageSignal"><i class="fas fa-exclamation-circle"></i> Signaler</button>
+            </form>
+            <?php } ?>
+
+        </div>
+
+        <!-- TEXTAREA POUR MODIFIER COMMENTAIRE -->
+
+        <div class="collapse col-12" id="modifComment<?= $comment['id'] ?>">
+            <form name="getCommentModif<?= $comment['id'] ?>" action="index.php?action=modifComment" method="post">
+                <input type="hidden" name="postId" value="1" />
+                <input type="hidden" name="modifCommentId" value="<?= $comment['id'] ?>" />
+                <p>
+                    <textarea id="modifComment<?= $comment['id'] ?>" class="alert alert-info col-12" name="modifComment" rows="8">
+                </textarea>
+                </p>
+                <button class="btn btn-success btn-sm col-3 offset-9" type="submit" name="messageSignal"><i class="fas fa-share-square"></i> Publier</button>
+                <p></p>
+            </form>
+        </div>
+
+        <?php     
+        } 
+        ?>
+
+    </div>
+    
+    <?php if (!(empty($_SESSION['pseudo'])) && !(empty($_SESSION['password']))) { ?>
+    <!-- BOUTON ET TEXTAREA POUR AJOUTER UN COMMENTAIRE -->
+
+    <p>
+        <a class="btn btn-primary col-5 offset-6" data-toggle="collapse" href="#newComment" role="button" aria-expanded="false" aria-controls="newComment"><i class="far fa-comment-alt"></i>Commenter
+        </a>
+    </p>
+    <div class="collapse col-12" id="newComment">
+        <form id="newComment" action="index.php?action=addComment" method="post">
+            <input type="hidden" name="postId" value="1" />
+            <p>
+                <textarea id="newComment" class="alert alert-info col-12" name="nv_comment" rows="8">
+            </textarea>
+            </p>
+            <button class="btn btn-success btn-sm col-2 offset-10" type="submit"><i class="fas fa-share-square"></i> Publier</button>
+        </form>
+    </div>
+    <?php } ?>
+
+</section>
+
+<!-- BOUTON D'ACCES AU LOGIN SI PAS DE CONNEXION -->
+
 <?php if (empty($_SESSION['pseudo']) && empty($_SESSION['password'])) { ?>
 <section id="footer-all">
     <div class="home-footer bg-dark row d-flex flex-column justify-content-center align-items-center d-enter justify-content-center">
