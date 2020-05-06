@@ -24,7 +24,8 @@ try {
         // => homeView (Démo/Avis/Connect)           
 
         if ($_GET['action'] == 'home') {
-            require('view/frontend/homeView.php');
+            homeDirect();
+           /* require('view/frontend/homeView.php'); */
         }
 
         //**************************************************************************************
@@ -95,9 +96,18 @@ try {
                 createAisle($_SESSION['id'], $aisleTitle, $aisleOrder);
             }
             // Supprimer un rayon,   
-            else if ($_GET['action'] == 'deleteAisle') {
+         /* else if ($_GET['action'] == 'deleteAisle') {
                 $aisleId = getCleanParameter($_POST['aisleId']);
                 deleteAisle($_SESSION['id'], $aisleId);
+            } */
+            // Supprimer un rayon avprès alert() :   
+            else if ($_GET['action'] == 'deleteAisle') {
+                if ($_GET['aisleErase']) {
+                    $aisleErase = getCleanParameter($_GET['aisleErase']);
+                    deleteAisle($_SESSION['id'], $aisleErase);
+                } else {
+                    throw new Exception('Aucun rayon selectionné');
+                }
             }
             // Modifier un rayon,
             else if ($_GET['action'] == 'modifAisle') {  
@@ -129,10 +139,20 @@ try {
                 }
             } 
             // Supprimer un article,   
-            else if ($_GET['action'] == 'deleteItem') {
+         /* else if ($_GET['action'] == 'deleteItem') {
                 $itemId = getCleanParameter($_POST['itemId']);
                 deleteItem($_SESSION['id'], $itemId);
+            }*/
+            // Supprimer un article avprès alert() :   
+            else if ($_GET['action'] == 'deleteItem') {
+                if ($_GET['itemErase']) {
+                    $itemErase = getCleanParameter($_GET['itemErase']);
+                    deleteItem($_SESSION['id'], $itemErase);
+                } else {
+                    throw new Exception('Aucun article selectionné');
+                }
             }
+            
             // Modifier un article, 
             else if ($_GET['action'] == 'modifItem') { 
                 $itemId = getCleanParameter($_POST['itemId']);
@@ -373,7 +393,7 @@ try {
     else if ($_COOKIE['password']) {
         $pseudo = getCleanParameter($_COOKIE['pseudo']);
         $password = getCleanParameter($_COOKIE['password']);
-        loginAvailable($pseudo, $password);
+        loginAvailable($pseudo, $password, 1);
     }
     // Soit on dirige vers la page d'accueil en libre accés, 
     else {

@@ -3,7 +3,6 @@
 /* global alert */
 /* global document */
 /* global navigator */
-/* global confirm */
 "use strict";
 
 //**************************************************************************************
@@ -31,9 +30,6 @@ var isMobile = {
     }
 };
 
-$('.carousel').carousel ({
-    interval: isMobile.any() ? false : 5000
-});
 
 //**************************************************************************************
 // => Carousel slider use mobile left/right
@@ -71,29 +67,17 @@ $(".carousel").on("touchstart", function(event){
     });
 });
 
+/* $('.carousel').carousel ({
+    interval: isMobile.any() ? false : 5000
+});
+*/
 
 //**************************************************************************************
 // => listView - Tabs / jQuery Accordion        
 //**************************************************************************************
-if (document.getElementById("list-tab")) {
-    var listTab = document.getElementById('list-tab');
-    listTab.addEventListener('click', function () {
-        var listRefresh = document.getElementById('list-refresh');
-        listRefresh.click();
-    });
-}
-
-if (document.getElementById("items-tab")) {
-    var itemsTab = document.getElementById('items-tab');
-    itemsTab.addEventListener('click', function () {
-        var itemsRefresh = document.getElementById('items-refresh');
-        itemsRefresh.click();
-    });
-}
-
-//**************************************************************************************
-// => listView - Tabs / jQuery Accordion        
-//**************************************************************************************
+$(function () {
+$('a[aria-expanded="true"]').removeClass("refresh-btn");
+});
 
 $(function () {
     $("#tabs").tabs();
@@ -181,48 +165,102 @@ $(function () {
     }); */
 });
 
-//**************************************************************************************
-// => listView - Rayons / jQuery Sortable        
-//**************************************************************************************
 
-$(function () {
-    $("#sortable").sortable({
-        opacity: 0.8, // réduit l'opacité lors du déplacement
-        grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
-        placeholder: '.ui-state-highlight',
-        forcePlaceholderSize: true, // force le redimensionnement du placeholder
-        revert: true,
-        stop: function (event, ui) {
-            var aisleNewPos = ui.item.index() + 1; // récupère la position d'arrivée du seul rayon sorti
-            // var aisleGeneId = ui.item.attr('id'); // récupèrerait son id
-            var order = $(this).sortable('serialize'); // récupère sous forme de tableau tous les id des rayons classés dans le nouvel ordre. Attention pour serialize les id doivent avoir un préfixe textuel => id="aisleId_" + indice php // sinon faire un 'toArray'
+if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=aislesList") > -1) {
+    
+    //**************************************************************************************
+    // => aislesView : Focus sur article à modifier au click sur icone "pencil"         
+    //**************************************************************************************
 
-            /* var ids = [];
-            for (var i = 0, c = order.length; i < c; i++) { // idem récupère les id classés dans le nouvel ordre
-                ids.push($('#sortable-admin li:eq(' + i + ')').attr('id'));
-            }  */
+    var list = document.getElementById("liste");
+    var items = document.querySelectorAll(".item-check");
 
-            $.ajax({
-                dataType: "html",
-                type: 'POST',
-                url: 'public/ajax.php?action=orderAisle',
-                data: order,
-                success: function () {
-                    /*alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder + " et le nouvel ordre est : " + order);*/
-                    alert("Ce rayon a bien été déplacé en position n° " + aisleNewPos);
-                },
-                error: function () {
-                    alert('failed');
+    if (list) {
+        var icons = list.querySelectorAll(".item-modif");
+        for (var i = 0, c = icons.length; i < c; i++) {
+            items[i].onclick = function () {
+                var itemName = this.innerText;
+                var input = document.createElement('input');
+                input.value = itemName;
+                input.type = "text";
+                input.className = "right";
+                this.appendChild(input);
+                input.focus();
+                input.onblur = function () {
+                this.parentNode.innerText = this.value;
                 }
-            });
+            }
         }
-    });
-    $("#sortable").disableSelection();
-    /* $('#sortable-admin').sortable({
-        cancel: '#newAisleGene' // désactive la fonction sortable sur ce rayon mais désactive l'input sur les atres !
-    }); */
-});
+    }
 
+    //**************************************************************************************
+    // => ailsesView - Rayons / jQuery Sortable (uniquement sur ordi)   
+    //**************************************************************************************
+
+    if (!(isMobile.any())) { // détecte si pas sur mobile */
+
+    $(function () {
+        $("#sortable").sortable({
+            opacity: 0.8, // réduit l'opacité lors du déplacement
+            grid: [10, 10], // magnétise le déplacement sur une grille de 10*10
+            placeholder: '.ui-state-highlight',
+            forcePlaceholderSize: true, // force le redimensionnement du placeholder
+            revert: true,
+            stop: function (event, ui) {
+                var aisleNewPos = ui.item.index() + 1; // récupère la position d'arrivée du seul rayon sorti
+                // var aisleGeneId = ui.item.attr('id'); // récupèrerait son id
+                var order = $(this).sortable('serialize'); // récupère sous forme de tableau tous les id des rayons classés dans le nouvel ordre. Attention pour serialize les id doivent avoir un préfixe textuel => id="aisleId_" + indice php // sinon faire un 'toArray'
+
+                /* var ids = [];
+                for (var i = 0, c = order.length; i < c; i++) { // idem récupère les id classés dans le nouvel ordre
+                    ids.push($('#sortable-admin li:eq(' + i + ')').attr('id'));
+                }  */
+                $.ajax({
+                    dataType: "html",
+                    type: 'POST',
+                    url: 'public/ajax.php?action=orderAisle',
+                    data: order,
+                    success: function () {
+                        /*alert("La nouvelle position du rayon : " + aisleGeneId + " est " + aisleGeneOrder + " et le nouvel ordre est : " + order);*/
+                        alert("Ce rayon a bien été déplacé en position n° " + aisleNewPos);
+                    },
+                    error: function () {
+                        alert('failed');
+                    }
+                });
+            }
+        });
+        $("#sortable").disableSelection();
+        /* $('#sortable-admin').sortable({
+            cancel: '#newAisleGene' // désactive la fonction sortable sur ce rayon mais désactive l'input sur les atres !
+        }); */
+    });
+
+    } else { // Message conseil sur smartphone pour basculer sur ordi   
+        alert('Attention, la modification de l\'ordre de vos rayons par glisser-déposer n\'est disponible que sur ordinateur pour des raisons ergonomiques...');
+        /*
+        if (confirm('Attention, la modification de l\'ordre de vos rayons par glisser-déposer n\'est disponible que sur ordinateur pour des raisons ergonomiques...')) {  
+            $("#new-order").on('click', function() {
+            var order = Array.from($('input[name="newaisleposition"]'), e => "aislesId[]=" + e.id,).join('&');
+         /* var order = Array.from($('input[name="newaisleposition"]'), e => e.id + "=" + e.value).join('&'); */
+           /*    alert(order);
+                    $.ajax({
+                        dataType: "html",
+                        type: 'POST',
+                        url: 'public/ajax.php?action=newAislesOrder',
+                        data: order,
+                        success: function () {
+                            alert("Votre nouveau circuit est bien mémorisé !");
+                        },
+                        error: function () {
+                            alert('failed');
+                        }
+                    });
+
+            });
+        }*/
+    }
+}
 
 //**************************************************************************************
 // => listView/Articles jQuery - Mise en liste
@@ -230,11 +268,26 @@ $(function () {
 
 $(function () {
     $(".add-list").on('click', function(){
-        $(this).hide(); // on cache le bouton d'ajout en liste
         var itemId = $(this).val(); // l'id de l'article récupérée 
         var itemName = $(this).attr("data-value"); // le nom de l'article récupéré placé dans une data-value et qui correspond à l'id de l'input à changer
         var inlistInput = document.getElementById(itemName);
-        inlistInput.classList.add('to-buy'); // modifie l'aspect de l'article mis en liste
+        if ($(this).hasClass('bg-white')) { // on change la couleur du bouton d'ajout en liste
+            $(this).removeClass('bg-white');
+            $(this).addClass('bg-orange');
+            $(this.firstChild).removeClass('fa-th');
+            $(this.firstChild).removeClass('blue');
+            $(this.firstChild).addClass('fa-scroll');
+            $(this.firstChild).addClass('white');
+            inlistInput.classList.add('to-buy'); // on modifie l'aspect de l'input article mis en liste
+        } else {
+            $(this).removeClass('bg-orange');
+            $(this).addClass('bg-white');  
+            $(this.firstChild).addClass('fa-th');
+            $(this.firstChild).addClass('blue');
+            $(this.firstChild).removeClass('fa-scroll');
+            $(this.firstChild).removeClass('white');
+            inlistInput.classList.remove('to-buy'); // on modifie l'aspect de l'input article mis en liste
+        }
         $.ajax({
             type: "POST",
             url: 'public/ajax.php?action=itemToBuy',
@@ -253,8 +306,7 @@ $(function () {
         }); 
     }); 
 });
-                    
-                                
+
 //**************************************************************************************
 // => Passage de mousse a touch sur mobile (complément touch-punch) 
 //**************************************************************************************
@@ -375,70 +427,133 @@ $(function(){
 }); 
 
 //**************************************************************************************
-// => exitView - Interactions pour la déconnexion     
+//                                ACCUEIL & SHOPLIST
 //**************************************************************************************
 
-    function deconnect_confirm() {
-        if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
-            document.location.href = "index.php?action=deconnexion";
-            return true;
-        } else {
-            alert("Je me disais aussi...");
-            return false;
-        }
-    }
-    if (document.getElementById("deconnexion")) {
-        document.getElementById("deconnexion").addEventListener('click', function (e) {
-            e.preventDefault();
-            deconnect_confirm();
-        });
-    }
-    if (document.getElementById("deconnexion-xs")) {
-        document.getElementById("deconnexion-xs").addEventListener('click', function (e) {
-            e.preventDefault();
-            deconnect_confirm();
-        });
-    }
+    //                            ACCUEIL & SHOPLIST
+    //                  Spin loader de chargement de la page
+    // ============================================================================= //
 
-//**************************************************************************************
-// => listView : Focus sur article à modifier au click sur icone "pencil"         
-//**************************************************************************************
-
-if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=shopList") > -1) {
-    /*
-    remplacer tous les liens par les liens en ligne =>
-    "https://fredlabourel.fr/caddyrace/index.php?action=..."
-    */
-    var list = document.getElementById("liste");
-    var items = document.querySelectorAll(".item-check");
-
-    if (list) {
-        var icons = list.querySelectorAll(".item-modif");
-        for (var i = 0, c = icons.length; i < c; i++) {
-            items[i].onclick = function () {
-                var itemName = this.innerText;
-                var input = document.createElement('input');
-                input.value = itemName;
-                input.type = "text";
-                input.className = "right";
-                this.appendChild(input);
-                input.focus();
-                input.onblur = function () {
-                    this.parentNode.innerText = this.value;
-                }
-            }
-        }
-    }
+if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=home") > -1) {
+    
+ /*   if (!(isMobile.any())) { // supprimé sur tous mobiles car ne fonctionne pas sur iphone (voir autres mobiles ?) */
+    
+    jQuery(function($) {
+        $('body').append('<div id="loadingDiv" class="d-flex justify-content-center align-items-center"><div class="loader">Loading...</div></div>');
+        $(window).ready(function(){
+        setTimeout(function() {
+            $( "#loadingDiv" ).fadeOut(500, function() {
+            // fadeOut complete. Remove the loading div
+            $( "#loadingDiv" ).remove(); //makes page more lightweight 
+        });  
+        },2000)
+    });
+    });    
 
 }
+    //                            SOCIAL LINKS FOOTER
+    //                  Spin loader de chargement des  social links
+    // ============================================================================= //
+    
+    jQuery(function($) {
+        $("#social-link_1").on('click', function(e){ // insertion du loader pour Facebook
+            $('#social-link_1').html('<div id="loadingDiv-footer" class="d-flex justify-content-center align-items-center"><div class="loader-footer"><span><i class="fab fa-facebook-f fa-lg"></i></span></div></div>');
+            $(window).ready(function(){
+            setTimeout(function() {
+                $( "#loadingDiv-footer" ).fadeOut(500, function() { // fadeOut complete. Remove the loading div
+                    $( "#loadingDiv-footer" ).remove();  // suppression du loader
+                    $('#social-link_1').html('<span><i class="fab fa-facebook-f fa-lg"></i></span>');  // insertion de l'icône sociale
+                }); 
+                document.getElementById('link_1').click();
+            },2000)
+        });
+        });  
+    });
+    jQuery(function($) {
+        $("#social-link_2").on('click', function(e){ // insertion du loader pour Twitter
+            $('#social-link_2').html('<div id="loadingDiv-footer2" class="d-flex justify-content-center align-items-center"><div class="loader-footer">Loading...</div></div>');
+            $(window).ready(function(){
+            setTimeout(function() {
+                $( "#loadingDiv-footer2" ).fadeOut(500, function() {
+                    $( "#loadingDiv-footer2" ).remove(); 
+                    $('#social-link_2').html('<span><i class="fab fa-twitter fa-lg"></i></span>');
+                }); 
+                document.getElementById('link_2').click();
+            },2000)
+        });
+        });  
+    });
+    jQuery(function($) {
+        $("#social-link_3").on('click', function(e){ // insertion du loader pour Instagram
+            $('#social-link_3').html('<div id="loadingDiv-footer3" class="d-flex justify-content-center align-items-center"><div class="loader-footer">Loading...</div></div>');
+            $(window).ready(function(){
+            setTimeout(function() {
+                $( "#loadingDiv-footer3" ).fadeOut(500, function() {
+                    $( "#loadingDiv-footer3" ).remove();
+                    $('#social-link_3').html('<span><i class="fab fa-instagram fa-lg"></i></span>');
+                }); 
+                document.getElementById('link_3').click();
+            },2000)
+        });
+        });  
+    });
+    jQuery(function($) {
+        $("#social-link_4").on('click', function(e){ // insertion du loader pour LinkedIn
+            $('#social-link_4').html('<div id="loadingDiv-footer4" class="d-flex justify-content-center align-items-center"><div class="loader-footer">Loading...</div></div>');
+            $(window).ready(function(){
+            setTimeout(function() {
+                $( "#loadingDiv-footer4" ).fadeOut(500, function() {
+                    $( "#loadingDiv-footer4" ).remove();
+                    $('#social-link_4').html('<span><i class="fab fa-linkedin-in fa-lg"></i></span>');
+                }); 
+                document.getElementById('link_4').click();
+            },2000)
+        });
+        });  
+    });
+    jQuery(function($) {
+        $("#social-link_5").on('click', function(e){ // insertion du loader pour GitHub
+            $('#social-link_5').html('<div id="loadingDiv-footer5" class="d-flex justify-content-center align-items-center"><div class="loader-footer">Loading...</div></div>');
+            $(window).ready(function(){
+            setTimeout(function() {
+                $( "#loadingDiv-footer5" ).fadeOut(500, function() {
+                    $( "#loadingDiv-footer5" ).remove();
+                    $('#social-link_5').html('<span><i class="fab fa-github fa-lg"></i></span>');
+                }); 
+                document.getElementById('link_5').click();
+            },2000)
+        });
+        });  
+    });
+    
+
+
+    //                                ACCUEIL
+    //                  FullPage Scrolling section/section
+    // ============================================================================= //
+/*
+if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=home") > -1) {
+
+    jQuery(function($) {
+        if (($(window).width() < 900) && (window.matchMedia("(orientation: portrait)").matches)) {
+            new fullpage('#fullpage', {
+                autoScrolling:true,
+                scrollHorizontally: true
+            });
+            $("#footer-std").css("display", "none");
+        }
+    });
+
+} */
+
 //**************************************************************************************
 // => Mises en formes des input formulaires  
 //**************************************************************************************
 
-if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=home") > -1) {
+if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=login") > -1) {
     /*
     remplacer tous les liens par les liens en ligne =>
-    "https://fredlabourel.fr/caddyrace/index.php?action=..."
+    "http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=..."
     */
     if (document.getElementById("pseudo_login")) {
         var pseudoLogin = document.getElementById('pseudo_login');
@@ -632,10 +747,10 @@ if (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/inde
 // => profilView - Interactions pour les input formulaires        
 //**************************************************************************************
 
-if ((window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=memberDetail") > -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=memberModif") > -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/index.php?action=memberDelete") > -1)) {
+if ((window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=memberDetail") > -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=memberModif") > -1) || (window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=memberDelete") > -1)) {
     /*
     remplacer tous les liens par les liens en ligne =>
-    "https://fredlabourel.fr/caddyrace/index.php?action=..."
+    "http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=..."
     */
     var form = document.getElementById('form_modif');
     var errorChamp = document.getElementById('error1');
@@ -691,3 +806,30 @@ if ((window.location.href.indexOf("http://localhost:8888/caddyrace/CaddyRace/ind
     }, false);
 
 }
+
+//**************************************************************************************
+// => exitView - Interactions pour la déconnexion     
+//**************************************************************************************
+/*
+function deconnect_confirm() {
+    if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
+        document.location.href = "http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=deconnexion";
+        return true;
+    } else {
+        alert("Je me disais aussi...");
+        return false;
+    }
+}
+
+if (document.getElementById("deconnexion")) {
+    document.getElementById("deconnexion").addEventListener('click', function (e) {
+        e.preventDefault();
+        deconnect_confirm();
+    });
+} else if (document.getElementById("deconnexion-xs")) {
+    document.getElementById("deconnexion-xs").addEventListener('click', function (e) {
+        e.preventDefault();
+        deconnect_confirm();
+    });
+}
+*/

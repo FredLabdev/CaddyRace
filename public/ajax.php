@@ -44,6 +44,23 @@
         };
     }
 
+ /* //**************************************************************************************
+    // => Frontend: Rayons jQuery - new OrderAisle avec input sur mobile 
+    //**************************************************************************************
+    // Attention cette fonction semble désactiver la précedente !
+    if ($_GET['action'] == 'newAislesOrder') {
+        $i = 1;
+        foreach($_POST['aisleId'] as aisleId) {
+            $req = $bdd->prepare('UPDATE aisles_priv SET aisle_priv_order = :aisleNewOrder WHERE id = :aisleId'); 
+            $req->execute(array(
+                'aisleId' => aisleId,
+                'aisleNewOrder' =>$i
+            ));
+            $req->closeCursor();
+            $i++;
+        };
+    } */
+
     //**************************************************************************************
     // => Frontend: listView/Articles jQuery - Mise en panier itemToBuy        
     //**************************************************************************************
@@ -64,7 +81,6 @@
             'item_id' => $itemId
         )); 
         $req->closeCursor();
-
     }
 
     if (isset($_POST['myFunction']) && $_POST['myFunction'] != '') {

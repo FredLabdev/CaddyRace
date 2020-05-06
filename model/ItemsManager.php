@@ -66,10 +66,10 @@ class ItemsManager extends Manager {
         $req = $db->prepare('UPDATE items_priv SET item_priv_owner_id = ? WHERE item_priv_owner_id = 1');
         $req->execute(array($memberId));
         $req->closeCursor();
-        // et on modifie les ids des rayons de référence dupliqués par les ids des rayons Privés précédemment créés
-      /*  $changeItemAisleGene = $db->query('UPDATE i SET i.aisle_priv_id = a.id FROM items_priv AS i INNER JOIN aisles AS a ON i.aisle_priv_id = a.aisle_gene_refer_id'); */
-        // si ça ne marche pas faire d'abord INNER JOIN puis le UPDATE de la fonction changeItemAisleGene ci-dessous avec le [] récupéré (voir MemberManager)
     }
+        // et on modifie les ids des rayons de référence dupliqués par les ids des rayons Privés précédemment créés
+     /*   $db->query('UPDATE i SET i.aisle_priv_id = a.id FROM items_priv AS i INNER JOIN aisles_priv AS a ON i.item_priv_owner_id  = a.aisle_priv_owner_id AND INNER JOIN aisles_priv AS a2 ON i.aisle_priv_id = a2.aisle_gene_refer_id'); 
+        // si ça ne marche pas faire d'abord INNER JOIN puis le UPDATE de la fonction changeItemAisleGene ci-dessous avec le [] récupéré (voir MemberManager)
     
     /* public function changeItemAisleGene($aisleId2, $aisleId1) {            
         $db = $this->dbConnect();
@@ -81,6 +81,17 @@ class ItemsManager extends Manager {
         $req->closeCursor();
     } */
     
+    
+    public function updateItemAisleId($itemId, $newAisleId) {            
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE items_priv SET aisle_priv_id = :new_aisle_id WHERE id = :item_id');
+        $req->execute(array(
+            'new_aisle_id' => $newAisleId,
+            'item_id' => $itemId
+        ));
+        $req->closeCursor();
+    }
+        
     public function getItemsCountInAisle($memberId, $aisleId) {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT COUNT(id) AS count FROM items_priv WHERE item_priv_owner_id = :member_id AND aisle_priv_id = :aisle_priv_id');
@@ -173,6 +184,17 @@ class ItemsManager extends Manager {
             'item_tobuy' => 1
         ));
         return $itemsToPick;
+    }
+    
+    public function getItemId($memberId) {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT MAX(id) FROM items_priv WHERE item_priv_owner_id = :member_id');
+        $req->execute(array(
+            'member_id' => $memberId
+        ));
+        $itemId = $req->fetch();
+        $req->closeCursor();
+        return $itemId;
     }
     
     public function pushItem($memberId, $aisleId, $itemName) {            

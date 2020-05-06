@@ -40,11 +40,11 @@ ob_start();
                 <input class="form-check-input" type="hidden" name="login_auto" checked />
 
                 <div class="form-group">
-                    <button type="button submit" class="connect btn btn-success white btn-lg" name="login">
+                    <button type="button submit" class="connect btn btn-dark white btn-lg" name="login">
                         <span class="logo3 white">
-                            <img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" />
+                            <img src="public/picture/brand/caddy-icon-C-38x38.png" alt="caddy picture" />
                             <span>addy</span>
-                            <img src="public/picture/brand/caddy-icon-R-15x12-white.png" alt="caddy picture" />
+                            <img src="public/picture/brand/caddy-icon-R-15x12.png" alt="caddy picture" />
                             <span>ace</span>
                         </span>
                     </button>
@@ -90,7 +90,7 @@ ob_start();
                     <input id="password_create_confirm" type="password" name="password_confirm" placeholder="confirm Pass&word" />
                 </div>
                 <div class="form-group">
-                    <button type="button submit" class="btn btn-success white btn-lg col-xs-12" name="login"><i class="fas fa-user-plus orange"></i> Envoyer</button>
+                    <button type="button submit" class="btn btn-dark white btn-lg col-xs-12" name="login"><i class="fas fa-user-plus orange"></i> Envoyer</button>
                 </div>
             </div>
         </form>

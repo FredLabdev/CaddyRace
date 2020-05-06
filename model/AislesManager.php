@@ -142,6 +142,12 @@ class AislesManager extends Manager {
             'item_id' => $aisleId
         )); 
         $req->closeCursor();
+        $req = $db->prepare('DELETE FROM items_priv WHERE aisle_priv_id = :aisle_id AND item_priv_owner_id = :member_id');
+        $req->execute(array(
+            'aisle_id' => $aisleId,
+            'member_id' => $memberId
+        )); 
+        $req->closeCursor();
     }
     
     public function changeAisleTitle($memberId, $aisleId, $aisleTitle) {            

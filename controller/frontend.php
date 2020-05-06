@@ -30,17 +30,17 @@ try {
         $itemsToBuyCount = $ItemsManager->getItemsToBuyCount($memberId);
         $itemsInCaddyCount = $ItemsManager->getItemsInCaddyCount($memberId);
         foreach($aislesTab as $aisle) {
-            $itemsCountInAisle = $ItemsManager->getItemsCountInAisle($memberId, $aisle['aisle_priv_order']);  
+            $itemsCountInAisle = $ItemsManager->getItemsCountInAisle($memberId, $aisle['id']);  
             $itemsCountInAisleTab[] = $itemsCountInAisle;
-            $itemsCountInAisleToBuy = $ItemsManager->getItemsCountInAisleToBuy($memberId, $aisle['aisle_priv_order']);  
+            $itemsCountInAisleToBuy = $ItemsManager->getItemsCountInAisleToBuy($memberId, $aisle['id']);  
             $itemsCountInAisleToBuyTab[] = $itemsCountInAisleToBuy;
-            $itemsCountInAisleInCad = $ItemsManager->getItemsCountInAisleInCad($memberId, $aisle['aisle_priv_order']);  
+            $itemsCountInAisleInCad = $ItemsManager->getItemsCountInAisleInCad($memberId, $aisle['id']);  
             $itemsCountInAisleInCadTab[] = $itemsCountInAisleInCad;
-            $itemsInAisle = $ItemsManager->getItemsInAisle($memberId, $aisle['aisle_priv_order']);    
+            $itemsInAisle = $ItemsManager->getItemsInAisle($memberId, $aisle['id']);    
             $itemsInAisleTab[] = $itemsInAisle;
-            $itemsToBuy = $ItemsManager->getItemsToBuy($memberId, $aisle['aisle_priv_order']);    
+            $itemsToBuy = $ItemsManager->getItemsToBuy($memberId, $aisle['id']);    
             $itemsToBuyTab[] = $itemsToBuy;
-            $itemsToPick= $ItemsManager->getItemsToPick($memberId, $aisle['aisle_priv_order']);    
+            $itemsToPick= $ItemsManager->getItemsToPick($memberId, $aisle['id']);    
             $itemsToPickTab[] = $itemsToPick;
             $aislesIcons = $AislesManager->getAislesIcons($aisle['aisle_gene_refer_id']);    
             $aislesIconsTab[] = $aislesIcons;
@@ -64,10 +64,16 @@ try {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         $message_error = "";
         if($itemName == "") {
-            $message_error =  'Désolé votre nouvel article est vide';
+            $message_error =  'Merci de renseigner un nom pour votre nouvel article.';
         } else {
-            $ItemsManager->pushItem($memberId, $aisleId, $itemName);     
-            $message_success =  'Votre article a bien été ajouté dans ce rayon.';
+            $ItemsManager->pushItem($memberId, $aisleId, $itemName);  
+            $itemId = $ItemsManager->getItemId($memberId); 
+            $itemNewCheckStatus = $ItemsManager->changeItemCheck($itemId[0]);   
+            if ($itemNewCheckStatus == 0) {
+                $message_success =  'Quelque chose de bizarre s\'est profuit ??';
+            } else {
+                $message_success =  'Votre nouvel article ' . $itemName . ' a bien été créé, et ajouté à votre liste.';
+            }
         }
         shopList($memberId, $message_success, $message_error, 'shop');
     }
@@ -89,21 +95,24 @@ try {
     }
     
     function checkItem($memberId, $itemId) {
-        $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
-        $itemNewCheckStatus = $ItemsManager->changeItemCheck($itemId);   
-        if ($itemNewCheckStatus == 0) {
-            $message_success =  'Cet article a bien été retiré de votre liste.';
+        if ($itemId != '') {
+            $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
+            $itemNewCheckStatus = $ItemsManager->changeItemCheck($itemId);   
+            if ($itemNewCheckStatus == 0) {
+                $message_success =  'Cet article a bien été retiré de votre liste.';
+            } else if ($itemNewCheckStatus == 1) {
+                $message_success =  'Cet article a bien été ajouté dans votre liste.';
+            } 
         } else {
-            $message_success =  'Cet article a bien été ajouté dans votre liste.';
+            $message_error = 'Désolé cet article n\'existe pas. Crééz le dans le bon rayon.';
         }
-        $message_error = "";
         shopList($memberId, $message_success, $message_error, 'shop');
     }
     
     function caddyToList($memberId) {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         $ItemsManager->changeItemsToList($memberId);   
-        $message_success =  'Les articles achetés ont tous été remis dans une nouvelle liste.';
+        $message_success =  'Liste sauvegardée, bien joué ' . $_SESSION['first_name'] . '.';
         $message_error = "";
         shopList($memberId, $message_success, $message_error, 'shop');
     }
@@ -111,7 +120,7 @@ try {
     function caddyToShop($memberId) {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         $ItemsManager->deleteItemsList($memberId);   
-        $message_success =  'La liste a bien été remise à zéro.';
+        $message_success =  'La liste a bien été remise à zéro ' . $_SESSION['first_name'].'.';
         $message_error = "";
         shopList($memberId, $message_success, $message_error, 'shop');
     }
@@ -123,7 +132,7 @@ try {
         $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
         $itemNewCheckStatus = $ItemsManager->putItemCaddy($itemId);   
         if ($itemNewCheckStatus == 2) {
-            $message_success =  'Cet article a bien été déposé dans votre caddy.';
+            $message_success =  '' /*'Cet article a bien été déposé dans votre caddy.'*/ ;
         } else {
             $message_success =  'Nothing was changed';
         }
@@ -163,7 +172,7 @@ try {
     function deleteAisle($memberId, $aisleId) {
         $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
         $AislesManager->pullAisle($memberId, $aisleId); 
-        $message_success =  'Ce rayon a bien été supprimé.';
+        $message_success =  'Ce rayon a bien été supprimé ainsi que tous les articles rattachés éventuels.';
         $message_error = "";
         aislesList($memberId, $message_success, $message_error);
     }
@@ -171,7 +180,7 @@ try {
     function modifAisle($memberId, $aisleId, $aisleTitle) {
         $AislesManager = new \FredLab\tp5_caddy_race\Model\AislesManager();
         $AislesManager->changeAisleTitle($memberId, $aisleId, $aisleTitle);   
-        $message_success =  'Votre article a bien été modifié.';
+        $message_success =  'Votre rayon a bien été modifié.';
         $message_error = "";
         aislesList($memberId, $message_success, $message_error);
     }
@@ -310,6 +319,23 @@ try {
                 // et on modifie les ids des rayons de référence dupliqués par les ids des rayons Privés précédemment créés
                 $ItemsManager = new \FredLab\tp5_caddy_race\Model\ItemsManager();
                 $ItemsManager->duplicateItemsGeneDatas($memberId);
+                
+                // ensuite on récupère les données des rayons privés,      
+                $aislesTab3  = array();                
+                $aislesTab3 = $AislesManager->getAislesTab($memberId);
+               // et on les passe en boucle pour récupèrer les sous-tableaux d'items rattachés qu'on met à leur tour dans un tableau, (qu'on pourra lister par rayon donc) 
+                $itemsInAisleTab3  = array();
+                foreach($aislesTab3 as $aisle) {
+                    $itemsInAisle = $ItemsManager->getItemsInAisle($memberId, $aisle['aisle_priv_order']);    
+                    $itemsInAisleTab3[] = $itemsInAisle;                        
+                }
+               // puis on vient modifier l'id de base (Gene) du rayon rattaché pour chaque item, par les vraies id des rayons créés
+                $aislesCount3 = $AislesManager->getAislesCount($memberId);
+                for ($i=0; $i<$aislesCount3['count']; $i++) {     
+                    foreach ($itemsInAisleTab3[$i] as $itemInAisle) {
+                        $ItemsManager->updateItemAisleId($itemInAisle['id'], $aislesTab3[$i]['id']);
+                    }
+                }
                 // et on démarre sa session
                 loginControl($createPseudo, $createPassword, 0);
             } else {
@@ -321,7 +347,13 @@ try {
     //**************************************************************************************
     //        Controller frontend MemberManager
     //**************************************************************************************
-
+    
+    function homeDirect() {
+        $memberManager = new \FredLab\tp5_caddy_race\Model\MemberManager();
+        $membersCount2 = $memberManager->getMembersCount();
+        require('view/frontend/homeView.php');      
+    }
+    
     function membersHome($message_success, $message_error, $memberDetails) {
         $memberManager = new \FredLab\tp5_caddy_race\Model\MemberManager();
         $membersCount = $memberManager->getMembersCount();

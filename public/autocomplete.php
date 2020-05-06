@@ -3,7 +3,7 @@
     // on se connecte à notre base de données
     try
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=caddyrace', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $bdd = new PDO('mysql:host=db5000026047.hosting-data.io;dbname=dbs21225;charset=utf8', 'dbu34731', 'Fred&200172', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
     catch (Exception $e)
     {

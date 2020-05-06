@@ -10,7 +10,7 @@ ob_start();
 ?>
 
 <div class="exit d-flex flex-column justify-content-center align-items-center">
-    <a href="index.php?action=home" class="return-button btn btn-success btn-lg exit-text" name="login">Back to race ?</a>
+    <a href="index.php?action=home" class="return-button btn btn-lg exit-text" name="login">Back to race ?</a>
     <h2 class="exit-text orange">
         <?= $message_success ?>
     </h2>

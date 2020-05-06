@@ -1,5 +1,5 @@
 <!--********************************************************************************-->
-<!--********************************** TEMPLATE ************************************-->
+<!--*********************************** TEMPLATE ***********************************-->
 <!--********************************************************************************-->
 
 <!DOCTYPE html>
@@ -21,28 +21,28 @@
     </title>
 
     <!-- Facebook Open Graph data -->
-    <meta property="og:title" content="Caddy race" />
+    <meta property="og:title" content="CaddyRace" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://fredlabourel.fr/caddyrace" />
+    <meta property="og:url" content="https://fredlabourel.fr/caddyrace" />
     <meta name="image" property="og:image" content="public/picture/brand/caddyrace3.jpg" />
     <meta property="og:description" content="Caddy Race, vos courses, une course" />
 
     <!-- Twitter Card data -->
-    <meta name="twitter:card" content="Caddy Race">
+    <meta name="twitter:card" content="CaddyRace">
     <meta name="twitter:site" content="@publisher_handle">
-    <meta name="twitter:title" content="Caddy Race">
-    <meta name="twitter:description" content="Caddy Race, vos courses, une course">
+    <meta name="twitter:title" content="CaddyRace">
+    <meta name="twitter:description" content="CaddyRace, vos courses, une course">
     <meta name="twitter:creator" content="@author_handle">
 
     <!-- Twitter Summary card images must be at least 200x200px -->
     <meta name="twitter:image" content="public/picture/brand/caddyrace.jpg">
 
     <!-- Icones du site en raccourci écran Apple -->
-    <link rel="apple-touch-icon-precomposed" href="public/picture/ico/apple-touch-icon-57-precomposed.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="public/picture/ico/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="public/picture/ico/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="public/picture/ico/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="public/picture/ico/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" href="public/picture/ico/caddyrace_icon_bic_57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="public/picture/ico/caddyrace_icon_bic_57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="public/picture/ico/caddyrace_icon_bic_72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="public/picture/ico/caddyrace_icon_bic_114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="public/picture/ico/caddyrace_icon_bic_144.png" />
 
     <!-- Polices Google Fonts utilisées -->
     <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron|Open+Sans+Condensed:300" rel="stylesheet">
@@ -79,7 +79,7 @@
     <!-------------- Menu Membre uniquement -------------->
     <?php if (isset ($_SESSION['group_id']) && $_SESSION['group_id'] != 1) { ?>  
     <li class="nav-item">
-        <a class="nav-link" href="index.php?action=shopList"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-shopping-cart fa-2x" title="Boutique"></i> Shoplist
+        <a class="nav-link" href="index.php?action=shopList" id="shop-menu"><!--<img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" />--><i class="fas fa-scroll fa-2x" title="Boutique"></i> Shoplist
         </a>
     </li>
     <li class="nav-item">
@@ -130,7 +130,7 @@
             /* -------------- Bouton de déconnexion uniquement si connecté -------------*/ 
                   if (isset ($_SESSION['pseudo'])) { ?>
             <li class="nav-item">
-                <a class="nav-link" href="#" id="deconnexion" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
+                <a class="nav-link" href="http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=deconnexion" id="deconnexion" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
             </li>
             <?php } ?>
             
@@ -150,11 +150,14 @@
                         <!--------------  Bouton de déconnexion uniquement si connecté --------------> 
                         <?php if(isset($_SESSION['pseudo'])) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="deconnexion-xs" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
+                            <a class="nav-link" href="http://localhost:8888/caddyrace/CaddyRace_local/index.php?action=deconnexion" id="deconnexion-xs" title="Deconnexion"><i class="fas fa-power-off fa-2x"></i> Deconnexion</a>
                         </li>
                         <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link bg-orange" href="index.php?action=login"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Start !
+                            <a class="nav-link" href="index.php?action=home" title="Demo"><i class="far fa-eye fa-2x"></i> Démo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link bg-orange" href="index.php?action=connexion"><img src="public/picture/brand/caddy-icon-C-38x38-white.png" alt="caddy picture" title="Caddie" /> Start !
                             </a>
                         </li>
                         <?php }?>
@@ -173,8 +176,8 @@
                             <span>ace</span>
                         </span>
                     </div>
-                    <div class="col-3 navbar-menu orange"><span id="mobile-menu" class="mobile-menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></span></div>
-                    <div class="col-5 navbar-descript">
+                    <div class="col-4 navbar-menu orange"><span id="mobile-menu" class="mobile-menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></span></div>
+                    <div class="col-4 navbar-descript">
                     </div>
                 </button>
         </nav>
@@ -185,41 +188,47 @@
 
     <!-- FOOTER -->
     <?php ob_start(); ?>
-    <footer class="text-center white">
-        <div class="sm-row xs-column justify-content-around align-items-center bg-orange">
+    <footer class="text-center white" id="footer-std">
+        <div class="d-flex flex-row justify-content-around align-items-center bg-orange">
             <a href="#popup1"><img src="public/picture/mini/App_Store_Badge.png" alt="apple_store_picture" width="175px" /></a>
-            <div id="popup1" class="overlay">
+            <div id="popup1" class="overlay d-flex">
                 <div class="popup popup-sm">
                     <h3>Pas encore :D</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content orange">
-                        Mais vous pouvez vous servir de l'Appli en créant un raccourci sur l'écran de votre iphone/ipad !
+                        Mais vous pouvez vous servir de l'Appli en utilisant le raccourci écran prévu pour votre iphone/ipad !
+                        <img src="public/picture/ico/raccourci_ecran.png" alt="logo caddyrace" />
                     </div>
                 </div>
             </div>
-            <a href="#popup2"><img src="public/picture/mini/Google_Play_Badge.png" alt="google_play_picture" width="200px" /></a>
-            <div id="popup2" class="overlay">
+            <a href="#popup2"><img src="public/picture/mini/Google_Play_Badge.png" alt="google_play_picture" width="175px" /></a>
+            <div id="popup2" class="overlay d-flex">
                 <div class="popup popup-sm">
                     <h3>Là non plus :D</h3>
                     <a class="close" href="#">&times;</a>
                     <div class="content orange">
-                        Mais vous pouvez vous servir de l'Appli en créant un raccourci sur l'écran de votre mobile Androïd !
+                        Mais vous pouvez vous servir de l'Appli en utilisant le raccourci écran prévu pour votre mobile Androïd !
+                        <img src="public/picture/ico/raccourci_ecran.png" alt="logo caddyrace" />
                     </div>
                 </div>
             </div>
         </div>
-        <div class="justify-content-around align-items-center bg-orange">
-            <h2>Restez informé</h2>
+        <div class="d-flex flex-column justify-content-around align-items-center bg-orange">
             <div class="d-flex justify-content-center align-items-center">
-                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://www.facebook.com/labdev.web/" target=_blank><span><i class="fab fa-facebook-f fa-lg white"></i></span></a></button>
-                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://twitter.com/labdev_web" target=_blank><span><i class="fab fa-twitter fa-lg white"></i></span></a></button>
-                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://www.instagram.com/labdev_web/" target=_blank><span><i class="fab fa-instagram fa-lg white"></i></span></a></button>
-                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://www.linkedin.com/in/frederic-labourel/" target=_blank><span><i class="fab fa-linkedin-in white"></i></span></a></button>
-                <button class="d-flex justify-content-center align-items-center btn btn-info social-link"><a href="https://github.com/FredLabdev/" target=_blank><span><i class="fab fa-github white"></i></span></a></button>
+                <a id="link_1" href="https://www.facebook.com/labdev.web/" target="_blank">Facebook</a>
+                <button class="d-flex justify-content-center align-items-center btn social-link" id="social-link_1"><span><i class="fab fa-facebook-f fa-lg white"></i></span></button>
+                <a id="link_2" href="https://twitter.com/labdev_web/" target="_blank">Twitter</a>
+                <button class="d-flex justify-content-center align-items-center btn social-link" id="social-link_2"><span><i class="fab fa-twitter fa-lg white"></i></span></button>
+                <a id="link_3" href="https://www.instagram.com/labdev_web/" target="_blank">Instagram</a>
+                <button class="d-flex justify-content-center align-items-center btn social-link" id="social-link_3"><span><i class="fab fa-instagram fa-lg white"></i></span></button>
+                <a id="link_4" href="https://www.linkedin.com/in/frederic-labourel/" target="_blank">Linkedin</a>
+                <button class="d-flex justify-content-center align-items-center btn social-link" id="social-link_4"><span><i class="fab fa-linkedin-in white"></i></span></button>
+                <a id="link_5" href="https://github.com/FredLabdev/" target="_blank">GitHub</a>
+                <button class="d-flex justify-content-center align-items-center btn social-link" id="social-link_5"><span><i class="fab fa-github white"></i></span></button>
             </div>
         </div>
-        <div class="sm-row xs-column justify-content-center align-items-center white">
-            <span>CaddyRace</span><span>Copyrights © 2019 labdev. Tous droits réservés.</span><span><a href="mailto:fred@labdev.fr">contact</a></span><span class="site-info">Brainmade by Labdev</span>
+        <div class="sm-row xs-column d-flex flex-row justify-content-center align-items-start white" id="footer-links">
+            <span>CaddyRace</span><span>Copyrights © 2019 labdev, tous droits réservés.</span><span class="email"><a  href="mailto:fred@labdev.fr">contact</a></span><span class="site-info d-flex flex-row justify-content-center align-items-start"><span>Brainmade by </span><a href="http://labdev.fr" target=_blank><img src="public/picture/brand/labdev_mini.png" alt="logo labdev" /></a></span>
         </div>
         
         <!--
@@ -279,26 +288,27 @@
 
     <!-- CONTAINER BOOTSTRAP -->
 
-    <main role="main" class="container-fluid">
-
-        <?php 
-            echo $menu;
-            echo $all1;
-            echo $all3;
-            if ($template == 'adminModerator') {
-                echo $adminModerator;
-            }
-            if ($template == 'frontend') {
-                echo $frontend;
-            }
-            if (isset ($all2)) { echo $all2; };
-            if ($template == 'backend') {
-                echo $backend;
-            }  
-        
-        ?>
-
-    </main>
+    <?php 
+        echo $menu;
+    ?>
+        <main role="main" class="container-fluid">
+           <!-- <div id="fullpage"> -->
+            <?php   
+                echo $all1;
+                echo $all3;
+                if ($template == 'adminModerator') {
+                    echo $adminModerator;
+                }
+                if ($template == 'frontend') {
+                    echo $frontend;
+                }
+                if (isset ($all2)) { echo $all2; };
+                if ($template == 'backend') {
+                    echo $backend;
+                }  
+            ?>
+         <!--   </div>  -->
+        </main>
 
     <?= $footer ?>
 
@@ -320,6 +330,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+ <!--   <script src="public/fullpage.js"></script>  -->
     <script src="public/ajax.js"></script>
     <script src="public/caddyrace.js"></script>
 
